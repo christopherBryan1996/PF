@@ -14,6 +14,8 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended:false})) // reconoce objetos de solicitud entrante como cadenas o matrices
 
+const test='testbyYani'
+const test2='testbyYani2'
 //aqui manejaremos todas las rutas
 app.use(router)
 
