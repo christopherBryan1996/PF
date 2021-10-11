@@ -8,7 +8,7 @@ const router = require('./src/routers/router')
 //middleware
 app.use(morgan('dev'))
 app.use(cors({
-    origin:'*'//para que pueda consultar cualquier paguina 
+    origin:'*'//para que pueda consultar cualquier pagina 
 }))
 //para cuando venga desde body
 app.use(express.json())
@@ -19,5 +19,5 @@ app.use(router)
 
 
 app.listen(3008,()=>{
-    console.log('I lisen in http://localhost:3008')
+    console.log('I lisen in the port: http://localhost:3008')
 })
