@@ -7,6 +7,7 @@ const router = require('./src/routers/router')
 
 const pepito = "pepito"
 const juancito = "juancito"
+const oscar = "oscar"
 
 //middleware
 app.use(morgan('dev'))
