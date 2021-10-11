@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended:false})) // reconoce objetos de solicitud e
 //aqui manejaremos todas las rutas
 app.use(router)
 
-
+const nestor = 'pppppp';
 app.listen(3008,()=>{
     console.log('I lisen in the port: http://localhost:3008')
 })
