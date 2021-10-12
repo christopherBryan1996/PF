@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route} from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Route exact path="/" component={LandingPage}/>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
