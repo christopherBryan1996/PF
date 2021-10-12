@@ -10,6 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route exact path="/" component={LandingPage}/>
+      <Route exact path="/app" component={App}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
