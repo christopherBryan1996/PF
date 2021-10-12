@@ -1,0 +1,20 @@
+
+
+[
+    {"id":"1", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"2", "name":"Juagar futbol", "description":"Queremos compartir un rato ","fecha":"12-12-2021", "ubicacion":"Cancha 5", "publico":false, "invitados": 22, "precio":"0" },
+    {"id":"3", "name":"Tomar chelas", "description":"Queremos compartir un rato ","fecha":"22-11-2021", "ubicacion":"Bar de moe", "publico":true, "invitados": 50, "precio":"0" },
+    {"id":"4", "name":"Cumple Yani", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"Casa de Lean", "publico":false, "invitados": 30, "precio":"0" },
+    {"id":"5", "name":"Fiesta", "description":"Queremos compartir un rato ","fecha":"28-11-2021", "ubicacion":"salon 8", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"6", "name":"Concierto Aerosmith", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"Estadio 1", "publico":true, "invitados": 25000, "precio":"1000" },
+    {"id":"7", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"8", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"9", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"10", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"11", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" },
+    {"id":"12", "name":"Juagar Bolos", "description":"Queremos compartir un rato ","fecha":"12-11-2021", "ubicacion":"centro comercial", "publico":true, "invitados": 100, "precio":"100" }
+    ]
+    
+    
+    
+    
