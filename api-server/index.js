@@ -1,32 +1,28 @@
 //importar librerias o rutas
-const express = require('express')
-const app = express()
-const morgan=require('morgan')
-const cors= require('cors')
-const router = require('./src/routers/router')
+const express = require('express');
+const morgan =require('morgan');
+const cors = require('cors');
 
-<<<<<<< HEAD:app/index.js
+const app = express();
 
-=======
-//hola pirulo soy lean y hice un cambio jeje
->>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab:api-server/index.js
+// importing routes
+const router = require('./src/Routes/index');
+
+require('./src/database/db');
 
 //middleware
 app.use(morgan('dev'))
 app.use(cors({
     origin:'*'//para que pueda consultar cualquier pagina 
-}))
+}));
+
 //para cuando venga desde body
-app.use(express.json())
-app.use(express.urlencoded({extended:false})) // reconoce objetos de solicitud entrante como cadenas o matrices
+app.use(express.json());
+app.use(express.urlencoded({extended:false})); // reconoce objetos de solicitud entrante como cadenas o matrices
 
 //aqui manejaremos todas las rutas
-app.use(router)
+app.use(router);
 
-const nestor = 'pppppp';
 app.listen(3008,()=>{
-    console.log('I lisen in the port: http://localhost:3008')
-})
-const esaa = "e" + "saa";
-const culia = "cul" + "ia";
-//cambio para facu
+    console.log('I listen in the port: http://localhost:3008')
+});
