@@ -1,22 +1,15 @@
-.divpapa{
+.formRegister{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.navLogin{
+.botonesRegister{
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
-.botonesLogin{
-    display: flex;
-    flex-direction: column;
-}
-.formLogin{
-    display: flex;
-    flex-direction: column;
-}
-.divpapa{
-    background-image: url('../../images/fondoLogin.jpg');
+.fondoDiv{
+    background-image: url('../../images/fondoRegister.jpg');
     opacity: 0.75;
     background-repeat: no-repeat;
     background-attachment: fixed;

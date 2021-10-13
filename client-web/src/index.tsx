@@ -7,6 +7,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import About from './components/About';
 import Login from './components/Login';
+import Register from './components/Register';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route exact path="/" component={LandingPage}/>
       <Route exact path="/about" component={About}/>
       <Route exact path="/Login" component={Login}/>
+      <Route exact path="/Register" component={Register}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
