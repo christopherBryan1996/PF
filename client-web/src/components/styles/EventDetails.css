@@ -1,0 +1,23 @@
+.EventDetailsMain{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    height: 800px;
+}
+
+.detalles{
+    display: inline;
+    font-size: 60px;
+}
+.inputs{
+    position: relative;
+    left: 500px;
+}
+.inputDetalles{
+    height: 25px;
+    background-color:rgb(107, 105, 105) ;
+    border-radius: 8px;
+    
+}
+::placeholder{
+    color: rgb(211, 208, 208);
+}

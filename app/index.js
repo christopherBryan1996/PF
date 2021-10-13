@@ -5,7 +5,7 @@ const morgan=require('morgan')
 const cors= require('cors')
 const router = require('./src/routers/router')
 
-const hola="hola"
+
 
 //middleware
 app.use(morgan('dev'))
@@ -19,7 +19,10 @@ app.use(express.urlencoded({extended:false})) // reconoce objetos de solicitud e
 //aqui manejaremos todas las rutas
 app.use(router)
 
-
+const nestor = 'pppppp';
 app.listen(3008,()=>{
     console.log('I lisen in the port: http://localhost:3008')
 })
+const esaa = "e" + "saa";
+const culia = "cul" + "ia";
+//cambio para facu

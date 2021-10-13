@@ -1,0 +1,26 @@
+.nav-contenedor{
+    display: flex;
+    justify-content: space-between;
+}
+.div-logo{
+    display: flex;
+    align-items: baseline;
+}
+.botonSobreNosotros{
+    display: flex;
+    margin-left: 10px;
+}
+.botoneslogin{
+    display: flex;
+    align-items: center;
+}
+.botonlogin{
+    margin-right: 12px;
+}
+.div-tarjeta1{
+    display: flex;
+    background-color: rgba(12, 12, 12, 0.445);
+    border-radius: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
