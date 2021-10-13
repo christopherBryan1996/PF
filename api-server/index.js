@@ -5,7 +5,11 @@ const morgan=require('morgan')
 const cors= require('cors')
 const router = require('./src/routers/router')
 
+<<<<<<< HEAD:app/index.js
+
+=======
 //hola pirulo soy lean y hice un cambio jeje
+>>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab:api-server/index.js
 
 //middleware
 app.use(morgan('dev'))

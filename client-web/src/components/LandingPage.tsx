@@ -1,5 +1,11 @@
 import React, {FunctionComponent} from "react";
 import  "./styles/LandingPage.css";
+<<<<<<< HEAD
+
+
+
+export default function LandingPage ()  {
+=======
 import imagen1 from '../images/fiestalogin.jpg';
 import imagen2 from '../images/fiestalogin2.jpg';
 import imagen3 from '../images/fiestalogin4.jpg';
@@ -21,11 +27,19 @@ export default function LandingPage ()  {
 
 
 
+>>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab
     return(
         <div>
             <div className="nav-contenedor">
                 <div className="div-logo">
                     <h1>ClanFest</h1>
+<<<<<<< HEAD
+                    <button className="botonSobreNosotros">Sobre Nosotros</button>
+                </div>
+                <div className="botoneslogin">
+                    <button className="botonlogin">Ingresa</button>
+                    <button>Registrate</button>
+=======
                     <button className="botonSobreNosotros" onClick={botonSobreNosotros}>Sobre Nosotros</button>
                 </div>
                 <div className="botoneslogin">
@@ -41,11 +55,19 @@ export default function LandingPage ()  {
                 </div>
                 <div>
                     <img src={imagen1} alt="imagen de vos cuando bajes la app" className="imagenes"/>
+>>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab
                 </div>
             </div>
 
             <div className="div-tarjeta1">
                 <div>
+<<<<<<< HEAD
+                    <h1>La mejor manera de organizar y compartir tus eventos Online</h1>
+                    <p>Ten el control tanto en tu computadora como en tu celular</p>
+                </div>
+                <div>
+                    <img src={require('../images/fiestalogin3.jpg')} alt="imagen de vos cuando bajes la app"/>
+=======
                     <img src={imagen2} alt="imagen de vos cuando bajes la app" className="imagenes"/>
                 </div>
                 <div>
@@ -79,6 +101,7 @@ export default function LandingPage ()  {
                         <li><p>Privacy Policy</p></li>
                         <li><p>Register</p></li>
                     </ul>
+>>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab
                 </div>
             </div>
         </div>
