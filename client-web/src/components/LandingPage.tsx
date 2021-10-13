@@ -3,9 +3,12 @@ import  "./styles/LandingPage.css";
 
 
 
+
 export default function LandingPage ()  {
     return(
         <div>
+         
+
             <div className="nav-contenedor">
                 <div className="div-logo">
                     <h1>ClanFest</h1>
