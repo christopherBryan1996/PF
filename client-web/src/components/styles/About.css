@@ -1,0 +1,42 @@
+
+.divpadre{
+    background-image: url('../../images/fondoAbout.jpg');
+    opacity: 0.75;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    position: absolute; top: 0; left: 0;
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+}
+.divnav{
+    display: flex;
+    align-items: center;
+    
+}
+.botonback{
+    margin-right: 200px;
+}
+.tarjeta{
+    background-color: rgba(34, 34, 34, 0.712);
+    width: 60%;
+    border-radius: 15px;
+}
+.titulo{
+    font-size: 80px;
+}
+.tarjetatexto{
+    font-size: 30px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 100px;
+    margin-top: 40px;
+}
