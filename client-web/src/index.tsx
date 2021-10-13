@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route} from 'react-router-dom';
 import LandingPage from './components/LandingPage';
+import About from './components/About';
+import Login from './components/Login';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Route exact path="/" component={LandingPage}/>
-      <Route exact path="/app" component={App}/>
+      <Route exact path="/about" component={About}/>
+      <Route exact path="/Login" component={Login}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

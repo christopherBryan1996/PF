@@ -1,0 +1,17 @@
+.divpapa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.navLogin{
+    display: flex;
+    align-items: center;
+}
+.botonesLogin{
+    display: flex;
+    flex-direction: column;
+}
+.formLogin{
+    display: flex;
+    flex-direction: column;
+}
