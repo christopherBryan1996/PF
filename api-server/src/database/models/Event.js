@@ -32,8 +32,12 @@ const eventSchema = new Schema({
     require: true, // guardar username del creador
   },
   asistentes: {
-    type: [String], //guardar array de username de asistentes
+    type: [], //guardar objetos { usernameDelAsistente: '' ,  tareasdelAsistente: []}
   },
+  image: {
+    type: String,
+    default: "https://images.unsplash.com/photo-1572575156811-2ae050d748d8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+  }
 });
 
 module.exports = model("Event", eventSchema);

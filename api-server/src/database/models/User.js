@@ -22,8 +22,12 @@ const userSchema = new Schema({
     required: true,
   },
   password: {
-    type: String, //agregar funcion hash antes de guardar pass
+    type: String, 
     required: true,
+  },
+  avatar: {
+    type: String,
+    default: "https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
   },
   fechaDeCreacion: {
     type: Date,
