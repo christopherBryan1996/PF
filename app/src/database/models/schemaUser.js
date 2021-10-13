@@ -1,7 +1,8 @@
 const mongoose = require('../db'), Schema= mongoose.Schema
-
-const schemas={
-    userShema: new Schema({
+const {model} = require('mongoose');
+ 
+const schemas = {
+    userSchema: new Schema({
         id: {
             type: Number
         },
@@ -17,4 +18,7 @@ const schemas={
             }
         }
     })
-}
+};
+
+module.exports = model('User', schemas.userSchema);
+
