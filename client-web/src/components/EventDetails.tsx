@@ -14,26 +14,40 @@ export default function EventDetails(){
                 <h1 className="detalles">
                     Detalles
                 </h1>
-                <Link to="/favoritos" >
+                <Link to="/favoritos" className="favoritos">
                 <FcLike size="3em"  />
                 </Link>
-                <Link to="/favoritos" >
+                <Link to="/favoritos" className="favoritos" >
                 <FiShoppingCart size="3em" color="white" />
                 </Link>
             </div>
             <div className="inputs">
                 <h2>Nombre del evento</h2>
-                <input className="inputDetalles" placeholder="Nombre del evento"></input>
+                    <div className="pdetalles">
+                    <p>evento</p>
+                    </div>
                 <h2>Ubicacion</h2>
-                <input className="inputDetalles" placeholder="Ubicacion"></input>
+                    <div className="pdetalles">
+                    <p>Ubicacion</p>
+                    </div>
                 <h2>Hora</h2>
-                <input className="inputDetalles" placeholder="DDMMAAAA HH:MM"></input> to <input className="inputDetalles" placeholder="DDMMAAAA HH:MM"></input>
+                <div className="pdetalle">
+                    <p className="hora">DDMMAAA HH:MM</p>
+                    </div> to <div className="pdetalle">
+                    <p className="hora">DDMMAAA HH:MM</p>
+                    </div>
                 <h2>Descripcion</h2>
-                <input className="inputDetalles" placeholder="Descripcion"></input>
+                <div className="pdetalles">
+                    <p>Descripcion</p>
+                    </div>
                 <h2>Cantidad de asistentes</h2>
-                <input className="inputDetalles" placeholder="Cantidad de asistentes"></input>
+                <div className="pdetalles">
+                    <p>asistentes qt</p>
+                    </div>
                 <h2>Precio</h2>
-                <input className="inputDetalles" placeholder="Precio"></input>
+                <div className="pdetalles">
+                    <p>precio</p>
+                    </div>
             </div>
 
 

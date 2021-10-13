@@ -7,17 +7,45 @@
 .detalles{
     display: inline;
     font-size: 60px;
+    position: relative;
+    left: 440px;
+}
+.favoritos{
+    position: relative;
+    right:-900px
+
 }
 .inputs{
     position: relative;
     left: 500px;
 }
 .inputDetalles{
-    height: 25px;
+    
     background-color:rgb(107, 105, 105) ;
     border-radius: 8px;
     
 }
-::placeholder{
-    color: rgb(211, 208, 208);
+
+.pdetalles{
+    width: 100%;
+    max-width: 250px;
+    background-color: rgb(117, 115, 115);
+    border-radius: 8px;
+    height: 25px;
+}
+.pdetalle{
+    display: inline;
+    width: 100%;
+    max-width: 290px;
+    background-color: rgb(117, 115, 115);
+    border-radius: 8px;
+    height: 25px;
+}
+
+p{
+    color: rgb(213, 214, 213);
+}
+.hora{
+    display: inline;
+    color:rgb(213,214,213);
 }
