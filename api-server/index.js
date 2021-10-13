@@ -1,5 +1,4 @@
 //importar librerias o rutas
-
 const express = require('express')
 const app = express()
 const morgan=require('morgan')

@@ -12,4 +12,13 @@ const addEvents = async function(req, res){
     }
 }
 
+const getEvents = async function(req, res){
+    try {
+        const events = await User.find();
+        res.send(users)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 module.exports = addEvents
