@@ -8,6 +8,9 @@ export default function Login () {
     const back = () => {
         history.push("/")
     };
+    const toRegister = () => {
+        history.push("/Register")
+    };
 
 
     return(
@@ -17,7 +20,7 @@ export default function Login () {
                 <h1>Hola! Bienvenidos</h1>
             </div>
             <div className="botonesLogin">
-                <button>No tienes cuenta? Registrate</button>
+                <button onClick={toRegister}>No tienes cuenta? Registrate</button>
                 <button>Inicia con Google</button>
             </div>
             <div >
