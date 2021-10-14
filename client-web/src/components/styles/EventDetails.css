@@ -1,4 +1,33 @@
-.EventDetailsMain{
+
+.container-detail{
+    margin-top: 120px;
+    display: flex;
+    justify-content:space-around;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.card-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-around;
+    font-size:15px;
+}
+
+.card-text{
+    color: rgb(219, 29, 29);
+}
+
+
+.card-details{
+    margin-top: 14px;
+    width: 70%;
+}
+
+
+/* .EventDetailsMain{
     background-color: rgb(0, 0, 0);
     color: white;
     height: 800px;
@@ -48,4 +77,4 @@ p{
 .hora{
     display: inline;
     color:rgb(213,214,213);
-}
+} */

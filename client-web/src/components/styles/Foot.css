@@ -1,0 +1,20 @@
+.contenedorFinal{
+    display: flex;
+    justify-content: space-evenly;
+}
+.divUl {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+  }
+  .p{
+      display: flex;
+      align-items: center;
+  }
+  .listafinal{
+    display: flex;
+    column-count: 2;
+    flex-wrap: wrap;
+  flex-direction: column;
+
+}

@@ -1,31 +1,79 @@
-import react from 'react';
+import {useState} from 'react';
 import './styles/Register.css';
 import { useHistory } from "react-router-dom";
-import fondoRegister from '../images/fondoRegister.jpg';
+
 
 export default function Register() {
 
+    //Estados---------------------------------------------------------------------------------
+
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+
+    //Funcion para redirigir la pagina-------------------------------------------------------
     const history = useHistory();
     const ToLogin = () => {
         history.push("/Login")
     };
 
+    //Funcion para enviar los posts del form-------------------------------------------------
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        //validators----
+        if(!username || !email || !password || !password2){return alert("Faltan completar casillas!")}
+        if (password2 !== password){return alert("Las contraseñas no coinciden")}
+        const ck_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/  ;
+        const ck_password =/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/ ;
+        if (!ck_password.test(password)){
+            return alert("Debes ingresar una contraseña de mas de 6 caracteres y al menos 1 numero.")
+        };
+        if(!ck_email.test(email)){
+            return alert("Debes ingresar un mail valido")
+        };
+
+        const post = {username, email, password}
+        console.log("constPost",post)
+        fetch('http://localhost:3001/activity', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(post)
+        })
+    };
 
 
-
+    //Return del componente--------------------------------------------------------------------
     return(
-        <div className="fondoDiv">
+        <div className="fondoDiv"> 
             <div>
                 <h2>Completa las casillas con tu informacion</h2>
             </div>
             <div>
-                <form className="formRegister">
+                <form className="formRegister" onSubmit={handleSubmit}>
+                    <label>Nombre de usuario</label>
+                    <input 
+                    placeholder="Escribe tu Nombre de usuario"
+                    type="text"
+                    value={username}
+                    onChange={(e)=> setUsername(e.target.value)}></input>
                     <label>Email</label>
-                    <input placeholder="Escribe tu Email"></input>
+                    <input 
+                    placeholder="Escribe tu Email"
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}></input>
                     <label>Contraseña</label>
-                    <input placeholder="Escribe tu contraseña" type="password"></input>
+                    <input 
+                    placeholder="Escribe tu contraseña"
+                    type="password"
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)} ></input>
                     <label> Repite tu contraseña</label>
-                    <input placeholder="Repite tu contraseña" type="password"></input>
+                    <input 
+                    placeholder="Repite tu contraseña" 
+                    type="password" 
+                    value={password2}
+                    onChange={(e)=>setPassword2(e.target.value)} ></input>
                     <button>Register</button>
                 </form>
             </div>
