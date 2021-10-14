@@ -1,6 +1,7 @@
 import React from "react";
 import './styles/About.css';
 import { useHistory } from "react-router-dom";
+import Foot from './Foot';
 
 
 export default function About() {
@@ -24,6 +25,7 @@ export default function About() {
 
                     Tecnologias:</h5>
             </div>
+            <Foot/>
         </div>
     )
 }

@@ -72,7 +72,7 @@ export default function LandingPage ()  {
                 </div>
             </div>
 
-            <div className="linea"></div>
+            
 
             <Foot/>
 
