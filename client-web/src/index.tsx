@@ -10,11 +10,16 @@ import About from './components/About';
 import Login from './components/Login';
 import Register from './components/Register';
 import NewEvent from './components/NewEvent';
+import { Home } from './components/Home';
+import { Nav } from './components/Nav';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Route  path="/" component={Nav}/>
       <Route exact path="/" component={LandingPage}/>
+      <Route exact path="/home" component={Home}/>
       <Route exact path="/app" component={App}/>
       <Route exact path="/details" component={EventDetails} />
       <Route exact path="/about" component={About}/>
