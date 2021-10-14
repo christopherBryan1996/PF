@@ -3,7 +3,6 @@ const Event = require('../database/models/Event');
 
 const addEvents = async function(req, res){
     try{
-        const newEvent = req.body;
         const event = new Event(req.body);
         const result = await event.save();
         res.send(result);
@@ -32,9 +31,19 @@ const getEventDetail = async function(req, res){
     }
 }
 
+const getAssistans = async function(req, res){
+    try {
+        const {id} = req.params;
+        const lista = await Event.findOne(id)
+        res.send(lista)
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 module.exports = {
     addEvents, 
     getEvents,
-    getEventDetail
+    getEventDetail,
+    getAssistans
 }

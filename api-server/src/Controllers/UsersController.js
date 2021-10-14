@@ -11,14 +11,4 @@ const getUsers = async (req,res) => {
     
 };
 
-const createUser = async (req,res) => {
-    const {name} = req.body;
-    const user = new User({name});
-    const result = await user.save();
-    res.send(result);
-    console.log("usuario guardado")
-
-}
-
-
-module.exports = {getUsers, createUser};
+module.exports = {getUsers};

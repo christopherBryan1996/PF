@@ -1,8 +1,10 @@
 //importar librerias o rutas
-const express = require('express')
-const app = express()
-const morgan=require('morgan')
-const cors= require('cors')
+const express = require('express');
+const morgan =require('morgan');
+const cors = require('cors');
+require('dotenv').config();
+
+const app = express();
 
 // importing routes
 const router = require('./src/Routes/index');
@@ -22,6 +24,8 @@ app.use(express.urlencoded({extended:false})); // reconoce objetos de solicitud 
 
 //aqui manejaremos todas las rutas
 app.use(router);
+
+
 
 
 app.listen(3008,()=>{
