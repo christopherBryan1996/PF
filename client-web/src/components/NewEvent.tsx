@@ -19,6 +19,7 @@ export default function NewEvent() {
     const handleSubmit = (e:any) => {
         e.preventDefault();
         if( !name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
+        
 
         const post = { name, ubicacion, publicoOPriv, numeroPersonas, precio, fecha, descripcion}
         console.log("constPost",post)

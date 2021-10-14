@@ -22,7 +22,15 @@ export default function Login () {
     const handleSubmit = (e:any) => {
         e.preventDefault();
         if( !email || !password ){return alert("Faltan completar casillas!")}
-        
+        const ck_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/  ;
+        const ck_password =/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/ ;
+
+        if (!ck_password.test(password)){
+            return alert("Debes ingresar una contraseña de mas de 6 caracteres y al menos 1 numero.")
+        };
+        if(!ck_email.test(email)){
+            return alert("Debes ingresar un mail valido")
+        };
 
         const post = { email, password}
         console.log("constPost",post)
