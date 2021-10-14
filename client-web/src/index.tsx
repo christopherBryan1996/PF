@@ -13,6 +13,7 @@ import NewEvent from './components/NewEvent';
 import { Home } from './components/Home';
 import { Nav } from './components/Nav';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
