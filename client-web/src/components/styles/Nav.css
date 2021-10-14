@@ -1,0 +1,9 @@
+.navbar-center  {
+    display:flex;
+    justify-content:center;
+    width: 40%;
+}
+
+.fff img {
+    margin-left: 25px;
+}
