@@ -28,6 +28,7 @@ export default function LandingPage ()  {
     return(
         <div>
             <div className="nav-contenedor">
+
                 <div className="div-logo">
                     <h1>ClanFest</h1>
                     <button className="botonSobreNosotros" onClick={botonSobreNosotros}>Sobre Nosotros</button>
@@ -45,7 +46,7 @@ export default function LandingPage ()  {
                     <button onClick={toHomeInvitado} >Pruebalo gratis</button>
                 </div>
                 <div>
-                    <img src={imagen1} alt="imagen de vos cuando bajes la app" className="imagenes"/>
+                    <img src={imagen1} alt="imagen de vos cuando bajes la app" className="imagenes" />
                 </div>
             </div>
 
@@ -67,7 +68,7 @@ export default function LandingPage ()  {
                     <button onClick={toHomeInvitado} >Intentalo ya</button>
                 </div>
                 <div>
-                    <img src={imagen3} alt="imagen de vos cuando bajes la app" className="imagenes"/>
+                    <img src={imagen3} alt="imagen de vos cuando bajes la app" className="imagenes" />
                 </div>
             </div>
 
