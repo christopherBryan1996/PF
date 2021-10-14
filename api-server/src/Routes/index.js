@@ -5,9 +5,8 @@ const eventsRoutes = require('./events');
 
 const router = Router();
 
-router.use('/users', usersRoutes);
+router.use('/api/users', usersRoutes);
 router.use('/events', eventsRoutes);
-
 router.use('/api/auth', require('./auth'));
 
 

@@ -10,11 +10,7 @@
   "author": "Grupo 2",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "bcrypt": "^5.0.1",
-=======
     "bcryptjs": "^2.4.3",
->>>>>>> d6939f6e6c5d11872e042f6960e09a57a376d83d
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
