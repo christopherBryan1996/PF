@@ -19,13 +19,6 @@
 }
 .div-tarjeta1{
     display: flex;
-<<<<<<< HEAD
-    background-color: rgba(12, 12, 12, 0.445);
-    border-radius: 15px;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-=======
     background-color: rgba(90, 90, 90, 0.445);
     border-radius: 15px;
     margin-left: 200px;
@@ -74,4 +67,3 @@
       display: flex;
       align-items: center;
   }
->>>>>>> 56c48f6bd9a78ecbaa348e7f276ec682f5f45eab
