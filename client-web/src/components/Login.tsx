@@ -1,9 +1,15 @@
-import React from "react";
+import {useState} from "react";
 import { useHistory } from "react-router-dom";
 import './styles/Login.css';
 
 export default function Login () {
 
+    //Estados------------------------------------------------------------------------
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    //Funciones para Redireccionar pagina--------------------------------------------
     const history = useHistory();
     const back = () => {
         history.push("/")
@@ -12,7 +18,23 @@ export default function Login () {
         history.push("/Register")
     };
 
+    //Funcion para enviar los posts del form-----------------------------------------
+    const handleSubmit = (e:any) => {
+        e.preventDefault();
+        if( !email || !password ){return alert("Faltan completar casillas!")}
+        
 
+        const post = { email, password}
+        console.log("constPost",post)
+        fetch('http://localhost:3001/activity', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(post)
+        })
+    };
+
+    
+    //Return del componente -------------------------------------------------------------------------------
     return(
         <div className="divpapa">
             <div className="navLogin">
@@ -24,11 +46,20 @@ export default function Login () {
                 <button>Inicia con Google</button>
             </div>
             <div >
-                <form className="formLogin">
+                <form className="formLogin" onSubmit={handleSubmit}>
                     <label>Email</label>
-                    <input placeholder="Escribe tu Email"></input>
+                    <input 
+                    placeholder="Escribe tu Email"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                    ></input>
                     <label>Contraseña</label>
-                    <input placeholder="Escribe tu contraseña" type="password"></input>
+                    <input 
+                    placeholder="Escribe tu contraseña"
+                    type="password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                    ></input>
                     <button>Login</button>
                 </form>
             </div>

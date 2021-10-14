@@ -1,7 +1,7 @@
 import React from "react";
 import './styles/About.css';
 import { useHistory } from "react-router-dom";
-import fondo from '../images/fondoAbout.jpg';
+
 
 export default function About() {
 

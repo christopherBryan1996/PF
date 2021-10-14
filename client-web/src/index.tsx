@@ -9,6 +9,7 @@ import EventDetails from './components/EventDetails';
 import About from './components/About';
 import Login from './components/Login';
 import Register from './components/Register';
+import NewEvent from './components/NewEvent';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route exact path="/about" component={About}/>
       <Route exact path="/Login" component={Login}/>
       <Route exact path="/Register" component={Register}/>
+      <Route exact path="/NewEvent" component={NewEvent}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
