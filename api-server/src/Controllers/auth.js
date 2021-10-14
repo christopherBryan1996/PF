@@ -2,8 +2,6 @@ const bcrypt = require('bcryptjs');
 const User = require('../database/models/User');
 const { generarJWT } = require('../Helpers/jwt');
 
-
-
 const cretedUser = async (req, res) => {
     
     const {email, password} = req.body;
