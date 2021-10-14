@@ -16,34 +16,34 @@ const getEvents = async function(req, res){
     try {
         const events = await Event.find();
         res.send(events)
-    } catch (err) {
+    } 
+    catch (err) {
         console.log(err)
     }
 }
 
 const getEventDetail = async function(req, res){
     try {
+        const assistans = req.query.list
         const {id} = req.params;
         const detail = await Event.findById(id);
-        res.send(detail)
-    } catch (err) {
+
+        if(!assistans){
+            res.send(detail)
+        }
+        else{
+            const list = detail.asistentes;
+            res.send(list);
+        }
+    } 
+    catch (err) {
         console.log(err)
     }
 }
 
-const getAssistans = async function(req, res){
-    try {
-        const {id} = req.params;
-        const lista = await Event.findOne(id)
-        res.send(lista)
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 module.exports = {
     addEvents, 
     getEvents,
-    getEventDetail,
-    getAssistans
+    getEventDetail
 }
