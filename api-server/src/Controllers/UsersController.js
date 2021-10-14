@@ -2,9 +2,6 @@ const User = require('../database/models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-/* require("dotenv").config();
-*/
-
 const getUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -17,7 +14,7 @@ const getUsers = async (req, res) => {
 const register = async (req, res) => {
     try {
         const newUser = new User(req.body);
-        newUser.password = bcrypt.hashSync(req.body.password, 2);
+        newUser.password = bcrypt.hashSync(req.body.password, 10);
         await newUser.save((err, user) => {
             if (err) {
                 return res.status(404).send({
@@ -34,7 +31,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    User.findOne({
+        User.findOne({
         usuario: req.body.usuario
     },
        async (err, user) => {
