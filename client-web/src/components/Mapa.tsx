@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./styles/Mapa.css";
-import 'leaflet/dist/leaflet.css';
+
 
 export default function Mapa() {
     return (
