@@ -37,7 +37,8 @@ export default function EventDetails() {
 
             </div>
             <div className="card-details ">
-                <img className="card-img-top" src={mapa} alt="Card image cap" height="600" />
+                
+                {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
                 <div className="card-footer">
                     <p>Ubicacion: <span>calle 25#32-06</span>  </p>
                 </div>

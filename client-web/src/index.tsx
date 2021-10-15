@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { Home } from './components/Home';
 import { Nav } from './components/Nav';
+import Mapa from './components/Mapa';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route exact path="/about" component={About}/>
       <Route exact path="/Login" component={Login}/>
       <Route exact path="/Register" component={Register}/>
+      <Route exact path="/mapa" component={Mapa}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
