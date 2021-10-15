@@ -1,18 +1,40 @@
 import {useState} from "react";
 import { useHistory } from "react-router-dom";
 import './styles/Login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login () {
 
     //Estados-------------------------------------------------------------------------
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    //warnings----------------------------------------------------------------------
+    const contraseñaIncorrecta = () => toast.error('La contraseña debe tener mas de 6 caracteres y contener 1 numero!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    const mailIncorrecto = () => toast.error('Debe ingresar un mail valido', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });   
+        
 
 
     //Funciones para Redireccionar pagina--------------------------------------------
     const history = useHistory();
     const back = () => {
-        history.push("/")
+        history.goBack() 
     };
     const toRegister = () => {
         history.push("/Register")
@@ -26,10 +48,10 @@ export default function Login () {
         const ck_password =/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/ ;
 
         if (!ck_password.test(password)){
-            return alert("Debes ingresar una contraseña de mas de 6 caracteres y al menos 1 numero.")
+             return contraseñaIncorrecta()
         };
         if(!ck_email.test(email)){
-            return alert("Debes ingresar un mail valido")
+            return mailIncorrecto()
         };
 
         const post = { email, password}
@@ -45,6 +67,7 @@ export default function Login () {
     //Return del componente -------------------------------------------------------------------------------
     return(
         <div className="divpapa">
+            
             <div className="navLogin">
                 <button onClick={back}>Back</button>
                 <h1>Hola! Bienvenidos</h1>
@@ -71,6 +94,16 @@ export default function Login () {
                     <button>Login</button>
                 </form>
             </div>
+            <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover/>
         </div>
     )
 }
