@@ -21,4 +21,4 @@ mongoose.connection.once("open", (_) => {
 });
 
 connection();
-//en los endpoints importar require("../db.js") para que se haga la conexion;
+//en los endpoints o en el index.js(server) importar require("../db.js") para que se haga la conexion;

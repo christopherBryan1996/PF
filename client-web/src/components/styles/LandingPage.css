@@ -40,30 +40,13 @@
 .titulotarjeta2{
     margin-left: 20px;
 }
-.linea {
-    border-top: 1px solid rgb(146, 146, 146);
-    height: 2px;
-    max-width: 900px;
-    padding: 0;
-    margin: 30px auto 0 auto;
-  }
-  .contenedorFinal{
-      display: flex;
-      justify-content: space-evenly;
-  }
-  .listafinal{
-      display: flex;
-      column-count: 2;
-      flex-wrap: wrap;
-    flex-direction: column;
 
-  }
-  .divUl {
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
-  }
-  .p{
+  
+.contTextoBoton{
       display: flex;
       align-items: center;
-  }
+
+      flex-direction: column;
+}
+  
+

@@ -9,9 +9,11 @@ import EventDetails from './components/EventDetails';
 import About from './components/About';
 import Login from './components/Login';
 import Register from './components/Register';
+import NewEvent from './components/NewEvent';
 import { Home } from './components/Home';
 import { Nav } from './components/Nav';
 import Mapa from './components/Mapa';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +27,7 @@ ReactDOM.render(
       <Route exact path="/Login" component={Login}/>
       <Route exact path="/Register" component={Register}/>
       <Route exact path="/mapa" component={Mapa}/>
+      <Route exact path="/NewEvent" component={NewEvent}/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

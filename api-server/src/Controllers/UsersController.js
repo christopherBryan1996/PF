@@ -1,24 +1,40 @@
-const User = require('../database/models/schemaUser');
+const User = require('../database/models/User');
 
-const getUsers = async (req,res) => {
-
+const getUsers = async (req, res) => {
     try {
         const users = await User.find();
-        res.send(users)
+        res.json(users)
     } catch (err) {
         console.log(err)
     }
-    
 };
 
-const createUser = async (req,res) => {
-    const {name} = req.body;
-    const user = new User({name});
-    const result = await user.save();
-    res.send(result);
-    console.log("usuario guardado")
+const getUserById = async (req, res) => {
 
-}
+    const { id } = req.params;
 
+    // crea variable con la consulta para evitar error por consola "querry was already executed"
+    const findByIdQuery = User.findById(id, (err, user) => {
 
-module.exports = {getUsers, createUser};
+        if (err) throw err;
+
+        if (!user) {
+            return res.status(400).json({
+                message: "No se ha encontrado ningun usuario"
+            })
+        }
+
+        if (user) {
+            return res.status(200).json({
+                message: "Usuario encontrado",
+                user
+            })
+        }
+    });
+
+    // ejecucion de la consulta
+    await findByIdQuery.clone()
+
+};
+
+module.exports = { getUsers, getUserById };
