@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import './styles/Register.css';
 import { useHistory } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
 
@@ -17,20 +18,51 @@ export default function Register() {
     const ToLogin = () => {
         history.push("/Login")
     };
+    const back = () => {
+        history.goBack() 
+    };
+    //warnings----------------------------------------------------------------------
+    const contraseñaIncorrecta = () => toast.error('La contraseña debe tener mas de 6 caracteres y contener 1 numero!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    const mailIncorrecto = () => toast.error('Debe ingresar un mail valido', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        }); 
+    const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });         
 
     //Funcion para enviar los posts del form-------------------------------------------------
     const handleSubmit = (e:any) => {
         e.preventDefault();
-        //validators----
+        //validators------------------------------
         if(!username || !email || !password || !password2){return alert("Faltan completar casillas!")}
-        if (password2 !== password){return alert("Las contraseñas no coinciden")}
+        if (password2 !== password){return contraseña2incorrecta()}
         const ck_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/  ;
         const ck_password =/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/ ;
         if (!ck_password.test(password)){
-            return alert("Debes ingresar una contraseña de mas de 6 caracteres y al menos 1 numero.")
+            return contraseñaIncorrecta()
         };
         if(!ck_email.test(email)){
-            return alert("Debes ingresar un mail valido")
+            return mailIncorrecto()
         };
 
         const post = {username, email, password}
@@ -47,6 +79,7 @@ export default function Register() {
     return(
         <div className="fondoDiv"> 
             <div>
+                <button onClick={back}>Back</button>
                 <h2>Completa las casillas con tu informacion</h2>
             </div>
             <div>
@@ -82,6 +115,16 @@ export default function Register() {
                 <h3>Or</h3>
                 <button>Inicia con Google</button>
             </div>
+            <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover/>
         </div>
     )
 }

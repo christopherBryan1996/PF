@@ -15,10 +15,11 @@ import { Nav } from './components/Nav';
 import Mapa from './components/Mapa';
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Route  path="/" component={Nav}/>
+      <Route  exact path="/" component={Nav}/>
       <Route exact path="/" component={LandingPage}/>
       <Route exact path="/home" component={Home}/>
       <Route exact path="/app" component={App}/>
