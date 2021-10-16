@@ -48,7 +48,25 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });         
+        });  
+        const usuarioRepetido = () => toast.error('El usuario o el Email ya se encuentran registrados!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });        
 
     //Funcion para enviar los posts del form-------------------------------------------------
     const handleSubmit = (e:any) => {
@@ -65,13 +83,29 @@ export default function Register() {
             return mailIncorrecto()
         };
 
-        const post = {username, email, password}
-        console.log("constPost",post)
-        fetch('http://localhost:3001/activity', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(post)
-        })
+        const post = {
+             usuario: username,
+             email, 
+             password};
+
+        async function fetchPost(data:object) {
+            try {
+                const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth/new', {
+                    method: 'POST', 
+                    headers: {"Content-Type": "application/json;charset=UTF-8"},
+                    body: JSON.stringify(data)
+                });
+                if (mensaje.ok){
+                    usuarioCreado();
+                }else{
+                    usuarioRepetido();
+                }
+                console.log("mensajefetch", mensaje);
+            } catch (error) {
+                console.error(error);
+            }             
+        }    
+        fetchPost(post)   
     };
 
 
@@ -107,7 +141,7 @@ export default function Register() {
                     type="password" 
                     value={password2}
                     onChange={(e)=>setPassword2(e.target.value)} ></input>
-                    <button>Register</button>
+                    <button >Register</button>
                 </form>
             </div>
             <div className="botonesRegister">
