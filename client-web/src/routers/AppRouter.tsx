@@ -8,6 +8,7 @@ import Login from '../components/Login';
 import { Nav } from '../components/Nav';
 import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
+import Mapa from '../components/Mapa';
 
 
 export const AppRouter = () => {
@@ -22,6 +23,7 @@ export const AppRouter = () => {
                     <Route exact path="/Login" component={Login} />
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/NewEvent" component={NewEvent} />
+                    <Route exact path="/mapa" component={Mapa} />
             </div>
         </Router>
     )
