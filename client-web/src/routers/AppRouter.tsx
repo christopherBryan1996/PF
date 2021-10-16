@@ -15,7 +15,7 @@ export const AppRouter = () => {
     return (
         <Router>
             <div>
-                    <Route  exact path="/" component={Nav} />
+                    {/* <Route path="/" component={Nav} /> */}
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/details" component={EventDetails} />
@@ -27,4 +27,5 @@ export const AppRouter = () => {
             </div>
         </Router>
     )
-}
+};
+
