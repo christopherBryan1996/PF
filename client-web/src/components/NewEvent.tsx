@@ -51,7 +51,7 @@ export default function NewEvent() {
         }    
         fetchPost(post)        
     };
-
+ //
 
     //Funcion para redirigir atras---------------------------------------------------------------------
     const history = useHistory();
