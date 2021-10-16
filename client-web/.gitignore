@@ -4,9 +4,10 @@
 
 /node_modules
 /client-web/node_modules
+/client-web/package-lock.json
 /.pnp
 .pnp.js
-
+package-lock.json
 # testing
 /coverage
 
