@@ -16,19 +16,44 @@ export default function NewEvent() {
     const [descripcion, setDescripcion] = useState("");
 
     //Funcion para enviar el post del form----------------------------------------------------------------
+
+    
+
     const handleSubmit = (e:any) => {
         e.preventDefault();
-        if( !name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
-        
 
-        const post = { name, ubicacion, publicoOPriv, numeroPersonas, precio, fecha, descripcion}
+        if( !name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
+        let publicVar= true;
+        if (publicoOPriv === "true" )publicVar = true;
+        if (publicoOPriv === "false" ) publicVar = false;
+        
+        const post = { 
+            nombreDelEvento: name, 
+            direccion: ubicacion, 
+            horaDeInicio:  "20:30",
+            autor: "pepita",
+            publico: publicVar, 
+            invitados: numeroPersonas, 
+            precio, 
+            fecha, 
+            descripcion
+        }
         console.log("constPost",post)
-        fetch('http://localhost:3001/activity', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(post)
-        })
+
+        async function fetchPost(data:object) {
+            try {
+                await fetch('https://api-fest.herokuapp.com/events/create', {
+                method: 'POST', 
+                headers: {"Content-Type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(data)
+            })
+            } catch (error) {
+                console.error(error);
+            }             
+        }    
+        fetchPost(post)        
     };
+    
 
 
     //Funcion para redirigir atras---------------------------------------------------------------------
@@ -84,8 +109,8 @@ export default function NewEvent() {
                             value={publicoOPriv}
                             onChange={(e)=>setPublicoOPriv(e.target.value)}
                             >
-                             <option value="publico">Publico</option>
-                             <option value="privado">Privado</option>
+                             <option value="true" >Publico</option>
+                             <option value="false" >Privado</option>
                             </select>
                         </li>
 

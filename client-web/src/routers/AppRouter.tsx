@@ -15,7 +15,7 @@ export const AppRouter = () => {
     return (
         <Router>
             <div>
-                    <Route path="/" component={Nav} />
+                    <Route  exact path="/" component={Nav} />
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/details" component={EventDetails} />
