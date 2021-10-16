@@ -3,6 +3,15 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.container-h{
+
+    margin-top: 180px;
+    padding: 25px;
+    height:70vh
+
+
+}
 .divDeLaUl{
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
