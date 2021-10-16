@@ -20,14 +20,36 @@ export default function NewEvent() {
         e.preventDefault();
         if( !name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
         
+        // Algunos de estos datos estan harcodeados porque el back necesita recibirlos
+        // publicoOPriv debe mandarse como un booleano 
+        // el objeto debe ir con esos nombres de propiedades para que el endpoint pueda guardar 
+        // directo en la db
+        const post = { 
+            nombreDelEvento: name, 
+            direccion: ubicacion, 
+            horaDeInicio:  "20:30",
+            autor: "pepita",
+            publico: true, 
+            invitados: numeroPersonas, 
+            precio, 
+            fecha, 
+            descripcion
+        }
 
-        const post = { name, ubicacion, publicoOPriv, numeroPersonas, precio, fecha, descripcion}
         console.log("constPost",post)
-        fetch('http://localhost:3001/activity', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(post)
-        })
+
+        async function fetchPost(data:object) {
+            try {
+                await fetch('https://api-fest.herokuapp.com/events/create', {
+                method: 'POST', 
+                headers: {"Content-Type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(data)
+            })
+            } catch (error) {
+                console.error(error);
+            }             
+        }    
+        fetchPost(post)        
     };
 
 
