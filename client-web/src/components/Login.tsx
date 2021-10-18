@@ -27,8 +27,25 @@ export default function Login () {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });   
-        
+        });
+        const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });     
+            const usuarioRepetido = () => toast.error('El usuario o el Email son incorrectos!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });  
 
 
     //Funciones para Redireccionar pagina--------------------------------------------
@@ -38,6 +55,9 @@ export default function Login () {
     };
     const toRegister = () => {
         history.push("/Register")
+    };
+    const toHome = () => {
+        history.push("/home")
     };
 
     //Funcion para enviar los posts del form-----------------------------------------
@@ -56,12 +76,26 @@ export default function Login () {
 
         const post = { email, password}
         console.log("constPost",post)
-        fetch('http://localhost:3001/activity', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(post)
-        })
-    };
+       
+    async function fetchPost(data:object) {
+        try {
+            const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth', {
+                method: 'POST', 
+                headers: {"Content-Type": "application/json;charset=UTF-8"},
+                body: JSON.stringify(data)
+            });
+            if (mensaje.ok){
+                toHome();
+            }else{
+                usuarioRepetido();
+            }
+            console.log("mensajefetch", mensaje);
+        } catch (error) {
+            console.error(error);
+        }             
+    }    
+    fetchPost(post)   
+};
 
     
     //Return del componente -------------------------------------------------------------------------------

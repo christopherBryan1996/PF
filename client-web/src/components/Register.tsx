@@ -20,7 +20,7 @@ export default function Register() {
     const ToLogin = () => {
         history.push("/Login")
     };
-    
+
     //warnings----------------------------------------------------------------------
     const contraseñaIncorrecta = () => toast.error('La contraseña debe tener mas de 6 caracteres y contener 1 numero!', {
         position: "top-center",
@@ -48,7 +48,25 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    });
+        });
+        const usuarioRepetido = () => toast.error('El usuario o el Email ya se encuentran registrados!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
     //Funcion para enviar los posts del form-------------------------------------------------
     const handleSubmit = (e: any) => {
@@ -65,13 +83,30 @@ export default function Register() {
             return mailIncorrecto()
         };
 
-        const post = { username, email, password }
-        console.log("constPost", post)
-        fetch('http://localhost:3001/activity', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(post)
-        })
+        const post = {
+            usuario: username,
+            email,
+            password
+        };
+
+        async function fetchPost(data: object) {
+            try {
+                const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth/new', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json;charset=UTF-8" },
+                    body: JSON.stringify(data)
+                });
+                if (mensaje.ok) {
+                    usuarioCreado();
+                } else {
+                    usuarioRepetido();
+                }
+                console.log("mensajefetch", mensaje);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchPost(post)
     };
 
     //Return del componente--------------------------------------------------------------------
@@ -139,17 +174,17 @@ export default function Register() {
                     </form>
                 </div>
 
-            </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover />
-        </div>
-    )
+                    </div>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover />
+                </div>
+                )
 }

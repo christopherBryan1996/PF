@@ -30,6 +30,7 @@ export default function NewEvent() {
             body: JSON.stringify(post)
         })
     };
+    
 
 
     //Funcion para redirigir atras---------------------------------------------------------------------
