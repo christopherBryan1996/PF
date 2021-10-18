@@ -2,10 +2,13 @@
 
 import { Evento } from './Evento'
 import './styles/Card.css'
+import { Nav } from './Nav';
+import Foot from './Foot';
 
 export const Home = () => {
     return (
         <div>
+            <Nav/>
             <div className="filter container">
 
                 <select className="form-select form-select-lg border" aria-label="Default select example">
@@ -30,6 +33,7 @@ export const Home = () => {
                 <Evento />
             </div>
 
+            <Foot/>
 
         </div>
     )

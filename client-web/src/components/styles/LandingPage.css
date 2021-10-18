@@ -1,18 +1,17 @@
 .nav-contenedor{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding:25px;
 }
 .div-logo{
     display: flex;
     align-items: baseline;
 }
-.botonSobreNosotros{
-    display: flex;
-    margin-left: 10px;
-}
-.botoneslogin{
-    display: flex;
-    align-items: center;
+.btn-outline-success {
+    color: #00bc8c;
+    border-color: #00bc8c;
+    margin-left: 25px;
 }
 .botonlogin{
     margin-right: 12px;
@@ -34,7 +33,9 @@
 
 .parrafo1{
     margin-top: 60px;
+    margin-bottom:25px;
     margin-left: 20px;
+    margin-right: 20px;
     font-size:20px;
 }
 .titulotarjeta2{
@@ -43,10 +44,12 @@
 
   
 .contTextoBoton{
+
+    padding: 15px;
       display: flex;
       align-items: center;
-
       flex-direction: column;
 }
-  
+
+
 
