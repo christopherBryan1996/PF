@@ -4,6 +4,7 @@
 
 /node_modules
 /client-web/node_modules
+/client-web/package-lock.json
 /.pnp
 .pnp.js
 /client-web/package-lock.json
