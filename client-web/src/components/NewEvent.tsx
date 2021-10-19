@@ -2,6 +2,7 @@ import { ImArrowLeft } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import {useState} from "react";
 import './styles/NewEvent.css';
+import Mapa from './Mapa';
 
 export default function NewEvent() {
 
@@ -14,7 +15,12 @@ export default function NewEvent() {
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
+    const [coordenadasPadre, setCoordenadasPadre] = useState<[number, number]>([0,0]);
 
+
+    function llenarEstadoCoordenadas(data:any) {
+        return setCoordenadasPadre(data)
+    };
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     
@@ -36,7 +42,8 @@ export default function NewEvent() {
             invitados: numeroPersonas, 
             precio, 
             fecha, 
-            descripcion
+            descripcion,
+           
         }
         console.log("constPost",post)
 
@@ -124,7 +131,7 @@ export default function NewEvent() {
                         </li>
 
                         <li>
-                            <label>Nombre del evento</label>
+                            <label>Fecha</label>
                             <input
                             type="date"
                             value={fecha}
@@ -141,6 +148,15 @@ export default function NewEvent() {
                         value={descripcion}
                         onChange={(e)=>setDescripcion(e.target.value)}
                         ></textarea>
+                    </div>
+                    <div>
+                        <label>Localizacion</label>
+                        <br/>
+                        <p>Haga click 1 vez para ver su localizacion actual, haga un segundo click para poner un marcador donde sera el evento</p>
+                        <div className="divMapa">
+                            <Mapa />
+                        </div>
+                            
                     </div>
                     
                     <button>Crear</button>

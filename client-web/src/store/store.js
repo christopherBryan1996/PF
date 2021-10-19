@@ -1,5 +1,6 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import  {rootReducer}  from '../reducers/rootReducer';
+import {reducerCoords} from '../reducers/coordsReducer';
 import thunk from 'redux-thunk';
 
 

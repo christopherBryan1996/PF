@@ -49,30 +49,39 @@ export default function Register() {
         draggable: true,
         progress: undefined,
         });
-        const usuarioRepetido = () => toast.error('El usuario o el Email ya se encuentran registrados!', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            });
-            const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                });
+    const usuarioRepetido = () => toast.error('El usuario o el Email ya se encuentran registrados!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    const faltanCasillas = () => toast.error('Faltan completar casillas!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+         });  
 
     //Funcion para enviar los posts del form-------------------------------------------------
     const handleSubmit = (e: any) => {
         e.preventDefault();
         //validators------------------------------
-        if (!username || !email || !password || !password2) { return alert("Faltan completar casillas!") }
+        if (!username || !email || !password || !password2) { return  faltanCasillas() }
         if (password2 !== password) { return contraseña2incorrecta() }
         const ck_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const ck_password = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -188,3 +197,5 @@ export default function Register() {
                 </div>
                 )
 }
+
+
