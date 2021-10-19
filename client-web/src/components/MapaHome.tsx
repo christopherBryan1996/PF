@@ -17,17 +17,23 @@ function MapaHome(props:any ) {
     }, []);
     const {eventos}=useSelector((state:any)=>state.eventos)
 
-    const eventosHard = [
-        {coordenadas: [12, 45],
-         nombreDelEvento: "juansito",
-         _id: 12},
-         
-         {coordenadas: [14, 46],
-            nombreDelEvento: "juansito2",
-            _id: 13}
-
-    ]
   
+
+    
+
+    const coords= [
+        { lat: 41.19197, lng: 25.33719 },
+        { lat: 41.26352, lng: 25.1471 },
+        { lat: 41.26365, lng: 25.24215 },
+        { lat: 41.26369, lng: 25.33719 },
+        { lat: 41.26365, lng: 25.43224 },
+        { lat: 41.26352, lng: 25.52728 },
+        { lat: 41.2633, lng: 25.62233 },
+        { lat: 41.263, lng: 25.71737 },
+        { lat: 41.3082, lng: 22.95892 },
+        { lat: 41.31041, lng: 23.054 }
+      ]
+
 
   
 console.log("evetos", eventos)
@@ -40,7 +46,7 @@ console.log("evetos", eventos)
         <div>
             
                    <Marker position={[12, 34]}>
-                    <Popup> nombre</Popup>
+                    <Popup> nombre Markers</Popup>
 
                 </Marker> 
                  
@@ -86,14 +92,13 @@ const LocationMarker = () => {
     <Markers/>
              
  
-               {eventosHard.map((e:any)=>{(
-                   <Marker position={[e.coordenadas[0], e.coordenadas[1]]}>
-                    <Popup> nombre</Popup>
-
-                </Marker> 
-               )
-                   
-               })}
+    {eventos.map(( e:any , index:any) => ( e.coordenadas.lat ?
+      <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}  key={index}>
+          <Popup>
+                {e.nombreDelEvento}
+          </Popup>
+      </Marker>
+                : null ))}
                   
                   
             

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 function Mapa(props:any ) {
 
   //-estados------------------------------------------------------
-  const [coordenadas, setCoordenadas] = useState<[number, number]>([0,0]);
+  const [coordenadas, setCoordenadas] = useState({lat:1, lng: 1});
   
 
   
@@ -19,9 +19,9 @@ function Mapa(props:any ) {
   const Markers =  () => {
     const map =  useMapEvents({
        click(e:any)  {   
-          var coordMoment = [e.latlng.lat, e.latlng.lng]                             
-          setCoordenadas([e.latlng.lat, e.latlng.lng]) 
-          props.llenarCoordenadas(coordMoment);
+                                      
+          setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
+          
           props.onCambio(coordenadas)               
         },            
     })
@@ -30,7 +30,7 @@ function Mapa(props:any ) {
     return (
       coordenadas ? 
           <Marker           
-          key={coordenadas[0]}
+          key={coordenadas["lat"]}
           position={coordenadas}
           interactive={false} >
             <Popup  >Aqui ocurrira el evento</Popup>
