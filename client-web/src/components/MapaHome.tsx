@@ -40,20 +40,7 @@ console.log("evetos", eventos)
   
   //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
 
-  const Markers =  () => {
-    
-    return (
-        <div>
-            
-                   <Marker position={[12, 34]}>
-                    <Popup> nombre Markers</Popup>
-
-                </Marker> 
-                 
-        </div>
-        
-  )   
-};
+  
 
 
 
@@ -88,9 +75,7 @@ const LocationMarker = () => {
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  
-    <Markers/>
-             
+           
  
     {eventos.map(( e:any , index:any) => ( e.coordenadas.lat ?
       <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}  key={index}>
