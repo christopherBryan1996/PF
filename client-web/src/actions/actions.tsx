@@ -16,3 +16,11 @@ export function getEvents (){
     })
     }
 }
+
+export const filtroPrecio=(state:any)=>{//este action es para filtrar por continente
+
+    return {
+        type: "filtroPrecio",
+        payload:state
+    }
+}

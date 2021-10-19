@@ -3,7 +3,7 @@ import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import Foot from './Foot';
-import { getEvents } from "../actions/actions"
+import { getEvents,filtroPrecio } from "../actions/actions"
 import React, { useEffect} from "react";
 
 export const Home = () => {
@@ -14,15 +14,22 @@ export const Home = () => {
 
         const {eventos}=useSelector((state:any)=>state.eventos)
         console.log(eventos)
+
+        function change(e:any){
+            dispatch(filtroPrecio(e.target.value))
+        }
+
     return (
         <div>
             <Nav/>
             <div className="filter container">
 
-                <select className="form-select form-select-lg border" aria-label="Default select example">
+                <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
                     <option selected>Filtrar por precio</option>
                     <option value="1">Gratis</option>
-                    <option value="2">Pago</option>                
+                    <option value="2">Pago</option>  
+                    <option value="3">Menor a mayor</option>  
+                    <option value="4">Mayor a menor</option>                
                 </select>
 
                 <button className="btn btn-light">Crea tu evento</button>
