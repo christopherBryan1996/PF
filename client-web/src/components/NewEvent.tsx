@@ -5,9 +5,12 @@ import { fileUpload } from "../helpers/fileUpload";
 import './styles/NewEvent.css';
 
 import Mapa from './Mapa';
+import { useDispatch } from "react-redux";
+
 
 export default function NewEvent() {
 
+    const dispatch:any = useDispatch();
     //Estados------------------------------------------------------------------------------------------
     const [name, setName] = useState("");
     const [ubicacion, setUbicacion] = useState("");
@@ -17,7 +20,7 @@ export default function NewEvent() {
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [coordenadasPadre, setCoordenadasPadre] = useState<[number, number]>([0, 0]);
-    const [file, setFile] = useState(null)
+
 
 
 
@@ -27,19 +30,15 @@ export default function NewEvent() {
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     const handleFileChange = (e: any) => {
-
-        if (e.target.files[0]) {
-            setFile(e.target.files[0])
-        }
+        const file = e.target.files[0]
+     
     }
 
-    console.log('Imagen:', file)
+    
 
     const handleSubmit = (e: any) => {
 
-        fileUpload(file)
-
-        e.preventDefault();
+      e.preventDefault();
 
         if (!name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion) { return alert("Faltan completar casillas!") }
         let publicVar = true;

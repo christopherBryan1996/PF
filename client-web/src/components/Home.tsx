@@ -1,11 +1,19 @@
-
-
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import Foot from './Foot';
+import { getEvents } from "../actions/actions"
+import React, { useEffect} from "react";
 
 export const Home = () => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getEvents());
+        }, []);
+
+        const {eventos}=useSelector((state:any)=>state.eventos)
+        console.log(eventos)
     return (
         <div>
             <Nav/>
@@ -21,16 +29,11 @@ export const Home = () => {
             </div>
             <div className="container container-home">
 
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
-                <Evento />
+                {eventos.map((i:any) => (
+                
+                <Evento imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+                ))
+                }
             </div>
 
             <Foot/>
@@ -40,3 +43,8 @@ export const Home = () => {
 }
 
 
+// function mapDispatchToProps(dispatch:any):{} {
+//     return { getEvents: () => dispatch(getEvents()) };
+//     }
+
+// export default connect(null, mapDispatchToProps)(Home);
