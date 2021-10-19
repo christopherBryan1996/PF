@@ -1,41 +1,50 @@
 import { ImArrowLeft } from "react-icons/im";
 import { useHistory } from "react-router-dom";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './styles/NewEvent.css';
 import Mapa from './Mapa';
+import { connect } from "react-redux";
 
-export default function NewEvent() {
+
+function NewEvent(props:any) {
 
     //Estados------------------------------------------------------------------------------------------
 
     const [name, setName] = useState("");
-    const [ubicacion, setUbicacion] = useState("");
+    const [direccion, setDireccion] = useState("");
     const [publicoOPriv, setPublicoOPriv] = useState("publico");
     const [numeroPersonas, setNumeroPersonas] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [coordenadasPadre, setCoordenadasPadre] = useState<[number, number]>([0,0]);
+    const [ubicacion, setUbicacion] = useState<[number, number]>([0,0]);
+    
+    const setearUbicacion = (e:any)=> {
+        setUbicacion(e)
+    }
+
+       
 
 
-    function llenarEstadoCoordenadas(data:any) {
-        return setCoordenadasPadre(data)
-    };
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     
 
-    const handleSubmit = (e:any) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
 
-        if( !name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
+        if( !name  || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion  ){return alert("Faltan completar casillas!")}
         let publicVar= true;
         if (publicoOPriv === "true" )publicVar = true;
         if (publicoOPriv === "false" ) publicVar = false;
+
+        var cordSet= props.coordenadasRedux;
+        setUbicacion(cordSet)
+        console.log("ubicacion en padre", ubicacion)
         
         const post = { 
             nombreDelEvento: name, 
-            direccion: ubicacion, 
+            direccion, 
             horaDeInicio:  "20:30",
             autor: "pepita",
             publico: publicVar, 
@@ -43,8 +52,9 @@ export default function NewEvent() {
             precio, 
             fecha, 
             descripcion,
-           
+            coordenadas: ubicacion
         }
+
         console.log("constPost",post)
 
         async function fetchPost(data:object) {
@@ -92,12 +102,12 @@ export default function NewEvent() {
                         </li>
 
                         <li>
-                            <label>Ubicacion</label>
+                            <label>Direccion</label>
                             <input
                             placeholder="Ubicacion del evento"
                             type="text"
-                            value={ubicacion}
-                            onChange={(e)=>setUbicacion(e.target.value)}
+                            value={direccion}
+                            onChange={(e)=>setDireccion(e.target.value)}
                             ></input>
                         </li>
 
@@ -141,6 +151,7 @@ export default function NewEvent() {
 
                     </ul>
                     </div>
+                   
                     <div className="inputTextarea">
                         <label>Description</label>
                         <textarea
@@ -149,12 +160,13 @@ export default function NewEvent() {
                         onChange={(e)=>setDescripcion(e.target.value)}
                         ></textarea>
                     </div>
+                   
                     <div>
                         <label>Localizacion</label>
                         <br/>
                         <p>Haga click 1 vez para ver su localizacion actual, haga un segundo click para poner un marcador donde sera el evento</p>
                         <div className="divMapa">
-                            <Mapa />
+                            <Mapa onCambio={setearUbicacion} />
                         </div>
                             
                     </div>
@@ -165,3 +177,13 @@ export default function NewEvent() {
         </div>
     )
 };
+
+
+  
+  function mapStateToProps (state:any)  {
+    return {
+      coordenadasRedux: state.coordenadasRedux
+    };
+  };
+  
+  export default connect(mapStateToProps)(NewEvent)
