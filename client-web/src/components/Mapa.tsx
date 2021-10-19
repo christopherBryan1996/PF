@@ -1,12 +1,15 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "./styles/Mapa.css";
 import {useState, useEffect} from "react";
+import {llenarCoordenadas} from '../actions/actions';
+import { connect } from "react-redux";
 
 
-export default function Mapa() {
+function Mapa(props:any) {
 
   //-estados------------------------------------------------------
   const [coordenadas, setCoordenadas] = useState<[number, number]>([0,0]);
+  
 
   
 
@@ -15,11 +18,10 @@ export default function Mapa() {
 
   const Markers = () => {
     const map = useMapEvents({
-        click(e:any) {                                
-            setCoordenadas([
-                e.latlng.lat,
-                e.latlng.lng
-            ]);                
+        click(e:any) {   
+           var coordMoment = [e.latlng.lat, e.latlng.lng]                             
+            props.llenarCoordenadas(coordMoment);
+            setCoordenadas([e.latlng.lat, e.latlng.lng])   //chequear estado redux             
         },            
     })
     console.log("coordenadas", coordenadas)
@@ -77,3 +79,17 @@ const LocationMarker = () => {
     
     );
 }
+
+function mapDispatchToProps(dispatch:any) {
+  return {
+    llenarCoordenadas: (data:any) => dispatch(llenarCoordenadas(data))
+  };
+};
+
+function mapStateToProps (state:any)  {
+  return {
+    coordenadasRedux: state.coordenadasRedux
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mapa)
