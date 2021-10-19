@@ -1,41 +1,57 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
-import "./styles/Mapa.css";
+import "./styles/MapaHome.css";
 import {useState, useEffect} from "react";
 import {llenarCoordenadas} from '../actions/actions';
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getEvents } from "../actions/actions"
 
 
-function Mapa(props:any ) {
+function MapaHome(props:any ) {
 
   //-estados------------------------------------------------------
-  const [coordenadas, setCoordenadas] = useState({lat:1, lng: 1});
-  
+  const [coordenadas, setCoordenadas] = useState<[number, number]>([0,0]);
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getEvents());
+    }, []);
+    const {eventos}=useSelector((state:any)=>state.eventos)
 
   
 
+    
+
+    const coords= [
+        { lat: 41.19197, lng: 25.33719 },
+        { lat: 41.26352, lng: 25.1471 },
+        { lat: 41.26365, lng: 25.24215 },
+        { lat: 41.26369, lng: 25.33719 },
+        { lat: 41.26365, lng: 25.43224 },
+        { lat: 41.26352, lng: 25.52728 },
+        { lat: 41.2633, lng: 25.62233 },
+        { lat: 41.263, lng: 25.71737 },
+        { lat: 41.3082, lng: 22.95892 },
+        { lat: 41.31041, lng: 23.054 }
+      ]
+
+
+  
+console.log("evetos", eventos)
   
   //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
 
   const Markers =  () => {
-    const map =  useMapEvents({
-       click(e:any)  {   
-                                      
-          setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
-          
-          props.onCambio(coordenadas)               
-        },            
-    })
-    console.log("coordenadas", coordenadas)
     
     return (
-      coordenadas ? 
-          <Marker           
-          key={coordenadas["lat"]}
-          position={coordenadas}
-          interactive={false} >
-            <Popup  >Aqui ocurrira el evento</Popup>
-          </Marker>
-      : null
+        <div>
+            
+                   <Marker position={[12, 34]}>
+                    <Popup> nombre Markers</Popup>
+
+                </Marker> 
+                 
+        </div>
+        
   )   
 };
 
@@ -73,9 +89,23 @@ const LocationMarker = () => {
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
   
-  
-    <LocationMarker/>
     <Markers/>
+             
+ 
+    {eventos.map(( e:any , index:any) => ( e.coordenadas.lat ?
+      <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}  key={index}>
+          <Popup>
+                {e.nombreDelEvento}
+          </Popup>
+      </Marker>
+                : null ))}
+                  
+                  
+            
+       
+
+    <LocationMarker/>
+    
     </MapContainer>
     </div>
     
@@ -94,4 +124,4 @@ function mapStateToProps (state:any)  {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mapa)
+export default connect(mapStateToProps, mapDispatchToProps)(MapaHome)
