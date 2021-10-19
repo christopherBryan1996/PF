@@ -1,32 +1,27 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "./styles/Mapa.css";
 import {useState, useEffect} from "react";
+import {llenarCoordenadas} from '../actions/actions';
+import { connect } from "react-redux";
 
 
-export default function Mapa() {
+function Mapa(props:any) {
 
   //-estados------------------------------------------------------
   const [coordenadas, setCoordenadas] = useState<[number, number]>([0,0]);
-  const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
   
-  //funcion para localizar donde se encuentra el usuario------------------------------------------------------------------------
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        setInitialPosition([latitude, longitude]);
 
-    });
-}, []);
+  
+
   
   //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
 
   const Markers = () => {
     const map = useMapEvents({
-        click(e:any) {                                
-            setCoordenadas([
-                e.latlng.lat,
-                e.latlng.lng
-            ]);                
+        click(e:any) {   
+           var coordMoment = [e.latlng.lat, e.latlng.lng]                             
+            props.llenarCoordenadas(coordMoment);
+            setCoordenadas([e.latlng.lat, e.latlng.lng])   //chequear estado redux             
         },            
     })
     console.log("coordenadas", coordenadas)
@@ -35,12 +30,16 @@ export default function Mapa() {
           <Marker           
           key={coordenadas[0]}
           position={coordenadas}
-          interactive={false} 
-          />
+          interactive={false} >
+            <Popup  >Aqui ocurrira el evento</Popup>
+          </Marker>
       : null
   )   
 };
 
+
+
+//funcion que centra el mapa cuando haces click-------------------------------------------------------------
 
 const LocationMarker = () => {
   const [position, setPosition] = useState<[number, number]>([0,0]);
@@ -57,11 +56,7 @@ const LocationMarker = () => {
     },
   })
 
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup  >You are here</Popup>
-    </Marker>
-  )
+  return  null 
 }
 
 
@@ -70,7 +65,7 @@ const LocationMarker = () => {
     return (
         
         <div className="mapa">
-        <MapContainer center={coordenadas || initialPosition} zoom={13}  >
+        <MapContainer center={coordenadas} zoom={13}  >
         <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -84,3 +79,17 @@ const LocationMarker = () => {
     
     );
 }
+
+function mapDispatchToProps(dispatch:any) {
+  return {
+    llenarCoordenadas: (data:any) => dispatch(llenarCoordenadas(data))
+  };
+};
+
+function mapStateToProps (state:any)  {
+  return {
+    coordenadasRedux: state.coordenadasRedux
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mapa)
