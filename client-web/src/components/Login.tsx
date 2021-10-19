@@ -68,7 +68,7 @@ export default function Login () {
         const ck_password =/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/ ;
 
         if (!ck_password.test(password)){
-             return contraseñaIncorrecta()
+            return contraseñaIncorrecta()
         };
         if(!ck_email.test(email)){
             return mailIncorrecto()
@@ -76,7 +76,7 @@ export default function Login () {
 
         const post = { email, password}
         console.log("constPost",post)
-       
+    
     async function fetchPost(data:object) {
         try {
             const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth', {
