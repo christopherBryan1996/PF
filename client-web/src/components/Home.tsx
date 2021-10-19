@@ -3,8 +3,9 @@ import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import Foot from './Foot';
-import { getEvents } from "../actions/actions"
+import { getEvents } from "../actions/actions";
 import React, { useEffect} from "react";
+import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -26,7 +27,15 @@ export const Home = () => {
                 </select>
 
                 <button className="btn btn-light">Crea tu evento</button>
+            
             </div>
+
+            <div>
+                <MapaHome/>
+            </div>
+
+
+
             <div className="container container-home">
 
                 {eventos.map((i:any) => (
