@@ -1,5 +1,5 @@
 import axios from "axios";
-import { fileUpload } from "../helpers/fileUpload";
+
 
 export function llenarCoordenadas (data:string[]) {
     console.log("llego action llenarCoordenadas")
@@ -18,19 +18,26 @@ export function getEvents (){
     }
 }
 
-export const fetchCountriesDetail = (id:string) => {
+// export const fetchCountriesDetail = (id:string) => {
 
-    return async function (dispatch:any) {
+//     return async function (dispatch:any) {
 
-        try {
-            const res = await axios.get(`http://localhost:3001/countries/${id}`);
-            dispatch({
-                type: "SET_DETAIL",
-                payload: res.data,
-            })
-        } catch (error) {
+//         try {
+//             const res = await axios.get(`http://localhost:3001/countries/${id}`);
+//             dispatch({
+//                 type: "SET_DETAIL",
+//                 payload: res.data,
+//             })
+//         } catch (error) {
 
-        }
+//         }
+//     }
+// }
+
+export const filtroPrecio=(state:any)=>{//este action es para filtrar por continente
+
+    return {
+        type: "filtroPrecio",
+        payload:state
     }
 }
-

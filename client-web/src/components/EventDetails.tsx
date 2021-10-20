@@ -16,13 +16,13 @@ export default function EventDetails() {
     const {details} =useSelector((state:any)=>state.eventos)
     const dispatch = useDispatch();
 
-    let { id } = useParams()
+    // let { id } = useParams()
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        dispatch(fetchCountriesDetail(id))
-        setTimeout(() => { setLoading(false) }, 500)
-    }, [id, dispatch]);
+    //     dispatch(fetchCountriesDetail(id))
+    //     setTimeout(() => { setLoading(false) }, 500)
+    // }, [id, dispatch]);
 
 
 
