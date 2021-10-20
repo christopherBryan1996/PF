@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import actions from '../actions_type/actions_types';
 
@@ -46,3 +47,4 @@ export const getAsistentes = (id: string) => {
     });
   };
 };
+   

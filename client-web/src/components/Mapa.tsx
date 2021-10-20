@@ -18,14 +18,22 @@ function Mapa(props:any ) {
 
   const Markers =  () => {
     const map =  useMapEvents({
+<<<<<<< HEAD
        click(e:any)  {   
                                       
           setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
           
           props.onCambio(coordenadas)               
+=======
+    async click(e:any)  {   
+
+          
+          setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
+          console.log("coordenadas", coordenadas)
+          props.onCambio({lat: e.latlng.lat, lng: e.latlng.lng})               
+>>>>>>> 1b0642eed60e0a73a09781a3e5c9edec94c160f4
         },            
     })
-    console.log("coordenadas", coordenadas)
     
     return (
       coordenadas ? 
