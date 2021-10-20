@@ -1,10 +1,10 @@
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import Foot from './Foot';
 import { getEvents } from "../actions/actions"
-import React, { useEffect} from "react";
+import { useEffect} from "react";
 
 export const Home = () => {
     const dispatch = useDispatch()
@@ -43,8 +43,3 @@ export const Home = () => {
 }
 
 
-// function mapDispatchToProps(dispatch:any):{} {
-//     return { getEvents: () => dispatch(getEvents()) };
-//     }
-
-// export default connect(null, mapDispatchToProps)(Home);

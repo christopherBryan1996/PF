@@ -17,3 +17,20 @@ export function getEvents (){
     })
     }
 }
+
+export const fetchCountriesDetail = (id:string) => {
+
+    return async function (dispatch:any) {
+
+        try {
+            const res = await axios.get(`http://localhost:3001/countries/${id}`);
+            dispatch({
+                type: "SET_DETAIL",
+                payload: res.data,
+            })
+        } catch (error) {
+
+        }
+    }
+}
+

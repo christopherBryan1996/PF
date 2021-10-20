@@ -5,7 +5,7 @@ import {llenarCoordenadas} from '../actions/actions';
 import { connect } from "react-redux";
 
 
-function Mapa(props:any) {
+function Mapa(props:any ) {
 
   //-estados------------------------------------------------------
   const [coordenadas, setCoordenadas] = useState<[number, number]>([0,0]);
@@ -16,15 +16,17 @@ function Mapa(props:any) {
   
   //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
 
-  const Markers = () => {
-    const map = useMapEvents({
-        click(e:any) {   
-           var coordMoment = [e.latlng.lat, e.latlng.lng]                             
-            props.llenarCoordenadas(coordMoment);
-            setCoordenadas([e.latlng.lat, e.latlng.lng])   //chequear estado redux             
+  const Markers =  () => {
+    const map =  useMapEvents({
+       click(e:any)  {   
+          var coordMoment = [e.latlng.lat, e.latlng.lng]                             
+          setCoordenadas([e.latlng.lat, e.latlng.lng]) 
+          props.llenarCoordenadas(coordMoment);
+          props.onCambio(coordenadas)               
         },            
     })
     console.log("coordenadas", coordenadas)
+    
     return (
       coordenadas ? 
           <Marker           
@@ -71,9 +73,9 @@ const LocationMarker = () => {
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
   
-  <Markers/>
+  
     <LocationMarker/>
-
+    <Markers/>
     </MapContainer>
     </div>
     

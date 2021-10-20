@@ -1,18 +1,20 @@
 const initialState = {
-    eventos: []
+    eventos: [],
+    details: []
 }
 
-export  function eventosReducer  (state = initialState, action:any):{}  {
+export function eventosReducer(state = initialState, action: any): {} {
     switch (action.type) {
-        case "getEvents":{
+        case "getEvents": {
             return {
                 ...state,
-                eventos:action.payload
+                eventos: action.payload
             }
         }
-            
-    
+
         default:
             return state;
     }
 }
+
+

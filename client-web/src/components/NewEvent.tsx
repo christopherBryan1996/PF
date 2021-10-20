@@ -5,12 +5,11 @@ import { fileUpload } from "../helpers/fileUpload";
 import './styles/NewEvent.css';
 
 import Mapa from './Mapa';
-import { useDispatch } from "react-redux";
 
 
 export default function NewEvent() {
 
-    const dispatch:any = useDispatch();
+
     //Estados------------------------------------------------------------------------------------------
     const [name, setName] = useState("");
     const [ubicacion, setUbicacion] = useState("");
@@ -20,7 +19,7 @@ export default function NewEvent() {
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [coordenadasPadre, setCoordenadasPadre] = useState<[number, number]>([0, 0]);
-
+    const [file, setFile] = useState(null || "")
 
 
 
@@ -30,20 +29,24 @@ export default function NewEvent() {
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     const handleFileChange = (e: any) => {
-        const file = e.target.files[0]
-     
+
+        const pic = e.target.files[0]
+        setFile(pic);
+
     }
 
-    
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
 
-      e.preventDefault();
+        e.preventDefault();
 
-        if (!name || !ubicacion || !publicoOPriv || !numeroPersonas || !precio || !fecha || !descripcion) { return alert("Faltan completar casillas!") }
+        if (!name || !ubicacion || !publicoOPriv || !numeroPersonas || !fecha || !descripcion) { return alert("Faltan completar casillas!") }
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
         if (publicoOPriv === "false") publicVar = false;
+
+        const url = await fileUpload(file)
+        console.log('url2:', url);
 
         const post = {
             nombreDelEvento: name,
@@ -55,12 +58,10 @@ export default function NewEvent() {
             precio,
             fecha,
             descripcion,
+            imagen: url,
+
 
         }
-        console.log("constPost", post)
-
-
-
         async function fetchPost(data: object) {
             try {
                 await fetch('https://api-fest.herokuapp.com/events/create', {
@@ -73,9 +74,8 @@ export default function NewEvent() {
             }
         }
         fetchPost(post)
+        console.log("constPost", post)
     };
-
-
 
     //Funcion para redirigir atras---------------------------------------------------------------------
     const history = useHistory();
