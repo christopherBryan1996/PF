@@ -1,44 +1,36 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import  Asistente from './Asistente';
+import { getAsistentes } from "../actions/actions";
+import Asistente from "./Asistente";
+import { Iasistentes, IasistentesAEvento } from "../interfaces/interfaces";
 
-//Necesito un get que devuelva la lista de asistentes por ID
-
-https://api-fest.herokuapp.com/events/:id/assistans
-
-//hardcode para probar asistentes
-interface Iasistentes {
-    usernameDelAsistente: string;
-    tareasdelAsistente: string[];
-}
-
-const asistente1:Iasistentes = {
-    usernameDelAsistente: 'Mario',
-    tareasdelAsistente: ['Traer bebida', 'Reservar salon']
-}
+//evento de prueba -> id: 616f6f4fdb5f15a30b5e3fdd
 
 
+export default function AsistentesPage(): JSX.Element {
+  const { eventid }: { eventid: string } =    useParams();
 
-//-------------------
+  const dispatch: any = useDispatch();
+  useEffect(() => dispatch(getAsistentes(eventid)), []);
 
-export default function AsistentesPage() {
+  const { asistentesEvento }: { asistentesEvento: IasistentesAEvento } = useSelector(
+    (state: any) => state.eventos
+  );
+ 
+     const listaDeAsistentes: Iasistentes[] = asistentesEvento.asistentes
 
-    const { username, eventid }: {username: string, eventid: string} = useParams();
-    const dispatch = useDispatch();
-    getAsistentes()
-  
-    
-    // useEffect(() =>
-    // {loadPage()
-    // dispatch(getDetail(id))},  []);
-  
-    return(
-        <div>
-          <Asistente 
-          usernameDelAsistente={asistente1.usernameDelAsistente}
-          tareasdelAsistente={asistente1.tareasdelAsistente}
-          />           
-        </div>
-    )
+  return (
+    <div>
+      {listaDeAsistentes.length?
+      listaDeAsistentes.map((asist: Iasistentes) => (
+        <div key={asist.usuario}>
+             <Asistente
+          usernameDelAsistente={asist.usuario}
+          tareasdelAsistente={asist.tareasDelUsuario}
+        />
+        </div>             
+      )): <div><p>Aún no hay asistentes a este evento</p></div>}
+    </div>
+  );
 }

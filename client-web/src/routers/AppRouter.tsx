@@ -9,13 +9,16 @@ import { Nav } from '../components/Nav';
 import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
+import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
+
 
 export const AppRouter = () => {
     return (
         <Router>
             <div>
                     {/* <Route path="/" component={Nav} /> */}
+                    <Route exact path="/mapaHome" component={MapaHome} />
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/details" component={EventDetails} />
