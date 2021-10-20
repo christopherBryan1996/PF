@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
@@ -59,5 +59,3 @@ export const Home = () => {
         </div>
     )
 }
-
-

@@ -1,15 +1,14 @@
 const initialState = {
     eventos: [],
-    details: [],
-    eventosCompleta: []//este estado siempre va estar con todos los eventos
+    eventosCompleta:[]//este estado siempre va estar con todos los eventos
 }
 
 interface Ievento {
-    nombreDelEvento: string;
+    nombreDelEvento:string;
     _id: string;
     direccion: string;
     coordenadas: [];
-    precio: number;
+    precio:number;
     fecha: string;
     horaDeInicio: string;
     descripcion: string;
@@ -17,44 +16,40 @@ interface Ievento {
     autor: string;
     publico: boolean;
     invitados: number;
-    imagen: string;
+    imagen:string;
 
 }
 
-export function eventosReducer(state = initialState, action: any): {} {
+export  function eventosReducer  (state = initialState, action:any):{}  {
     switch (action.type) {
-        case "getEvents": {
+        case "getEvents":{
             return {
                 ...state,
-                eventos: action.payload
+                eventos:action.payload,
+                eventosCompleta:action.payload,
             }
         }
-        case "filtroPrecio": {
-            if (action.payload === "2") {
-                return {
-                    ...state,
-                    eventos: state.eventosCompleta.filter((a: Ievento) => a.precio > 0)
+        case "filtroPrecio":{
+            if(action.payload === "2"){
+            return {...state,
+                eventos:state.eventosCompleta.filter((a:Ievento)=>a.precio > 0)
 
-                }
-            } else if (action.payload === "1") {
-                return {
-                    ...state,
-                    eventos: state.eventosCompleta.filter((a: Ievento) => a.precio === 0)
-                }
-            } else if (action.payload === "3") {
-                return {
-                    ...state,
-                    eventos: state.eventosCompleta.sort((a: Ievento, b: Ievento) => a.precio - b.precio)
-                }
-            } else {
-                return {
-                    ...state,
-                    eventos: state.eventosCompleta.sort((a: Ievento, b: Ievento) => b.precio - a.precio)
-                }
+            }}else if(action.payload === "1"){
+                return {...state,
+                    eventos:state.eventosCompleta.filter((a:Ievento)=>a.precio === 0)
+            }
+        }     else if(action.payload==="3"){
+            return{...state,
+                eventos:state.eventosCompleta.sort((a:Ievento,b:Ievento)=>a.precio -b.precio)
+            }
+        }else{
+            return{...state,
+                eventos:state.eventosCompleta.sort((a:Ievento,b:Ievento)=>b.precio -a.precio)
             }
         }
+    } 
+    
         default:
             return state;
     }
 }
-
