@@ -9,6 +9,9 @@ import { Nav } from '../components/Nav';
 import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
+import { ModificarUser } from '../components/modifar/Modificar';
+import MapaHome from '../components/MapaHome';
+import AsistentesPage from '../components/AsistentesPage';
 
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
@@ -27,8 +30,10 @@ export const AppRouter = () => {
                     <PublicRoutes exact path="/Register" component={Register} />
                     <PrivateRoutes exact path="/NewEvent" component={NewEvent} />
                     <PrivateRoutes exact path="/mapa" component={Mapa} />
+                     {/* ruta para modificar usuario */}
+                    <PrivateRoutes exact path='/modificarUser/:id' component={ModificarUser}/>
+                    <PrivateRoutes exact path="/:username/:eventid" component={AsistentesPage} />
                 </Switch>
-
             </div>
         </Router>
     )

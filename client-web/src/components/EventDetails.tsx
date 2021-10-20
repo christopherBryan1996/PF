@@ -1,13 +1,18 @@
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./styles/EventDetails.css";
 import {FaCalendarAlt} from "react-icons/fa"
 import { FiShoppingCart } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
-import mapa from '../images/mapa.jpg';
+
+
 
 
 export default function EventDetails() {
+
+
+
+
     return (
         <div className="container container-detail" >
             <div className="card card-details ">
