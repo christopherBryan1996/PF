@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { FaBullseye } from "react-icons/fa";
+import { Iasistentes } from "../interfaces/interfaces";
 import './styles/Asistente.css'
 
 type FormElement = React.FormEvent<HTMLFormElement>;
-interface Iasistentes {
-    usernameDelAsistente: string;
-    tareasdelAsistente: string[];
-}
 
 export default function Asistente(props:Iasistentes): JSX.Element {
   const [nuevaTarea, setNuevaTarea] = useState<string>('');
-  const [tareas, setTareas] = useState<string[]>(props.tareasdelAsistente);
+  const [tareas, setTareas] = useState<string[]>(props.tareasDelUsuario);
   const [tareasVisibles, setTareasVisibles] = useState(false)
+
   const handleSubmit = (e: FormElement): void => {
     e.preventDefault();
     agregarTarea(nuevaTarea);
@@ -36,12 +33,12 @@ export default function Asistente(props:Iasistentes): JSX.Element {
       <div className="row">
         <div className="col-md-6 offset-md-3">
         <div className="card-name" >
-            {props.usernameDelAsistente}
+            {props.usuario}
             <button  onClick={desplegarTareas}>tareas</button>
             <button>X</button>
         </div>
           {!tareasVisibles? null: <div className={"card-body"}>
-            {tareas.map((tarea: string, idx: number) => (
+            {tareas?.map((tarea: string, idx: number) => (
               <div className="card card-body mt-2" key={idx}>
                 <p>{tarea}</p>              
                 <button onClick={() => eliminarTarea(tarea)}>X</button>

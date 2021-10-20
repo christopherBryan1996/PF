@@ -26,8 +26,8 @@ export default function AsistentesPage(): JSX.Element {
       listaDeAsistentes.map((asist: Iasistentes) => (
         <div key={asist.usuario}>
              <Asistente
-          usernameDelAsistente={asist.usuario}
-          tareasdelAsistente={asist.tareasDelUsuario}
+          usuario={asist.usuario}
+          tareasDelUsuario={asist.tareasDelUsuario}
         />
         </div>             
       )): <div><p>Aún no hay asistentes a este evento</p></div>}
