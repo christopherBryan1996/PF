@@ -18,14 +18,14 @@ function Mapa(props:any ) {
 
   const Markers =  () => {
     const map =  useMapEvents({
-       click(e:any)  {   
-                                      
-          setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
+    async click(e:any)  {   
+
           
-          props.onCambio(coordenadas)               
+          setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
+          console.log("coordenadas", coordenadas)
+          props.onCambio({lat: e.latlng.lat, lng: e.latlng.lng})               
         },            
     })
-    console.log("coordenadas", coordenadas)
     
     return (
       coordenadas ? 
