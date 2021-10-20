@@ -59,10 +59,3 @@ export const Home = () => {
         </div>
     )
 }
-
-
-// function mapDispatchToProps(dispatch:any):{} {
-//     return { getEvents: () => dispatch(getEvents()) };
-//     }
-
-// export default connect(null, mapDispatchToProps)(Home);
