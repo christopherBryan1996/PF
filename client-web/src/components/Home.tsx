@@ -2,6 +2,7 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
+import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 
 import { getEvents,filtroPrecio } from "../actions/actions"
@@ -10,6 +11,12 @@ import React, { useEffect} from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
+    const history = useHistory();
+    const crearEvento = () => {
+        history.push("/NewEvent")
+    };
+
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
@@ -26,6 +33,7 @@ export const Home = () => {
         <div>
             <Nav/>
             <div className="filter container">
+                    
 
                 <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
                     <option selected>Filtrar por precio</option>
@@ -35,7 +43,7 @@ export const Home = () => {
                     <option value="4">Mayor a menor</option>                
                 </select>
 
-                <button className="btn btn-light">Crea tu evento</button>
+                <button onClick={crearEvento} className="btn btn-light">Crea tu evento</button>
             
             </div>
 

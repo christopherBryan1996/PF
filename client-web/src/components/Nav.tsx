@@ -23,7 +23,7 @@ export const Nav = () => {
 
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container">
-                <a className="navbar-brand" href="#"><img src={logo} alt="" width="240" height="90" /></a>
+                <a className="navbar-brand" href="#"><img src={logo} alt="" width="240" height="70" /></a>
                 <form className="navbar-center">
                     <input type="text" className="form-control" placeholder="Buscar evento..." aria-label="Username" aria-describedby="basic-addon1" />
                 </form>
