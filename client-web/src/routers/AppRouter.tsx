@@ -9,6 +9,7 @@ import { Nav } from '../components/Nav';
 import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
+import { ModificarUser } from '../components/modifar/Modificar';
 
 
 export const AppRouter = () => {
@@ -24,6 +25,8 @@ export const AppRouter = () => {
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/NewEvent" component={NewEvent} />
                     <Route exact path="/mapa" component={Mapa} />
+                    {/* ruta para modificar usuario */}
+                    <Route exact path='/modificarUser/:id' component={ModificarUser}/>
             </div>
         </Router>
     )
