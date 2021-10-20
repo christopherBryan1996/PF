@@ -3,7 +3,8 @@ import './styles/Register.css';
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FcGoogle } from "react-icons/fc";
+
+import { GoogleLogin } from 'react-google-login';
 
 export default function Register() {
 
@@ -48,7 +49,7 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+    });
     const usuarioRepetido = () => toast.error('El usuario o el Email ya se encuentran registrados!', {
         position: "top-center",
         autoClose: 5000,
@@ -57,7 +58,7 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+    });
     const usuarioCreado = () => toast.success('El usuario fue creado con exito', {
         position: "top-center",
         autoClose: 5000,
@@ -66,7 +67,7 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
+    });
     const faltanCasillas = () => toast.error('Faltan completar casillas!', {
         position: "top-center",
         autoClose: 5000,
@@ -75,13 +76,13 @@ export default function Register() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-         });  
+    });
 
     //Funcion para enviar los posts del form-------------------------------------------------
     const handleSubmit = (e: any) => {
         e.preventDefault();
         //validators------------------------------
-        if (!username || !email || !password || !password2) { return  faltanCasillas() }
+        if (!username || !email || !password || !password2) { return faltanCasillas() }
         if (password2 !== password) { return contraseña2incorrecta() }
         const ck_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const ck_password = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -117,6 +118,19 @@ export default function Register() {
         }
         fetchPost(post)
     };
+
+    const responseSuccessGoogle = (response: any) => {
+        const {email, name} = response.profileObj;
+        // console.log(givenName, "+", email);
+        // console.log(response);
+        setEmail(email);
+        setUsername(name);
+
+
+    }
+    const responseGoogle = (response:any) => {
+        console.log(response)
+    }
 
     //Return del componente--------------------------------------------------------------------
     return (
@@ -172,30 +186,33 @@ export default function Register() {
                             <button className="btn btn-primary col-md-12  btn-lg">Crear cuenta</button>
                         </div>
 
-                        <div className="form-group col-md-6">
-
-                            <button className=" col-md-12  btn-lg btn btn-outline-light"> <FcGoogle fontSize="1.8em" /> Con Google</button>
-
-                        </div>
+                        <GoogleLogin className="form-group col-md-6"
+                            clientId="48091866541-8dgrepi8g5leh993guoqchrguipcp9e2.apps.googleusercontent.com"
+                            buttonText="Registrarse con Google"
+                            onSuccess={responseSuccessGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />,
+                    
                         <div className="form-group col-md-6">
                             <button className="col-md-12 btn btn-success" onClick={ToLogin}>Ya tienes cuenta? LogIn</button>
                         </div>
                     </form>
                 </div>
 
-                    </div>
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={1000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover />
-                </div>
-                )
+            </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
+        </div>
+    )
 }
 
 
