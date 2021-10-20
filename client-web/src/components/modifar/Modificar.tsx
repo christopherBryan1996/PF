@@ -1,4 +1,3 @@
-//llegada http://localhost:3000/modificarUserid
 import {useParams} from 'react-router'
 import axios from 'axios'
 import logo from '../../images/Logo.png'
@@ -18,6 +17,7 @@ export const ModificarUser=()=>{
         password:'',
         comfirm_password:'',
     })
+    //mensajes
     const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
         position: "top-center",
         autoClose: 5000,
@@ -54,10 +54,10 @@ export const ModificarUser=()=>{
             }
         })
     }
-    
+    //funcion para verificar y hacer cambios en la api
     async function postModificar(e:any) {
         e.preventDefault()
-        
+        //verificaciones
         if(state.name.length >=3){
             if(!state.password){
                 return echo()
@@ -70,7 +70,7 @@ export const ModificarUser=()=>{
         if (!ck_password.test(state.password)) {
             return contraseñaIncorrecta()
         };
-        
+        //funcion para cambios
         async function echo(){
             await axios.put(`https://api-fest.herokuapp.com/api/users/edit/${id}`,{name:state.name,password:state.password})
             alert('exitoso')
