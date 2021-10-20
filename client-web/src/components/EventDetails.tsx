@@ -4,8 +4,6 @@ import "./styles/EventDetails.css";
 import {FaCalendarAlt} from "react-icons/fa"
 import { FiShoppingCart } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 
 
@@ -13,20 +11,7 @@ import { useEffect } from "react";
 export default function EventDetails() {
 
 
-    const {details} =useSelector((state:any)=>state.eventos)
-    const dispatch = useDispatch();
 
-    // let { id } = useParams()
-
-    // useEffect(() => {
-
-    //     dispatch(fetchCountriesDetail(id))
-    //     setTimeout(() => { setLoading(false) }, 500)
-    // }, [id, dispatch]);
-
-
-
-console.log('detalles:', details)
 
     return (
         <div className="container container-detail" >

@@ -9,7 +9,7 @@ export default function  Perfil():JSX.Element {
         <div>navbar</div>
         <div>{username}</div>
         <div>
-            <BarritaEventos/>
+            <BarritaEventos/>{/* pasarle el username, el ide del evento y el nombre del evento */}
             <BarritaEventos/>
         </div>
         </div>

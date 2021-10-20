@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 export const Nav = () => {
 
-    const [login, loginstate] = useState(false)
+    const [login, loginstate] = useState(true)
 
     const history = useHistory();
     const botonIngresa = () => {
@@ -23,7 +23,7 @@ export const Nav = () => {
 
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container">
-                <a className="navbar-brand" href="#"><img src={logo} alt="" width="240" height="90" /></a>
+                <a className="navbar-brand" href="#"><img src={logo} alt="" width="240" height="70" /></a>
                 <form className="navbar-center">
                     <input type="text" className="form-control" placeholder="Buscar evento..." aria-label="Username" aria-describedby="basic-addon1" />
                 </form>

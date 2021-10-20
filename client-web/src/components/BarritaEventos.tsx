@@ -14,8 +14,14 @@ export default function BarritaEventos() {
             <Link to="/home">
             <span><FiEdit2 color="blue" size="2em"/></span>
             </Link>
+            {/* <Link to={`/${props.username}/${props.eventid}`}> */}
+            <Link to="/juan/616f6f4fdb5f15a30b5e3fdd">
             <span><FaUserFriends color="blue" size="2em"/></span>
+            </Link>
+
+
             <span><BsFillTrashFill color="blue" size="2em"/></span>
+
             </div>
             
             
@@ -24,5 +30,5 @@ export default function BarritaEventos() {
         </div>
     )
 
-
+//
 }

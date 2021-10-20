@@ -25,7 +25,6 @@ function Mapa(props:any ) {
           props.onCambio(coordenadas)               
         },            
     })
-    console.log("coordenadas", coordenadas)
     
     return (
       coordenadas ? 
