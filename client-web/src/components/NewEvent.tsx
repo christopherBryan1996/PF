@@ -18,14 +18,19 @@ export default function NewEvent() {
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    const [coordenadasPadre, setCoordenadasPadre] = useState<[number, number]>([0, 0]);
+    const [coordenadasPadre, setCoordenadasPadre] = useState({lat:1, lng: 1});
     const [file, setFile] = useState(null || "")
 
-
+    
+      
+      
+      
 
     function llenarEstadoCoordenadas(data: any) {
-        return setCoordenadasPadre(data)
+         console.log("data", data)
+          setCoordenadasPadre(data)
     };
+    
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     const handleFileChange = (e: any) => {
@@ -48,6 +53,9 @@ export default function NewEvent() {
         const url = await fileUpload(file)
         console.log('url2:', url);
 
+         
+         
+
         const post = {
             nombreDelEvento: name,
             direccion: ubicacion,
@@ -59,9 +67,11 @@ export default function NewEvent() {
             fecha,
             descripcion,
             imagen: url,
-
-
+            coordenadas: coordenadasPadre
         }
+
+
+       
         async function fetchPost(data: object) {
             try {
                 await fetch('https://api-fest.herokuapp.com/events/create', {
@@ -174,7 +184,7 @@ export default function NewEvent() {
                         <br />
                         <p>Haga click 1 vez para ver su localizacion actual, haga un segundo click para poner un marcador donde sera el evento</p>
                         <div className="divMapa">
-                            <Mapa />
+                            <Mapa onCambio={llenarEstadoCoordenadas} />
                         </div>
 
                     </div>
