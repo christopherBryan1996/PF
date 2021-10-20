@@ -1,35 +1,28 @@
-const initialState = {
+import { Ievento, IEventoState  } from "../interfaces/interfaces"
+import actions from "../actions_type/actions_types"
+
+const initialState:IEventoState  = {
     eventos: [],
-    eventosCompleta:[]//este estado siempre va estar con todos los eventos
-}
-
-interface Ievento {
-    nombreDelEvento:string;
-    _id: string;
-    direccion: string;
-    coordenadas: [];
-    precio:number;
-    fecha: string;
-    horaDeInicio: string;
-    descripcion: string;
-    fechaDeCreacion: string;
-    autor: string;
-    publico: boolean;
-    invitados: number;
-    imagen:string;
-
+    eventosCompleta:[],//este estado siempre va estar con todos los eventos
+    asistentesEvento: { _id:'', asistentes:[]}
 }
 
 export  function eventosReducer  (state = initialState, action:any):{}  {
     switch (action.type) {
-        case "getEvents":{
+        case actions.GET_EVENTS: {
             return {
                 ...state,
                 eventos:action.payload,
                 eventosCompleta:action.payload,
             }
         }
-        case "filtroPrecio":{
+        case actions.GET_ASISTENTES:{
+            return {
+                ...state,
+                asistentesEvento: action.payload,
+            }
+        }
+        case actions.FILTRO_PRECIO: {
             if(action.payload === "2"){
             return {...state,
                 eventos:state.eventosCompleta.filter((a:Ievento)=>a.precio > 0)
