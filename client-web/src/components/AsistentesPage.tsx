@@ -1,6 +1,11 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import  Asistente from './Asistente';
 
 //Necesito un get que devuelva la lista de asistentes por ID
+
+https://api-fest.herokuapp.com/events/:id/assistans
 
 //hardcode para probar asistentes
 interface Iasistentes {
@@ -18,6 +23,16 @@ const asistente1:Iasistentes = {
 //-------------------
 
 export default function AsistentesPage() {
+
+    const { username, eventid }: {username: string, eventid: string} = useParams();
+    const dispatch = useDispatch();
+    getAsistentes()
+  
+    
+    // useEffect(() =>
+    // {loadPage()
+    // dispatch(getDetail(id))},  []);
+  
     return(
         <div>
           <Asistente 

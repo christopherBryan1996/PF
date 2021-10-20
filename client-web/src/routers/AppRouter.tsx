@@ -24,7 +24,7 @@ export const AppRouter = () => {
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/NewEvent" component={NewEvent} />
                     <Route exact path="/mapa" component={Mapa} />
-                    <Route exact path="/:eventid/asistentes" component={AsistentesPage} />
+                    <Route exact path="/:username/:eventid" component={AsistentesPage} />
             </div>
         </Router>
     )
