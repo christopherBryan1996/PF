@@ -10,6 +10,7 @@ import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import MapaHome from '../components/MapaHome';
+import Perfil from '../components/Perfil';
 
 
 export const AppRouter = () => {
@@ -26,6 +27,7 @@ export const AppRouter = () => {
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/NewEvent" component={NewEvent} />
                     <Route exact path="/mapa" component={Mapa} />
+                    <Route exact path="/:username" component={Perfil} />
             </div>
         </Router>
     )

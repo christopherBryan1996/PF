@@ -3,9 +3,7 @@ import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import Foot from './Foot';
-
 import { getEvents,filtroPrecio } from "../actions/actions"
-
 import React, { useEffect} from "react";
 import MapaHome from '../components/MapaHome';
 
