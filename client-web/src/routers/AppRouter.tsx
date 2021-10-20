@@ -9,12 +9,9 @@ import { Nav } from '../components/Nav';
 import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
-<<<<<<< HEAD
 import { ModificarUser } from '../components/modifar/Modificar';
-=======
 import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
->>>>>>> aa991ecbad93a1b82f84830fee0e893fd1bc5c47
 
 
 export const AppRouter = () => {
@@ -31,12 +28,9 @@ export const AppRouter = () => {
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/NewEvent" component={NewEvent} />
                     <Route exact path="/mapa" component={Mapa} />
-<<<<<<< HEAD
                     {/* ruta para modificar usuario */}
                     <Route exact path='/modificarUser/:id' component={ModificarUser}/>
-=======
                     <Route exact path="/:username/:eventid" component={AsistentesPage} />
->>>>>>> aa991ecbad93a1b82f84830fee0e893fd1bc5c47
             </div>
         </Router>
     )
