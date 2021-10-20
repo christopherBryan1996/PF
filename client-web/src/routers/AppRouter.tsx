@@ -11,6 +11,7 @@ import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
+import Favorites from '../components/Favorites';
 
 
 export const AppRouter = () => {
@@ -28,6 +29,7 @@ export const AppRouter = () => {
                     <Route exact path="/NewEvent" component={NewEvent} />
                     <Route exact path="/mapa" component={Mapa} />
                     <Route exact path="/:username/:eventid" component={AsistentesPage} />
+                    <Route exact path="/favorites" component={Favorites} />
             </div>
         </Router>
     )
