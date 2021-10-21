@@ -16,7 +16,7 @@ export function llenarCoordenadas(data: string[]) {
     return async function (dispatch: any) {
         return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
     };
-}
+} 
 
 export function getEvents() {
     return async function (dispatch: any) {
@@ -27,6 +27,7 @@ export function getEvents() {
         });
     };
 }
+
 
 export const filtroPrecio = (state: any) => {
     //este action es para filtrar por continente
