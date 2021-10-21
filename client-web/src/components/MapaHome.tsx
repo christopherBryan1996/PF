@@ -58,7 +58,7 @@ const LocationMarker = () => {
   />
            
  
-    {eventos.map(( e:any , index:any) => ( e.coordenadas.lat ?
+    {eventos.map(( e:any , index:any) => ( e.coordenadas ?
       <Marker position={[e.coordenadas.lat, e.coordenadas.lng]} 
               key={index}
               eventHandlers={{
