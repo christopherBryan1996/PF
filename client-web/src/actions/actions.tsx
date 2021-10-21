@@ -107,3 +107,13 @@ export const loginNormal = (data:any) => {
     payload: data,
   }
 };
+
+export const deleteFavoriteEvent = (id:any, eventid:any) => {
+  return async function (dispatch:any){
+    await axios.put(`https://api-fest.herokuapp.com/api/users/removefavourite/${id}/${eventid}`);
+    dispatch({
+      type: actions.DELETE_FAVORITE_EVENT,
+    });
+  }
+  
+}

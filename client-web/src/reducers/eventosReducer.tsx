@@ -74,6 +74,8 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
             eventosUsuario: action.payload,
         }
     }
+
+    
     
         default:
             return state;
