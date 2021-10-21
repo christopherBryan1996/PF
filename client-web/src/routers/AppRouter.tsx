@@ -10,7 +10,6 @@ import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import { ModificarUser } from '../components/modifar/Modificar';
-import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
@@ -31,6 +30,7 @@ export const AppRouter = () => {
     const [cheking, setChecking] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(true)
     
+    console.log('estoy logeado:', isLoggedIn)
 
     useEffect(() => {
 
@@ -76,10 +76,6 @@ export const AppRouter = () => {
                     <PublicRoutes exact path="/Register" component={Register} />
                     <PrivateRoutes exact path="/NewEvent" component={NewEvent} />
                     <PrivateRoutes exact path="/mapa" component={Mapa} />
-
-                    <PrivateRoutes exact path="/home/:username/favorites" component={Favorites} />
-
-                     {/* ruta para modificar usuario */}
                     <PrivateRoutes exact path='/modificarUser/:id' component={ModificarUser}/>
                     <PrivateRoutes exact path="/:username/:eventid" component={AsistentesPage} />
                 </Switch>
