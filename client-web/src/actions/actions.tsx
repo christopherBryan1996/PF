@@ -69,4 +69,22 @@ export const login = (uid:any, displayName:any, photo:any) =>(
             photo
         }
     }
-)
+
+
+export const getFavorites = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
+    dispatch({
+      type: actions.GET_FAVORITES,
+      payload: res.data,
+    });
+  };
+}
+
+export const filtroFavoritos = (state: any) => {
+  return {
+    type: actions.FILTRO_FAVORITOS,
+    payload: state,
+  };
+};

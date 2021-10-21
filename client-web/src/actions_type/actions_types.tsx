@@ -5,7 +5,11 @@ const actions : IActions = {
     GET_EVENTS: 'GET_EVENTS',
     FILTRO_PRECIO: 'FILTRO_PRECIO',
     GET_ASISTENTES: 'GET_ASISTENTES',
-    LOGIN: 'LOGIN_GOOGLE'
+
+    LOGIN: 'LOGIN_GOOGLE',
+    GET_FAVORITES: "GET_FAVORITES",
+    FILTRO_FAVORITOS: "FILTRO_FAVORITOS"
+
 }
 
 export default actions; 
