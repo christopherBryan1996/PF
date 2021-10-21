@@ -4,7 +4,7 @@ import actions from "../actions_type/actions_types"
 const initialState:IEventoState  = {
     eventos: [],
     eventosCompleta:[],//este estado siempre va estar con todos los eventos
-    asistentesEvento: { _id:'', asistentes:[]},
+    asistentesEvento: [],
     eventosFavoritos: []  
 }
 
@@ -20,7 +20,7 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
         case actions.GET_ASISTENTES:{
             return {
                 ...state,
-                asistentesEvento: action.payload,
+                asistentesEvento: action.payload.asistentes,
             }
         }
         case actions.FILTRO_PRECIO: {

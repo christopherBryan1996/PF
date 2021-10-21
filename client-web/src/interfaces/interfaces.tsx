@@ -5,7 +5,8 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
-
+    LOGIN_DB: string;
+    ELIMINAR_ASISTENTE: string;
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
 
@@ -13,21 +14,16 @@ export interface IActions {
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
+    id: string;
     usuario: string;
     tareasDelUsuario: string[];
-}
-
-//interface para evento con su ID y lista de asistentes
-export interface IasistentesAEvento {
-    _id: string;
-    asistentes: Iasistentes[];
 }
 
 //interface para el estado de eventos en redux
 export interface IEventoState {
     eventos: [];
     eventosCompleta: [];
-    asistentesEvento: IasistentesAEvento;
+    asistentesEvento: [];
     eventosFavoritos:[];
 }
 
