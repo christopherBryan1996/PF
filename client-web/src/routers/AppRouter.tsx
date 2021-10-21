@@ -22,7 +22,7 @@ import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
-export const AppRouter = (props:any) => {
+export const AppRouter = () => {
 
     const dispatch = useDispatch()
     const auth = getAuth()
