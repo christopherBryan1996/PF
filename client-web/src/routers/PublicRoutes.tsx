@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 const PublicRoutes = (props:any) => {
 
-    if (props.auth === true) return <Redirect to={'/home'} />
+    if (props.auth === false) return <Redirect to={'/home'} />
 
     return <Route {...props} />
 

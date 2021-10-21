@@ -5,6 +5,7 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
+    LOGOUT: string;
 }
 
 //interface para lista de asistentes por evento
@@ -42,3 +43,5 @@ export interface Ievento {
     invitados: number;
     imagen: string;
 }
+
+
