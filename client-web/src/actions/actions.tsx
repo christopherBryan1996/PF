@@ -69,7 +69,7 @@ export const login = (uid:any, displayName:any, photo:any) =>(
             photo
         }
     }
-);
+
 
 export const getFavorites = (id:any) => {
   return async function (dispatch: any) {

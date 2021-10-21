@@ -5,8 +5,10 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
+
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
+
 }
 
 //interface para lista de asistentes por evento
