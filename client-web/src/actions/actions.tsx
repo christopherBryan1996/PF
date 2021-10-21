@@ -1,5 +1,7 @@
 
 import axios from "axios";
+import { getAuth, signInWithPopup } from 'firebase/auth';
+import { googleAuthProvider } from '../firebase/firebase-config'
 import actions from '../actions_type/actions_types';
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
@@ -48,3 +50,41 @@ export const getAsistentes = (id: string) => {
   };
 };
    
+export const startGoogleLogin = () =>{
+    return (dispatch:any) =>{
+        const auth = getAuth();
+        signInWithPopup(auth, googleAuthProvider)
+            .then(({user}) =>{
+                dispatch(login(user.uid, user.displayName, user.photoURL))
+            });
+    }
+}
+
+export const login = (uid:any, displayName:any, photo:any) =>(
+    {
+        type:  actions.LOGIN,
+        payload: {
+            uid,
+            displayName,
+            photo
+        }
+    }
+
+
+export const getFavorites = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
+    dispatch({
+      type: actions.GET_FAVORITES,
+      payload: res.data,
+    });
+  };
+}
+
+export const filtroFavoritos = (state: any) => {
+  return {
+    type: actions.FILTRO_FAVORITOS,
+    payload: state,
+  };
+};
