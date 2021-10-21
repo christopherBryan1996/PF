@@ -68,8 +68,8 @@ export const login = (uid:any, displayName:any, photo:any) =>(
             displayName,
             photo
         }
-    }
-)
+    })
+
 
 export const getFavorites = (id:any) => {
   return async function (dispatch: any) {
@@ -89,4 +89,9 @@ export const filtroFavoritos = (state: any) => {
   };
 };
 
-
+export const loginNormal = (data:any) => {
+  return{
+    type: actions.LOGIN_NORMAL,
+    payload: data,
+  }
+};
