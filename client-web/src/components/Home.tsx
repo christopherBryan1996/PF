@@ -30,8 +30,9 @@ export const Home = () => {
     return (
         <div>
             <Nav/>
+          
             <div className="filter container">
-                    
+
 
                 <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
                     <option selected>Filtrar por precio</option>
@@ -44,9 +45,9 @@ export const Home = () => {
                 <button onClick={crearEvento} className="btn btn-light">Crea tu evento</button>
             
             </div>
-
+           
             <div>
-                <MapaHome/>
+            <MapaHome/>
             </div>
 
 

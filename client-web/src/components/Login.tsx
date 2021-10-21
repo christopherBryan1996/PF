@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import './styles/Login.css';
+import {useDispatch} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { startGoogleLogin } from "../actions/actions";
+
 
 export default function Login() {
+
+    const dispatch = useDispatch()
 
     //Estados-------------------------------------------------------------------------
     const [email, setEmail] = useState("");
@@ -70,6 +75,12 @@ export default function Login() {
     };
 
     //Funcion para enviar los posts del form-----------------------------------------
+
+  const  handleGoogleLogin = () => {
+    dispatch(startGoogleLogin())
+  }
+
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (!email || !password) { return faltanCasillas() }
@@ -135,7 +146,9 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     ></input>
                     <button>Login</button>
+                  
                 </form>
+                <button onClick={handleGoogleLogin}>Login con google</button>
             </div>
             <ToastContainer
                 position="top-right"
