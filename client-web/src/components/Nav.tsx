@@ -6,11 +6,11 @@ import logo from '../images/Logo.png';
 import avatar from '../images/user.png'
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from '../actions/actions';
-import { startLogput } from "../actions/actions";
+import { login, startLogout } from '../actions/actions';
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-export const Nav = () => {
+export const Nav = () => {   
 
     const dispatch = useDispatch()
     const auth = getAuth()
@@ -34,11 +34,8 @@ export const Nav = () => {
 
     }, [dispatch])
 
-
     const handleLogout = () => {
-
-        dispatch(startLogput())
-        console.log('click')
+        dispatch(startLogout())
     }
 
     const history = useHistory();
@@ -49,12 +46,10 @@ export const Nav = () => {
         history.push("/home")
     };
     const botonRegistrate = () => {
-        history.push("/register")
-    };
+        history.push("/register")    };
 
 
     return (
-
 
         <nav className="navbar navbar-dark bg-dark fixed-top">
             <div className="container">

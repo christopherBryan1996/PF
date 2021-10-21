@@ -16,6 +16,10 @@ import { getAuth } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/actions';
 
+import Favorites from '../components/Favorites';
+
+
+
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 
@@ -61,6 +65,9 @@ export const AppRouter = () => {
             
                 <Switch>
                     {/* <Route path="/" component={Nav} /> */}
+
+                    {/* <PublicRoutes exact path="/favorites" component={Favorites} /> */}
+
                     <PublicRoutes exact path="/" component={LandingPage} />
                     <PrivateRoutes exact path="/home" component={Home} />
                     <PrivateRoutes exact path="/details" component={EventDetails} />
@@ -76,4 +83,3 @@ export const AppRouter = () => {
         </Router>
     )
 };
-

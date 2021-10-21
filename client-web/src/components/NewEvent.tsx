@@ -4,13 +4,15 @@ import './styles/NewEvent.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Mapa from './Mapa';
 import { Nav } from "./Nav";
+import axios from "axios";
+import {useSelector} from 'react-redux';
 
 
 export default function NewEvent() {
 
 
     //Estados------------------------------------------------------------------------------------------
-    const [name, setName] = useState("");
+    const [nameEvent, setNameEvent] = useState("");
     const [ubicacion, setUbicacion] = useState("");
     const [publicoOPriv, setPublicoOPriv] = useState("publico");
     const [numeroPersonas, setNumeroPersonas] = useState(0);
@@ -45,6 +47,10 @@ export default function NewEvent() {
         setCoordenadasPadre(data)
     };
 
+
+    const {uid}=useSelector((state:any)=>state.authGoo.state)
+    
+
     //Funcion para enviar el post del form----------------------------------------------------------------
 
     const handleFileChange = (e: any) => {
@@ -59,7 +65,7 @@ export default function NewEvent() {
 
         e.preventDefault();
 
-        if (!name || !ubicacion || !publicoOPriv || !numeroPersonas || !fecha || !descripcion) { return faltanCasillas() }
+        if (!publicoOPriv || !numeroPersonas || !fecha || !descripcion || !precio || !fecha || !nameEvent) { return faltanCasillas() }
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
         if (publicoOPriv === "false") publicVar = false;
@@ -67,11 +73,11 @@ export default function NewEvent() {
         const url = await fileUpload(file)
 
 
-        const post = {
-            nombreDelEvento: name,
+        const post:any = {
+            nombreDelEvento: nameEvent,
             direccion: ubicacion,
             horaDeInicio: "20:30",
-            autor: "pepita",
+            autor: uid,
             publico: publicVar,
             invitados: numeroPersonas,
             precio,
@@ -84,12 +90,10 @@ export default function NewEvent() {
 
         async function fetchPost(data: object) {
             try {
-                const mensaje = await fetch('https://api-fest.herokuapp.com/events/create', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json;charset=UTF-8" },
-                    body: JSON.stringify(data)
-                })
-                if (mensaje.ok) {
+                const {data}: {data:any} =  await axios.post('https://api-fest.herokuapp.com/events/create', post)
+                console.log("data",data)
+                if (data.ok) {
+
                     eventoCreado();
                 } else {
                     faltanCasillas();
@@ -99,7 +103,7 @@ export default function NewEvent() {
             }
         }
         fetchPost(post)
-        console.log("constPost", post)
+        console.log("constPost", post) 
     };
 
 
@@ -119,8 +123,8 @@ export default function NewEvent() {
                                         className="form-control"
                                         placeholder="Escribe el nombre del evento"
                                         type="text"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
+                                        value={nameEvent}
+                                        onChange={(e) => setNameEvent(e.target.value)}
                                     >
                                     </input>
                                 </div>

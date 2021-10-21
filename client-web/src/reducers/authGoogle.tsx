@@ -10,11 +10,19 @@ export const authReducerG = (state = {}, action: any) => {
 
                 uid: action.payload.uid,
                 name: action.payload.displayName,
+                photoURL:action.payload.photoRUL,
 
             }
-        case actions.LOGOUT:
+        case actions.LOGIN_NORMAL:
+            return {
+                ...state,
+                state: action.payload
+                // uid: action.payload.uid,
+                // name: action.payload.name,
+                // image: action.payload.image,
+                // token: action.payload.token
+            }
 
-            return {}
 
 
         default:
