@@ -10,7 +10,6 @@ import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import { ModificarUser } from '../components/modifar/Modificar';
-import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
@@ -64,7 +63,6 @@ export const AppRouter = () => {
             
                 <Switch>
                     {/* <Route path="/" component={Nav} /> */}
-
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
 
                     <PublicRoute 
@@ -113,6 +111,7 @@ export const AppRouter = () => {
                     exact path="/:username/:eventid" 
                     isAuthenticated={isAuthenticated}
                     component={AsistentesPage} />
+
                 </Switch>
             </div>
         </Router>

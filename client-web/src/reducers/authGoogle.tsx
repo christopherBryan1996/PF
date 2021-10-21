@@ -10,6 +10,7 @@ export const authReducerG = (state = {}, action: any) => {
 
                 uid: action.payload.uid,
                 name: action.payload.displayName,
+                photoURL:action.payload.photoRUL,
 
             }
         case actions.LOGIN_NORMAL:
@@ -27,7 +28,5 @@ export const authReducerG = (state = {}, action: any) => {
         default:
             return state;
     }
-
-
 
 }
