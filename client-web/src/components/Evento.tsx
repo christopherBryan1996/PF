@@ -8,9 +8,10 @@ interface  Iprops {fecha:string,imagen:string,nombreDelEvento:string}
 
 
 export const Evento = (props:Iprops) => {
+
+
     const {fecha,imagen,nombreDelEvento}:Iprops =props
     
-
     return (
         <>
             
