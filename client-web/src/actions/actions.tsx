@@ -54,8 +54,7 @@ export const startGoogleLogin = () => {
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.photoURL))
-                console.log('Usua:',user)
+                dispatch(login(user.uid, user.displayName, user.photoURL))            
             });
     }
 }

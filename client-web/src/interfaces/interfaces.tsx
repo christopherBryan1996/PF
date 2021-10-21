@@ -6,9 +6,12 @@ export interface IActions {
     GET_ASISTENTES: string;
     LOGIN: string;
     GET_FAVORITES: string;
-    FILTRO_FAVORITOS: string;
-    LOGIN_NORMAL: string;
+    FILTRO_FAVORITOS: string;    
     LOGOUT:string;
+    DELETE_FAVORITE_EVENT: string;
+    LOGIN_NORMAL: string;
+
+    
 }
 
 //interface para lista de asistentes por evento
