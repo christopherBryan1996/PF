@@ -11,6 +11,8 @@ const actions : IActions = {
     FILTRO_FAVORITOS: "FILTRO_FAVORITOS",
     GET_USERSEVENTS:"GET_USERSEVENTS",
 
+    LOGIN_NORMAL: "LOGIN_NORMAL"
+
 }
 
 export default actions; 

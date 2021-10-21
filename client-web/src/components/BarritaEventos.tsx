@@ -6,6 +6,7 @@ import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
 
 export default function BarritaEventos() {
+    
 
     return(
         <div>

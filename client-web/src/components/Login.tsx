@@ -4,7 +4,9 @@ import './styles/Login.css';
 import {useDispatch} from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { startGoogleLogin } from "../actions/actions";
+import { startGoogleLogin, loginNormal } from "../actions/actions";
+import axios from "axios";
+
 
 
 export default function Login() {
@@ -99,17 +101,15 @@ export default function Login() {
 
         async function fetchPost(data: object) {
             try {
-                const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json;charset=UTF-8" },
-                    body: JSON.stringify(data)
-                });
-                if (mensaje.ok) {
+                const {data}: {data:any} = await axios.post('https://api-fest.herokuapp.com/api/auth', post);
+                console.log("mensaje", data)
+                if (data.ok) {
+                    dispatch(loginNormal(data));
                     toHome();
                 } else {
                     usuarioRepetido();
                 }
-                console.log("mensajefetch", mensaje);
+                
             } catch (error) {
                 console.error(error);
             }

@@ -10,6 +10,7 @@ export interface IActions {
     FILTRO_FAVORITOS: string;
     GET_USERSEVENTS: string;
 
+    LOGIN_NORMAL: string;
 }
 
 //interface para lista de asistentes por evento

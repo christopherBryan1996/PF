@@ -70,6 +70,8 @@ export const login = (uid:any, displayName:any, photo:any) =>(
         }
     }
 )
+    
+
 
 export const getFavorites = (id:any) => {
   return async function (dispatch: any) {
@@ -99,3 +101,9 @@ export const getUsersEvents = (id:any) => {
     });
   };
 }
+export const loginNormal = (data:any) => {
+  return{
+    type: actions.LOGIN_NORMAL,
+    payload: data,
+  }
+};
