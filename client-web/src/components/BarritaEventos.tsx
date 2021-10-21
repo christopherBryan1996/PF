@@ -20,7 +20,7 @@ export default function BarritaEventos() {
             </Link>
 
 
-            <span><BsFillTrashFill color="blue" size="2em"/></span>
+            <button><BsFillTrashFill color="blue" size="2em"/></button>
 
             </div>
             

@@ -21,8 +21,8 @@ function Mapa(props:any ) {
        click(e:any)  {   
                                       
           setCoordenadas({lat: e.latlng.lat, lng: e.latlng.lng}) 
-          
-          props.onCambio(coordenadas)               
+          props.onCambio({lat: e.latlng.lat, lng: e.latlng.lng})
+                         
         },            
     })
     

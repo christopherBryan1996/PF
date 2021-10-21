@@ -18,25 +18,6 @@ function MapaHome(props:any ) {
     const {eventos}=useSelector((state:any)=>state.eventos)
 
   
-
-    
-
-    const coords= [
-        { lat: 41.19197, lng: 25.33719 },
-        { lat: 41.26352, lng: 25.1471 },
-        { lat: 41.26365, lng: 25.24215 },
-        { lat: 41.26369, lng: 25.33719 },
-        { lat: 41.26365, lng: 25.43224 },
-        { lat: 41.26352, lng: 25.52728 },
-        { lat: 41.2633, lng: 25.62233 },
-        { lat: 41.263, lng: 25.71737 },
-        { lat: 41.3082, lng: 22.95892 },
-        { lat: 41.31041, lng: 23.054 }
-      ]
-
-
-  
-console.log("evetos", eventos)
   
   //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
 
@@ -78,7 +59,12 @@ const LocationMarker = () => {
            
  
     {eventos.map(( e:any , index:any) => ( e.coordenadas.lat ?
-      <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}  key={index}>
+      <Marker position={[e.coordenadas.lat, e.coordenadas.lng]} 
+              key={index}
+              eventHandlers={{
+                click: (e) => {
+                  alert("esto redireccionara al detalle del evento")
+                }}}>
           <Popup>
                 {e.nombreDelEvento}
           </Popup>

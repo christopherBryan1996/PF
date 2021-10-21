@@ -70,3 +70,32 @@ export const login = (uid:any, displayName:any, photo:any) =>(
         }
     }
 )
+
+export const getFavorites = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
+    dispatch({
+      type: actions.GET_FAVORITES,
+      payload: res.data,
+    });
+  };
+}
+
+export const filtroFavoritos = (state: any) => {
+  return {
+    type: actions.FILTRO_FAVORITOS,
+    payload: state,
+  };
+};
+
+export const getUsersEvents = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/${id}`);
+    dispatch({
+      type: actions.GET_USERSEVENTS,
+      payload: res.data,
+    });
+  };
+}

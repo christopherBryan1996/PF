@@ -1,7 +1,12 @@
 import { useParams } from "react-router-dom";
 import BarritaEventos from './BarritaEventos'
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect} from "react";
+
+
 
 export default function  Perfil():JSX.Element {
+    //const {uid}=useSelector((state:any)=>state.authGoo.state) estado global del usuarios.
     const {username}:{username:string}=useParams()
 
     return(
