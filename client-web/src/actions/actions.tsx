@@ -16,27 +16,27 @@ export function llenarCoordenadas(data: string[]) {
     return async function (dispatch: any) {
         return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
     };
-} 
+}
 
 export function getEvents() {
 
-  return async function (dispatch: any) {
-    const res = await axios.get("http://localhost:3008/events");
-    dispatch({
-      type: actions.GET_EVENTS,
-      payload: res.data,
-    });
-  };
+    return async function (dispatch: any) {
+        const res = await axios.get("http://localhost:3008/events");
+        dispatch({
+            type: actions.GET_EVENTS,
+            payload: res.data,
+        });
+    };
 }
 
-export function getEvent(eventId:any) {
-  return async function (dispatch: any) {
-    const res = await axios.get(`http://localhost:3008/events/${eventId}`);
-    dispatch({
-      type: actions.GET_EVENT,
-      payload: res.data,
-    });
-  };
+export function getEvent(eventId: any) {
+    return async function (dispatch: any) {
+        const res = await axios.get(`http://localhost:3008/events/${eventId}`);
+        dispatch({
+            type: actions.GET_EVENT,
+            payload: res.data,
+        });
+    };
 }
 
 
@@ -51,15 +51,15 @@ export const filtroPrecio = (state: any) => {
 
 export const getAsistentes = (id: string) => {
 
-  //este action es para filtrar por continente
+    //este action es para filtrar por continente
 
-  return async function (dispatch: any) {
-    const res = await axios.get(`http://localhost:3008/events/assistans/${id}`);
-    dispatch({
-      type: actions.GET_ASISTENTES,
-      payload: res.data,
-    });
-  };
+    return async function (dispatch: any) {
+        const res = await axios.get(`http://localhost:3008/events/assistans/${id}`);
+        dispatch({
+            type: actions.GET_ASISTENTES,
+            payload: res.data,
+        });
+    };
 
 };
 
@@ -68,7 +68,7 @@ export const startGoogleLogin = () => {
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.photoURL))            
+                dispatch(login(user.uid, user.displayName, user.photoURL))
             });
     }
 }
@@ -85,15 +85,15 @@ export const login = (uid: any, displayName: any, photoURL: any) => (
 
 
 
-export const getFavorites = (id:any) => {
-  return async function (dispatch: any) {
-    console.log("llego al action")
-    const res = await axios.get(`http://localhost:3008/api/users/favouritesevents/${id}`);
-    dispatch({
-      type: actions.GET_FAVORITES,
-      payload: res.data,
-    });
-  };
+export const getFavorites = (id: any) => {
+    return async function (dispatch: any) {
+        console.log("llego al action")
+        const res = await axios.get(`http://localhost:3008/api/users/favouritesevents/${id}`);
+        dispatch({
+            type: actions.GET_FAVORITES,
+            payload: res.data,
+        });
+    };
 
 }
 
@@ -110,16 +110,6 @@ export const loginNormal = (data: any) => {
         payload: data,
     }
 };
-
-
-export const deleteFavoriteEvent = (id:any, eventid:any) => {
-  return async function (dispatch:any){
-    await axios.put(`http://localhost:3008/api/users/removefavourite/${id}/${eventid}`);
-    dispatch({
-      type: actions.DELETE_FAVORITE_EVENT,
-    });
-  }
-  
 
 export const startLogout = () => {
 
@@ -138,4 +128,16 @@ export const logout = () => ({
 
     type: actions.LOGOUT
 })
+export const deleteFavoriteEvent = (id: any, eventid: any) => {
+    return async function (dispatch: any) {
+        await axios.put(`http://localhost:3008/api/users/removefavourite/${id}/${eventid}`);
+        dispatch({
+            type: actions.DELETE_FAVORITE_EVENT,
+        });
+    }
+
+}
+  
+
+    
 
