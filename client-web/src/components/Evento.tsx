@@ -4,20 +4,22 @@ import { Link } from "react-router-dom";
 import imag from '../images/bolos.jpg';
 
 
-interface  Iprops {fecha:string,imagen:string,nombreDelEvento:string}
+interface  Iprops {fecha:string,imagen:string,nombreDelEvento:string, _id:string}
 
 
 export const Evento = (props:Iprops) => {
 
 
-    const {fecha,imagen,nombreDelEvento}:Iprops =props
+    const {fecha,imagen,nombreDelEvento,_id}:Iprops =props
+
+
     
     return (
         <>
             
             <div className="container container-card">
                 <div className="card ">
-                <Link to="/details"className="link" >
+                <Link to={`/home/${_id}`} className="link" >
                     <img className="card-img-top" src={imagen} alt="Card image cap"  height="240" />
                     <div className="card-body">
                         <p className="card-text">{fecha.slice(0,10)}</p>

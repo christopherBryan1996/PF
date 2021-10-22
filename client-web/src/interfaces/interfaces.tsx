@@ -5,6 +5,10 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
+
+    GET_EVENT: string;
+
+
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;    
     LOGOUT:string;
@@ -28,6 +32,7 @@ export interface IasistentesAEvento {
 
 //interface para el estado de eventos en redux
 export interface IEventoState {
+    evento: [];
     eventos: [];
     eventosCompleta: [];
     asistentesEvento: IasistentesAEvento;

@@ -102,7 +102,7 @@ export default function Login() {
 
         async function fetchPost(data: object) {
             try {
-                const {data}: {data:any} = await axios.post('https://api-fest.herokuapp.com/api/auth', post);
+                const {data}: {data:any} = await axios.post('http://localhost:3008/api/auth', post);
                 console.log("mensaje", data)
                 if (data.ok) {
                     dispatch(loginNormal(data));
