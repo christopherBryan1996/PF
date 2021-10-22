@@ -8,6 +8,7 @@ export interface IActions {
     ELIMINAR_ASISTENTE: string;
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
+    ELIMINAR_TAREA_DB: string;
 
     LOGIN_NORMAL: string;
 }

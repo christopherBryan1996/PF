@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Iasistentes } from "../interfaces/interfaces";
 import "./styles/Asistente.css";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getAsistentes } from "../actions/actions";
 import axios from 'axios'
 
@@ -10,24 +11,35 @@ type FormElement = React.FormEvent<HTMLFormElement>;
 
 export default function Asistente(props: Iasistentes): JSX.Element {
   const [nuevaTarea, setNuevaTarea] = useState<string>("");
-  const [tareas, setTareas] = useState<string[]>(props.tareasDelUsuario);
   const [tareasVisibles, setTareasVisibles] = useState(false);
   const dispatch: any = useDispatch();
+  
+  const { uid, name }=useSelector((state:any)=>state.authGoo.state)
+  useEffect(() => dispatch(getAsistentes(props.id)), []);
+
+ 
+
+  //https://api-fest.herokuapp.com/events/assistans/delTarea/:id
+  //http://localhost:3008/events/assistans/delTarea
+  //{usuario, tareasDelUsuario}
 
   const handleSubmit = (e: FormElement): void => {
     e.preventDefault();
-    agregarTarea(nuevaTarea);
-    setNuevaTarea("");
+    // agregarTarea(nuevaTarea);
+    // setNuevaTarea("");
   };
 
-  const agregarTarea = (tarea: string): void => {
-    const listaTareas: string[] = [...tareas, tarea];
-    setTareas(listaTareas);
-  };
+  // const agregarTarea = (tarea: string): void => {
+  //   const listaTareas: string[] = [...tareas, tarea];
+  //   setTareas(listaTareas);
+  // };
 
-  const eliminarTarea = (tarea: string): void => {
-    const listaTareas: string[] = tareas.filter((t) => t !== tarea);
-    setTareas(listaTareas);
+  const eliminarTarea = async (idEvento: string, tarea: string) => {
+    // const listaTareas: string[] = tareas.filter((t) => t !== tarea);
+    
+    const obj = {usuario:name, tareasDelUsuario: tarea }
+      const tareaEliminada = await axios.patch(`http://localhost:3008/events/assistans/delTarea/${idEvento}`, obj);
+      dispatch(getAsistentes(idEvento))
   };
 
   const desplegarTareas = (): void => {
@@ -39,7 +51,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
 
         const obj = {usuario}
         console.log('objeto usuario: ', obj)
-        const deleted = await axios.put(`https://api-fest.herokuapp.com/events/assistans/delete/${idEvento}`, obj);
+        const deleted = await axios.put(`http://localhost:3008/events/assistans/delete/${idEvento}`, obj);
         console.log(deleted)
         dispatch(getAsistentes(idEvento))
       };
@@ -55,10 +67,10 @@ export default function Asistente(props: Iasistentes): JSX.Element {
           </div>
           {!tareasVisibles ? null : (
             <div className={"card-body"}>
-              {tareas?.map((tarea: string, idx: number) => (
+              {props.tareasDelUsuario?.map((tarea: string, idx: number) => (
                 <div className="card card-body mt-2" key={idx}>
                   <p>{tarea}</p>
-                  <button onClick={() => eliminarTarea(tarea)} type="button" className="btn btn-outline-danger">X</button>
+                  <button onClick={() => eliminarTarea(props.id, tarea)} type="button" className="btn btn-outline-danger">X</button>
                 </div>
               ))}
               <form onSubmit={handleSubmit}>

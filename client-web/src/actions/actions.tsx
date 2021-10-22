@@ -21,7 +21,7 @@ export function llenarCoordenadas(data: string[]) {
 
 export function getEvents() {
   return async function (dispatch: any) {
-    const res = await axios.get("https://api-fest.herokuapp.com/events");
+    const res = await axios.get("http://localhost:3008/events");
     dispatch({
       type: actions.GET_EVENTS,
       payload: res.data,
@@ -42,7 +42,7 @@ export const getAsistentes = (id: string) => {
   //este action es para filtrar por continente
 
   return async function (dispatch: any) {
-    const res = await axios.get(`https://api-fest.herokuapp.com/events/assistans/${id}`);
+    const res = await axios.get(`http://localhost:3008/events/assistans/${id}`);
     dispatch({
       type: actions.GET_ASISTENTES,
       payload: res.data,

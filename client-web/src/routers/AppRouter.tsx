@@ -81,7 +81,7 @@ export const AppRouter = () => {
 
                      {/* ruta para modificar usuario */}
                     <PrivateRoutes exact path='/modificarUser/:id' component={ModificarUser}/>
-                    <PrivateRoutes exact path="/:username/:eventid" component={AsistentesPage} />
+                    <PrivateRoutes exact path="/home/:username/:eventid" component={AsistentesPage} />
                 </Switch>
             </div>
         </Router>
