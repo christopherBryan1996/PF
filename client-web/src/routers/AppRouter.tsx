@@ -67,7 +67,6 @@ export const AppRouter = () => {
                     <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
-                    isAuthenticated={isAuthenticated} 
                     component={LandingPage} />
                     <PrivateRoute 
                     exact path="/home"
@@ -79,15 +78,12 @@ export const AppRouter = () => {
                     component={EventDetails} />
                     <PublicRoute 
                     exact path="/about" 
-                    isAuthenticated={isAuthenticated}
                     component={About} />
                     <PublicRoute 
                     exact path="/Login" 
-                    isAuthenticated={isAuthenticated}
                     component={Login} />
                     <PublicRoute 
                     exact path="/Register"
-                    isAuthenticated={isAuthenticated}
                     component={Register} />
                     <PrivateRoute 
                     exact path="/NewEvent"

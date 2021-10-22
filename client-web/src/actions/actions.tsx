@@ -1,7 +1,7 @@
 import axios from "axios";
-import { getAuth, signInWithPopup, signOut } from 'firebase/auth';
-import { googleAuthProvider } from '../firebase/firebase-config'
-import actions from '../actions_type/actions_types';
+import { getAuth, signInWithPopup, signOut } from "firebase/auth";
+import { googleAuthProvider } from "../firebase/firebase-config";
+import actions from "../actions_type/actions_types";
 import URLrequests from "../components/constanteURL";
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
@@ -11,16 +11,14 @@ import URLrequests from "../components/constanteURL";
  4-> reducer correspndiente: en case colocar actions.NOMBRE_DE_LA_ACTION
 **********************/
 
-
 export function llenarCoordenadas(data: string[]) {
-    console.log("llego action llenarCoordenadas");
-    return async function (dispatch: any) {
-        return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
-    };
-} 
+  console.log("llego action llenarCoordenadas");
+  return async function (dispatch: any) {
+    return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
+  };
+}
 
 export function getEvents() {
-
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events`);
     dispatch({
@@ -30,7 +28,7 @@ export function getEvents() {
   };
 }
 
-export function getEvent(eventId:any) {
+export function getEvent(eventId: any) {
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events/${eventId}`);
     dispatch({
@@ -40,18 +38,16 @@ export function getEvent(eventId:any) {
   };
 }
 
-
 export const filtroPrecio = (state: any) => {
-    //este action es para filtrar por continente
+  //este action es para filtrar por continente
 
-    return {
-        type: actions.FILTRO_PRECIO,
-        payload: state,
-    };
+  return {
+    type: actions.FILTRO_PRECIO,
+    payload: state,
+  };
 };
 
 export const getAsistentes = (id: string) => {
-
   //este action es para filtrar por continente
 
   return async function (dispatch: any) {
@@ -61,82 +57,70 @@ export const getAsistentes = (id: string) => {
       payload: res.data,
     });
   };
-
 };
 
 export const startGoogleLogin = () => {
-    return (dispatch: any) => {
-        const auth = getAuth();
-        signInWithPopup(auth, googleAuthProvider)
-            .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.photoURL))            
-            });
-    }
-}
+  return (dispatch: any) => {
+    const auth = getAuth();
+    signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
+      dispatch(login(user.uid, user.displayName, user.photoURL));
+    });
+  };
+};
 
-export const login = (uid: any, displayName: any, photoURL: any) => (
-    {
-        type: actions.LOGIN,
-        payload: {
-            uid,
-            displayName,
-            photoURL
-        }
-    })
+export const login = (uid: any, displayName: any, photoURL: any) => ({
+  type: actions.LOGIN,
+  payload: {
+    uid,
+    displayName,
+    photoURL,
+  },
+});
 
-
-
-export const getFavorites = (id:any) => {
+export const getFavorites = (id: any) => {
   return async function (dispatch: any) {
-    console.log("llego al action")
-    const res = await axios.get(`${URLrequests}api/users/favouritesevents/${id}`);
+    console.log("llego al action");
+    const res = await axios.get(
+      `${URLrequests}api/users/favouritesevents/${id}`
+    );
     dispatch({
       type: actions.GET_FAVORITES,
       payload: res.data,
     });
   };
-
-}
+};
 
 export const filtroFavoritos = (state: any) => {
-    return {
-        type: actions.FILTRO_FAVORITOS,
-        payload: state,
-    };
+  return {
+    type: actions.FILTRO_FAVORITOS,
+    payload: state,
+  };
 };
 
 export const loginNormal = (data: any) => {
-    return {
-        type: actions.LOGIN_NORMAL,
-        payload: data,
-    }
+  return {
+    type: actions.LOGIN_NORMAL,
+    payload: data,
+  };
 };
 
-
-export const deleteFavoriteEvent = (id:any, eventid:any) => {
-  return async function (dispatch:any){
+export const deleteFavoriteEvent = (id: any, eventid: any) => {
+  return async function (dispatch: any) {
     await axios.put(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });
-  }
-  
-}
+  };
+};
 
 export const startLogout = () => {
-
-    return async (dispatch: any) => {
-
-        const auth = getAuth();
-        await signOut(auth);
-
-        dispatch(logout());
-    }
-
-
-}
+  return async (dispatch: any) => {
+    const auth = getAuth();
+    await signOut(auth);
+    dispatch(logout());
+  };
+};
 
 export const logout = () => ({
-
-    type: actions.LOGOUT
-})
+  type: actions.LOGOUT,
+});
