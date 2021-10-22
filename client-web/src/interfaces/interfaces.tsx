@@ -6,12 +6,19 @@ export interface IActions {
     GET_ASISTENTES: string;
     LOGIN: string;
 <<<<<<< HEAD
+<<<<<<< HEAD
     ELIMINAR_ASISTENTE: string;
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
     ELIMINAR_TAREA_DB: string;
 
 =======
+=======
+
+    GET_EVENT: string;
+
+
+>>>>>>> c81833a1ebbd8555a1bb34cb8fb9ae8b8d3cceb2
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;    
     LOGOUT:string;
@@ -31,6 +38,7 @@ export interface Iasistentes {
 
 //interface para el estado de eventos en redux
 export interface IEventoState {
+    evento: [];
     eventos: [];
     eventosCompleta: [];
     asistentesEvento: [];

@@ -18,25 +18,6 @@ export function llenarCoordenadas(data: string[]) {
     };
 } 
 
-export function getEvents() {
-<<<<<<< HEAD
-  return async function (dispatch: any) {
-    const res = await axios.get("http://localhost:3008/events");
-    dispatch({
-      type: actions.GET_EVENTS,
-      payload: res.data,
-    });
-  };
-=======
-    return async function (dispatch: any) {
-        const res = await axios.get("http://localhost:3008/events");
-        dispatch({
-            type: actions.GET_EVENTS,
-            payload: res.data,
-        });
-    };
->>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
-}
 
 
 export const filtroPrecio = (state: any) => {
@@ -49,18 +30,7 @@ export const filtroPrecio = (state: any) => {
 };
 
 export const getAsistentes = (id: string) => {
-<<<<<<< HEAD
   //este action es para filtrar por continente
-
-  return async function (dispatch: any) {
-    const res = await axios.get(`http://localhost:3008/events/assistans/${id}`);
-    dispatch({
-      type: actions.GET_ASISTENTES,
-      payload: res.data,
-    });
-  };
-=======
-    //este action es para filtrar por continente
 
     return async function (dispatch: any) {
         const res = await axios.get(`https://api-fest.herokuapp.com/events/assistans/${id}`);
@@ -69,7 +39,6 @@ export const getAsistentes = (id: string) => {
             payload: res.data,
         });
     };
->>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
 };
 
 export const startGoogleLogin = () => {
@@ -93,15 +62,17 @@ export const login = (uid: any, displayName: any, photoURL: any) => (
     })
 
 
-export const getFavorites = (id: any) => {
-    return async function (dispatch: any) {
-        console.log("llego al action")
-        const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
-        dispatch({
-            type: actions.GET_FAVORITES,
-            payload: res.data,
-        });
-    };
+
+export const getFavorites = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`http://localhost:3008/api/users/favouritesevents/${id}`);
+    dispatch({
+      type: actions.GET_FAVORITES,
+      payload: res.data,
+    });
+  };
+
 }
 
 export const filtroFavoritos = (state: any) => {
@@ -118,20 +89,13 @@ export const loginNormal = (data: any) => {
     }
 };
 
-export const startLogout = () => {
 
-    return async (dispatch: any) => {
-
-        const auth = getAuth();
-        await signOut(auth);
-
-        dispatch(logout());
-    }
-
+export const deleteFavoriteEvent = (id:any, eventid:any) => {
+  return async function (dispatch:any){
+    await axios.put(`http://localhost:3008/api/users/removefavourite/${id}/${eventid}`);
+    dispatch({
+      type: actions.DELETE_FAVORITE_EVENT,
+    });
+  }
+  
 }
-
-export const logout = () => ({
-
-    type: actions.LOGOUT
-})
-

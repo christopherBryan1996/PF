@@ -6,6 +6,7 @@ const actions : IActions = {
     FILTRO_PRECIO: 'FILTRO_PRECIO',
     GET_ASISTENTES: 'GET_ASISTENTES',
 <<<<<<< HEAD
+<<<<<<< HEAD
     ELIMINAR_ASISTENTE: 'ELIMINAR_ASISTENTE',
     LOGIN: 'LOGIN_GOOGLE',
     GET_FAVORITES: "GET_FAVORITES",
@@ -14,6 +15,12 @@ const actions : IActions = {
 
     LOGIN_NORMAL: "LOGIN_NORMAL"
 =======
+=======
+
+    GET_EVENT: 'GET_EVENT',
+
+
+>>>>>>> c81833a1ebbd8555a1bb34cb8fb9ae8b8d3cceb2
     LOGIN: 'LOGIN_GOOGLE',
     GET_FAVORITES: "GET_FAVORITES",
     FILTRO_FAVORITOS: "FILTRO_FAVORITOS",

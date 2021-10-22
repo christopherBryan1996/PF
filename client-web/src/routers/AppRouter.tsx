@@ -63,8 +63,9 @@ export const AppRouter = () => {
             
                 <Switch>
                     {/* <Route path="/" component={Nav} /> */}
-                    {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
 
+                    {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
+                    <PrivateRoutes exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
                     isAuthenticated={isAuthenticated} 
@@ -101,6 +102,7 @@ export const AppRouter = () => {
                     exact path="/home/:username/favorites"
                     isAuthenticated={isAuthenticated}
                     component={Favorites} />
+
 
                      {/* ruta para modificar usuario */}
 <<<<<<< HEAD
