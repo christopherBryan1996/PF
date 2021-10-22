@@ -93,7 +93,7 @@ export default function NewEvent() {
             try {
                 const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
                 console.log("data",data)
-                if (data.ok) {
+                if (data.message === 'Evento creado') {
 
                     eventoCreado();
                 } else {
