@@ -6,6 +6,7 @@ import Mapa from './Mapa';
 import { Nav } from "./Nav";
 import axios from "axios";
 import {useSelector} from 'react-redux';
+import URLrequests from "./constanteURL";
 
 
 export default function NewEvent() {
@@ -48,7 +49,7 @@ export default function NewEvent() {
     };
 
 
-    const {uid}=useSelector((state:any)=>state.authGoo.state)
+    const {uid}=useSelector((state:any)=>state.authGoo.logNormal)
     
 
     //Funcion para enviar el post del form----------------------------------------------------------------
@@ -90,9 +91,9 @@ export default function NewEvent() {
 
         async function fetchPost(data: object) {
             try {
-                const {data}: {data:any} =  await axios.post('http://localhost:3008/events/create', post)
+                const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
                 console.log("data",data)
-                if (data.ok) {
+                if (data.message === 'Evento creado') {
 
                     eventoCreado();
                 } else {

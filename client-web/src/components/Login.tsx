@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import './styles/Login.css';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { startGoogleLogin, loginNormal } from "../actions/actions";
-import axios from "axios";
-
-
+import { loginNormal, login } from "../actions/actions";
+import {startGoogleLogin, nuevoUsuario} from "../controllers/loginGoogle/googleLogin";
+import URLrequests from "./constanteURL";
+import { getAuth, signInWithPopup } from "firebase/auth";
+import { googleAuthProvider } from "../firebase/firebase-config";
+import { FcGoogle } from "react-icons/fc";
+import axios from 'axios'
 
 export default function Login() {
 
@@ -66,9 +69,7 @@ export default function Login() {
 
     //Funciones para Redireccionar pagina--------------------------------------------
     const history = useHistory();
-    const back = () => {
-        history.goBack()
-    };
+
     const toRegister = () => {
         history.push("/Register")
     };
@@ -76,11 +77,36 @@ export default function Login() {
         history.push("/home")
     };
 
-    //Funcion para enviar los posts del form-----------------------------------------
 
-  const  handleGoogleLogin = () => {
-    dispatch(startGoogleLogin())
-    
+    //Funcion para enviar los posts del form-----------------------------------------
+  const  handleGoogleLogin = async () => {
+    const auth = getAuth();
+    const { user }: {user: any} = await signInWithPopup(auth, googleAuthProvider)
+    const loginGoogle = {
+        uid:user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL
+    }
+    const infoLog = {
+        email: user.email, 
+        password: user.uid.slice(0,12)
+    }
+    const data : any = await startGoogleLogin(infoLog) 
+    if( data && data.ok){
+        dispatch(loginNormal(data)); 
+    } else {
+        const usuario = {
+                usuario: user.displayName,
+                email: user.email,
+                password: user.uid.slice(0,12)
+        }
+        const datos: any = await nuevoUsuario(usuario)
+        dispatch(loginNormal(datos))           
+    }
+    await dispatch(login(loginGoogle));
+        toHome() 
+
+        
   }
 
 
@@ -102,7 +128,7 @@ export default function Login() {
 
         async function fetchPost(data: object) {
             try {
-                const {data}: {data:any} = await axios.post('http://localhost:3008/api/auth', post);
+                const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
                 console.log("mensaje", data)
                 if (data.ok) {
                     dispatch(loginNormal(data));
@@ -110,7 +136,7 @@ export default function Login() {
                 } else {
                     usuarioRepetido();
                 }
-                
+
             } catch (error) {
                 console.error(error);
             }
@@ -123,33 +149,49 @@ export default function Login() {
     return (
         <div className="divpapa">
 
-            <div className="navLogin">
-                <button onClick={back}>Back</button>
-                <h1>Hola! Bienvenidos</h1>
-            </div>
-            <div className="botonesLogin">
-                <button onClick={toRegister}>No tienes cuenta? Registrate</button>
-                <button>Inicia con Google</button>
-            </div>
-            <div >
-                <form className="formLogin" onSubmit={handleSubmit}>
-                    <label>Email</label>
-                    <input
-                        placeholder="Escribe tu Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    ></input>
-                    <label>Contraseña</label>
-                    <input
-                        placeholder="Escribe tu contraseña"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    ></input>
-                    <button>Login</button>
-                  
-                </form>
-                <button onClick={handleGoogleLogin}>Login con google</button>
+
+            <div className="contaimer card-login p-3">
+                <div className="navLogin">
+
+                    <h1>Hola! Bienvenidos</h1>
+                </div>
+
+                <div >
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group col-md-12 ">
+                            <label>Email</label>
+                            <input
+                                className="form-control"
+                                placeholder="Escribe tu Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}>
+                            </input>
+                        </div>
+                        <div className="form-group col-md-12 ">
+                            <label>Contraseña</label>
+                            <input
+                                className="form-control"
+                                placeholder="Escribe tu contraseña"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)} >
+                            </input>
+                        </div>
+                        <div className="form-group col-md-12">
+                            <button className="btn btn-primary   btn-lg">Iniciar sesion </button>
+                        </div>
+                    </form>
+                    <div className="form-group col-md-12">
+                        <button onClick={handleGoogleLogin} className="btn btn-outline-success btn-lg"><FcGoogle /> Iniciar sesion con Google</button>
+                    </div>
+                    <div className="form-group col-md-8">
+                        <button className=" btn btn btn-link" onClick={toRegister}>No tienes cuenta? Registrate</button>
+                    </div>
+                    <div className="form-group col-md-8">
+                        <button className=" btn btn-success" onClick={toHome}>Regresar al home</button>
+                    </div>
+
+                </div>
             </div>
             <ToastContainer
                 position="top-right"

@@ -10,10 +10,10 @@ import React, { useEffect} from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
+    
     const history = useHistory();
     const crearEvento = () => {
-        history.push("/NewEvent")
-    };
+        history.push("/NewEvent")};
 
 
     const dispatch = useDispatch()
@@ -22,8 +22,8 @@ export const Home = () => {
     }, []);
 
 
-        const {eventos}=useSelector((state:any)=>state.eventos)
-        console.log("eventos",eventos)
+    const { eventos } = useSelector((state: any) => state.eventos)
+    console.log("eventos", eventos)
 
 
 
@@ -33,12 +33,9 @@ export const Home = () => {
 
     return (
 
-
         <div>
             <Nav />
-
             <div className="filter container">
-
 
                 <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
                     <option selected>Filtrar por precio</option>
@@ -56,11 +53,11 @@ export const Home = () => {
                 <MapaHome />
             </div>
 
-            <div className="container container-home">
+            <div className=" container-home">
 
-                {eventos.map((i:any) => (
-                
-                <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+                {eventos.map((i: any) => (
+
+                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
 
                 ))
                 }

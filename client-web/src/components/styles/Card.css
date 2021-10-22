@@ -1,7 +1,20 @@
 .container-card{
 
     padding:10px;
-    width: 30%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.mapa{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding:25px;
 
 }
 
@@ -10,15 +23,9 @@
     margin-bottom: 3px;
 }
 
-.card-footer{
-   padding: 0;
-}
-.card-footer{
 
-    text-align:center;
-    padding:0.75rem;
 
-}
+
 
 a {
     color: #ffffff;
@@ -42,32 +49,22 @@ a {
 }
 
 .container-home{
-
     display: flex;
     flex-wrap: wrap;
-    
-
-
+    padding: 45px;
+    align-items: center;
+    justify-content: center;
 }
+
 .filter{
     margin-top: 160px;
     display:flex;
     align-items: center;
     justify-content: space-around;
     margin-bottom:15px;
-
-
 }
 
-.border{
 
-    border-radius: 5px;
-    background-color:rgb(39, 38, 38);
-    color:white;
-    border:1px solid #00bc8c !important;
-    height: 30px;
-
-}
 
 .btn-light {
     color: #fff;
@@ -80,15 +77,6 @@ a {
     background-color: #00bc8d00;
     border-color: #00bc8c;
 }
-
-
-/* 
-.btn-outline-success {
-    color: #8c52ff;
-    border-color: #8c52ff;
-} */
-
-
 
 
 

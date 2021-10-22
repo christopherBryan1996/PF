@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
@@ -38,7 +37,12 @@ export const AppRouter = () => {
         onAuthStateChanged(auth, (user) => {
 
             if (user?.uid) {
-                dispatch(login(user.uid, user.displayName, user.photoURL))
+                const datos = {
+                    user: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                } 
+                dispatch(login(datos))
                 setIsLoggedIn(true)
             }else{
                 setIsLoggedIn(false)
@@ -71,13 +75,14 @@ export const AppRouter = () => {
 
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
                     <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
+                    
+                    <PublicRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
-                    // isAuthenticated={isAuthenticated} 
                     component={LandingPage} />
-                    <PrivateRoute 
+                    <PublicRoute  
                     exact path="/home"
-                    isAuthenticated={isAuthenticated}
+                   
                     component={Home} />
                     <PrivateRoute 
                     exact path="/details"        
@@ -85,7 +90,6 @@ export const AppRouter = () => {
                     component={EventDetails} />
                     <PublicRoute 
                     exact path="/about" 
-                    isAuthenticated={isAuthenticated}
                     component={About} />
                     <PublicRoute 
                     exact path="/Login" 
@@ -94,6 +98,9 @@ export const AppRouter = () => {
                     <PublicRoute 
                     exact path="/Register"
                     // isAuthenticated={isAuthenticated}
+                    component={Login} />
+                    <PublicRoute 
+                    exact path="/Register"
                     component={Register} />
                     <PrivateRoute 
                     exact path="/NewEvent"
@@ -107,15 +114,13 @@ export const AppRouter = () => {
                     exact path="/home/:username/favorites"
                     isAuthenticated={isAuthenticated}
                     component={Favorites} />
-
-
                      {/* ruta para modificar usuario */}
                     <PrivateRoute 
                     exact path='/modificarUser/:id'
                     isAuthenticated={isAuthenticated}
                     component={ModificarUser}/>
                     <PrivateRoute
-                    exact path="/:username/:eventid" 
+                    exact path="/asistentes/:username/:eventid" 
                     isAuthenticated={isAuthenticated}
                     component={AsistentesPage} />
  <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />

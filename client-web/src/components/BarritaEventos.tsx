@@ -4,24 +4,30 @@ import {FaUserFriends} from "react-icons/fa";
 import {BsFillTrashFill} from "react-icons/bs";
 import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
+import { IeventosUsuario } from "../interfaces/interfaces";
 
-export default function BarritaEventos() {
+export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario) {
     
+    function eliminarEvento(){
+        
+    } 
 
     return(
         <div>
             <div className="barra">
-            <span>Mi evento </span>
+            <span>{nombreDelEvento} </span>
             <Link to="/home">
             <span><FiEdit2 color="blue" size="2em"/></span>
             </Link>
+
             {/* <Link to={`/${props.username}/${props.eventid}`}> */}
-            <Link to="/juan/616f6f4fdb5f15a30b5e3fdd">
+
+            <Link to={`/asistentes/${uid}/${id}`}>
             <span><FaUserFriends color="blue" size="2em"/></span>
             </Link>
 
 
-            <button><BsFillTrashFill color="blue" size="2em"/></button>
+            <button><BsFillTrashFill color="blue" size="2em" onClick={eliminarEvento}/></button>
 
             </div>
             

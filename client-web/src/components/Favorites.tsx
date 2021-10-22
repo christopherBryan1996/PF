@@ -31,12 +31,7 @@ export default function Favorites() {
     const back = () => {
         history.goBack()
     };
-   
     
-
-
-
-
     return(
         <div>
             <div className="DivDeArriba">

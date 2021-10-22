@@ -65,7 +65,7 @@ export default function EventDetails() {
             <div className="card-details ">
                 
                 {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
-                <div className="card-footer">
+                <div >
                     <Mapa1evento/>
                 </div>
             </div>
