@@ -15,6 +15,7 @@ export interface IActions {
     DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
+    USER_ASISTIRA_EVENTO: string;
 
     
 }

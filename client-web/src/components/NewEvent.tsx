@@ -66,7 +66,7 @@ export default function NewEvent() {
 
         e.preventDefault();
 
-        if (!publicoOPriv || !numeroPersonas || !fecha || !descripcion || !precio || !fecha || !nameEvent) { return faltanCasillas() }
+        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent) { return faltanCasillas() }
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
         if (publicoOPriv === "false") publicVar = false;
@@ -87,6 +87,7 @@ export default function NewEvent() {
             imagen: url,
             coordenadas: coordenadasPadre
         }
+        console.log("post", post)
 
 
         async function fetchPost(data: object) {
