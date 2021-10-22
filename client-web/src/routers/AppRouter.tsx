@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
@@ -65,14 +64,14 @@ export const AppRouter = () => {
                     {/* <Route path="/" component={Nav} /> */}
 
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
-                    <PrivateRoute  path="/home/:eventid" component={EventDetails} />
+                    <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
                     isAuthenticated={isAuthenticated} 
                     component={LandingPage} />
-                    <PrivateRoute 
+                    <PublicRoute  
                     exact path="/home"
-                    isAuthenticated={isAuthenticated}
+                   
                     component={Home} />
                     <PrivateRoute 
                     exact path="/details"        
@@ -102,14 +101,13 @@ export const AppRouter = () => {
                     exact path="/home/:username/favorites"
                     isAuthenticated={isAuthenticated}
                     component={Favorites} />
-
                      {/* ruta para modificar usuario */}
                     <PrivateRoute 
                     exact path='/modificarUser/:id'
                     isAuthenticated={isAuthenticated}
                     component={ModificarUser}/>
                     <PrivateRoute
-                    exact path="/:username/:eventid" 
+                    exact path="/asistentes/:username/:eventid" 
                     isAuthenticated={isAuthenticated}
                     component={AsistentesPage} />
 

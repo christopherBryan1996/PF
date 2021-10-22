@@ -20,14 +20,15 @@ export interface IActions {
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
+    id: string
     usuario: string;
     tareasDelUsuario: string[];
 }
 
 //interface para evento con su ID y lista de asistentes
 export interface IasistentesAEvento {
-    _id: string;
-    asistentes: Iasistentes[];
+    usuario: string; 
+    tareasDelUsuario: [];
 }
 
 //interface para el estado de eventos en redux
@@ -35,7 +36,7 @@ export interface IEventoState {
     evento: [];
     eventos: [];
     eventosCompleta: [];
-    asistentesEvento: IasistentesAEvento;
+    asistentesEvento: IasistentesAEvento[];
     eventosFavoritos:[];
 }
 
@@ -55,5 +56,3 @@ export interface Ievento {
     invitados: number;
     imagen: string;
 }
-
-
