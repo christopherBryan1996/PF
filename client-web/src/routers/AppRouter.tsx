@@ -35,7 +35,12 @@ export const AppRouter = () => {
         onAuthStateChanged(auth, (user) => {
 
             if (user?.uid) {
-                dispatch(login(user.uid, user.displayName, user.photoURL))
+                const datos = {
+                    user: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                } 
+                dispatch(login(datos))
                 setIsLoggedIn(true)
             }else{
                 setIsLoggedIn(false)
@@ -67,7 +72,6 @@ export const AppRouter = () => {
                     <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
-                    isAuthenticated={isAuthenticated} 
                     component={LandingPage} />
                     <PublicRoute  
                     exact path="/home"
@@ -79,15 +83,12 @@ export const AppRouter = () => {
                     component={EventDetails} />
                     <PublicRoute 
                     exact path="/about" 
-                    isAuthenticated={isAuthenticated}
                     component={About} />
                     <PublicRoute 
                     exact path="/Login" 
-                    isAuthenticated={isAuthenticated}
                     component={Login} />
                     <PublicRoute 
                     exact path="/Register"
-                    isAuthenticated={isAuthenticated}
                     component={Register} />
                     <PrivateRoute 
                     exact path="/NewEvent"

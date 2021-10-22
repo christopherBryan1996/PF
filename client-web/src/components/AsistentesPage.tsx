@@ -10,7 +10,7 @@ import "./styles/AsistentesPage.css";
 export default function AsistentesPage(): JSX.Element {
   const { eventid, username }: { eventid: string; username: string } =
     useParams();
-  const { name } = useSelector((state: any) => state.authGoo.state);
+  const { name } = useSelector((state: any) => state.authGoo.logNormal);
   const dispatch: any = useDispatch();
 
   useEffect(() => dispatch(getAsistentes(eventid)), []);

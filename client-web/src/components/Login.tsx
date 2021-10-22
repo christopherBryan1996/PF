@@ -4,11 +4,13 @@ import './styles/Login.css';
 import { useDispatch } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { startGoogleLogin, loginNormal } from "../actions/actions";
-import axios from "axios";
+import { loginNormal, login } from "../actions/actions";
+import {startGoogleLogin, nuevoUsuario} from "../controllers/loginGoogle/googleLogin";
 import URLrequests from "./constanteURL";
+import { getAuth, signInWithPopup } from "firebase/auth";
+import { googleAuthProvider } from "../firebase/firebase-config";
 import { FcGoogle } from "react-icons/fc";
-
+import axios from 'axios'
 
 export default function Login() {
 
@@ -75,12 +77,37 @@ export default function Login() {
         history.push("/home")
     };
 
+
     //Funcion para enviar los posts del form-----------------------------------------
-
-    const handleGoogleLogin = () => {
-        dispatch(startGoogleLogin())
-
+  const  handleGoogleLogin = async () => {
+    const auth = getAuth();
+    const { user }: {user: any} = await signInWithPopup(auth, googleAuthProvider)
+    const loginGoogle = {
+        uid:user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL
     }
+    const infoLog = {
+        email: user.email, 
+        password: user.uid.slice(0,12)
+    }
+    const data : any = await startGoogleLogin(infoLog) 
+    if( data && data.ok){
+        dispatch(loginNormal(data)); 
+    } else {
+        const usuario = {
+                usuario: user.displayName,
+                email: user.email,
+                password: user.uid.slice(0,12)
+        }
+        const datos: any = await nuevoUsuario(usuario)
+        dispatch(loginNormal(datos))           
+    }
+    await dispatch(login(loginGoogle));
+        toHome() 
+
+        
+  }
 
 
     const handleSubmit = (e: any) => {
@@ -151,7 +178,7 @@ export default function Login() {
                             </input>
                         </div>
                         <div className="form-group col-md-12">
-                            <button onClick={handleGoogleLogin} className="btn btn-primary   btn-lg">Iniciar sesion </button>
+                            <button className="btn btn-primary   btn-lg">Iniciar sesion </button>
                         </div>
                     </form>
                     <div className="form-group col-md-12">

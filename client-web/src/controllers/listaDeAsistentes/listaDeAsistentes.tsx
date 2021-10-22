@@ -17,7 +17,7 @@ export const eliminarTarea = async (tarea: string, usuario: string, idEvento: st
   };
 
 
-  //Agregar alerta para confirmar eliminacion de asistente
+//Agregar alerta para confirmar eliminacion de asistente
 export const eliminarAsistente = async ( usuario: string, idEvento: string, dispatch: any) => {
         const obj = {usuario}
         await axios.put(`${URLrequests}events/assistans/delete/${idEvento}`, obj);
