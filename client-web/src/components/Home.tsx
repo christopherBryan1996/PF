@@ -23,7 +23,7 @@ export const Home = () => {
         }, []);
 
         const {eventos}=useSelector((state:any)=>state.eventos)
-        console.log(eventos)
+        console.log("eventos",eventos)
 
         function change(e:any){
             dispatch(filtroPrecio(e.target.value))
@@ -58,7 +58,7 @@ export const Home = () => {
 
                 {eventos.map((i:any) => (
                 
-                <Evento imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+                <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
                 ))
                 }
             </div>

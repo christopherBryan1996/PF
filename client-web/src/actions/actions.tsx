@@ -21,9 +21,19 @@ export function llenarCoordenadas(data: string[]) {
 
 export function getEvents() {
   return async function (dispatch: any) {
-    const res = await axios.get("https://api-fest.herokuapp.com/events");
+    const res = await axios.get("http://localhost:3008/events");
     dispatch({
       type: actions.GET_EVENTS,
+      payload: res.data,
+    });
+  };
+}
+
+export function getEvent(eventId:any) {
+  return async function (dispatch: any) {
+    const res = await axios.get(`http://localhost:3008/events/${eventId}`);
+    dispatch({
+      type: actions.GET_EVENT,
       payload: res.data,
     });
   };
@@ -42,7 +52,7 @@ export const getAsistentes = (id: string) => {
   //este action es para filtrar por continente
 
   return async function (dispatch: any) {
-    const res = await axios.get(`https://api-fest.herokuapp.com/events/assistans/${id}`);
+    const res = await axios.get(`http://localhost:3008/events/assistans/${id}`);
     dispatch({
       type: actions.GET_ASISTENTES,
       payload: res.data,
@@ -74,7 +84,7 @@ export const login = (uid:any, displayName:any, photo:any) =>(
 export const getFavorites = (id:any) => {
   return async function (dispatch: any) {
     console.log("llego al action")
-    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
+    const res = await axios.get(`http://localhost:3008/api/users/favouritesevents/${id}`);
     dispatch({
       type: actions.GET_FAVORITES,
       payload: res.data,
@@ -98,7 +108,7 @@ export const loginNormal = (data:any) => {
 
 export const deleteFavoriteEvent = (id:any, eventid:any) => {
   return async function (dispatch:any){
-    await axios.put(`https://api-fest.herokuapp.com/api/users/removefavourite/${id}/${eventid}`);
+    await axios.put(`http://localhost:3008/api/users/removefavourite/${id}/${eventid}`);
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });

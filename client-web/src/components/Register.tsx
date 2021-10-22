@@ -100,7 +100,7 @@ export default function Register() {
 
         async function fetchPost(data: object) {
             try {
-                const mensaje = await fetch('https://api-fest.herokuapp.com/api/auth/new', {
+                const mensaje = await fetch('http://localhost:3008/api/auth/new', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json;charset=UTF-8" },
                     body: JSON.stringify(data)

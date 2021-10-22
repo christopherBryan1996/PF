@@ -70,7 +70,7 @@ export const AppRouter = () => {
 
                     <PublicRoutes exact path="/" component={LandingPage} />
                     <PrivateRoutes exact path="/home" component={Home} />
-                    <PrivateRoutes exact path="/details" component={EventDetails} />
+                    <PrivateRoutes exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoutes exact path="/about" component={About} />
                     <PublicRoutes exact path="/Login" component={Login} />
                     <PublicRoutes exact path="/Register" component={Register} />

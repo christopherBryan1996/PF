@@ -90,7 +90,7 @@ export default function NewEvent() {
 
         async function fetchPost(data: object) {
             try {
-                const {data}: {data:any} =  await axios.post('https://api-fest.herokuapp.com/events/create', post)
+                const {data}: {data:any} =  await axios.post('http://localhost:3008/events/create', post)
                 console.log("data",data)
                 if (data.ok) {
 

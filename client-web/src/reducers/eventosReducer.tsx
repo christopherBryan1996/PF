@@ -2,6 +2,7 @@ import { Ievento, IEventoState  } from "../interfaces/interfaces"
 import actions from "../actions_type/actions_types"
 
 const initialState:IEventoState  = {
+    evento: [],
     eventos: [],
     eventosCompleta:[],//este estado siempre va estar con todos los eventos
     asistentesEvento: { _id:'', asistentes:[]},
@@ -15,6 +16,13 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
                 ...state,
                 eventos:action.payload,
                 eventosCompleta:action.payload,
+            }
+        }
+        case actions.GET_EVENT: {
+            return {
+                ...state,
+                evento:action.payload,
+                
             }
         }
         case actions.GET_ASISTENTES:{
