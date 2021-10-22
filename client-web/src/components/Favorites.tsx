@@ -1,5 +1,5 @@
 import React, { useEffect} from "react";
-import {  getFavorites, deleteFavoriteEvent} from "../actions/actions";
+import {  getFavorites, } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
 import { useParams } from "react-router-dom";
@@ -58,8 +58,8 @@ export default function Favorites() {
                         <h1>{e.nombreDelEvento}</h1>
                     </div>
                     <div>
-                        <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
-                                                dispatch(getFavorites(username)) }}/>
+                        {/* <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
+                                                dispatch(getFavorites(username)) }}/> */}
                     </div>
                 </div>
                 )) : null

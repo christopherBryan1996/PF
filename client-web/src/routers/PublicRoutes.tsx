@@ -7,7 +7,6 @@ const PublicRoutes = (props:any) => {
      //Cambie esto de aca a false para poder trabajar------------------------------------
     if (props.auth === false) return <Redirect to={'/home'} />
 
-
     return <Route {...props} />
 
 };

@@ -32,6 +32,7 @@ export const AppRouter = () => {
     const [cheking, setChecking] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(true)
     
+    console.log('estoy logeado:', isLoggedIn)
 
     useEffect(() => {
 
