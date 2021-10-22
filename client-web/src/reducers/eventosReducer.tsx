@@ -76,6 +76,8 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
         }
     }
 
+        
+
     
     
         default:

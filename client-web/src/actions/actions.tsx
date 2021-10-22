@@ -86,6 +86,16 @@ export const getFavorites = (id: any) => {
   };
 };
 
+export const addFavoriteEvent = (uid:any, eventID: any) => {
+  return async function (dispatch: any){
+    const res = await axios.put(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
+    dispatch({
+      type: actions.ADD_FAVORITE_EVENT,
+      payload: res.data
+    })
+  }
+}
+
 export const filtroFavoritos = (state: any) => {
   return {
     type: actions.FILTRO_FAVORITOS,
