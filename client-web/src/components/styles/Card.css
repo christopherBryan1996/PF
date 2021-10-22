@@ -8,6 +8,16 @@
 
 }
 
+.mapa{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding:25px;
+
+}
+
 .card-text{
     margin-top:2px;
     margin-bottom: 3px;
