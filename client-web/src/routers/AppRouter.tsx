@@ -69,7 +69,7 @@ export const AppRouter = () => {
                     {/* <Route path="/" component={Nav} /> */}
 
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
-                    <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
+                    <PublicRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
                     component={LandingPage} />
