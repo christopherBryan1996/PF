@@ -7,12 +7,25 @@ import imag from '../images/bolos.jpg';
 import { useEffect} from "react";
 import { getEvent, userAsistiraEvento} from "../actions/actions"
 import Mapa1evento from "./Mapa1evento";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
 
 export default function EventDetails() {
 
+//NOTIFICACIONES------------------------------------------------------------------------------
+    const asistire = () => toast.success('Ahora figuras como que asistiras al evento', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
     const url = window.location.pathname;
     const path= url.split("/")[2];
  
@@ -30,6 +43,7 @@ export default function EventDetails() {
 
     const agregarGenteAsistir = () => {
         dispatch(userAsistiraEvento(uid, evento._id))
+        asistire();
     }
 
     var privadoOpublico = evento.publico;
@@ -37,10 +51,20 @@ export default function EventDetails() {
     if(privadoOpublico=== false){ final = "Privado - Solo invitados"};
 
 
-
+//return del componente------------------------------------------------------------------------------
 
     return  evento.imagen ? ( 
         <div className="container container-detail" >
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
             <div className="card card-details ">
 
                 <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
@@ -79,6 +103,7 @@ export default function EventDetails() {
                     <Mapa1evento/>
                 </div>
             </div>
+            
         </div>
     ) : null
 }
