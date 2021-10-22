@@ -1,6 +1,5 @@
-
 import axios from "axios";
-import { getAuth, signInWithPopup } from 'firebase/auth';
+import { getAuth, signInWithPopup, signOut } from 'firebase/auth';
 import { googleAuthProvider } from '../firebase/firebase-config'
 import actions from '../actions_type/actions_types';
 
@@ -13,13 +12,14 @@ import actions from '../actions_type/actions_types';
 
 
 export function llenarCoordenadas(data: string[]) {
-  console.log("llego action llenarCoordenadas");
-  return async function (dispatch: any) {
-    return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
-  };
-}
+    console.log("llego action llenarCoordenadas");
+    return async function (dispatch: any) {
+        return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
+    };
+} 
 
 export function getEvents() {
+<<<<<<< HEAD
   return async function (dispatch: any) {
     const res = await axios.get("http://localhost:3008/events");
     dispatch({
@@ -27,18 +27,29 @@ export function getEvents() {
       payload: res.data,
     });
   };
+=======
+    return async function (dispatch: any) {
+        const res = await axios.get("http://localhost:3008/events");
+        dispatch({
+            type: actions.GET_EVENTS,
+            payload: res.data,
+        });
+    };
+>>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
 }
 
-export const filtroPrecio = (state: any) => {
-  //este action es para filtrar por continente
 
-  return {
-    type: actions.FILTRO_PRECIO,
-    payload: state,
-  };
+export const filtroPrecio = (state: any) => {
+    //este action es para filtrar por continente
+
+    return {
+        type: actions.FILTRO_PRECIO,
+        payload: state,
+    };
 };
 
 export const getAsistentes = (id: string) => {
+<<<<<<< HEAD
   //este action es para filtrar por continente
 
   return async function (dispatch: any) {
@@ -48,50 +59,79 @@ export const getAsistentes = (id: string) => {
       payload: res.data,
     });
   };
+=======
+    //este action es para filtrar por continente
+
+    return async function (dispatch: any) {
+        const res = await axios.get(`https://api-fest.herokuapp.com/events/assistans/${id}`);
+        dispatch({
+            type: actions.GET_ASISTENTES,
+            payload: res.data,
+        });
+    };
+>>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
 };
-   
-export const startGoogleLogin = () =>{
-    return (dispatch:any) =>{
+
+export const startGoogleLogin = () => {
+    return (dispatch: any) => {
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
-            .then(({user}) =>{
-                dispatch(login(user.uid, user.displayName, user.photoURL))
+            .then(({ user }) => {
+                dispatch(login(user.uid, user.displayName, user.photoURL))            
             });
     }
 }
 
-export const login = (uid:any, displayName:any, photo:any) =>(
+export const login = (uid: any, displayName: any, photoURL: any) => (
     {
-        type:  actions.LOGIN,
+        type: actions.LOGIN,
         payload: {
             uid,
             displayName,
-            photo
+            photoURL
         }
     })
 
 
-export const getFavorites = (id:any) => {
-  return async function (dispatch: any) {
-    console.log("llego al action")
-    const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
-    dispatch({
-      type: actions.GET_FAVORITES,
-      payload: res.data,
-    });
-  };
+export const getFavorites = (id: any) => {
+    return async function (dispatch: any) {
+        console.log("llego al action")
+        const res = await axios.get(`https://api-fest.herokuapp.com/api/users/favouritesevents/${id}`);
+        dispatch({
+            type: actions.GET_FAVORITES,
+            payload: res.data,
+        });
+    };
 }
 
 export const filtroFavoritos = (state: any) => {
-  return {
-    type: actions.FILTRO_FAVORITOS,
-    payload: state,
-  };
+    return {
+        type: actions.FILTRO_FAVORITOS,
+        payload: state,
+    };
 };
 
-export const loginNormal = (data:any) => {
-  return{
-    type: actions.LOGIN_NORMAL,
-    payload: data,
-  }
+export const loginNormal = (data: any) => {
+    return {
+        type: actions.LOGIN_NORMAL,
+        payload: data,
+    }
 };
+
+export const startLogout = () => {
+
+    return async (dispatch: any) => {
+
+        const auth = getAuth();
+        await signOut(auth);
+
+        dispatch(logout());
+    }
+
+}
+
+export const logout = () => ({
+
+    type: actions.LOGOUT
+})
+

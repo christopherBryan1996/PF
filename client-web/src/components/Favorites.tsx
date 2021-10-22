@@ -1,9 +1,10 @@
 import React, { useEffect} from "react";
-import {  getFavorites} from "../actions/actions";
+import {  getFavorites, deleteFavoriteEvent} from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
 import { useParams } from "react-router-dom";
 import { ImHeart, ImCross } from "react-icons/im";
+import { useHistory } from "react-router-dom";
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -16,23 +17,23 @@ import { ImHeart, ImCross } from "react-icons/im";
 export default function Favorites() {
     
     const {username}:{username:string}=useParams()
+    console.log("username", username)
 
     const dispatch = useDispatch()
-    
+
+     const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
+
     useEffect(() => {
         dispatch(getFavorites(username));
-    }, []);
+    }, [eventosFavoritos.favouritesEvents, dispatch]);
 
+    const history = useHistory();
+    const back = () => {
+        history.goBack()
+    };
+   
     
-    const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
 
-    console.log("estado favoritos", eventosFavoritos.favouritesEvents)
-
-    // function change(e:any){
-    //     dispatch(filtroFavoritos(e.target.value))
-    // }    
-
-    
 
 
 
@@ -40,15 +41,8 @@ export default function Favorites() {
         <div>
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
+                    <button onClick={back}>Back</button>
                     <h1>Favoritos</h1>
-                    {/* <input placeholder="Buscar evento en favoritos" className="input"></input>
-                    <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change} >
-                        <option selected>Filtrar por precio</option>
-                        <option value="1">Gratis</option>
-                        <option value="2">Pago</option>  
-                        <option value="3">Menor a mayor</option>  
-                        <option value="4">Mayor a menor</option>                
-                    </select> */}
                 </div>
                 <div>
                     <button>Aca va a estar la foto de perfil</button>
@@ -64,7 +58,8 @@ export default function Favorites() {
                         <h1>{e.nombreDelEvento}</h1>
                     </div>
                     <div>
-                        <ImCross/>
+                        <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
+                                                dispatch(getFavorites(username)) }}/>
                     </div>
                 </div>
                 )) : null

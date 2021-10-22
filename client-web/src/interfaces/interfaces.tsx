@@ -5,12 +5,21 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
+<<<<<<< HEAD
     ELIMINAR_ASISTENTE: string;
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
     ELIMINAR_TAREA_DB: string;
 
+=======
+    GET_FAVORITES: string;
+    FILTRO_FAVORITOS: string;    
+    LOGOUT:string;
+    DELETE_FAVORITE_EVENT: string;
+>>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
     LOGIN_NORMAL: string;
+
+    
 }
 
 //interface para lista de asistentes por evento
@@ -44,3 +53,5 @@ export interface Ievento {
     invitados: number;
     imagen: string;
 }
+
+
