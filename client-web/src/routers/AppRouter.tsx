@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
@@ -65,7 +64,7 @@ export const AppRouter = () => {
                     {/* <Route path="/" component={Nav} /> */}
 
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
-                    <PrivateRoutes exact path="/home/:eventid" component={EventDetails} />
+                    <PrivateRoute exact path="/home/:eventid" component={EventDetails} />
                     <PublicRoute 
                     exact path="/"         
                     isAuthenticated={isAuthenticated} 
@@ -105,20 +104,15 @@ export const AppRouter = () => {
 
 
                      {/* ruta para modificar usuario */}
-<<<<<<< HEAD
-                    <PrivateRoutes exact path='/modificarUser/:id' component={ModificarUser}/>
-                    <PrivateRoutes exact path="/home/:username/:eventid" component={AsistentesPage} />
-=======
                     <PrivateRoute 
                     exact path='/modificarUser/:id'
                     isAuthenticated={isAuthenticated}
                     component={ModificarUser}/>
                     <PrivateRoute
-                    exact path="/:username/:eventid" 
+                    exact path="/asistentes/:username/:eventid" 
                     isAuthenticated={isAuthenticated}
                     component={AsistentesPage} />
 
->>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
                 </Switch>
             </div>
         </Router>

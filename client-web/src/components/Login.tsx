@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { startGoogleLogin, loginNormal } from "../actions/actions";
 import axios from "axios";
+import URLrequests from "./constanteURL";
 
 
 
@@ -102,7 +103,7 @@ export default function Login() {
 
         async function fetchPost(data: object) {
             try {
-                const {data}: {data:any} = await axios.post('http://localhost:3008/api/auth', post);
+                const {data}: {data:any} = await axios.post(`${URLrequests}api/auth`, post);
                 console.log("mensaje", data)
                 if (data.ok) {
                     dispatch(loginNormal(data));

@@ -5,25 +5,14 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    ELIMINAR_ASISTENTE: string;
-    GET_FAVORITES: string;
-    FILTRO_FAVORITOS: string;
-    ELIMINAR_TAREA_DB: string;
-
-=======
-=======
 
     GET_EVENT: string;
 
 
->>>>>>> c81833a1ebbd8555a1bb34cb8fb9ae8b8d3cceb2
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;    
     LOGOUT:string;
     DELETE_FAVORITE_EVENT: string;
->>>>>>> cf224efd4a2b116d87d919ff59d8bbcfe812ff74
     LOGIN_NORMAL: string;
 
     
@@ -31,9 +20,15 @@ export interface IActions {
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
-    id: string;
+    id: string
     usuario: string;
     tareasDelUsuario: string[];
+}
+
+//interface para evento con su ID y lista de asistentes
+export interface IasistentesAEvento {
+    usuario: string; 
+    tareasDelUsuario: [];
 }
 
 //interface para el estado de eventos en redux
@@ -41,7 +36,7 @@ export interface IEventoState {
     evento: [];
     eventos: [];
     eventosCompleta: [];
-    asistentesEvento: [];
+    asistentesEvento: IasistentesAEvento[];
     eventosFavoritos:[];
 }
 
@@ -61,5 +56,3 @@ export interface Ievento {
     invitados: number;
     imagen: string;
 }
-
-

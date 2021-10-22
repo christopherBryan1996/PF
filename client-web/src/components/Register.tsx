@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
+import URLrequests from './constanteURL';
 
 export default function Register() {
 
@@ -100,7 +101,7 @@ export default function Register() {
 
         async function fetchPost(data: object) {
             try {
-                const mensaje = await fetch('http://localhost:3008/api/auth/new', {
+                const mensaje = await fetch(`${URLrequests}api/auth/new`, {
                     method: 'POST',
                     headers: { "Content-Type": "application/json;charset=UTF-8" },
                     body: JSON.stringify(data)
