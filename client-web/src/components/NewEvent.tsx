@@ -30,16 +30,16 @@ export default function NewEvent() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        });
-        const faltanCasillas = () => toast.error('Faltan completar casillas!', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-             });
+    });
+    const faltanCasillas = () => toast.error('Faltan completar casillas!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
 
     function llenarEstadoCoordenadas(data: any) {
@@ -106,7 +106,7 @@ export default function NewEvent() {
         console.log("constPost", post) 
     };
 
- 
+
     //Return del componente----------------------------------------------------------------------------
 
     return (
@@ -195,8 +195,8 @@ export default function NewEvent() {
                                 ></textarea>
                             </div>
                             <div className="form-group col-md-11">
-                            <button className="btn btn-success col-md-12  btn-lg">Crear evento</button>
-                        </div>
+                                <button className="btn btn-success col-md-12  btn-lg">Crear evento</button>
+                            </div>
                         </form>
                     </div>
 
@@ -206,15 +206,15 @@ export default function NewEvent() {
                     </div>
                 </div>
                 <ToastContainer
-                        position="top-right"
-                        autoClose={1000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover />
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
 
 

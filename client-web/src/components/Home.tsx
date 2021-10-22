@@ -1,13 +1,13 @@
-import { connect, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 
-import { getEvents,filtroPrecio } from "../actions/actions"
+import { getEvents, filtroPrecio } from "../actions/actions"
 
-import React, { useEffect} from "react";
+import { useEffect } from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
@@ -20,50 +20,54 @@ export const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
-        }, []);
+    }, []);
+
 
         const {eventos}=useSelector((state:any)=>state.eventos)
         console.log("eventos",eventos)
 
-        function change(e:any){
-            dispatch(filtroPrecio(e.target.value))
-        }
+
+
+    function change(e: any) {
+        dispatch(filtroPrecio(e.target.value))
+    }
 
     return (
+
+
         <div>
-            <Nav/>
-          
+            <Nav />
+
             <div className="filter container">
 
 
                 <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
                     <option selected>Filtrar por precio</option>
                     <option value="1">Gratis</option>
-                    <option value="2">Pago</option>  
-                    <option value="3">Menor a mayor</option>  
-                    <option value="4">Mayor a menor</option>                
+                    <option value="2">Pago</option>
+                    <option value="3">Menor a mayor</option>
+                    <option value="4">Mayor a menor</option>
                 </select>
 
                 <button onClick={crearEvento} className="btn btn-light">Crea tu evento</button>
-            
+
             </div>
-           
+
             <div>
-            <MapaHome/>
+                <MapaHome />
             </div>
-
-
 
             <div className="container container-home">
 
                 {eventos.map((i:any) => (
                 
                 <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+
                 ))
                 }
             </div>
 
-            <Foot/>
+            <Foot />
 
         </div>
     )

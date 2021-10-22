@@ -10,19 +10,16 @@ import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import { ModificarUser } from '../components/modifar/Modificar';
-import MapaHome from '../components/MapaHome';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { login } from '../actions/actions';
 
 import Favorites from '../components/Favorites';
 
-
-
-import PublicRoutes from './PublicRoutes';
-import PrivateRoutes from './PrivateRoutes';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
 export const AppRouter = () => {
 
@@ -31,6 +28,8 @@ export const AppRouter = () => {
     const [cheking, setChecking] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(true)
     
+    const userLogged:any = useSelector((state:any) => state.authGoo.state)
+    const isAuthenticated = !userLogged ? false : true;
 
     useEffect(() => {
 
@@ -58,7 +57,6 @@ export const AppRouter = () => {
         )
     }
 
-
     return (
         <Router>
             <div>
@@ -66,22 +64,56 @@ export const AppRouter = () => {
                 <Switch>
                     {/* <Route path="/" component={Nav} /> */}
 
-                    {/* <PublicRoutes exact path="/favorites" component={Favorites} /> */}
-
-                    <PublicRoutes exact path="/" component={LandingPage} />
-                    <PrivateRoutes exact path="/home" component={Home} />
+                    {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
                     <PrivateRoutes exact path="/home/:eventid" component={EventDetails} />
-                    <PublicRoutes exact path="/about" component={About} />
-                    <PublicRoutes exact path="/Login" component={Login} />
-                    <PublicRoutes exact path="/Register" component={Register} />
-                    <PrivateRoutes exact path="/NewEvent" component={NewEvent} />
-                    <PrivateRoutes exact path="/mapa" component={Mapa} />
+                    <PublicRoute 
+                    exact path="/"         
+                    isAuthenticated={isAuthenticated} 
+                    component={LandingPage} />
+                    <PrivateRoute 
+                    exact path="/home"
+                    isAuthenticated={isAuthenticated}
+                    component={Home} />
+                    <PrivateRoute 
+                    exact path="/details"        
+                    isAuthenticated={isAuthenticated}
+                    component={EventDetails} />
+                    <PublicRoute 
+                    exact path="/about" 
+                    isAuthenticated={isAuthenticated}
+                    component={About} />
+                    <PublicRoute 
+                    exact path="/Login" 
+                    isAuthenticated={isAuthenticated}
+                    component={Login} />
+                    <PublicRoute 
+                    exact path="/Register"
+                    isAuthenticated={isAuthenticated}
+                    component={Register} />
+                    <PrivateRoute 
+                    exact path="/NewEvent"
+                    isAuthenticated={isAuthenticated}
+                    component={NewEvent} />
+                    <PrivateRoute 
+                    exact path="/mapa"
+                    isAuthenticated={isAuthenticated}
+                    component={Mapa} />
+                    <PrivateRoute 
+                    exact path="/home/:username/favorites"
+                    isAuthenticated={isAuthenticated}
+                    component={Favorites} />
 
-                    <PrivateRoutes exact path="/home/:username/favorites" component={Favorites} />
 
                      {/* ruta para modificar usuario */}
-                    <PrivateRoutes exact path='/modificarUser/:id' component={ModificarUser}/>
-                    <PrivateRoutes exact path="/:username/:eventid" component={AsistentesPage} />
+                    <PrivateRoute 
+                    exact path='/modificarUser/:id'
+                    isAuthenticated={isAuthenticated}
+                    component={ModificarUser}/>
+                    <PrivateRoute
+                    exact path="/:username/:eventid" 
+                    isAuthenticated={isAuthenticated}
+                    component={AsistentesPage} />
+
                 </Switch>
             </div>
         </Router>

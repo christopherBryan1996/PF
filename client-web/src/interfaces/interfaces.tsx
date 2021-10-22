@@ -5,12 +5,14 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
+
     GET_EVENT: string;
 
-    GET_FAVORITES: string;
-    FILTRO_FAVORITOS: string;
-    DELETE_FAVORITE_EVENT: string;
 
+    GET_FAVORITES: string;
+    FILTRO_FAVORITOS: string;    
+    LOGOUT:string;
+    DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
 
     
@@ -53,3 +55,5 @@ export interface Ievento {
     invitados: number;
     imagen: string;
 }
+
+
