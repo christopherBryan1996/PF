@@ -21,7 +21,10 @@ export const Home = () => {
         dispatch(getEvents());
     }, []);
 
-    const { eventos } = useSelector((state: any) => state.eventos)
+
+        const {eventos}=useSelector((state:any)=>state.eventos)
+        console.log("eventos",eventos)
+
 
 
     function change(e: any) {
@@ -55,9 +58,10 @@ export const Home = () => {
 
             <div className="container container-home">
 
-                {eventos.map((i: any) => (
+                {eventos.map((i:any) => (
+                
+                <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
 
-                    <Evento imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
                 ))
                 }
             </div>
