@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
+    
     const history = useHistory();
     const crearEvento = () => {
         history.push("/NewEvent")

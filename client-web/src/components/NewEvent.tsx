@@ -49,7 +49,7 @@ export default function NewEvent() {
     };
 
 
-    const {uid}=useSelector((state:any)=>state.authGoo.state)
+    const {uid}=useSelector((state:any)=>state.authGoo.logNormal)
     
 
     //Funcion para enviar el post del form----------------------------------------------------------------

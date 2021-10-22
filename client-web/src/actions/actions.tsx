@@ -1,8 +1,7 @@
 import axios from "axios";
-import { getAuth, signInWithPopup, signOut } from "firebase/auth";
-import { googleAuthProvider } from "../firebase/firebase-config";
 import actions from "../actions_type/actions_types";
 import URLrequests from "../components/constanteURL";
+
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
  1-> carpeta Interfaces: añadir a la interface IActions el nombre de la action y el tipo String
@@ -59,22 +58,22 @@ export const getAsistentes = (id: string) => {
   };
 };
 
-export const startGoogleLogin = () => {
-  return (dispatch: any) => {
-    const auth = getAuth();
-    signInWithPopup(auth, googleAuthProvider).then(({ user }) => {
-      dispatch(login(user.uid, user.displayName, user.photoURL));
-    });
+
+export const login = (data: any) => ({
+  type: actions.LOGIN,
+  payload: data
+});
+
+export const loginNormal = (data: any) => {
+  return {
+    type: actions.LOGIN_NORMAL,
+    payload: data,
   };
 };
 
-export const login = (uid: any, displayName: any, photoURL: any) => ({
-  type: actions.LOGIN,
-  payload: {
-    uid,
-    displayName,
-    photoURL,
-  },
+
+export const logout = () => ({
+  type: actions.LOGOUT,
 });
 
 export const getFavorites = (id: any) => {
@@ -97,13 +96,6 @@ export const filtroFavoritos = (state: any) => {
   };
 };
 
-export const loginNormal = (data: any) => {
-  return {
-    type: actions.LOGIN_NORMAL,
-    payload: data,
-  };
-};
-
 export const deleteFavoriteEvent = (id: any, eventid: any) => {
   return async function (dispatch: any) {
     await axios.put(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
@@ -113,14 +105,4 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
   };
 };
 
-export const startLogout = () => {
-  return async (dispatch: any) => {
-    const auth = getAuth();
-    await signOut(auth);
-    dispatch(logout());
-  };
-};
 
-export const logout = () => ({
-  type: actions.LOGOUT,
-});

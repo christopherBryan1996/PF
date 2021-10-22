@@ -1,14 +1,16 @@
 import actions from "../actions_type/actions_types";
 
 const initialState = {
-  state: {},
+  google: {},
+  logNormal:{}
 };
 
 export const authReducerG = (state = initialState, action: any) => {
   switch (action.type) {
     case actions.LOGIN:
       return {
-        state: {
+        ...state,
+        google: {
           uid: action.payload.uid,
           name: action.payload.displayName,
           photoURL: action.payload.photoRUL,
@@ -16,7 +18,8 @@ export const authReducerG = (state = initialState, action: any) => {
       };
     case actions.LOGIN_NORMAL:
       return {
-        state: action.payload,
+        ...state,
+        logNormal: action.payload,
       };
     case actions.LOGOUT:
       return {

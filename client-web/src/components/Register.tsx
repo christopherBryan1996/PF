@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
+import axios from 'axios';
 import URLrequests from './constanteURL';
 
 export default function Register() {

@@ -6,9 +6,9 @@ import logo from "../images/Logo.png";
 import avatar from "../images/user.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, startLogout } from "../actions/actions";
+import { login, logout } from "../actions/actions";
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged,signOut } from "firebase/auth";
 
 export const Nav = () => {
   const dispatch = useDispatch();
@@ -21,9 +21,14 @@ export const Nav = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName, user.photoURL));
+        const datos = {
+          uid: user.uid,
+          name: user.displayName,
+          photoURL: user.photoURL
+        }
+        dispatch(login( datos ));
         setIsLoggedIn(true);
-      } else if (authGoo.state && authGoo.state.ok) {
+      } else if (authGoo.logNormal && authGoo.logNormal.ok) {
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -31,8 +36,10 @@ export const Nav = () => {
     });
   }, [dispatch]);
 
-  const handleLogout = () => {
-    dispatch(startLogout());
+  const handleLogout = async() => {
+    const auth = getAuth();
+    await signOut(auth);
+    dispatch(logout());
     landing()
   };
 

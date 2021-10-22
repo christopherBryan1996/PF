@@ -35,7 +35,12 @@ export const AppRouter = () => {
         onAuthStateChanged(auth, (user) => {
 
             if (user?.uid) {
-                dispatch(login(user.uid, user.displayName, user.photoURL))
+                const datos = {
+                    user: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                } 
+                dispatch(login(datos))
                 setIsLoggedIn(true)
             }else{
                 setIsLoggedIn(false)
