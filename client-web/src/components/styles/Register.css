@@ -2,7 +2,15 @@
 
 .card-register{
 
-    margin-top: 180px;
+    margin-top: 8%;
+    background-color: black;
+    border-radius: 8px;    
+    position:relative;
+    background: rgb(14, 10, 10); /* Fallback for older browsers without RGBA-support */
+    background: rgba(8, 5, 5, 0.5);
+    width: 40%;
+
+
 
 
 }

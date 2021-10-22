@@ -11,12 +11,13 @@ import URLrequests from "../components/constanteURL";
 **********************/
 
 export function llenarCoordenadas(data: string[]) {
+
   console.log("llego action llenarCoordenadas");
   return async function (dispatch: any) {
     return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
   };
-}
 
+}
 export function getEvents() {
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events`);
@@ -38,8 +39,6 @@ export function getEvent(eventId: any) {
 }
 
 export const filtroPrecio = (state: any) => {
-  //este action es para filtrar por continente
-
   return {
     type: actions.FILTRO_PRECIO,
     payload: state,
@@ -47,7 +46,6 @@ export const filtroPrecio = (state: any) => {
 };
 
 export const getAsistentes = (id: string) => {
-  //este action es para filtrar por continente
 
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events/assistans/${id}`);
@@ -57,7 +55,6 @@ export const getAsistentes = (id: string) => {
     });
   };
 };
-
 
 export const login = (data: any) => ({
   type: actions.LOGIN,

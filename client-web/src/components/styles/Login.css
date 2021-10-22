@@ -1,19 +1,29 @@
-.divpapa{
+/* .divpapa{
     display: flex;
     flex-direction: column;
     align-items: center;
+} */
+
+.card-login{
+    margin-top: 8%;
+    background-color: black;
+    border-radius: 8px;    
+    position:relative;
+    background: rgb(14, 10, 10); /* Fallback for older browsers without RGBA-support */
+    background: rgba(8, 5, 5, 0.5);
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 .navLogin{
     display: flex;
     align-items: center;
 }
-.botonesLogin{
-    display: flex;
-    flex-direction: column;
-}
+
 .formLogin{
-    display: flex;
-    flex-direction: column;
+   height: 100%;
 }
 .divpapa{
     background-image: url('../../images/fondoLogin.jpg');
