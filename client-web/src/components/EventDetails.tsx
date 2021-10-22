@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles/EventDetails.css";
 import {FaCalendarAlt} from "react-icons/fa"
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiUserPlus } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
 import { useEffect} from "react";
-import { getEvent} from "../actions/actions"
+import { getEvent, userAsistiraEvento} from "../actions/actions"
 import Mapa1evento from "./Mapa1evento";
 
 
@@ -19,6 +19,7 @@ export default function EventDetails() {
     const dispatch = useDispatch()
     
     const evento = useSelector((state:any)=>state.eventos.evento)
+    const {uid}=useSelector((state:any)=>state.authGoo.logNormal);
 
     useEffect(() => {
         dispatch(getEvent(path));
@@ -26,6 +27,10 @@ export default function EventDetails() {
 
     
     console.log("evento", evento)
+
+    const agregarGenteAsistir = () => {
+        dispatch(userAsistiraEvento(uid, evento._id))
+    }
 
     var privadoOpublico = evento.publico;
     var final = "Publico - Cualquiera puede asistir";
@@ -55,10 +60,15 @@ export default function EventDetails() {
                     <p>Descripción: <span>{evento.descripcion}</span>  </p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/favoritos" className="favoritos" >
-                        <FiShoppingCart size="2em" color="white" />
-                        <p>Adquirir Boletos</p>
-                    </Link>
+                    {!privadoOpublico && <div><FiShoppingCart size="2em" color="white" />
+                                         <p>Adquirir Boletos</p></div>}
+
+                       
+                    
+                </div>
+                <div className="card-footer">
+                    {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" /> 
+                                                                      <p>Asistire al evento</p>  </div>}
                 </div>
 
             </div>

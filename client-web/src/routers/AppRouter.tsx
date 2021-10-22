@@ -19,6 +19,7 @@ import Favorites from '../components/Favorites';
 
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import MercadoPago from '../components/MercadoPago';
 
 export const AppRouter = () => {
 
@@ -70,6 +71,8 @@ export const AppRouter = () => {
 
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
                     <PublicRoute exact path="/home/:eventid" component={EventDetails} />
+                    <PublicRoute exact path="/mercadopago" component={MercadoPago} />
+
                     <PublicRoute 
                     exact path="/"         
                     component={LandingPage} />
