@@ -1,4 +1,3 @@
-
 import './styles/Card.css'
 import { Link } from "react-router-dom";
 import imag from '../images/bolos.jpg';
@@ -17,8 +16,8 @@ export const Evento = (props:Iprops) => {
     return (
         <>
             
-            <div className="container container-card">
-                <div className="card ">
+            <div className="container-card">
+                <div >
                 <Link to={`/home/${_id}`} className="link" >
                     <img className="card-img-top" src={imagen} alt="Card image cap"  height="240" />
                     <div className="card-body">

@@ -17,7 +17,7 @@ export function llenarCoordenadas(data: string[]) {
     return async function (dispatch: any) {
         return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
     };
-} 
+}
 
 export function getEvents() {
 
@@ -52,7 +52,7 @@ export const filtroPrecio = (state: any) => {
 
 export const getAsistentes = (id: string) => {
 
-  //este action es para filtrar por continente
+    //este action es para filtrar por continente
 
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events/assistans/${id}`);
@@ -69,7 +69,7 @@ export const startGoogleLogin = () => {
         const auth = getAuth();
         signInWithPopup(auth, googleAuthProvider)
             .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName, user.photoURL))            
+                dispatch(login(user.uid, user.displayName, user.photoURL))
             });
     }
 }

@@ -69,9 +69,9 @@ export const AppRouter = () => {
                     exact path="/"         
                     isAuthenticated={isAuthenticated} 
                     component={LandingPage} />
-                    <PrivateRoute 
+                    <PublicRoute  
                     exact path="/home"
-                    isAuthenticated={isAuthenticated}
+                   
                     component={Home} />
                     <PrivateRoute 
                     exact path="/details"        
@@ -101,8 +101,6 @@ export const AppRouter = () => {
                     exact path="/home/:username/favorites"
                     isAuthenticated={isAuthenticated}
                     component={Favorites} />
-
-
                      {/* ruta para modificar usuario */}
                     <PrivateRoute 
                     exact path='/modificarUser/:id'
