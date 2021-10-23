@@ -7,15 +7,47 @@
 }
 .DivTituloFiltros{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
 }
 .input{
     width: 500px;
 }
 .tarjetaFavoritos{
     display: flex;
-    background-color: rgba(92, 92, 91, 0.856);
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    margin-top: 20px;
+    border-radius:8px;
+    padding:30px;
+    width: 500px;
+    background-color: rgb(46, 45, 45);
+
+    box-shadow: -4px 1px 23px 0px rgba(0,0,0,0.37);
+    -webkit-box-shadow: -4px 1px 23px 0px rgba(0,0,0,0.37);
+    -moz-box-shadow: -4px 1px 23px 0px rgba(0,0,0,0.37);
+}
+.divMapeoTarjetas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nombreTarjeta{
+    font-size: 30px;
+    width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.cruz:hover{
+    color:rgb(190, 39, 39);
+    cursor: pointer;
+}
+.corazao{
+    color: rgb(54, 190, 149);
+    font-size: 50px;
 }

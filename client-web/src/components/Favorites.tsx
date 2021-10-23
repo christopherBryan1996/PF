@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { ImHeart, ImCross } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
+import { toast, ToastContainer } from 'react-toastify';
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -36,6 +37,24 @@ export default function Favorites() {
         history.goBack()
     };
 
+
+    const eventoQuitado = () => toast.warning('Evento fue eliminado de tus favoritos!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const quitarFavs = (userID:any, eventID:any) => {
+        dispatch(deleteFavoriteEvent(userID,eventID));
+        dispatch(getFavorites(userID));
+        eventoQuitado();
+    }
+
+
     return (
         <div>
 
@@ -47,21 +66,28 @@ export default function Favorites() {
                 </div>
 
             </div>
-            <div>
+            <div className="divMapeoTarjetas">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
                     <div className="tarjetaFavoritos">
                         <div>
-
+                            <ImHeart className="corazao"/>
+                        </div>
+                        <div >
+                            <p className="nombreTarjeta">{e.nombreDelEvento}</p>
                         </div>
                         <div>
-                            <h1>{e.nombreDelEvento}</h1>
+                            <ImCross className="cruz" onClick={() => {  quitarFavs(authGoo.logNormal.uid,  e._id)}} />
                         </div>
-                        <div>
-                            <ImCross onClick={() => {
-                                dispatch(deleteFavoriteEvent(authGoo.logNormal.uid, e._id));
-                                dispatch(getFavorites(authGoo.logNormal.uid))
-                            }} />
-                        </div>
+                        <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
                     </div>
                 )) : null
                 }
