@@ -5,17 +5,20 @@ import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 import { getEvents, filtroPrecio } from "../actions/actions"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
 
+    const [search, setSearch] = useState('')
+    const { eventos } = useSelector((state: any) => state.eventos)
+   
+
     const history = useHistory();
     const crearEvento = () => {
         history.push("/NewEvent")
     };
-
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -23,14 +26,15 @@ export const Home = () => {
     }, []);
 
 
-    const { eventos } = useSelector((state: any) => state.eventos)
-    console.log("eventos", eventos)
-
-
-
     function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
     }
+
+    const handlrOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+        console.log(search)
+    }
+
 
     return (
 
@@ -49,6 +53,7 @@ export const Home = () => {
                                 placeholder="Buscar evento..."
                                 aria-label="Username"
                                 aria-describedby="basic-addon1"
+                                onChange={handlrOnchange}
                             />
                             <button className="btn-search">Buscar</button>
                         </div>
@@ -84,7 +89,13 @@ export const Home = () => {
 
             <div className=" container-home">
 
-                {eventos.map((i: any) => (
+                {eventos.filter((val: any)=>{
+                    if(search === ''){
+                        return val
+                    }else if(val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())){
+                        return val
+                    }
+                }).map((i: any) => (
 
                     <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
 
