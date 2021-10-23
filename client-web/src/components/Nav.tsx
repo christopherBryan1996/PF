@@ -75,7 +75,7 @@ export const Nav = () => {
               {" "}
               <ImHeart color="white" fontSize="1.6em" />
             </a>
-            <a href="">
+            <a href= {`/home/usuario/${authGoo.logNormal.uid}`} >
               <img src={avatar} alt="" width="50" height="50" />
             </a>
             <a onClick={handleLogout}>

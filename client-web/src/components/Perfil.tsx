@@ -3,6 +3,8 @@ import BarritaEventos from './BarritaEventos'
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect} from "react";
 import { getUsersEvents } from "../actions/actions";
+import {Nav} from './Nav';
+import './styles/Perfil.css';
 
 
 
@@ -23,7 +25,7 @@ export default function  Perfil():JSX.Element {
     console.log(eventosUsuario, "hola")
     return eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ? (
         <div>
-        <div>navbar</div>
+        <div className="divDelNav"><Nav></Nav></div>
         <div>{username}</div>
         <div>{uid}</div>
         <div>{eventosUsuario.createdEvents[0].nombreDelEvento}</div>

@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
+import { toast, ToastContainer } from 'react-toastify';
 
 
 
@@ -40,6 +41,25 @@ export default function Favorites() {
     };
 
 
+
+    const eventoQuitado = () => toast.warning('Evento fue eliminado de tus favoritos!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const quitarFavs = (userID:any, eventID:any) => {
+        dispatch(deleteFavoriteEvent(userID,eventID));
+        dispatch(getFavorites(userID));
+        eventoQuitado();
+    }
+
+
+
     return (
         <div>
 
@@ -55,6 +75,9 @@ export default function Favorites() {
                 </div>
 
             </div>
+
+                        
+
             <div className="container container-cards">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
 
@@ -72,6 +95,16 @@ export default function Favorites() {
                             }} />
                         </div>
 
+                    <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
                     </div>
 
                 )) : null
