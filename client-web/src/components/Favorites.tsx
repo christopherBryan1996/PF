@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { getFavorites, deleteFavoriteEvent } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
-import { useParams } from "react-router-dom";
-import { ImHeart, ImCross } from "react-icons/im";
+import { Link, useParams } from "react-router-dom";
+import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
 import { toast, ToastContainer } from 'react-toastify';
+
+
+
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -38,6 +41,7 @@ export default function Favorites() {
     };
 
 
+
     const eventoQuitado = () => toast.warning('Evento fue eliminado de tus favoritos!', {
         position: "top-center",
         autoClose: 5000,
@@ -54,18 +58,22 @@ export default function Favorites() {
         eventoQuitado();
     }
 
-
     return (
         <div>
 
             <Nav />
+          <div className="card">
+
+          </div>
+
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
-                    <button onClick={back}>Back</button>
-                    <h1>Favoritos</h1>
+
+                    <h1>Mis Favoritos</h1>
                 </div>
 
             </div>
+
             <div className="divMapeoTarjetas">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
                     <div className="tarjetaFavoritos">
@@ -88,10 +96,13 @@ export default function Favorites() {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover />
+
                     </div>
+
                 )) : null
                 }
             </div>
+
         </div>
     )
 }
