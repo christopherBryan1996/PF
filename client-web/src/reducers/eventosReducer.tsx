@@ -5,8 +5,11 @@ const initialState:IEventoState  = {
     evento: [],
     eventos: [],
     eventosCompleta:[],//este estado siempre va estar con todos los eventos
+    
+    eventosFavoritos: [],
+    eventosUsuario:[],  
     asistentesEvento: [],
-    eventosFavoritos: []  
+     
 }
 
 export  function eventosReducer  (state = initialState, action:any):{}  {
@@ -73,6 +76,12 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
             return{...state,
                 eventosFavoritos:state.eventosCompleta.sort((a:Ievento,b:Ievento)=>b.precio -a.precio)
             }
+        }
+    }
+    case actions.GET_USERSEVENTS: {
+        return {
+            ...state,
+            eventosUsuario: action.payload,
         }
     }
 

@@ -9,6 +9,8 @@ import NewEvent from '../components/NewEvent';
 import Register from '../components/Register';
 import Mapa from '../components/Mapa';
 import { ModificarUser } from '../components/modifar/Modificar';
+import MapaHome from '../components/MapaHome';
+import Perfil from '../components/Perfil';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
@@ -69,7 +71,11 @@ export const AppRouter = () => {
                 <Switch>
                     {/* <Route path="/" component={Nav} /> */}
 
+                    {/* ruta para modificar usuario */}
+
+
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
+
                     <PublicRoute exact path="/detail/:eventid" component={EventDetails} />
                     <PublicRoute exact path="/mercadopago" component={MercadoPago} />
 
@@ -78,6 +84,7 @@ export const AppRouter = () => {
                         component={LandingPage} />
                     <PublicRoute
                         exact path="/home"
+
                         component={Home} />
 
                     <PublicRoute
@@ -85,7 +92,9 @@ export const AppRouter = () => {
                         component={About} />
                     <PublicRoute
                         exact path="/Login"
+                        // isAuthenticated={isAuthenticated}
                         component={Login} />
+
                     <PublicRoute
                         exact path="/Register"
                         component={Register} />
@@ -110,7 +119,7 @@ export const AppRouter = () => {
                         exact path="/asistentes/:username/:eventid"
                         isAuthenticated={isAuthenticated}
                         component={AsistentesPage} />
-
+                    <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
             </div>
         </Router>

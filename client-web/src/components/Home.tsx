@@ -4,10 +4,9 @@ import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
+import { getEvents,filtroPrecio } from "../actions/actions"
+import React, { useEffect} from "react";
 
-import { getEvents, filtroPrecio } from "../actions/actions"
-
-import { useEffect } from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {

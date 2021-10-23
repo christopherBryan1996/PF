@@ -10,13 +10,15 @@ export interface IActions {
 
 
     GET_FAVORITES: string;
-    FILTRO_FAVORITOS: string;    
+    FILTRO_FAVORITOS: string;
+    GET_USERSEVENTS: string;
+      
     LOGOUT:string;
     DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
-
+    DELETE_EVENT:string;
     
 }
 
@@ -26,6 +28,14 @@ export interface Iasistentes {
     usuario: string;
     tareasDelUsuario: string[];
 }
+
+//interface para los eventos creados por usuario
+export interface IeventosUsuario {
+    id: string;
+    nombreDelEvento:string;
+    uid:string
+}
+
 
 //interface para evento con su ID y lista de asistentes
 export interface IasistentesAEvento {
@@ -40,6 +50,7 @@ export interface IEventoState {
     eventosCompleta: [];
     asistentesEvento: IasistentesAEvento[];
     eventosFavoritos:[];
+    eventosUsuario:[];
 }
 
 //interface para la lista de eventos
