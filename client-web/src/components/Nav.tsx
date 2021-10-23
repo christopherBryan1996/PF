@@ -65,7 +65,7 @@ export const Nav = () => {
     <nav className="navbar navbar-dark bg-dark fixed-top">
       <div className="container">
         <a className="navbar-brand">
-          <img onClick={home} src={logo} alt="" width="240" height="70" />
+          <img onClick={home} src={logo} alt="" width="240" height="65" />
         </a>
        
 
