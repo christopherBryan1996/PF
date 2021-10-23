@@ -4,12 +4,27 @@
     width: 40%;
 }
 
+.fff{
+    margin-right: 185px;
+}
+
 .fff img {
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 85px;
+    margin-right: 85px;
 }
 
 
 .navbar {
     opacity: 0.8;
   }
+
+  .navbar-brand {
+    display: inline-block;
+    padding-top: 0.32421875rem;
+    padding-bottom: 0.32421875rem;
+    margin-right: 1rem;
+    font-size: 1.171875rem;
+    line-height: inherit;
+    white-space: nowrap;
+    margin-left: 3rem;
+}
