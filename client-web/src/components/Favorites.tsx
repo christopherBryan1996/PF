@@ -21,7 +21,7 @@ export default function Favorites() {
 
     const dispatch = useDispatch()
 
-     const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
+    const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
 
     useEffect(() => {
         dispatch(getFavorites(username));
@@ -44,7 +44,7 @@ export default function Favorites() {
                 </div>
             </div>
             <div>
-               { eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e:any) => (
+            { eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e:any) => (
                 <div className="tarjetaFavoritos">
                     <div>
                         <ImHeart/>
