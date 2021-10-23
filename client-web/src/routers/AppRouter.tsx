@@ -14,9 +14,7 @@ import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector} from 'react-redux';
 import { login } from '../actions/actions';
-
 import Favorites from '../components/Favorites';
-
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
