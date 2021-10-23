@@ -1,0 +1,10 @@
+.barra{
+   
+    /* width: 400px; */
+    
+    display: flex;
+    background-color: rgba(92, 92, 91, 0.856);
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

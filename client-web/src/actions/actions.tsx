@@ -12,6 +12,14 @@ import URLrequests from "../components/constanteURL";
 
 export function llenarCoordenadas(data: string[]) {
 
+// export function getEvents() {
+//     return async function (dispatch: any) {
+//         const res = await axios.get("https://api-fest.herokuapp.com/events");
+//         dispatch({
+//             type: actions.GET_EVENTS,
+//             payload: res.data,
+//         });
+//     };
   console.log("llego action llenarCoordenadas");
   return async function (dispatch: any) {
     return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
@@ -56,11 +64,23 @@ export const getAsistentes = (id: string) => {
   };
 };
 
+export const userAsistiraEvento = (uid:any, eventID: any) => {
+  return async function (dispatch:any){
+    const res = await axios.patch(`${URLrequests}api/users/addeventstoassist/${uid}/${eventID}`);
+    dispatch({
+      type: actions.USER_ASISTIRA_EVENTO,
+      payload: res.data
+    })
+  }
+}
+
 export const login = (data: any) => ({
   type: actions.LOGIN,
   payload: data
 });
 
+
+    
 export const loginNormal = (data: any) => {
   return {
     type: actions.LOGIN_NORMAL,
@@ -86,9 +106,19 @@ export const getFavorites = (id: any) => {
   };
 };
 
+export const getUsersEvents = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`${URLrequests}api/users/userevents/${id}`);
+    dispatch({
+      type: actions.GET_USERSEVENTS,
+      payload: res.data,
+    });
+  };
+}
 export const addFavoriteEvent = (uid:any, eventID: any) => {
   return async function (dispatch: any){
-    const res = await axios.put(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
+    const res = await axios.patch(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
     dispatch({
       type: actions.ADD_FAVORITE_EVENT,
       payload: res.data
@@ -105,11 +135,12 @@ export const filtroFavoritos = (state: any) => {
 
 export const deleteFavoriteEvent = (id: any, eventid: any) => {
   return async function (dispatch: any) {
-    await axios.put(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
+    await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });
-  };
-};
+  }
+}
+
 
 

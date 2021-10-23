@@ -1,4 +1,5 @@
 .DivDeArriba{
+    margin-top: 140px;
     display: flex;
     flex-direction: row;
     align-items: center;

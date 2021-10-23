@@ -6,6 +6,7 @@ import logo from '../images/Logo.png';
 import imagen3 from '../images/fiestalogin4.jpg';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
+import { Nav } from "./Nav";
  
 export default function LandingPage ()  {
 
@@ -30,15 +31,9 @@ export default function LandingPage ()  {
         <div>
         <div className=" container nav-contenedor">
 
-            <div className="div-logo">
+            <Nav/>
 
-                <a className="navbar-brand" href="#"><img src={logo} alt="" width="240" height="90" /></a>
-                <button className="btn btn-outline-success" onClick={botonSobreNosotros}>Sobre Nosotros</button>
-            </div>
-            <div className="botoneslogin">
-                <button className="btn btn-outline-success" onClick={botonIngresa}>Ingresa</button>
-                <button className="btn btn-outline-success" onClick={botonRegistrate}>Registrate</button>
-            </div>
+         
         </div>
 
         <div className="div-tarjeta1">

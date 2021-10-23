@@ -1,41 +1,74 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles/EventDetails.css";
-import {FaCalendarAlt} from "react-icons/fa"
-import { FiShoppingCart } from "react-icons/fi";
+import { FaCalendarAlt } from "react-icons/fa"
+import { FiShoppingCart, FiUserPlus } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
-import { useEffect} from "react";
-import { getEvent} from "../actions/actions"
+import { useEffect } from "react";
+import { getEvent, userAsistiraEvento } from "../actions/actions"
 import Mapa1evento from "./Mapa1evento";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
 
 export default function EventDetails() {
 
+    //NOTIFICACIONES------------------------------------------------------------------------------
+    const asistire = () => toast.success('Ahora figuras como que asistiras al evento', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
     const url = window.location.pathname;
-    const path= url.split("/")[2];
- 
+
+
+    const { eventid }: { eventid: string } =
+        useParams();
+    console.log('event:', eventid);
+
     const dispatch = useDispatch()
-    
-    const evento = useSelector((state:any)=>state.eventos.evento)
+
+    const evento = useSelector((state: any) => state.eventos.evento)
+    const { uid } = useSelector((state: any) => state.authGoo.logNormal);
 
     useEffect(() => {
-        dispatch(getEvent(path));
-        }, [evento]);
+        dispatch(getEvent(eventid));
+    }, []);
 
-    
+
     console.log("evento", evento)
+
+    const agregarGenteAsistir = () => {
+        dispatch(userAsistiraEvento(uid, evento._id))
+        asistire();
+    }
 
     var privadoOpublico = evento.publico;
     var final = "Publico - Cualquiera puede asistir";
-    if(privadoOpublico=== false){ final = "Privado - Solo invitados"};
+    if (privadoOpublico === false) { final = "Privado - Solo invitados" };
 
 
+    //return del componente------------------------------------------------------------------------------
 
-
-    return  evento.imagen ? ( 
+    return evento.imagen ? (
         <div className="container container-detail" >
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
             <div className="card card-details ">
 
                 <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
@@ -55,20 +88,23 @@ export default function EventDetails() {
                     <p>Descripción: <span>{evento.descripcion}</span>  </p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/favoritos" className="favoritos" >
-                        <FiShoppingCart size="2em" color="white" />
-                        <p>Adquirir Boletos</p>
-                    </Link>
+                    {!privadoOpublico && <div><FiShoppingCart size="2em" color="white" />
+                        <p>Adquirir Boletos</p></div>}
+                </div>
+                <div className="card-footer">
+                    {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
+                        <p>Asistire al evento</p>  </div>}
                 </div>
 
             </div>
             <div className="card-details ">
-                
+
                 {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
                 <div >
-                    <Mapa1evento/>
+                    <Mapa1evento />
                 </div>
             </div>
+
         </div>
     ) : null
 }

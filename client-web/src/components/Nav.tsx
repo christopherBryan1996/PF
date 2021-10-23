@@ -50,6 +50,10 @@ export const Nav = () => {
   const home = () => {
     history.push("/home");
   };
+
+  const favorites = () => {
+    history.push(`/home/${authGoo.logNormal.uid}/favorites`);
+  };
   const botonRegistrate = () => {
     history.push("/register");
   };
@@ -63,19 +67,11 @@ export const Nav = () => {
         <a className="navbar-brand">
           <img onClick={home} src={logo} alt="" width="240" height="70" />
         </a>
-        <form className="navbar-center">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar evento..."
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </form>
+       
 
         {logins ? (
           <div className="fff">
-            <a href="">
+            <a onClick={favorites}>
               {" "}
               <ImHeart color="white" fontSize="1.6em" />
             </a>

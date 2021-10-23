@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios';
 import URLrequests from './constanteURL';
+import { loginNormal } from '../actions/actions';
+import { useDispatch } from 'react-redux'
 
 export default function Register() {
 
@@ -21,6 +23,9 @@ export default function Register() {
     const history = useHistory();
     const ToLogin = () => {
         history.push("/Login")
+    };
+    const toHome = () => {
+        history.push("/home")
     };
 
     //warnings----------------------------------------------------------------------
@@ -80,6 +85,7 @@ export default function Register() {
     });
 
     //Funcion para enviar los posts del form-------------------------------------------------
+    const dispatch = useDispatch()
     const handleSubmit = (e: any) => {
         e.preventDefault();
         //validators------------------------------
@@ -99,6 +105,10 @@ export default function Register() {
             email,
             password
         };
+        const postLogin = {
+            email,
+            password
+        };
 
         async function fetchPost(data: object) {
             try {
@@ -109,6 +119,18 @@ export default function Register() {
                 });
                 if (mensaje.ok) {
                     usuarioCreado();
+                    try{
+                        const {data}:{data:any} = await axios.post(`${URLrequests}api/auth`, postLogin);
+                        if (data.ok){
+                            dispatch(loginNormal(data));
+                            toHome();
+                        }else {
+                            alert("algo salio mal entre despues de crear el usuario y intentar un login")
+                        }
+                    }catch (error){
+                        console.error(error);
+                    }
+                    
                 } else {
                     usuarioRepetido();
                 }
