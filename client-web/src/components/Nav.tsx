@@ -67,15 +67,7 @@ export const Nav = () => {
         <a className="navbar-brand">
           <img onClick={home} src={logo} alt="" width="240" height="70" />
         </a>
-        <form className="navbar-center">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar evento..."
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </form>
+       
 
         {logins ? (
           <div className="fff">
