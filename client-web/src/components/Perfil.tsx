@@ -13,13 +13,13 @@ export default function  Perfil():JSX.Element {
 
      const dispatch = useDispatch()
     
+     const {eventosUsuario}:{eventosUsuario:any}=useSelector((state:any)=>state.eventos)
     useEffect(() => {
         console.log("useeffect")
         dispatch(getUsersEvents(uid));
     }, []);
 
     
-    const {eventosUsuario}:{eventosUsuario:any}=useSelector((state:any)=>state.eventos)
     console.log(eventosUsuario, "hola")
     return eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ? (
         <div>

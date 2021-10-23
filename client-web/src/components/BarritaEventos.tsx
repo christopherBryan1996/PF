@@ -5,13 +5,14 @@ import {BsFillTrashFill} from "react-icons/bs";
 import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
 import { IeventosUsuario } from "../interfaces/interfaces";
+import { useDispatch} from "react-redux";
+import {deleteEvent} from "../controllers/eventos/eventoscontrollers"
 
 export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario) {
     
-    function eliminarEvento(){
-        
-    } 
-
+    const dispatch=useDispatch();
+   
+    
     return(
         <div>
             <div className="barra">
@@ -27,7 +28,7 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
             </Link>
 
 
-            <button><BsFillTrashFill color="blue" size="2em" onClick={eliminarEvento}/></button>
+            <button onClick={()=>deleteEvent(uid,id,dispatch)}><BsFillTrashFill color="blue" size="2em"  /></button>
 
             </div>
             

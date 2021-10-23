@@ -64,6 +64,16 @@ export const getAsistentes = (id: string) => {
   };
 };
 
+export const userAsistiraEvento = (uid:any, eventID: any) => {
+  return async function (dispatch:any){
+    const res = await axios.patch(`${URLrequests}api/users/addeventstoassist/${uid}/${eventID}`);
+    dispatch({
+      type: actions.USER_ASISTIRA_EVENTO,
+      payload: res.data
+    })
+  }
+}
+
 export const login = (data: any) => ({
   type: actions.LOGIN,
   payload: data
@@ -106,6 +116,15 @@ export const getUsersEvents = (id:any) => {
     });
   };
 }
+export const addFavoriteEvent = (uid:any, eventID: any) => {
+  return async function (dispatch: any){
+    const res = await axios.patch(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
+    dispatch({
+      type: actions.ADD_FAVORITE_EVENT,
+      payload: res.data
+    })
+  }
+}
 
 export const filtroFavoritos = (state: any) => {
   return {
@@ -116,7 +135,7 @@ export const filtroFavoritos = (state: any) => {
 
 export const deleteFavoriteEvent = (id: any, eventid: any) => {
   return async function (dispatch: any) {
-    await axios.put(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
+    await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });

@@ -16,7 +16,9 @@ export interface IActions {
     LOGOUT:string;
     DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
-
+    ADD_FAVORITE_EVENT: string;
+    USER_ASISTIRA_EVENTO: string;
+    DELETE_EVENT:string;
     
 }
 

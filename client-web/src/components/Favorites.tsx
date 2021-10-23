@@ -1,5 +1,5 @@
 import React, { useEffect} from "react";
-import {  getFavorites, } from "../actions/actions";
+import {  getFavorites, deleteFavoriteEvent} from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
 import { useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function Favorites() {
 
     const dispatch = useDispatch()
 
-     const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
+    const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
 
     useEffect(() => {
         dispatch(getFavorites(username));
@@ -44,7 +44,7 @@ export default function Favorites() {
                 </div>
             </div>
             <div>
-               { eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e:any) => (
+            { eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e:any) => (
                 <div className="tarjetaFavoritos">
                     <div>
                         <ImHeart/>
@@ -53,8 +53,8 @@ export default function Favorites() {
                         <h1>{e.nombreDelEvento}</h1>
                     </div>
                     <div>
-                        {/* <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
-                                                dispatch(getFavorites(username)) }}/> */}
+                        <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
+                                                dispatch(getFavorites(username)) }}/>
                     </div>
                 </div>
                 )) : null
