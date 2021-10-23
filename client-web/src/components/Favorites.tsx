@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import { getFavorites, deleteFavoriteEvent } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
-import { useParams } from "react-router-dom";
-import { ImHeart, ImCross } from "react-icons/im";
+import { Link, useParams } from "react-router-dom";
+import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
 import { toast, ToastContainer } from 'react-toastify';
+
+
+
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -38,6 +41,7 @@ export default function Favorites() {
     };
 
 
+
     const eventoQuitado = () => toast.warning('Evento fue eliminado de tus favoritos!', {
         position: "top-center",
         autoClose: 5000,
@@ -55,30 +59,43 @@ export default function Favorites() {
     }
 
 
+
     return (
         <div>
 
             <Nav />
+          <div className="card">
+
+          </div>
+
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
-                    <button onClick={back}>Back</button>
-                    <h1>Favoritos</h1>
+
+                    <h1>Mis Favoritos</h1>
                 </div>
 
             </div>
-            <div className="divMapeoTarjetas">
+
+                        
+
+            <div className="container container-cards">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
-                    <div className="tarjetaFavoritos">
-                        <div>
-                            <ImHeart className="corazao"/>
+
+                    <div className="card col-md-8">
+                        <Link to={`/detail/${e._id}`} className="container container-favorites">
+                            <div className="card-body">
+                                <h4>{e.nombreDelEvento}</h4>
+
+                            </div>
+                        </Link>
+                        <div className="icon">
+                            <ImBin fontSize="1.6em" onClick={() => {
+                                dispatch(deleteFavoriteEvent(authGoo.logNormal.uid, e._id));
+                                dispatch(getFavorites(authGoo.logNormal.uid))
+                            }} />
                         </div>
-                        <div >
-                            <p className="nombreTarjeta">{e.nombreDelEvento}</p>
-                        </div>
-                        <div>
-                            <ImCross className="cruz" onClick={() => {  quitarFavs(authGoo.logNormal.uid,  e._id)}} />
-                        </div>
-                        <ToastContainer
+
+                    <ToastContainer
                 position="top-right"
                 autoClose={1000}
                 hideProgressBar={false}
@@ -89,9 +106,11 @@ export default function Favorites() {
                 draggable
                 pauseOnHover />
                     </div>
+
                 )) : null
                 }
             </div>
+
         </div>
     )
 }

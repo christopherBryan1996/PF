@@ -55,7 +55,7 @@ export const Home = () => {
                                 aria-describedby="basic-addon1"
                                 onChange={handlrOnchange}
                             />
-                            <button className="btn-search">Buscar</button>
+                           
                         </div>
                         <div className="filter container">
 
