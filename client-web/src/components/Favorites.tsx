@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import { getFavorites, deleteFavoriteEvent } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
-import { useParams } from "react-router-dom";
-import { ImHeart, ImCross } from "react-icons/im";
+import { Link, useParams } from "react-router-dom";
+import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
+
+
+
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -36,36 +39,45 @@ export default function Favorites() {
         history.goBack()
     };
 
+
     return (
         <div>
 
             <Nav />
+          <div className="card">
+
+          </div>
+
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
-                    <button onClick={back}>Back</button>
-                    <h1>Favoritos</h1>
+
+                    <h1>Mis Favoritos</h1>
                 </div>
 
             </div>
-            <div>
+            <div className="container container-cards">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
-                    <div className="tarjetaFavoritos">
-                        <div>
 
-                        </div>
-                        <div>
-                            <h1>{e.nombreDelEvento}</h1>
-                        </div>
-                        <div>
-                            <ImCross onClick={() => {
+                    <div className="card col-md-8">
+                        <Link to={`/detail/${e._id}`} className="container container-favorites">
+                            <div className="card-body">
+                                <h4>{e.nombreDelEvento}</h4>
+
+                            </div>
+                        </Link>
+                        <div className="icon">
+                            <ImBin fontSize="1.6em" onClick={() => {
                                 dispatch(deleteFavoriteEvent(authGoo.logNormal.uid, e._id));
                                 dispatch(getFavorites(authGoo.logNormal.uid))
                             }} />
                         </div>
+
                     </div>
+
                 )) : null
                 }
             </div>
+
         </div>
     )
 }
