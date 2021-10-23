@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { getEvent, userAsistiraEvento } from "../actions/actions"
 import Mapa1evento from "./Mapa1evento";
 import { ToastContainer, toast } from 'react-toastify';
+import { Nav } from "./Nav";
+import Foot from "./Foot";
 
 
 
@@ -69,7 +71,42 @@ export default function EventDetails() {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover />
-            <div className="card card-details ">
+
+            <Nav />
+
+            <div className="card-contai">
+
+                <div className="card " >
+
+                    <h3 className="card-title">{evento.nombreDelEvento}</h3>
+
+                </div>
+                <div className="card">
+                <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="300" width="00" />
+                </div>
+                <div className="card container-card-detail" >
+                <p>Hora: <span>{evento.horaDeInicio}</span>  </p> 
+                <p>Ubicacion: <span>{evento.direccion}</span>  </p>
+                <p>Asistentes: <span>{evento.asistentes.length}</span></p>
+                <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
+                    <p>Publico: <span>{final}</span></p>
+                   
+                </div>
+                <div className="card" >
+
+
+                </div>
+                <Foot />
+            </div>
+
+
+
+
+
+
+
+
+            {/* <div className="card card-details ">
 
                 <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
                 <div className="card-body">
@@ -100,10 +137,13 @@ export default function EventDetails() {
             <div className="card-details ">
 
                 {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
-                <div >
+            {/* <div >
                     <Mapa1evento />
-                </div>
-            </div>
+                </div> */}
+            {/* </div> */}
+
+
+            {/* } */}
 
         </div>
     ) : null
