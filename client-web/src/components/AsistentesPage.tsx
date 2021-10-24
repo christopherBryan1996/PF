@@ -11,29 +11,25 @@ export default function AsistentesPage( ): JSX.Element {
   const { eventid, uid }: { eventid: string; uid: string } =
     useParams();
 
-  const { authGoo } = useSelector((state: any) => state);
+  const { authGoo, eventos } = useSelector((state: any) => state);
 
   const dispatch: any = useDispatch();
 
   useEffect(() => dispatch(getAsistentes(eventid)), []);
   
-  const { asistentesEvento } : { asistentesEvento: [] } = useSelector(
-    (state: any) => state.eventos
-  );
-
   //verifico que el usuario logueado coincida con el autor del evento
   return authGoo.logNormal && uid === authGoo.logNormal.uid ? (
     <div className="containerAsistentes">
       <h2>Lista de Asistentes</h2>
       <Nav />
       <div className="container p-4">
-        {asistentesEvento && asistentesEvento.length ? (
-          asistentesEvento.map((asist: Iasistentes) => (
+        {eventos.asistentesEvento && eventos.asistentesEvento.length ? (
+          eventos.asistentesEvento.map((asist: Iasistentes) => (
             <div key={asist.usuario} className="card card-body mt-2">
               <Asistente
                 eventId={eventid}
                 usuario={asist.usuario.usuario}
-                userId={asist.usuario._id}
+                userId={asist.usuario[0]}
                 tareasDelUsuario={asist.tareasDelUsuario}
               />
             </div>
