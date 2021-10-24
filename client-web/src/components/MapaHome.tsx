@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { llenarCoordenadas } from '../actions/actions';
 import { connect, useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../actions/actions"
+import {Link} from 'react-router-dom';
 
 
 function MapaHome(props: any) {
@@ -70,11 +71,12 @@ function MapaHome(props: any) {
             key={index}
             eventHandlers={{
               click: (e) => {
-                alert("esto redireccionara al detalle del evento")
+                console.log("tocaste el popup")
               }
             }}>
             <Popup>
               {e.nombreDelEvento}
+              <Link to={`/detail/${e._id}`}>Vea los detalles del evento</Link>
             </Popup>
           </Marker>
           : null))}

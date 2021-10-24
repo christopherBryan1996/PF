@@ -64,7 +64,7 @@ export const Nav = () => {
     <nav className="navbar navbar-dark bg-dark fixed-top">
       <div className="container">
         <a className="navbar-brand">
-          <img onClick={home} src={logo} alt="" width="240" height="70" />
+          <img onClick={home} src={logo} alt="" width="240" height="65" />
         </a>
        
 
@@ -75,7 +75,7 @@ export const Nav = () => {
               <ImHeart color="white" fontSize="1.6em" />
              <Notificacion />
             </a>
-            <a href="">
+            <a href= {`/home/usuario/${authGoo.logNormal.uid}`} >
               <img src={avatar} alt="" width="50" height="50" />
             </a>
             <a onClick={handleLogout}>

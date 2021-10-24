@@ -15,20 +15,23 @@ export const Evento = (props: Iprops) => {
     const { fecha, imagen, nombreDelEvento, _id }: Iprops = props
     const { uid } = useSelector((state: any) => state.authGoo.logNormal);
     const dispatch = useDispatch();
+    
+    const eventoAgregado = () => toast.success('Evento agregado con exito!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     const agregarAfavoritos = () => {
-        dispatch(addFavoriteEvent(uid, _id))
+        dispatch(addFavoriteEvent(uid, _id));
+        eventoAgregado();
     };
 
-    // const contraseñaIncorrecta = () => toast.error('La contraseña debe tener mas de 6 caracteres y contener 1 numero!', {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    // });
+    
 
     return (
         <>
@@ -48,7 +51,7 @@ export const Evento = (props: Iprops) => {
                     </div>
 
                 </div>
-                {/* <ToastContainer
+                <ToastContainer
                 position="top-right"
                 autoClose={1000}
                 hideProgressBar={false}
@@ -57,7 +60,7 @@ export const Evento = (props: Iprops) => {
                 rtl={false}
                 pauseOnFocusLoss
                 draggable
-                pauseOnHover /> */}
+                pauseOnHover />
             </div>
 
         </>
