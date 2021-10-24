@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Iasistentes } from "../interfaces/interfaces";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
 import {
   agregarTarea,
   eliminarTarea,
@@ -16,9 +18,17 @@ export default function Asistente(props: Iasistentes): JSX.Element {
   const [tareasVisibles, setTareasVisibles] = useState(false);
   const dispatch: any = useDispatch();
 
+  const { authGoo, socketIO } = useSelector((state: any) => state);
+
   const handleSubmit = (e: FormElement): void => {
     e.preventDefault();
-    agregarTarea(nuevaTarea, props.usuario, props.id, dispatch);
+    socketIO.socket &&
+    agregarTarea(nuevaTarea, 
+      authGoo.logNormal.uid, 
+      props.userId, 
+      props.eventId, 
+      dispatch, 
+      socketIO.socket);
     setNuevaTarea("");
   };
 
@@ -41,7 +51,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
             </button>
             <button
               onClick={() =>
-                eliminarAsistente(props.usuario, props.id, dispatch)
+                eliminarAsistente(props.userId, props.eventId, dispatch, socketIO.socket)
               }
               type="button"
               className="btn btn-outline-danger"
@@ -55,9 +65,9 @@ export default function Asistente(props: Iasistentes): JSX.Element {
                 <div className="card card-body mt-2" key={idx}>
                   <p>{tarea}</p>
                   <button
-                    onClick={() =>
-                      eliminarTarea(tarea, props.usuario, props.id, dispatch)
-                    }
+                    // onClick={() =>
+                    //   eliminarTarea(tarea, props.usuario, props.id, dispatch, props.socket)
+                    // }
                     type="button"
                     className="btn btn-outline-danger"
                   >

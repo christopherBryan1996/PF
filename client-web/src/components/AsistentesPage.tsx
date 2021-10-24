@@ -7,20 +7,22 @@ import Asistente from "./Asistente";
 import { Iasistentes } from "../interfaces/interfaces";
 import "./styles/AsistentesPage.css";
 
-export default function AsistentesPage(): JSX.Element {
-  const { eventid, username }: { eventid: string; username: string } =
+export default function AsistentesPage( ): JSX.Element {
+  const { eventid, uid }: { eventid: string; uid: string } =
     useParams();
-  const { name } = useSelector((state: any) => state.authGoo.logNormal);
+
+  const { authGoo } = useSelector((state: any) => state);
+
   const dispatch: any = useDispatch();
 
   useEffect(() => dispatch(getAsistentes(eventid)), []);
-
-  const { asistentesEvento }: { asistentesEvento: [] } = useSelector(
+  
+  const { asistentesEvento } : { asistentesEvento: [] } = useSelector(
     (state: any) => state.eventos
   );
 
   //verifico que el usuario logueado coincida con el autor del evento
-  return name && username === name ? (
+  return authGoo.logNormal && uid === authGoo.logNormal.uid ? (
     <div className="containerAsistentes">
       <h2>Lista de Asistentes</h2>
       <Nav />
@@ -29,8 +31,9 @@ export default function AsistentesPage(): JSX.Element {
           asistentesEvento.map((asist: Iasistentes) => (
             <div key={asist.usuario} className="card card-body mt-2">
               <Asistente
-                id={eventid}
-                usuario={asist.usuario}
+                eventId={eventid}
+                usuario={asist.usuario.usuario}
+                userId={asist.usuario._id}
                 tareasDelUsuario={asist.tareasDelUsuario}
               />
             </div>

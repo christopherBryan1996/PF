@@ -19,13 +19,16 @@ export interface IActions {
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
     DELETE_EVENT:string;
+
+    SOCKET_IO_CONFIG: string;
     
 }
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
-    id: string
-    usuario: string;
+    eventId: string
+    usuario: any;
+    userId: string;
     tareasDelUsuario: string[];
 }
 

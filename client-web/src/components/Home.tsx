@@ -15,18 +15,13 @@ export const Home = () => {
     const crearEvento = () => {
         history.push("/NewEvent")
     };
-
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
     }, []);
 
-
     const { eventos } = useSelector((state: any) => state.eventos)
     console.log("eventos", eventos)
-
-
 
     function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
@@ -35,8 +30,6 @@ export const Home = () => {
     return (
 
         <div>
-
-
             <Nav />
             <div className="container">
 
