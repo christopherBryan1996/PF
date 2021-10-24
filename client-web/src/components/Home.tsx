@@ -97,7 +97,7 @@ export const Home = () => {
                     }
                 }).map((i: any) => (
 
-                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento}  />
 
                 ))
                 }

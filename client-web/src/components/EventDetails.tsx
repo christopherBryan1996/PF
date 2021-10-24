@@ -92,9 +92,8 @@ export default function EventDetails() {
                     <p>Publico: <span>{final}</span></p>
                    
                 </div>
-                <div className="card" >
-
-
+                <div className="card-contai2" >
+                    <Mapa1evento/>
                 </div>
                 <Foot />
             </div>
