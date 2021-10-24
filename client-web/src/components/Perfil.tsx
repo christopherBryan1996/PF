@@ -26,18 +26,19 @@ export default function  Perfil():JSX.Element {
     return eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ? (
         <div>
         <div className="divDelNav"><Nav></Nav></div>
-        <div>{username}</div>
-        <div>{uid}</div>
-        <div>{eventosUsuario.createdEvents[0].nombreDelEvento}</div>
+        <div className="perfil">Mis eventos</div>
+        
+       
+        
         <div>
             {eventosUsuario.createdEvents.map((i:{
     _id: string;
     nombreDelEvento:string;
     
 })=>(
-
+    <div>
             <BarritaEventos id={i._id} nombreDelEvento={i.nombreDelEvento} uid={uid}/>
-            
+            <br /></div>
             ))}
         </div>
         </div>
