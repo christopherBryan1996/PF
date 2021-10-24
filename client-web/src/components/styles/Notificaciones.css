@@ -1,0 +1,26 @@
+.notificaciones {
+    display: flex;
+}
+.buttonNotif{
+    background-color: transparent;
+    border:none;
+    position: relative;
+}
+
+.buttonNotif:focus{
+    outline: none;
+}
+.contador {
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border-radius: 14px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 5px;
+    top:2px;
+    color:white;
+}

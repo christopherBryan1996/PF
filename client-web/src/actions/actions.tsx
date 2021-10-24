@@ -1,6 +1,8 @@
 import axios from "axios";
 import actions from "../actions_type/actions_types";
 import URLrequests from "../components/constanteURL";
+import socketIOClient from "socket.io-client";
+
 
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
@@ -54,8 +56,7 @@ export const filtroPrecio = (state: any) => {
 };
 
 export const getAsistentes = (id: string) => {
-
-  return async function (dispatch: any) {
+ return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events/assistans/${id}`);
     dispatch({
       type: actions.GET_ASISTENTES,
@@ -142,5 +143,16 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
   }
 }
 
+
+export const socketConfig = (uid: string, usuario: string) => {
+  const socket = socketIOClient(URLrequests)
+  socket.emit("newUser", uid, usuario);
+  return function (dispatch: any) {
+    dispatch({
+      type: actions.SOCKET_IO_CONFIG,
+      payload: socket
+    });
+  }
+}
 
 
