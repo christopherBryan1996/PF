@@ -15,10 +15,8 @@ import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../actions/actions';
-
+import { login, socketConfig } from '../actions/actions';
 import Favorites from '../components/Favorites';
-
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import MercadoPago from '../components/MercadoPago';
@@ -57,6 +55,11 @@ export const AppRouter = () => {
 
     }, [dispatch, setChecking])
 
+    //conexion a SocketIo------------------------------------------
+    const { authGoo } = useSelector((state: any) => state);
+    useEffect(():any => {
+        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
+      }, [])
 
     if (cheking) {
         return (
@@ -84,9 +87,8 @@ export const AppRouter = () => {
                         component={LandingPage} />
                     <PublicRoute
                         exact path="/home"
-
-                        component={Home} />
-
+                        component={Home}
+                    />
                     <PublicRoute
                         exact path="/about"
                         component={About} />
@@ -116,9 +118,10 @@ export const AppRouter = () => {
                         isAuthenticated={isAuthenticated}
                         component={ModificarUser} />
                     <PrivateRoute
-                        exact path="/asistentes/:username/:eventid"
+                        exact path="/asistentes/:uid/:eventid"
                         isAuthenticated={isAuthenticated}
-                        component={AsistentesPage} />
+                        component={AsistentesPage}/>
+                        
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
             </div>

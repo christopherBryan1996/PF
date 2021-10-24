@@ -7,18 +7,17 @@ import avatar from "../images/user.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../actions/actions";
-
+import { Notificacion } from "./Notificaciones";
 import { getAuth, onAuthStateChanged,signOut } from "firebase/auth";
 
 export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
-
   const { authGoo } = useSelector((state: any) => state);
-
   const [logins, setIsLoggedIn] = useState(false);
-
+  
   useEffect(() => {
+ 
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         const datos = {
@@ -74,6 +73,7 @@ export const Nav = () => {
             <a onClick={favorites}>
               {" "}
               <ImHeart color="white" fontSize="1.6em" />
+             <Notificacion />
             </a>
             <a href= {`/home/usuario/${authGoo.logNormal.uid}`} >
               <img src={avatar} alt="" width="50" height="50" />
