@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { llenarCoordenadas } from '../actions/actions';
 import { connect, useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../actions/actions"
+import {Link} from 'react-router-dom';
 
 
 function MapaHome(props: any) {
 
-  //-estados------------------------------------------------------
-  const [coordenadas, setCoordenadas] = useState<[number, number]>([0, 0]);
+
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -26,19 +26,27 @@ function MapaHome(props: any) {
 
 
   //funcion que centra el mapa cuando haces click-------------------------------------------------------------
-
+  const [zoom, setZoom] = useState<number>(1);
+  const [position, setPosition] = useState<[number, number]>([0, 0]);
   const LocationMarker = () => {
-    const [position, setPosition] = useState<[number, number]>([0, 0]);
+
+
     const map = useMapEvents({
+
       click() {
+        setZoom(13)
+        console.log('zoom:', zoom)
         map.locate()
       },
       locationfound(e) {
+
+
         setPosition([
           e.latlng.lat,
           e.latlng.lng
         ])
-        map.flyTo(e.latlng, map.getZoom())
+        map.flyTo(e.latlng, zoom)
+
       },
     })
 
@@ -51,24 +59,24 @@ function MapaHome(props: any) {
   return (
 
     <div className="mapa">
-      <div> <h5>Para revisar eventos cercanos a tu ubicacion, da click en el mapa y listo!</h5>
-     </div>
-     
-      <MapContainer center={[-16.004715, -59.313538]} zoom={3}   >
+
+      <MapContainer center={position} zoom={zoom}   >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         {eventos.map((e: any, index: any) => (e.coordenadas ?
           <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}
             key={index}
             eventHandlers={{
               click: (e) => {
-                alert("esto redireccionara al detalle del evento")
+                console.log("tocaste el popup")
               }
             }}>
             <Popup>
               {e.nombreDelEvento}
+              <Link to={`/detail/${e._id}`}>Vea los detalles del evento</Link>
             </Popup>
           </Marker>
           : null))}

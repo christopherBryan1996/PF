@@ -4,18 +4,21 @@ import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
-
 import { getEvents, filtroPrecio } from "../actions/actions"
+import React, { useEffect, useState } from "react";
 
-import { useEffect } from "react";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
-    
+
+    const [search, setSearch] = useState('')
+    const { eventos } = useSelector((state: any) => state.eventos)
+   
+
     const history = useHistory();
     const crearEvento = () => {
-        history.push("/NewEvent")};
-
+        history.push("/NewEvent")
+    };
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -23,42 +26,78 @@ export const Home = () => {
     }, []);
 
 
-    const { eventos } = useSelector((state: any) => state.eventos)
-    console.log("eventos", eventos)
-
-
-
     function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
     }
 
+    const handlrOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+        console.log(search)
+    }
+
+
     return (
 
         <div>
+
+
             <Nav />
-            <div className="filter container">
+            <div className="container">
 
-                <select className="form-select form-select-lg border" aria-label="Default select example" onChange={change}>
-                    <option selected>Filtrar por precio</option>
-                    <option value="1">Gratis</option>
-                    <option value="2">Pago</option>
-                    <option value="3">Menor a mayor</option>
-                    <option value="4">Mayor a menor</option>
-                </select>
+                <div className="container ">
+                    <div className="container-map-btn">
+                        <div className="container-search">
+                            <input
+                                type="text"
+                                className="form-control search col-md-3"
+                                placeholder="Buscar evento..."
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                                onChange={handlrOnchange}
+                            />
+                           
+                        </div>
+                        <div className="filter container">
 
-                <button onClick={crearEvento} className="btn btn-light">Crea tu evento</button>
+                            <select className=" select-home" onChange={change} >
+                                <option selected>Filtrar por precio</option>
+                                <option value="1">Gratis</option>
+                                <option value="2">Pago</option>
+                                <option value="3">Menor a mayor</option>
+                                <option value="4">Mayor a menor</option>
+                            </select>
+
+                            <button onClick={crearEvento} className="btn btn-light col-md-3 ">Crea tu evento</button>
+
+                        </div>
+                        <div className="container container-map">
+                            <div className="conta">
+                                <h5>Para revisar los eventos cercanos a tu ubicacion, da click en el mapa y listo</h5>
+                            </div>
+                            <div className="conta">
+                                <MapaHome />
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
 
             </div>
 
-            <div>
-                <MapaHome />
-            </div>
 
             <div className=" container-home">
 
-                {eventos.map((i: any) => (
+                {eventos.filter((val: any)=>{
+                    if(search === ''){
+                        return val
+                    }else if(val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())){
+                        return val
+                    }
+                }).map((i: any) => (
 
-                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} />
+                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento}  />
 
                 ))
                 }
