@@ -18,17 +18,17 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
             <div className="barra">
             <span>{nombreDelEvento} </span>
             <Link to="/home">
-            <span><FiEdit2 color="blue" size="2em"/></span>
+            <span><FiEdit2 className="icons"/></span>
             </Link>
 
             {/* <Link to={`/${props.username}/${props.eventid}`}> */}
 
             <Link to={`/asistentes/${uid}/${id}`}>
-            <span><FaUserFriends color="blue" size="2em"/></span>
+            <span><FaUserFriends className="icons"/></span>
             </Link>
 
 
-            <button onClick={()=>deleteEvent(uid,id,dispatch)}><BsFillTrashFill color="blue" size="2em"  /></button>
+            <button className="boton" onClick={()=>deleteEvent(uid,id,dispatch)}><BsFillTrashFill className="icons"  /></button>
 
             </div>
             
