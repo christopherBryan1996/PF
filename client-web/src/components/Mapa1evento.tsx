@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
-import "./styles/MapaHome.css";
+import "./styles/Mapa1evento.css";
 import {useState, useEffect} from "react";
 import {llenarCoordenadas} from '../actions/actions';
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -22,24 +22,11 @@ function Mapa1evento(props:any ) {
     dispatch(getEvent(path));
     }, []);
 
-
-  
-  
-  //funcion para marcar en el mapa (se usa como componente en el return del componente)-----------------------------------------
-
-  
-
-
-
-
-
-
-
     //Return del componente-------------------------------------------------------
     return  evento.imagen ? (
         
-        <div className="mapa">
-        <MapContainer center={[evento.coordenadas.lat, evento.coordenadas.lng]} zoom={13}  >
+        <div className="mapa" id="mapid">
+        <MapContainer center={[evento.coordenadas.lat, evento.coordenadas.lng]} zoom={2}  >
         <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -58,7 +45,7 @@ function Mapa1evento(props:any ) {
           </Popup>
       </Marker>
                 
-    
+     
     </MapContainer>
     </div>
     
