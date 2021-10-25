@@ -6,16 +6,16 @@ import { addFavoriteEvent } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
 
 
-interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string }
+interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string, precio: number }
 
 
 export const Evento = (props: Iprops) => {
 
 
-    const { fecha, imagen, nombreDelEvento, _id }: Iprops = props
+    const { fecha, imagen, nombreDelEvento, _id, precio }: Iprops = props
     const { authGoo } = useSelector((state: any) => state);
     const dispatch = useDispatch();
-    
+
     const eventoAgregado = () => toast.success('Evento agregado con exito!', {
         position: "top-center",
         autoClose: 5000,
@@ -28,11 +28,9 @@ export const Evento = (props: Iprops) => {
 
     const agregarAfavoritos = () => {
         authGoo.logNormal &&
-        dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
+            dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
         eventoAgregado();
     };
-
-    
 
     return (
         <>
@@ -44,6 +42,15 @@ export const Evento = (props: Iprops) => {
                         <div className="card-body">
                             <p className="card-text">{fecha.slice(0, 10)}</p>
                             <h5 className="card-title">{nombreDelEvento}</h5>
+
+                            {
+                                (precio === 0
+                                    ?
+                                    <p className="card-text">Gratis</p>
+                                    :
+                                    <p className="card-text">Valor:  ${precio}</p>
+                                )
+                            }
                         </div>
                     </Link>
                     <div className="card-footer">
@@ -53,15 +60,15 @@ export const Evento = (props: Iprops) => {
 
                 </div>
                 <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover />
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
 
         </>

@@ -8,11 +8,12 @@
     padding-left: 180px;
     padding-right: 180px;
 }
-.cars-contai2{
-    margin-top: 130px;
-    
-    padding-left: 180px;
-    padding-right: 180px;
+.card-contai2{
+    margin-top:30px;   
+    box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+-webkit-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+-moz-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+border-radius: 8px;
 }
 .container-card-detail{
 
@@ -39,11 +40,10 @@
 
 .card {
     margin-top: 25px;
-    box-shadow: 2px 4px 10px 6px rgb(0 0 0 / 75%);
-    -webkit-box-shadow: 2px 4px 10px 6px rgb(0 0 0 / 75%);
-    -moz-box-shadow: 2px 4px 10px 6px rgba(0,0,0,0.75);
-    justify-content: space-around;
-    align-items: center;
+    box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    -webkit-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    border-radius: 8px;
 
 }
 .conta{   

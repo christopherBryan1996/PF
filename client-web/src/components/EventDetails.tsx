@@ -97,9 +97,11 @@ export default function EventDetails() {
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
                 </button>
+               
                 <div className="card-contai2" >
                     <Mapa1evento/>
                 </div>
+             
                 <Foot />
             </div>
 

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BarritaEventos from './BarritaEventos'
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
@@ -27,7 +27,9 @@ export default function Perfil(): JSX.Element {
         <div>
             <div className="divDelNav"><Nav></Nav></div>
             <div className="perfil">Mis eventos</div>
-
+            <Link to={`/modificarUser/${authGoo.logNormal}`}>
+            <button className="modPerfil">Editar mi perfil</button>
+            </Link>
             {eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ?
                 <div>
                     {eventosUsuario.createdEvents.map((i: {

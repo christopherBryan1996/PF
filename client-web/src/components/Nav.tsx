@@ -70,14 +70,17 @@ export const Nav = () => {
 
         {logins ? (
           <div className="fff">
+            <div className="fav">
             <a onClick={favorites}>
               {" "}
-              <ImHeart color="white" fontSize="1.6em" />
+              <ImHeart color="white" fontSize="1.6em"/>
             </a>
+            </div>
             <Notificacion />
             <a href= {authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`} >
-              <img src={avatar} alt="" width="50" height="50" />
+              <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="50" height="50" />
             </a>
+            <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
             <a onClick={handleLogout}>
               <ImExit fontSize="1.3em" />
             </a>
