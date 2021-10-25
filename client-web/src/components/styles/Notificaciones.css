@@ -1,5 +1,7 @@
 .notificaciones {
-    display: flex;
+   
+    width:  40px;
+    margin-right:  0;
 }
 .buttonNotif{
     background-color: transparent;
