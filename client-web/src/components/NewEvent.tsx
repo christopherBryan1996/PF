@@ -49,7 +49,7 @@ export default function NewEvent() {
     };
 
 
-    const {uid}=useSelector((state:any)=>state.authGoo.logNormal)
+    const {authGoo}=useSelector((state:any)=>state)
     
 
     //Funcion para enviar el post del form----------------------------------------------------------------
@@ -78,7 +78,7 @@ export default function NewEvent() {
             nombreDelEvento: nameEvent,
             direccion: ubicacion,
             horaDeInicio: "20:30",
-            autor: uid,
+            autor: authGoo.logNormal.uid,
             publico: publicVar,
             invitados: numeroPersonas,
             precio,

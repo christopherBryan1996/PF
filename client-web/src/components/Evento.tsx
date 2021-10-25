@@ -13,7 +13,7 @@ export const Evento = (props: Iprops) => {
 
 
     const { fecha, imagen, nombreDelEvento, _id }: Iprops = props
-    const { uid } = useSelector((state: any) => state.authGoo.logNormal);
+    const { authGoo } = useSelector((state: any) => state);
     const dispatch = useDispatch();
     
     const eventoAgregado = () => toast.success('Evento agregado con exito!', {
@@ -27,7 +27,8 @@ export const Evento = (props: Iprops) => {
     });
 
     const agregarAfavoritos = () => {
-        dispatch(addFavoriteEvent(uid, _id));
+        authGoo.logNormal &&
+        dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
         eventoAgregado();
     };
 
