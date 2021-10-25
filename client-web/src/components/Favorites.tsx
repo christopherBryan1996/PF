@@ -7,6 +7,8 @@ import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
 import { Nav } from "./Nav";
 import { toast, ToastContainer } from 'react-toastify';
+import axios from "axios";
+import URLrequests from "./constanteURL";
 
 
 
@@ -52,11 +54,18 @@ export default function Favorites() {
         progress: undefined,
     });
 
-    const quitarFavs = (userID:any, eventID:any) => {
-        dispatch(deleteFavoriteEvent(userID,eventID));
-        dispatch(getFavorites(userID));
+    // const quitarFavs = (userID:any, eventID:any) => {
+    //     dispatch(deleteFavoriteEvent(userID,eventID));
+    //     dispatch(getFavorites(userID));
+        
+    // }
+
+    const  deleteFavoriteEvent = async (id: any, eventid: any) => {
+        await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
+        dispatch(getFavorites(authGoo.logNormal.uid));
         eventoQuitado();
     }
+
 
 
 
@@ -89,10 +98,7 @@ export default function Favorites() {
                             </div>
                         </Link>
                         <div className="icon">
-                            <ImBin fontSize="1.6em" onClick={() => {
-                                dispatch(deleteFavoriteEvent(authGoo.logNormal.uid, e._id));
-                                dispatch(getFavorites(authGoo.logNormal.uid))
-                            }} />
+                            <ImBin fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
                         </div>
 
                     <ToastContainer
