@@ -52,6 +52,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
             <button 
               onClick={() =>
                 eliminarAsistente(props.userId,
+                  authGoo.logNormal.name,
                    props.eventId, 
                    dispatch, 
                    socketIO.socket)
@@ -69,7 +70,8 @@ export default function Asistente(props: Iasistentes): JSX.Element {
                   <p>{tarea}</p>
                   <button
                     onClick={() =>
-                      eliminarTarea(tarea, 
+                      eliminarTarea(tarea,
+                        authGoo.logNormal.name, 
                         props.userId, 
                         props.eventId, 
                         dispatch, 
