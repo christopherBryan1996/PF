@@ -24,7 +24,7 @@ export const Home = () => {
         dispatch(getEvents());
     }, []);
 
-     function change(e: any) {
+    function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
     }
 
@@ -34,7 +34,7 @@ export const Home = () => {
     }
 
 
-  
+
 
 
 
@@ -47,29 +47,29 @@ export const Home = () => {
                 <div className="container ">
                     <div className="container-map-btn">
                         <div className="container-search">
-                            <input
-                                type="text"
-                                className="form-control search col-md-3"
-                                placeholder="Buscar evento..."
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                                onChange={handlrOnchange}
-                            />
-                           
+
+                            <div className="filter container">
+                                <select className=" select-home" onChange={change} >
+                                    <option selected>Filtrar por precio</option>
+                                    <option value="1">Gratis</option>
+                                    <option value="2">Pago</option>
+                                    <option value="3">de Menor a mayor precio </option>
+                                    <option value="4">de Mayor a menor precio</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    className="form-control search col-md-3"
+                                    placeholder="Buscar evento..."
+                                    aria-label="Username"
+                                    aria-describedby="basic-addon1"
+                                    onChange={handlrOnchange}
+                                />
+                                <button onClick={crearEvento} className="btn btn-light col-md-3 ">Crea tu evento</button>
+
+
+                            </div>
                         </div>
-                        <div className="filter container">
 
-                            <select className=" select-home" onChange={change} >
-                                <option selected>Filtrar por precio</option>
-                                <option value="1">Gratis</option>
-                                <option value="2">Pago</option>
-                                <option value="3">Menor a mayor</option>
-                                <option value="4">Mayor a menor</option>
-                            </select>
-
-                            <button onClick={crearEvento} className="btn btn-light col-md-3 ">Crea tu evento</button>
-
-                        </div>
                         <div className="container container-map">
                             <div className="conta">
                                 <h5>Para revisar los eventos cercanos a tu ubicacion, da click en el mapa y listo</h5>
@@ -89,15 +89,15 @@ export const Home = () => {
 
             <div className=" container-home">
 
-                {eventos.filter((val: any)=>{
-                    if(search === ''){
+                {eventos.filter((val: any) => {
+                    if (search === '') {
                         return val
-                    }else if(val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())){
+                    } else if (val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())) {
                         return val
                     }
                 }).map((i: any) => (
 
-                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento}  />
+                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} />
 
                 ))
                 }

@@ -6,13 +6,13 @@ import { addFavoriteEvent } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
 
 
-interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string }
+interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string, precio: number }
 
 
 export const Evento = (props: Iprops) => {
 
 
-    const { fecha, imagen, nombreDelEvento, _id }: Iprops = props
+    const { fecha, imagen, nombreDelEvento, _id, precio }: Iprops = props
     const { authGoo } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ export const Evento = (props: Iprops) => {
 
     const agregarAfavoritos = () => {
         authGoo.logNormal &&
-        dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
+            dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
         eventoAgregado();
     };
 
@@ -42,6 +42,15 @@ export const Evento = (props: Iprops) => {
                         <div className="card-body">
                             <p className="card-text">{fecha.slice(0, 10)}</p>
                             <h5 className="card-title">{nombreDelEvento}</h5>
+
+                            {
+                                (precio === 0
+                                    ?
+                                    <p className="card-text">Gratis</p>
+                                    :
+                                    <p className="card-text">Valor:  ${precio}</p>
+                                )
+                            }
                         </div>
                     </Link>
                     <div className="card-footer">
