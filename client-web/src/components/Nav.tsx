@@ -76,7 +76,7 @@ export const Nav = () => {
               <ImHeart color="white" fontSize="1.6em"/>
             </a>
             </div>
-            <Notificacion />
+            {/* <Notificacion /> */}
             <a href= {authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`} >
               <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="50" height="50" />
             </a>

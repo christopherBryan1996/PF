@@ -16,7 +16,9 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
     return(
         <div>
             <div className="barra">
+            <Link to={`/detail/${id}`}>
             <span>{nombreDelEvento} </span>
+            </Link>
             {/* <Link to="/home">
             <span><FiEdit2 className="icons"/></span>
             </Link> */}

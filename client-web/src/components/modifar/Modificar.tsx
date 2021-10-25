@@ -7,10 +7,14 @@ import './css/sourcesanspro-font.css'
 import image from './images/form-v8.jpg'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import { loginNormal } from '../../actions/actions'
+import { useDispatch, useSelector } from "react-redux";
 
 export const ModificarUser=()=>{
     //traemos lo que este en id del params
     const {id}= useParams() as any
+    const {authGoo}=useSelector((state:any)=>state);
+    const dispatch = useDispatch();
     //creamos un estado de objetos
     const [state, setstate] = useState({
         name:'',
@@ -19,6 +23,15 @@ export const ModificarUser=()=>{
     })
     //mensajes
     const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const exitoso = () => toast.success('Cambio exitoso!', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -73,7 +86,8 @@ export const ModificarUser=()=>{
         //funcion para cambios
         async function echo(){
             await axios.put(`https://api-fest.herokuapp.com/api/users/edit/${id}`,{name:state.name,password:state.password})
-            alert('exitoso')
+            dispatch(loginNormal({email: authGoo.logNormal.email, password: state.password}))
+            exitoso()
         } 
        
         echo()
