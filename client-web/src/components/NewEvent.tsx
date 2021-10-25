@@ -22,6 +22,7 @@ export default function NewEvent() {
     const [descripcion, setDescripcion] = useState("");
     const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
     const [file, setFile] = useState(null || "")
+    const [creando, setCreando] = useState(false);
 
     const eventoCreado = () => toast.success('El evento fue creado con exito', {
         position: "top-center",
@@ -65,13 +66,16 @@ export default function NewEvent() {
     const handleSubmit = async (e: any) => {
 
         e.preventDefault();
+        
 
         if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent) { return faltanCasillas() }
+        setCreando(true);
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
         if (publicoOPriv === "false") publicVar = false;
 
         const url = await fileUpload(file)
+        
 
 
         const post:any = {
@@ -93,10 +97,19 @@ export default function NewEvent() {
         async function fetchPost(data: object) {
             try {
                 const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
-                console.log("data",data)
+                console.log("data",data);
+                
                 if (data.message === 'Evento creado') {
 
                     eventoCreado();
+                    setNameEvent("");
+                    setUbicacion("");
+                    setNumeroPersonas(0);
+                    setPrecio(0);
+                    setFecha("");
+                    setDescripcion("");
+                    setCreando(false);
+
                 } else {
                     faltanCasillas();
                 }
@@ -197,7 +210,9 @@ export default function NewEvent() {
                                 ></textarea>
                             </div>
                             <div className="form-group col-md-11">
-                                <button className="btn btn-success col-md-12  btn-lg">Crear evento</button>
+                                {creando && <button disabled className="btn btn-success col-md-12  btn-lg">Creando evento</button>}
+                                {!creando && <button className="btn btn-success col-md-12  btn-lg">Crear evento</button>}
+                                
                             </div>
                         </form>
                     </div>
