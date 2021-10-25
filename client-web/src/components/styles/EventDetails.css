@@ -53,6 +53,13 @@ border-radius: 8px;
 }
 
 
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;;
+}
+
 .container-card {
     margin-left: 18px;
     margin-top: 15px;
