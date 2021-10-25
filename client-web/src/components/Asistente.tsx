@@ -22,8 +22,9 @@ export default function Asistente(props: Iasistentes): JSX.Element {
 
   const handleSubmit = (e: FormElement): void => {
     e.preventDefault();
-     agregarTarea(nuevaTarea, 
-      authGoo.logNormal.name,
+    socketIO.socket &&
+    agregarTarea(nuevaTarea, 
+      authGoo.logNormal.uid, 
       props.userId, 
       props.eventId, 
       dispatch, 
@@ -34,15 +35,14 @@ export default function Asistente(props: Iasistentes): JSX.Element {
   const desplegarTareas = (): void => {
     setTareasVisibles(!tareasVisibles);
   };
-  console.log(props.usuario)
 
-  return ( 
+  return (
     <div className="container p-4">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card-name">
-            {props.usuario}
-                   <button
+            {props.userId} // cambiar por usuario
+            <button
               onClick={desplegarTareas}
               type="button"
               className="btn btn-outline-success"
@@ -51,11 +51,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
             </button>
             <button 
               onClick={() =>
-                eliminarAsistente(props.userId,
-                  authGoo.logNormal.name,
-                   props.eventId, 
-                   dispatch, 
-                   socketIO.socket)
+                eliminarAsistente(props.userId, props.eventId, dispatch, socketIO.socket)
               }
               type="button"
               className="btn btn-outline-danger"
@@ -69,14 +65,9 @@ export default function Asistente(props: Iasistentes): JSX.Element {
                 <div className="card card-body mt-2" key={idx}>
                   <p>{tarea}</p>
                   <button
-                    onClick={() =>
-                      eliminarTarea(tarea,
-                        authGoo.logNormal.name, 
-                        props.userId, 
-                        props.eventId, 
-                        dispatch, 
-                        socketIO.socket)
-                    }
+                    // onClick={() =>
+                    //   eliminarTarea(tarea, props.usuario, props.id, dispatch, props.socket)
+                    // }
                     type="button"
                     className="btn btn-outline-danger"
                   >
