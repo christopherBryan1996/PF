@@ -15,7 +15,7 @@ export const Evento = (props: Iprops) => {
     const { fecha, imagen, nombreDelEvento, _id }: Iprops = props
     const { uid } = useSelector((state: any) => state.authGoo.logNormal);
     const dispatch = useDispatch();
-    
+
     const eventoAgregado = () => toast.success('Evento agregado con exito!', {
         position: "top-center",
         autoClose: 5000,
@@ -30,8 +30,6 @@ export const Evento = (props: Iprops) => {
         dispatch(addFavoriteEvent(uid, _id));
         eventoAgregado();
     };
-
-    
 
     return (
         <>
@@ -52,15 +50,15 @@ export const Evento = (props: Iprops) => {
 
                 </div>
                 <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover />
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
             </div>
 
         </>
