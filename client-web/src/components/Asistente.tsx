@@ -49,7 +49,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
             >
               tareas
             </button>
-            <button
+            <button 
               onClick={() =>
                 eliminarAsistente(props.userId, props.eventId, dispatch, socketIO.socket)
               }
