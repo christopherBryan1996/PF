@@ -6,27 +6,25 @@ import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 import { getEvents, filtroPrecio } from "../actions/actions"
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
+import URLrequests from "./constanteURL";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
 
     const [search, setSearch] = useState('')
     const { eventos } = useSelector((state: any) => state.eventos)
-   
 
     const history = useHistory();
     const crearEvento = () => {
         history.push("/NewEvent")
     };
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
     }, []);
 
-
-    function change(e: any) {
+     function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
     }
 
@@ -36,14 +34,14 @@ export const Home = () => {
     }
 
 
+  
+
+
     return (
 
         <div>
-
-
             <Nav />
             <div className="container">
-
                 <div className="container ">
                     <div className="container-map-btn">
                         <div className="container-search">
