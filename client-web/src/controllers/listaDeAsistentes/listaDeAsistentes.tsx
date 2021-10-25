@@ -13,10 +13,8 @@ export const agregarTarea = async (
     await axios.patch(`${URLrequests}api/users/addtask/${idUser}/${idEvento}`, {tarea});
     dispatch(getAsistentes(idEvento))   
    
-    socket.emit("postNotification",{
-      receiverUID: idUser, 
-      message: `${name} te ha asignado una nueva tarea: ${tarea}`
-    } ) 
+    const data = {uid: idUser, message: `${name} te ha asignado una nueva tarea: ${tarea}` }
+    socket.emit("postNotification",data ) 
   };
 
 
