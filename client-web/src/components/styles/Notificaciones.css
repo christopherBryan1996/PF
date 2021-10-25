@@ -26,13 +26,3 @@
     top:2px;
     color:white;
 }
-
-.notificacion {
-    display: block;
-    margin-top: 5px;
-    width: 300px;
-    box-sizing: content-box;
-    position: absolute;
-    z-index: 50;
-    opacity: 100%;
-}

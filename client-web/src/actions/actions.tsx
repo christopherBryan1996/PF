@@ -146,8 +146,7 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
 
 export const socketConfig = (uid: string, usuario: string) => {
   const socket = socketIOClient(URLrequests)
-  const data = {uid, usuario}
-  socket.emit("newUser",data);
+  socket.emit("newUser", uid, usuario);
   return function (dispatch: any) {
     dispatch({
       type: actions.SOCKET_IO_CONFIG,

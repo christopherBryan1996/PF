@@ -28,8 +28,8 @@ export default function AsistentesPage( ): JSX.Element {
             <div key={asist.usuario} className="card card-body mt-2">
               <Asistente
                 eventId={eventid}
-                usuario={asist.usuario[0].usuario}
-                userId={asist.usuario[0]._id}
+                usuario={asist.usuario.usuario}
+                userId={asist.usuario[0]}
                 tareasDelUsuario={asist.tareasDelUsuario}
               />
             </div>
