@@ -17,9 +17,9 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
         <div>
             <div className="barra">
             <span>{nombreDelEvento} </span>
-            <Link to="/home">
+            {/* <Link to="/home">
             <span><FiEdit2 className="icons"/></span>
-            </Link>
+            </Link> */}
 
             {/* <Link to={`/${props.username}/${props.eventid}`}> */}
 
