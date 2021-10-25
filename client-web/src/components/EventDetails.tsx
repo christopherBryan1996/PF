@@ -4,7 +4,7 @@ import "./styles/EventDetails.css";
 import { FaCalendarAlt } from "react-icons/fa"
 import { FiShoppingCart, FiUserPlus } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getEvent, userAsistiraEvento } from "../actions/actions"
 import Mapa1evento from "./Mapa1evento";
 import { ToastContainer, toast } from 'react-toastify';
@@ -30,7 +30,7 @@ export default function EventDetails() {
     //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
     const url = window.location.pathname;
 
-
+    const [loading, setLoading] = useState<boolean>(true)
     const { eventid }: { eventid: string } =
         useParams();
     console.log('event:', eventid);
@@ -41,7 +41,11 @@ export default function EventDetails() {
     const { authGoo } = useSelector((state: any) => state);
 
     useEffect(() => {
+       
         dispatch(getEvent(eventid));
+        setTimeout(() => {
+            setLoading(false)
+        }, 500)
     }, []);
 
 
@@ -49,7 +53,7 @@ export default function EventDetails() {
 
     const agregarGenteAsistir = () => {
         authGoo.logNormal &&
-        dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
+            dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
     }
 
@@ -60,7 +64,7 @@ export default function EventDetails() {
 
     //return del componente------------------------------------------------------------------------------
 
-    return evento.imagen ? (
+    return evento.imagen && !loading ? (
         <div className="container container-detail" >
             <ToastContainer
                 position="top-right"
@@ -83,25 +87,25 @@ export default function EventDetails() {
 
                 </div>
                 <div className="card">
-                <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="300" width="00" />
+                    <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="300" width="00" />
                 </div>
                 <div className="card container-card-detail" >
-                <p>Hora: <span>{evento.horaDeInicio}</span>  </p> 
-                <p>Ubicacion: <span>{evento.direccion}</span>  </p>
-                <p>Asistentes: <span>{evento.asistentes.length}</span></p>
-                <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
+                    <p>Hora: <span>{evento.horaDeInicio}</span>  </p>
+                    <p>Ubicacion: <span>{evento.direccion}</span>  </p>
+                    <p>Asistentes: <span>{evento.asistentes.length}</span></p>
+                    <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
                     <p>Publico: <span>{final}</span></p>
-                   
+
                 </div>
                 <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
                 </button>
-               
+
                 <div className="card-contai2" >
-                    <Mapa1evento/>
+                    <Mapa1evento />
                 </div>
-             
+
                 <Foot />
             </div>
 
@@ -152,5 +156,9 @@ export default function EventDetails() {
             {/* } */}
 
         </div>
-    ) : null
+    ) : (
+        <div className="loading">
+            <img src="https://i.gifer.com/VAyR.gif" alt="loading...." />
+        </div>
+    )
 }

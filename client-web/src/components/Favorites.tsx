@@ -57,10 +57,10 @@ export default function Favorites() {
     // const quitarFavs = (userID:any, eventID:any) => {
     //     dispatch(deleteFavoriteEvent(userID,eventID));
     //     dispatch(getFavorites(userID));
-        
+
     // }
 
-    const  deleteFavoriteEvent = async (id: any, eventid: any) => {
+    const deleteFavoriteEvent = async (id: any, eventid: any) => {
         await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
         dispatch(getFavorites(authGoo.logNormal.uid));
         eventoQuitado();
@@ -73,19 +73,15 @@ export default function Favorites() {
         <div>
 
             <Nav />
-          <div className="card">
-
-          </div>
-
+            <div className="card">
+            </div>
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
-
                     <h1>Mis Favoritos</h1>
                 </div>
-
             </div>
 
-                        
+
 
             <div className="container container-cards">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
@@ -98,19 +94,19 @@ export default function Favorites() {
                             </div>
                         </Link>
                         <div className="icon">
-                            <ImBin fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
+                            <ImBin className="icon-delete" fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
                         </div>
 
-                    <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover />
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
                     </div>
 
                 )) : null
