@@ -5,33 +5,29 @@ import axios from 'axios'
 
 export const agregarTarea = async (
   tarea: string, 
-  uid: string,
+  name: string,
   idUser: string,
   idEvento: string, 
   dispatch: any, 
   socket:any) => {
-    const obj = {uid: idUser, tareasDelUsuario: tarea }
-    await axios.patch(`${URLrequests}events/assistans/newTarea/${idEvento}`, obj);
+    await axios.patch(`${URLrequests}api/users/addtask/${idUser}/${idEvento}`, {tarea});
     dispatch(getAsistentes(idEvento))   
    
-    // socket.emit("postNotification",{
-    //   senderName: idEvento, 
-    //   receiverUID: usuario, 
-    //   message: tarea
-    // } ) 
+    socket.emit("postNotification",{
+      receiverUID: idUser, 
+      message: `${name} te ha asignado una nueva tarea: ${tarea}`
+    } ) 
   };
 
 
-export const eliminarTarea = async (tarea: string, usuario: string, idEvento: string, dispatch: any, socket:any) => {
-    const obj = {usuario, tareasDelUsuario: tarea }
-    await axios.patch(`${URLrequests}events/assistans/delTarea/${idEvento}`, obj);
+export const eliminarTarea = async (tarea: string, idUser: string, idEvento: string, dispatch: any, socket:any) => {
+  
+  await axios.patch(`${URLrequests}api/users/deleteTask/${idUser}/${idEvento}`, {tarea});
     dispatch(getAsistentes(idEvento))
-  };
-
+};
 
 //Agregar alerta para confirmar eliminacion de asistente
 export const eliminarAsistente = async ( id: string, idEvento: string, dispatch: any, socket:any) => {
-        
         await axios.patch(`${URLrequests}api/users/deleteeventstoassist/${id}/${idEvento}`);
         dispatch(getAsistentes(idEvento))
 };

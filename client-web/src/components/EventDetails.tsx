@@ -38,7 +38,7 @@ export default function EventDetails() {
     const dispatch = useDispatch()
 
     const evento = useSelector((state: any) => state.eventos.evento)
-    const { uid } = useSelector((state: any) => state.authGoo.logNormal);
+    const { authGoo } = useSelector((state: any) => state);
 
     useEffect(() => {
         dispatch(getEvent(eventid));
@@ -48,7 +48,8 @@ export default function EventDetails() {
     console.log("evento", evento)
 
     const agregarGenteAsistir = () => {
-        dispatch(userAsistiraEvento(uid, evento._id))
+        authGoo.logNormal &&
+        dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
     }
 
@@ -92,6 +93,10 @@ export default function EventDetails() {
                     <p>Publico: <span>{final}</span></p>
                    
                 </div>
+                <button className="btn btn-success">
+                    {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
+                        <p>Asistire al evento</p>  </div>}
+                </button>
                 <div className="card-contai2" >
                     <Mapa1evento/>
                 </div>

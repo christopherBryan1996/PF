@@ -22,9 +22,8 @@ export default function Asistente(props: Iasistentes): JSX.Element {
 
   const handleSubmit = (e: FormElement): void => {
     e.preventDefault();
-    socketIO.socket &&
-    agregarTarea(nuevaTarea, 
-      authGoo.logNormal.uid, 
+     agregarTarea(nuevaTarea, 
+      authGoo.logNormal.name,
       props.userId, 
       props.eventId, 
       dispatch, 
@@ -35,23 +34,27 @@ export default function Asistente(props: Iasistentes): JSX.Element {
   const desplegarTareas = (): void => {
     setTareasVisibles(!tareasVisibles);
   };
+  console.log(props.usuario)
 
-  return (
+  return ( 
     <div className="container p-4">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card-name">
-            {props.userId} //cambiar por usuario
-            <button
+            {props.usuario}
+                   <button
               onClick={desplegarTareas}
               type="button"
               className="btn btn-outline-success"
             >
               tareas
             </button>
-            <button
+            <button 
               onClick={() =>
-                eliminarAsistente(props.userId, props.eventId, dispatch, socketIO.socket)
+                eliminarAsistente(props.userId,
+                   props.eventId, 
+                   dispatch, 
+                   socketIO.socket)
               }
               type="button"
               className="btn btn-outline-danger"
@@ -65,9 +68,13 @@ export default function Asistente(props: Iasistentes): JSX.Element {
                 <div className="card card-body mt-2" key={idx}>
                   <p>{tarea}</p>
                   <button
-                    // onClick={() =>
-                    //   eliminarTarea(tarea, props.usuario, props.id, dispatch, props.socket)
-                    // }
+                    onClick={() =>
+                      eliminarTarea(tarea, 
+                        props.userId, 
+                        props.eventId, 
+                        dispatch, 
+                        socketIO.socket)
+                    }
                     type="button"
                     className="btn btn-outline-danger"
                   >
