@@ -72,9 +72,9 @@ export const Nav = () => {
           <div className="fff">
             <a onClick={favorites}>
               {" "}
-              <ImHeart color="white" fontSize="1.6em" />
-             <Notificacion />
+              <ImHeart color="white" fontSize="1.6em" />             
             </a>
+            <Notificacion />
             <a href= {`/home/usuario/${authGoo.logNormal.uid}`} >
               <img src={avatar} alt="" width="50" height="50" />
             </a>
