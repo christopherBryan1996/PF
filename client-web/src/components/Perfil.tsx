@@ -27,7 +27,7 @@ export default function Perfil(): JSX.Element {
         <div>
             <div className="divDelNav"><Nav></Nav></div>
             <div className="perfil">Mis eventos</div>
-            <Link to={`/modificarUser/${authGoo.logNormal}`}>
+            <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
             <button className="modPerfil">Editar mi perfil</button>
             </Link>
             {eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ?
