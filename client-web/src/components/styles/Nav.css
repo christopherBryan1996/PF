@@ -4,13 +4,28 @@
     width: 40%;
 }
 
-.fff{
-    margin-right: 185px;
-}
+
+    .fff {
+        /* margin-right: 185px; */
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
 
 .fff img {
-    margin-left: 85px;
-    margin-right: 85px;
+    margin-left: 55px;
+    margin-right: 5px;
+}
+
+.fff a{
+    margin-left:40px;
+}
+
+.fav{
+
+    margin-right:45px;
+
 }
 
 
