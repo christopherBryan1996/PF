@@ -23,6 +23,11 @@
 
 
 }
+.icon-delete:hover{
+    cursor: pointer;
+    color: red;
+}
+
 
 .container-cards{
 
