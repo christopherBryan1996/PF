@@ -35,7 +35,7 @@ export const eliminarAsistente = async ( idUser: string, name: string, idEvento:
         dispatch(getAsistentes(idEvento))
 
       const data = {uid: idUser, message: `${name} te ha quitado de la lista de asistentes a su evento: ${idEvento}` }
-      socket.emit("postNotification",data ) 
+      socket.emit("postNotification",data )  
 
 };
 
