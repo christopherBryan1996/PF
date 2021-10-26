@@ -7,18 +7,17 @@ import avatar from "../images/user.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../actions/actions";
-
+import { Notificacion } from "./Notificaciones";
 import { getAuth, onAuthStateChanged,signOut } from "firebase/auth";
 
 export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
-
   const { authGoo } = useSelector((state: any) => state);
-
   const [logins, setIsLoggedIn] = useState(false);
-
+  
   useEffect(() => {
+ 
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         const datos = {
@@ -50,6 +49,10 @@ export const Nav = () => {
   const home = () => {
     history.push("/home");
   };
+
+  const favorites = () => {
+    history.push(`/home/${authGoo.logNormal.uid}/favorites`);
+  };
   const botonRegistrate = () => {
     history.push("/register");
   };
@@ -61,27 +64,23 @@ export const Nav = () => {
     <nav className="navbar navbar-dark bg-dark fixed-top">
       <div className="container">
         <a className="navbar-brand">
-          <img onClick={home} src={logo} alt="" width="240" height="70" />
+          <img onClick={home} src={logo} alt="" width="240" height="65" />
         </a>
-        <form className="navbar-center">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar evento..."
-            aria-label="Username"
-            aria-describedby="basic-addon1"
-          />
-        </form>
+       
 
         {logins ? (
           <div className="fff">
-            <a href="">
+            <div className="fav">
+            <a onClick={favorites}>
               {" "}
-              <ImHeart color="white" fontSize="1.6em" />
+              <ImHeart color="white" fontSize="1.6em"/>
             </a>
-            <a href="">
-              <img src={avatar} alt="" width="50" height="50" />
+            </div>
+            {/* <Notificacion /> */}
+            <a href= {authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`} >
+              <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="50" height="50" />
             </a>
+            <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
             <a onClick={handleLogout}>
               <ImExit fontSize="1.3em" />
             </a>

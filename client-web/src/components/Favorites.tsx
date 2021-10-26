@@ -1,10 +1,17 @@
-import React, { useEffect} from "react";
-import {  getFavorites, deleteFavoriteEvent} from "../actions/actions";
+import React, { useEffect } from "react";
+import { getFavorites, deleteFavoriteEvent } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
-import { useParams } from "react-router-dom";
-import { ImHeart, ImCross } from "react-icons/im";
+import { Link, useParams } from "react-router-dom";
+import { ImBin } from "react-icons/im";
 import { useHistory } from "react-router-dom";
+import { Nav } from "./Nav";
+import { toast, ToastContainer } from 'react-toastify';
+import axios from "axios";
+import URLrequests from "./constanteURL";
+
+
+
 
 
 // https://api-fest.herokuapp.com/api/users
@@ -15,51 +22,97 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Favorites() {
-    
-    const {username}:{username:string}=useParams()
+
+    const { username }: { username: string } = useParams()
+
     console.log("username", username)
 
     const dispatch = useDispatch()
 
-     const {eventosFavoritos}=useSelector((state:any)=>state.eventos)
+    const { eventosFavoritos } = useSelector((state: any) => state.eventos)
+    const { authGoo } = useSelector((state: any) => state)
 
     useEffect(() => {
-        dispatch(getFavorites(username));
-    }, [eventosFavoritos.favouritesEvents, dispatch]);
+        authGoo.logNormal &&
+            dispatch(getFavorites(authGoo.logNormal.uid));
+    }, []);
 
     const history = useHistory();
     const back = () => {
         history.goBack()
     };
-    
-    return(
+
+
+
+    const eventoQuitado = () => toast.warning('Evento fue eliminado de tus favoritos!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    // const quitarFavs = (userID:any, eventID:any) => {
+    //     dispatch(deleteFavoriteEvent(userID,eventID));
+    //     dispatch(getFavorites(userID));
+
+    // }
+
+    const deleteFavoriteEvent = async (id: any, eventid: any) => {
+        await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
+        dispatch(getFavorites(authGoo.logNormal.uid));
+        eventoQuitado();
+    }
+
+
+
+
+    return (
         <div>
+
+            <Nav />
+            <div className="card">
+            </div>
             <div className="DivDeArriba">
                 <div className="DivTituloFiltros">
-                    <button onClick={back}>Back</button>
-                    <h1>Favoritos</h1>
-                </div>
-                <div>
-                    <button>Aca va a estar la foto de perfil</button>
+                    <h1>Mis Favoritos</h1>
                 </div>
             </div>
-            <div>
-               { eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e:any) => (
-                <div className="tarjetaFavoritos">
-                    <div>
-                        <ImHeart/>
+
+
+
+            <div className="container container-cards">
+                {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
+
+                    <div className="card col-md-8">
+                        <Link to={`/detail/${e._id}`} className="container container-favorites">
+                            <div className="card-body">
+                                <h4>{e.nombreDelEvento}</h4>
+
+                            </div>
+                        </Link>
+                        <div className="icon">
+                            <ImBin className="icon-delete" fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
+                        </div>
+
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={1000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover />
                     </div>
-                    <div>
-                        <h1>{e.nombreDelEvento}</h1>
-                    </div>
-                    <div>
-                        <ImCross onClick={()=> {dispatch(deleteFavoriteEvent(username, e._id));
-                                                dispatch(getFavorites(username)) }}/>
-                    </div>
-                </div>
+
                 )) : null
                 }
             </div>
+
         </div>
     )
 }

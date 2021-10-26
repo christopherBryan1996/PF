@@ -1,6 +1,8 @@
 import axios from "axios";
 import actions from "../actions_type/actions_types";
 import URLrequests from "../components/constanteURL";
+import socketIOClient from "socket.io-client";
+
 
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
@@ -12,6 +14,14 @@ import URLrequests from "../components/constanteURL";
 
 export function llenarCoordenadas(data: string[]) {
 
+// export function getEvents() {
+//     return async function (dispatch: any) {
+//         const res = await axios.get("https://api-fest.herokuapp.com/events");
+//         dispatch({
+//             type: actions.GET_EVENTS,
+//             payload: res.data,
+//         });
+//     };
   console.log("llego action llenarCoordenadas");
   return async function (dispatch: any) {
     return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
@@ -46,8 +56,7 @@ export const filtroPrecio = (state: any) => {
 };
 
 export const getAsistentes = (id: string) => {
-
-  return async function (dispatch: any) {
+ return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events/assistans/${id}`);
     dispatch({
       type: actions.GET_ASISTENTES,
@@ -71,6 +80,8 @@ export const login = (data: any) => ({
   payload: data
 });
 
+
+    
 export const loginNormal = (data: any) => {
   return {
     type: actions.LOGIN_NORMAL,
@@ -96,6 +107,16 @@ export const getFavorites = (id: any) => {
   };
 };
 
+export const getUsersEvents = (id:any) => {
+  return async function (dispatch: any) {
+    console.log("llego al action")
+    const res = await axios.get(`${URLrequests}api/users/userevents/${id}`);
+    dispatch({
+      type: actions.GET_USERSEVENTS,
+      payload: res.data,
+    });
+  };
+}
 export const addFavoriteEvent = (uid:any, eventID: any) => {
   return async function (dispatch: any){
     const res = await axios.patch(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
@@ -119,7 +140,19 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });
-  };
-};
+  }
+}
+
+
+export const socketConfig = (uid: string, usuario: string) => {
+  const socket = socketIOClient(URLrequests)
+  socket.emit("newUser", uid, usuario);
+  return function (dispatch: any) {
+    dispatch({
+      type: actions.SOCKET_IO_CONFIG,
+      payload: socket
+    });
+  }
+}
 
 
