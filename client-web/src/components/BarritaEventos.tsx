@@ -8,7 +8,7 @@ import { IeventosUsuario } from "../interfaces/interfaces";
 import { useDispatch} from "react-redux";
 import {deleteEvent} from "../controllers/eventos/eventoscontrollers"
 
-export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario) {
+export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fecha}:IeventosUsuario) {
     
     const dispatch=useDispatch();
    
@@ -16,12 +16,27 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
     return(
         <div>
             <div className="barra">
+            <img className="card-img-top" src={imagen} alt="Card image cap" height="240" />
+
+            <div className="card-body">
+            <p className="card-text">{fecha.slice(0, 10)}</p>
             <Link to={`/detail/${id}`}>
             <span>{nombreDelEvento} </span>
             </Link>
-            {/* <Link to="/home">
+            {
+                                (precio === 0
+                                    ?
+                                    <p className="card-text">Gratis</p>
+                                    :
+                                    <p className="card-text">Valor:  ${precio}</p>
+                                )
+                            }
+            </div>
+
+            <div className="card-footer">
+            <Link to="/home">
             <span><FiEdit2 className="icons"/></span>
-            </Link> */}
+            </Link>
 
             {/* <Link to={`/${props.username}/${props.eventid}`}> */}
 
@@ -29,9 +44,9 @@ export default function BarritaEventos({id,nombreDelEvento,uid}:IeventosUsuario)
             <span><FaUserFriends className="icons"/></span>
             </Link>
 
-
             <button className="boton" onClick={()=>deleteEvent(uid,id,dispatch)}><BsFillTrashFill className="icons"  /></button>
 
+             </div>                  
             </div>
             
             

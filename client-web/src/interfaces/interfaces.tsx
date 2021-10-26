@@ -38,7 +38,10 @@ export interface Iasistentes {
 export interface IeventosUsuario {
     id: string;
     nombreDelEvento:string;
-    uid:string
+    uid:string;
+    precio:number;
+    imagen:string;
+    fecha:string;
 }
 
 

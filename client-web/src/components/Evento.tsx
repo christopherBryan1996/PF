@@ -1,10 +1,6 @@
 import './styles/Card.css'
-
 import { Link } from "react-router-dom";
-import imag from '../images/bolos.jpg';
 import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
-
-
 import { useSelector, useDispatch } from 'react-redux';
 import { addFavoriteEvent } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
