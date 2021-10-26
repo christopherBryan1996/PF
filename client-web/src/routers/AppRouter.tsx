@@ -19,7 +19,7 @@ import { login, socketConfig } from '../actions/actions';
 import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
-import MercadoPago from '../components/MercadoPago';
+import MercadoPay from '../components/MercadoPay';
 
 export const AppRouter = () => {
 
@@ -80,7 +80,7 @@ export const AppRouter = () => {
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
 
                     <PublicRoute exact path="/detail/:eventid" component={EventDetails} />
-                    <PublicRoute exact path="/mercadopago" component={MercadoPago} />
+                    <PublicRoute exact path="/mercadopago" component={MercadoPay} /> 
 
                     <PublicRoute
                         exact path="/"

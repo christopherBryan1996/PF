@@ -10,6 +10,8 @@ import Mapa1evento from "./Mapa1evento";
 import { ToastContainer, toast } from 'react-toastify';
 import { Nav } from "./Nav";
 import Foot from "./Foot";
+import axios from 'axios';
+import URLrequests from "./constanteURL";
 
 
 
@@ -50,13 +52,45 @@ export default function EventDetails() {
 
 
     console.log("evento", evento)
-
+//Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
     const agregarGenteAsistir = () => {
         authGoo.logNormal &&
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
     }
 
+    const [cantidad, setCantidad] = useState(1);
+
+    const comprarEntrada = () => {
+        const post = {
+            title: evento.nombreDelEvento,
+            price: evento.precio,
+            quantity: cantidad
+        }
+        async function fetchPost(data:any) {
+            try {
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
+                console.log("data",data);
+    
+                if (data.LinkMP) {
+                    window.open(data.LinkMP);
+                   
+    
+                } else if  (data.err){
+                    alert("error al crear el link");
+    
+                }
+            } catch (error) {
+                console.error(error);
+            };
+        }
+        fetchPost(post)
+        console.log("constPost", post) 
+
+    }
+
+
+//Variables de como llegan los estados PrivadoOpublico---------------------------------------------------------------
     var privadoOpublico = evento.publico;
     var final = "Publico - Cualquiera puede asistir";
     if (privadoOpublico === false) { final = "Privado - Solo invitados" };
@@ -100,6 +134,9 @@ export default function EventDetails() {
                 <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
+
+                    {evento.precio !== 0 && <div onClick={comprarEntrada}> <FiShoppingCart size="2em" color="white" /> <p>Comprar Entradas</p> </div> }   
+
                 </button>
 
                 <div className="card-contai2" >
