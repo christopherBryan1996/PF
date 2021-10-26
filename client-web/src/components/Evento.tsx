@@ -4,6 +4,8 @@ import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } 
 import { useSelector, useDispatch } from 'react-redux';
 import { addFavoriteEvent } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
+import { IoHeartOutline } from "react-icons/io5";
+
 
 
 interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string, precio: number }
@@ -37,7 +39,50 @@ export const Evento = (props: Iprops) => {
     return (
         <>
 
-            <div className="container-card">
+            <div className='card container-card'>
+                <img className="card-img-top" src={imagen} alt="Card image cap" height="160" />
+                <div className='card-body'>
+                    <p className="card-text">{fecha.slice(0, 10)}</p>
+                    <h5 className="card-title">{nombreDelEvento}</h5>
+                    {
+                        (precio === 0
+                            ?
+                            <p className="card-text">Gratis</p>
+                            :
+                            <p className="card-text">Valor:  ${precio}</p>
+                        )
+                    }
+                    <div className="card-footer">
+                    <span className="spa">Compartir</span>
+                    <FacebookShareButton url={`https://students.soyhenry.com/`} quote='Hola, quiero compartir este evento'>
+                            <FacebookIcon className="share" round={true} size='2em' />
+                        </FacebookShareButton>
+                        <WhatsappShareButton
+                            title='Hola, te comparto este evento, te pueda interesar!'
+                            url="https://students.soyhenry.com/">
+                            <WhatsappIcon className="share" round={true} size='2em' />
+                        </WhatsappShareButton>
+                    </div>
+                    <div className="favorites-container">
+                        <span>
+                            <button onClick={agregarAfavoritos}><IoHeartOutline color="white" fontSize="1.6em" /></button>
+                        </span>
+                    </div>
+                </div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
+            </div>
+
+
+            {/* <div className="container-card">
                 <div >
                     <Link to={`/detail/${_id}`} className="link" >
                         <img className="card-img-top" src={imagen} alt="Card image cap" height="180" />
@@ -69,17 +114,8 @@ export const Evento = (props: Iprops) => {
                     </div>
 
                 </div>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={1000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover />
-            </div>
+              
+            </div> */}
 
         </>
     )

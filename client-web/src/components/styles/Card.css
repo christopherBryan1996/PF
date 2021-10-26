@@ -1,24 +1,71 @@
 .container-card{
-   
-    margin-left: 18px;
+
+    width: 18rem;
+
+    /* margin-left: 18px;
     margin-top: 15px;
     border-radius:8px;
     padding:10px;
     width: 20%;
     display: flex;
     flex-direction: column;
-    background-color: rgb(46, 45, 45);
+    background-color: rgb(46, 45, 45); */
 }
 .container-card a{
     text-decoration: none;
     color: white;
 }
 
+.favorites-container{
+    position: absolute;
+    top:140px;
+    right:12px;
+    border-radius: 40px;
+    border: solid 1px white;
+    background-color: #303030;
+    opacity: .8;
+ 
+}
+
+.favorites-container button {
+    border-radius: 40px;
+    height: 40px;
+    padding: 8px;
+    -webkit-transition: all .4s cubic-bezier(.4,0,.3,1);
+    transition: all .4s cubic-bezier(.4,0,.3,1);
+    width: 40px;
+    background: none;
+    border: none;
+    
+}
+
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    margin-right:10px;
+    margin-bottom: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #303030;
+    background-clip: border-box;
+    border: 1
+px
+ solid rgba(0,0,0,0.125);
+    border-radius: 0.25
+rem
+;
+}
+
 
 
 .btn-search{
     background-color: rgba(255, 255, 255, 0);
-   border:none;
+    border:none;
     height:calc(1.5em + 0.74rem + 1px);
     color:#00bc8c;
 }
@@ -102,10 +149,10 @@
     width: 60%;
 }
 
-.card-text{
+/* .card-text{
     margin-top:2px;
     margin-bottom: 3px;
-}
+} */
 
 
 .share{
@@ -122,20 +169,20 @@
 
 
 
-.card-body {
+/* .card-body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     min-height: 1px;
     padding: 0.5rem; 
 
-}
-.card-body p{
+} */
+/* .card-body p{
     font-size:12px;
 }
 .card-title {
     margin-bottom: 0;
-}
+} */
 
 .container-home{
     display: flex;
@@ -146,11 +193,10 @@
 }
 
 .filter{
-       display:flex;
+    display:flex;
     flex-direction:row;
     align-items: center;
     justify-content: space-around;
-  
 }
 
 
