@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-.card{
+/* .card{
 
     margin-top:25px;
     box-shadow: 2px 4px 10px 6px rgba(0,0,0,0.75);
@@ -22,7 +22,7 @@
     align-items:center;
 
 
-}
+} */
 .icon-delete:hover{
     cursor: pointer;
     color: red;

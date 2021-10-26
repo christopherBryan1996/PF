@@ -32,6 +32,8 @@ export interface Iasistentes {
     tareasDelUsuario: string[];
 }
 
+
+
 //interface para los eventos creados por usuario
 export interface IeventosUsuario {
     id: string;

@@ -64,7 +64,7 @@ export const Nav = () => {
     <nav className="navbar navbar-dark bg-dark fixed-top">
       <div className="container">
         <a className="navbar-brand">
-          <img onClick={home} src={logo} alt="" width="240" height="65" />
+          <img onClick={home} src={logo} alt="" width="180" height="45" />
         </a>
        
 
@@ -78,7 +78,7 @@ export const Nav = () => {
             </div>
             {/* <Notificacion /> */}
             <a href= {authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`} >
-              <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="50" height="50" />
+              <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="40" height="40" />
             </a>
             <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
             <a onClick={handleLogout}>
