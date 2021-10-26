@@ -45,7 +45,7 @@ export const Evento = (props: Iprops) => {
                 </Link>
                 <div className='card-body'>
                    
-                        <p className="card-text">{fecha.slice(0, 10)}</p>
+                        <p className="card-text fecha">{fecha.slice(0, 10)}</p>
                         <Link to={`/detail/${_id}`}>
                         <h5 className="card-title">{nombreDelEvento}</h5>
                         </Link>
