@@ -131,7 +131,7 @@ export default function EventDetails() {
                     <p>Publico: <span>{final}</span></p>
 
                 </div>
-                <button className="btn btn-success">
+                <button className="btn btn-success col-md-12">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
 

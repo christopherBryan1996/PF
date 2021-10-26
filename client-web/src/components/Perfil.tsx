@@ -27,7 +27,7 @@ export default function Perfil(): JSX.Element {
         <div>
             <div className="divDelNav"><Nav></Nav></div>
             <div className="perfil">Mis eventos</div>
-            <Link to={`/modificarUser/${authGoo.logNormal}`}>
+            <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
             <button className="modPerfil">Editar mi perfil</button>
             </Link>
             {eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ?
@@ -35,9 +35,12 @@ export default function Perfil(): JSX.Element {
                     {eventosUsuario.createdEvents.map((i: {
                         _id: string;
                         nombreDelEvento: string;
+                        precio:number;
+                        imagen:string;
+                        fecha:string;
                     }) => (
                         <div>
-                            <BarritaEventos id={i._id} nombreDelEvento={i.nombreDelEvento} uid={authGoo.logNormal.uid} />
+                            <BarritaEventos id={i._id} nombreDelEvento={i.nombreDelEvento} uid={authGoo.logNormal.uid} precio={i.precio} imagen={i.imagen} fecha={i.fecha} />
                             <br /></div>
                     ))}
                 </div>

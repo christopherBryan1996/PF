@@ -1,23 +1,21 @@
 import "./styles/Nav.css";
 import { useEffect, useState } from "react";
 import { ImHeart } from "react-icons/im";
-import { ImExit } from "react-icons/im";
 import logo from "../images/Logo.png";
-import avatar from "../images/user.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../actions/actions";
 import { Notificacion } from "./Notificaciones";
-import { getAuth, onAuthStateChanged,signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
   const { authGoo } = useSelector((state: any) => state);
   const [logins, setIsLoggedIn] = useState(false);
-  
+
   useEffect(() => {
- 
+
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         const datos = {
@@ -25,7 +23,7 @@ export const Nav = () => {
           name: user.displayName,
           photoURL: user.photoURL
         }
-        dispatch(login( datos ));
+        dispatch(login(datos));
         setIsLoggedIn(true);
       } else if (authGoo.logNormal && authGoo.logNormal.ok) {
         setIsLoggedIn(true);
@@ -35,7 +33,7 @@ export const Nav = () => {
     });
   }, [dispatch]);
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     const auth = getAuth();
     await signOut(auth);
     dispatch(logout());
@@ -64,26 +62,32 @@ export const Nav = () => {
     <nav className="navbar navbar-dark bg-dark fixed-top">
       <div className="container">
         <a className="navbar-brand">
-          <img onClick={home} src={logo} alt="" width="240" height="65" />
+          <img onClick={home} src={logo} alt="" width="180" height="45" />
         </a>
-       
+
 
         {logins ? (
-          <div className="fff">
+          <div className="fff ">
             <div className="fav">
-            <a onClick={favorites}>
-              {" "}
-              <ImHeart color="white" fontSize="1.6em"/>
-            </a>
+              <a onClick={favorites}>
+                {" "}
+                <ImHeart color="white" fontSize="1.6em" />
+              </a>
             </div>
             <Notificacion />
-            <a href= {authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`} >
-              <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="50" height="50" />
-            </a>
-            <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
-            <a onClick={handleLogout}>
-              <ImExit fontSize="1.3em" />
-            </a>
+
+
+            <li className=" dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="40" height="40" />
+                <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a className="link-perfil" href={authGoo.logNormal && `/home/usuario/${authGoo.logNormal.uid}`}>Ver perfil</a></li>
+
+                <li><a  className='btn-cerar' onClick={handleLogout}> Cerrar sesion</a></li>
+              </ul>
+            </li>
           </div>
         ) : (
           <div>

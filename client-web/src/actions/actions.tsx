@@ -143,16 +143,23 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
   }
 }
 
-
 export const socketConfig = (uid: string, usuario: string) => {
   const socket = socketIOClient(URLrequests)
-  socket.emit("newUser", uid, usuario);
+  const data = {uid, usuario}
+  socket.emit("newUser",data);
+
+  let  notificacionesOffL: string[] = [];  
+  socket.on("getNotifOfLine", ( OffLinenotif: string[])  => {
+    OffLinenotif.forEach(e =>notificacionesOffL.push(e))
+  })
   return function (dispatch: any) {
     dispatch({
       type: actions.SOCKET_IO_CONFIG,
-      payload: socket
+      payload: {socket, notificacionesOffL}
     });
   }
 }
 
-
+export const cleanNotifications = () => ({
+  type: actions.CLEAN_NOTIFICATIONS,
+});
