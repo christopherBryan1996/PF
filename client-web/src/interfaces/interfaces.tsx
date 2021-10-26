@@ -19,8 +19,8 @@ export interface IActions {
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
     DELETE_EVENT:string;
-
     SOCKET_IO_CONFIG: string;
+    CLEAN_NOTIFICATIONS: string;
     
 }
 
