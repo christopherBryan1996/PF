@@ -20,6 +20,7 @@ import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import MercadoPago from '../components/MercadoPago';
+import '../components/styles/Loading.css'
 
 export const AppRouter = () => {
 
@@ -63,7 +64,10 @@ export const AppRouter = () => {
 
     if (cheking) {
         return (
-            <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
+            <div className="loading">
+                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif"/>
+            </div>
+            // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
         )
     }
 

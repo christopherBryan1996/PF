@@ -19,7 +19,6 @@ export interface IActions {
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
     DELETE_EVENT:string;
-
     SOCKET_IO_CONFIG: string;
     CLEAN_NOTIFICATIONS: string;
     
@@ -37,7 +36,10 @@ export interface Iasistentes {
 export interface IeventosUsuario {
     id: string;
     nombreDelEvento:string;
-    uid:string
+    uid:string;
+    precio:number;
+    imagen:string;
+    fecha:string;
 }
 
 
