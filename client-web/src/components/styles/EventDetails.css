@@ -61,14 +61,6 @@ border-radius: 8px;
 }
 
 
-.card-footer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:space-around;
-    font-size:15px;
-}
-
 /* .container-card {
     margin-left: 18px;
     margin-top: 15px;
