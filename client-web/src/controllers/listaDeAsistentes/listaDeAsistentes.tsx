@@ -34,7 +34,7 @@ export const eliminarAsistente = async ( idUser: string, name: string, idEvento:
         await axios.patch(`${URLrequests}api/users/deleteeventstoassist/${idUser}/${idEvento}`);
         dispatch(getAsistentes(idEvento))
 
-      const data = {uid: idUser, message: `${name} te ha quitado de la lista de asistentes a su evento: ${idEvento}` }
+      const data = {uid: idUser, message: `${name} te ha quitado de la lista de asistentes a su evento` }
       socket.emit("postNotification",data )  
 
 };
