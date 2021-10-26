@@ -1,6 +1,7 @@
 import './styles/Card.css'
+import { ShareDialog } from 'react-native-fbsdk';
 import { Link } from "react-router-dom";
-import imag from '../images/bolos.jpg';
+
 import {useSelector, useDispatch } from 'react-redux';
 import { addFavoriteEvent} from "../actions/actions"
 
@@ -9,6 +10,12 @@ interface  Iprops {fecha:string,imagen:string,nombreDelEvento:string, _id:string
 
 
 export const Evento = (props:Iprops) => {
+
+    const shareLinkContent = {
+        contentType: 'link',
+        contentUrl: "",
+        contentDescription: 'Wow, check out this great site!',
+      };
 
 
     const {fecha,imagen,nombreDelEvento,_id}:Iprops =props 
