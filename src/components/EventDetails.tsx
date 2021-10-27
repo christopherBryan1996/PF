@@ -70,7 +70,7 @@ export default function EventDetails() {
         console.log("infoEnviar", infoEnviar)
         const despacharStatus = async (data:any) => {
             try {
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, infoEnviar) //tenes q cambiar esta ruta
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, infoEnviar) //tenes q cambiar esta ruta
                 console.log("data",data);
     
             } catch (error) {
@@ -99,7 +99,7 @@ export default function EventDetails() {
         }
         async function fetchPost(data:any) {
             try {
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, post)
                 console.log("data",data);
     
                 if (data.LinkMP) {
