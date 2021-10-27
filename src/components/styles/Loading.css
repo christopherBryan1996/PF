@@ -1,0 +1,9 @@
+.loading {
+    width: 60%;
+    height: 0;
+    padding-bottom: 135%;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}

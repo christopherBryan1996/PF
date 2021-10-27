@@ -1,0 +1,150 @@
+
+
+
+.card-contai{
+
+    margin-top: 130px;
+    
+    padding-left: 180px;
+    padding-right: 180px;
+}
+.card-contai2{
+    margin-top:30px;   
+    box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+-webkit-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+-moz-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+border-radius: 8px;
+}
+.container-card-detail{
+
+    margin-top:15px; display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.container-card-detail p{
+
+    font-weight: bold;
+    margin-left: 20px;
+     font-size: 15px;
+    
+
+}
+
+.container-card-detail span{
+    font-weight: 200;
+}
+
+
+
+/* .card {
+    margin-top: 25px;
+    box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    -webkit-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px -1px 30px -1px rgba(0,0,0,0.65);
+    border-radius: 8px;
+
+} */
+.conta{   
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;;
+}
+
+
+/* .container-card {
+    margin-left: 18px;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 70%;
+    display: flex; 
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(46, 45, 45);
+} */
+    
+
+
+/* 
+.container-detail{
+    margin-top: 120px;
+    display: flex;
+    justify-content:space-around;
+    flex-direction: column;
+    align-items: center;
+
+
+
+
+.card-text{
+    color: rgb(219, 29, 29);
+}
+
+
+.card-details{
+    margin-top: 14px;
+    width: 70%;
+}
+
+
+/* .EventDetailsMain{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    height: 800px;
+}
+
+.detalles{
+    display: inline;
+    font-size: 60px;
+    position: relative;
+    left: 440px;
+}
+.favoritos{
+    position: relative;
+    right:-900px
+
+}
+.inputs{
+    position: relative;
+    left: 500px;
+}
+.inputDetalles{
+    
+    background-color:rgb(107, 105, 105) ;
+    border-radius: 8px;
+    
+}
+
+.pdetalles{
+    width: 100%;
+    max-width: 250px;
+    background-color: rgb(117, 115, 115);
+    border-radius: 8px;
+    height: 25px;
+}
+.pdetalle{
+    display: inline;
+    width: 100%;
+    max-width: 290px;
+    background-color: rgb(117, 115, 115);
+    border-radius: 8px;
+    height: 25px;
+}
+
+p{
+    color: rgb(213, 214, 213);
+}
+.hora{
+    display: inline;
+    color:rgb(213,214,213);
+} */ 
