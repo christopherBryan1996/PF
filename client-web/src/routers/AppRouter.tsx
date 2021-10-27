@@ -21,6 +21,7 @@ import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 import MercadoPago from '../components/MercadoPago';
 import '../components/styles/Loading.css'
+import { Admin } from '../components/Admin';
 
 export const AppRouter = () => {
 
@@ -125,6 +126,11 @@ export const AppRouter = () => {
                         exact path="/asistentes/:uid/:eventid"
                         isAuthenticated={isAuthenticated}
                         component={AsistentesPage}/>
+                          <PrivateRoute
+                        exact path="/admin/"
+                        isAuthenticated={isAuthenticated}
+                        component={Admin}/>
+                        
                         
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
