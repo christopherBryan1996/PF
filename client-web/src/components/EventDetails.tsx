@@ -64,7 +64,7 @@ export default function EventDetails() {
             userID: authGoo.logNormal.uid,
             enventID: eventid,
             mount: evento.price,
-            payment_id: paramFieldPayment_id
+            payment_id: paramFieldPayment_id 
         }
 
         console.log("infoEnviar", infoEnviar)
