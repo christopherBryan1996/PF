@@ -64,7 +64,7 @@ export default function EventDetails() {
             userID: authGoo.logNormal.uid,
             enventID: eventid,
             mount: evento.price,
-            payment_id: paramFieldPayment_id 
+            payment_id: paramFieldPayment_id
         }
 
         console.log("infoEnviar", infoEnviar)
@@ -162,7 +162,7 @@ export default function EventDetails() {
                     <p>Publico: <span>{final}</span></p>
 
                 </div>
-                <button className="btn btn-success col-md-12">
+                <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
 
