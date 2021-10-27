@@ -5,14 +5,10 @@ export interface IActions {
     FILTRO_PRECIO: string;
     GET_ASISTENTES: string;
     LOGIN: string;
-
     GET_EVENT: string;
-
-
     GET_FAVORITES: string;
     FILTRO_FAVORITOS: string;
-    GET_USERSEVENTS: string;
-      
+    GET_USERSEVENTS: string;      
     LOGOUT:string;
     DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
@@ -21,6 +17,7 @@ export interface IActions {
     DELETE_EVENT:string;
     SOCKET_IO_CONFIG: string;
     CLEAN_NOTIFICATIONS: string;
+    GET_USERS: string;
     
 }
 
@@ -42,6 +39,13 @@ export interface IeventosUsuario {
     precio:number;
     imagen:string;
     fecha:string;
+}
+
+
+export interface Iusers{
+
+    users:[];
+
 }
 
 
