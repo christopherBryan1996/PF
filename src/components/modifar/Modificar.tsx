@@ -1,7 +1,6 @@
 import {useParams} from 'react-router'
 import axios from 'axios'
-import logo from '../../images/Logo.png'
-import { Link } from 'react-router-dom'
+import URLrequests from "../constanteURL";
 import './css/style.css'
 import './css/sourcesanspro-font.css'
 import image from './images/form-v8.jpg'
@@ -9,18 +8,20 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { loginNormal } from '../../actions/actions'
 import { useDispatch, useSelector } from "react-redux";
-
+import {Nav }from '../Nav'
 export const ModificarUser=()=>{
     //traemos lo que este en id del params
     const {id}= useParams() as any
     const {authGoo}=useSelector((state:any)=>state);
     const dispatch = useDispatch();
-    //creamos un estado de objetos
     const [state, setstate] = useState({
         name:'',
         password:'',
         comfirm_password:'',
     })
+    
+    
+    
     //mensajes
     const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
         position: "top-center",
@@ -32,6 +33,15 @@ export const ModificarUser=()=>{
         progress: undefined,
     });
     const exitoso = () => toast.success('Cambio exitoso!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const exitoso2 = () => toast.success('Se actualizara su nombre cuando reinicie secion', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -58,6 +68,30 @@ export const ModificarUser=()=>{
         draggable: true,
         progress: undefined,
     });
+    const actualizar= async ()=> {
+         const {data}:{data:any} = await axios.get(`http://localhost:3008/api/users/${id}`)
+         const email2= data.user.email
+         //await dispatch(loginNormal({email: email22, password: state.password}))
+         //return email22
+
+         async function fetchPost() {
+            try {
+                const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, {email:email2,password:state.password});
+                if (data.ok) {
+                    dispatch(loginNormal(data)); 
+                } 
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        if(state.password){
+             return fetchPost()
+        }
+        if(state.name && !state.password){
+            return exitoso2()
+        }
+        
+    }
     //funcion para la entrada de los estados
     function inputChange(e:any){
         setstate((prevState:any)=>{
@@ -71,23 +105,24 @@ export const ModificarUser=()=>{
     async function postModificar(e:any) {
         e.preventDefault()
         //verificaciones
-        if(state.name.length >=3){
-            if(!state.password){
-                return echo()
-            }
-        }else if(state.name.length>=1){
+         if(state.name.length>=1 && state.name.length <=2){
             return nombreCorto()
         }
-        if (state.password !== state.comfirm_password) { return contraseña2incorrecta() }
-        const ck_password = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-        if (!ck_password.test(state.password)) {
-            return contraseñaIncorrecta()
-        };
+        if(state.password){
+            if (state.password !== state.comfirm_password) { return contraseña2incorrecta() }
+            const ck_password = /^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+            if (!ck_password.test(state.password)) {
+                return contraseñaIncorrecta()
+            }
+        }
+        
         //funcion para cambios
         async function echo(){
             await axios.put(`https://api-fest.herokuapp.com/api/users/edit/${id}`,{name:state.name,password:state.password})
-            dispatch(loginNormal({email: authGoo.logNormal.email, password: state.password}))
+            //dispatch(loginNormal({email: email, password: state.password}))
             exitoso()
+            actualizar()
+            
         } 
        
         echo()
@@ -95,9 +130,7 @@ export const ModificarUser=()=>{
     
     return <div>
         <div>
-            <Link to='/home'>
-             <img className='logo' src={logo} alt='logo'/>
-            </Link>
+            <Nav/>
         </div>
         <div className="form-v8">
 	        <div className="page-content">

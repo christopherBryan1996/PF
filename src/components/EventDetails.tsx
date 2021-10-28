@@ -12,6 +12,7 @@ import { Nav } from "./Nav";
 import Foot from "./Foot";
 import axios from 'axios';
 import URLrequests from "./constanteURL";
+import { useLocation } from "react-router";
 
 
 
@@ -49,31 +50,61 @@ export default function EventDetails() {
             setLoading(false)
         }, 500)
     }, []);
+//Con esto me fijo si cuando volvio de hacer la compra en los query hay un aprobado-------------------------------
+    let { search } = useLocation();
+    const query = new URLSearchParams(search);
+    const paramFieldStatus = query.get('collection_status');
+    const paramFieldPayment_id= query.get("payment_id")
+    console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
 
+    if (paramFieldStatus === "pending" || paramFieldStatus === "approved" ){
+        
+        const infoEnviar = {
+            status: paramFieldStatus,
+            userID: authGoo.logNormal.uid,
+            enventID: eventid,
+            mount: evento.price,
+            payment_id: paramFieldPayment_id
+        }
 
-    console.log("evento", evento)
+        console.log("infoEnviar", infoEnviar)
+        const despacharStatus = async (data:any) => {
+            try {
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, infoEnviar) //tenes q cambiar esta ruta
+                console.log("data",data);
+    
+            } catch (error) {
+                console.error(error);
+            };
+        }
+        despacharStatus(infoEnviar)
+    }
+    
+
 //Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
     const agregarGenteAsistir = () => {
         authGoo.logNormal &&
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
     }
-
+//Funcion para despachar la compra de una entrada POST------------------------------------------------
     const [cantidad, setCantidad] = useState(1);
 
     const comprarEntrada = () => {
         const post = {
             title: evento.nombreDelEvento,
             price: evento.precio,
-            quantity: cantidad
+            quantity: cantidad,
+            eventID: eventid
         }
         async function fetchPost(data:any) {
             try {
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, post)
                 console.log("data",data);
     
                 if (data.LinkMP) {
                     window.open(data.LinkMP);
+                    //window.open para nueva tab % window.location.assign en la misma tab
                    
     
                 } else if  (data.err){
@@ -131,11 +162,16 @@ export default function EventDetails() {
                     <p>Publico: <span>{final}</span></p>
 
                 </div>
-                <button className="btn btn-success col-md-12">
+                <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
 
-                    {evento.precio !== 0 && <div onClick={comprarEntrada}> <FiShoppingCart size="2em" color="white" /> <p>Comprar Entradas</p> </div> }   
+                    {evento.precio !== 0 && 
+                    <div onClick={comprarEntrada}> 
+                    <FiShoppingCart size="2em" color="white" />
+                     <p>Comprar Entradas</p> 
+                     <input type="number" value={cantidad} onChange={(e)=> setCantidad(parseInt(e.target.value))}></input>
+                     </div> }   
 
                 </button>
 
