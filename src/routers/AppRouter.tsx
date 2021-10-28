@@ -19,6 +19,9 @@ import { login, socketConfig } from '../actions/actions';
 import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import MercadoPago from '../components/MercadoPay';
+import '../components/styles/Loading.css';
+import ModificarEvento from '../components/ModificarEvento';
 
 import MercadoPay from '../components/MercadoPay';
 
@@ -129,6 +132,11 @@ export const AppRouter = () => {
                         exact path="/asistentes/:uid/:eventid"
                         isAuthenticated={isAuthenticated}
                         component={AsistentesPage}/>
+                    <PrivateRoute
+                        exact path="/modificarEventos/:eventid"
+                        isAuthenticated={isAuthenticated}
+                        component={ModificarEvento} />
+
                           <PrivateRoute
                         exact path="/admin/"
                         isAuthenticated={isAuthenticated}

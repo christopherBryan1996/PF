@@ -34,7 +34,7 @@ export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fec
             </div>
 
             <div className="card-footer">
-            <Link to="/home">
+            <Link to={`/modificarEventos/${id}`}>
             <span><FiEdit2 className="icons"/></span>
             </Link>
 
