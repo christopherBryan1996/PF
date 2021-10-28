@@ -12,7 +12,7 @@
         justify-content: space-around;
     }
 
-
+   
 .fff img {
     margin-left: 55px;
     margin-right: 5px;
@@ -31,7 +31,31 @@
 
 .navbar {
     opacity: 0.8;
+    padding:0;
   }
+.link-perfil{
+    text-decoration: none;
+    color: white;
+}
+.btn-cerar{
+
+    color: white;
+    cursor: pointer;
+
+
+}
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #fff;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
 
   .navbar-brand {
     display: inline-block;
@@ -41,4 +65,10 @@
     line-height: inherit;
     white-space: nowrap;
     margin-left: 3rem;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+  
 }

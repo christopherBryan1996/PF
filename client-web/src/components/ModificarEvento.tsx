@@ -11,6 +11,18 @@ import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
 
 export default function ModificarEvento() {
+     //Estados------------------------------------------------------------------------------------------
+    const [nameEvent, setNameEvent] = useState<string>("");
+    const [ubicacion, setUbicacion] = useState("");
+    const [publicoOPriv, setPublicoOPriv] = useState("publico");
+    const [numeroPersonas, setNumeroPersonas] = useState(0);
+    const [precio, setPrecio] = useState(0);
+    const [fecha, setFecha] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
+    const [file, setFile] = useState(null || "")
+    const [creando, setCreando] = useState(false);
+    
     
     const { eventid }: { eventid: string } = useParams()
     const dispatch = useDispatch();
@@ -21,26 +33,25 @@ export default function ModificarEvento() {
     const {evento}:{evento:any}=useSelector((state:any)=>state.eventos)
     console.log(evento,"hola")
 
+    useEffect(()=>{
+        if(evento){
+            setNameEvent(evento.nombreDelEvento);
+            setUbicacion(evento.direccion)
+            setNumeroPersonas(evento.invitados);
+            setPrecio(evento.precio);
+            setFecha(evento.fecha);
+            setDescripcion(evento.descripcion);
+            setPublicoOPriv(evento.publico);
+            setCoordenadasPadre(evento.coordenadas);
+            setFile(evento.imagen);
+            
+        }
+    },[evento])
 
-    //Estados------------------------------------------------------------------------------------------
-    const infoEvento=evento;
+
     
-    // const [nameEvent, setNameEvent] = useState<string>(nombreDelEvento);
-    // console.log(nameEvent,"name")
-    // console.log(evento.nombreDelEvento,"e.jo")
-    const [state,setState]=useState(infoEvento);
-    useEffect(()=>{setState(infoEvento)})
-    // const [ubicacion, setUbicacion] = useState("");
-    // const [publicoOPriv, setPublicoOPriv] = useState("publico");
-    // const [numeroPersonas, setNumeroPersonas] = useState(0);
-    // const [precio, setPrecio] = useState(0);
-    // const [fecha, setFecha] = useState("");
-    // const [descripcion, setDescripcion] = useState("");
-    // const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
-    // const [file, setFile] = useState(null || "")
-    const [creando, setCreando] = useState(false);
 
-    const eventoCreado = () => toast.success('El evento fue creado con exito', {
+    const eventoModificado = () => toast.success('El evento fue modificado con exito', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -60,94 +71,78 @@ export default function ModificarEvento() {
     });
 
 
-    // function llenarEstadoCoordenadas(data: any) {
-    //     console.log("data", data)
-    //     setCoordenadasPadre(data)
-    // };
+    function llenarEstadoCoordenadas(data: any) {
+        console.log("data", data)
+        setCoordenadasPadre(data)
+    };
 
-    function handleOnChange(e:any){
-        setState((prevState:any)=>{
-            return{
-                ...prevState,
-                [e.target.name]: e.target.value
-            }
-        })
-        
-       
+
+
+    function handleChange(e:any){
+        e.preventDefault();
+        setNameEvent(e.target.value)
     }
     //Funcion para enviar el post del form----------------------------------------------------------------
 
-    // const handleFileChange = (e: any) => {
+    const handleFileChange = (e: any) => {
 
-    //     const pic = e.target.files[0]
-    //     setFile(pic);
+        const pic = e.target.files[0]
+        setFile(pic);
 
-    // }
-    // console.log(file)
+    }
+    console.log(file)
 
-    // const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: any) => {
 
-    //     e.preventDefault();
+        e.preventDefault();
         
-    //     //!nameEvent
-    //     if (!publicoOPriv  || !fecha || !descripcion  || !fecha ) { return faltanCasillas() }
-    //     setCreando(true);
-    //     let publicVar = true;
-    //     if (publicoOPriv === "true") publicVar = true;
-    //     if (publicoOPriv === "false") publicVar = false;
+        console.log(publicoOPriv,fecha,descripcion,fecha,nameEvent,ubicacion, "hola")
+        if (!publicoOPriv  || !fecha || !descripcion  || !precio || !nameEvent || !ubicacion) { return faltanCasillas() }
+        setCreando(true);
+        let publicVar = true;
+        if (publicoOPriv === "true") publicVar = true;
+        if (publicoOPriv === "false") publicVar = false;
 
-    //     const url = await fileUpload(file)
+        const url = await fileUpload(file)
         
 
 
-    //     const post:any = {
-    //         // nombreDelEvento: nameEvent,
-    //         direccion: ubicacion,
-    //         horaDeInicio: "20:30",
-    //         autor: authGoo.logNormal.uid,
-    //         publico: publicVar,
-    //         invitados: numeroPersonas,
-    //         precio,
-    //         fecha,
-    //         descripcion,
-    //         imagen: url,
-    //         coordenadas: coordenadasPadre
-    //     }
-    //     console.log("post", post)
+        const put:any = {
+            nombreDelEvento: nameEvent,
+            direccion: ubicacion,
+            // horaDeInicio: "20:30",
+            autor: authGoo.logNormal.uid,
+            publico: publicVar,
+            invitados: numeroPersonas,
+            precio,
+            fecha,
+            descripcion,
+            imagen: url,
+            coordenadas: coordenadasPadre
+        }
+        console.log("put", put)
 
 
-    //     async function fetchPost(data: object) {
-    //         try {
-    //             const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
-    //             console.log("data",data);
+        async function fetchPost(data: object) {
+            try {
+                const {data}: {data:any} =  await axios.put(`${URLrequests}events/edit/${eventid}`, put)
+                console.log("data",data);
                 
-    //             if (data.message === 'Evento creado') {
+                
 
-    //                 eventoCreado();
-    //                 // setNameEvent("");
-    //                 setUbicacion("");
-    //                 setNumeroPersonas(0);
-    //                 setPrecio(0);
-    //                 setFecha("");
-    //                 setDescripcion("");
-    //                 setCreando(false);
-
-    //             } else {
-    //                 faltanCasillas();
-    //             }
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //     fetchPost(post)
-    //     console.log("constPost", post) 
-    // };
+                
+                    setCreando(false);
+                    eventoModificado()
+                
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchPost(put)
+        console.log("constPost", put) 
+    };
 
     
-    // console.log(filtrado,"jo")
-
-   
-   
     //Return del componente----------------------------------------------------------------------------
 
     return  (
@@ -156,7 +151,8 @@ export default function ModificarEvento() {
             <div className="container container-Nevent">
                 <div className="row">
                     <div className="col-lg-6 col-sm-12  ">
-                        <form >{/*onSubmit={handleSubmit}*/}
+                        <h2>Modificar Evento</h2>
+                        <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="form-group col-md-6 ">
                                     <label>Nombre del evento</label>
@@ -164,38 +160,39 @@ export default function ModificarEvento() {
                                         className="form-control"
                                         // placeholder="Nombre del evento"
                                         type="text"
-                                        value={state.nombreDelEvento}
-                                        name="nombreDelEvento"
+                                        value={nameEvent}
+                                        // name="nombreDelEvento"
                                         // defaultValue={evento.nombreDelEvento}
-                                        onChange={handleOnChange}
+                                        onChange={handleChange}
                                         
                                     >
                                     </input>
                                 </div>
-                                {/* <div className="form-group col-md-5 col-sm-12 ">
+                                <div className="form-group col-md-5 col-sm-12 ">
                                     <label>Ubicacion</label>
                                     <input
                                         className="form-control"
-                                        // placeholder={filtrado[0].direccion}
+                                        
                                         type="text"
                                         value={ubicacion}
                                         onChange={(e) => setUbicacion(e.target.value)}
                                     >
                                     </input>
                                 </div>
-                            </div> */}
-                            {/* <div className="row">
+                            </div>
+                            <div className="row">
                                 <div className="form-group col-md-6 col-sm-12 ">
-                                    <label>Cantidad de asistentes</label>
+                                    <label>Cantidad de invitados</label>
                                     <input
                                         
                                         type="number"
+                                        value={numeroPersonas}
                                         // defaultValue={filtrado[0].asistentes.length}
                                         onChange={(e) => setNumeroPersonas(parseInt(e.target.value))}
                                     >
                                     </input>
-                                </div> */}
-                                {/* <div className="form-group col-md-1 ">
+                                </div>
+                                <div className="form-group col-md-1 ">
                                     <label>Tipo</label>
                                     <select
                                         className="form-select form-select-lg "
@@ -206,31 +203,31 @@ export default function ModificarEvento() {
                                         <option value="false" >Privado</option>
                                     </select>
                                 </div>
-                            </div> */}
-                            {/* <div className="row">
+                            </div>
+                            <div className="row">
                                 <div className="form-group col-md-5 ">
                                     <label>Valor del ingreso</label>
                                     <input
                                         type="number"
-                                        // value={filtrado[0].precio}
+                                        value={precio}
                                         onChange={(e) => setPrecio(parseInt(e.target.value))}
                                     >
                                     </input>
-                                </div> */}
-                                {/* <div className="form-group col-md-2 col-sm-12">
+                                </div>
+                                <div className="form-group col-md-2 col-sm-12">
                                     <label>Fecha</label>
                                     <input
                                         type="date"
-                                        // value={filtrado[0].fecha.slice(0,10)}
+                                        value={fecha}
                                         onChange={(e) => setFecha(e.target.value)}>
                                     </input>
                                 </div>
-                            </div> */}
-                            {/* <div className="custom-file col-md-11">
+                            </div>
+                            <div className="custom-file col-md-11">
                                 <input type="file" onChange={handleFileChange} className="custom-file-input" id="customFile" />
                                 <label className="custom-file-label" htmlFor="customFile">Adjuntar imagen</label>
-                            </div> */}
-                            {/* <div className="form-group col-md-11">
+                            </div>
+                            <div className="form-group col-md-11">
                                 <label>Descripcion del evento</label>
                                 <textarea
                                     className="form-control"
@@ -241,7 +238,7 @@ export default function ModificarEvento() {
                             </div>
                             <div className="form-group col-md-11">
                                 {creando && <button disabled className="btn btn-success col-md-12  btn-lg">Creando evento</button>}
-                                {!creando && <button className="btn btn-success col-md-12  btn-lg">Crear evento</button>} */}
+                                {!creando && <button className="btn btn-success col-md-12  btn-lg">Modificar evento</button>} 
                                 
                             </div>
                         </form>
@@ -250,7 +247,7 @@ export default function ModificarEvento() {
 
                     <div className="col-6">
                         <p>Haga click 1 vez para ver su localizacion actual, haga un segundo click para poner un marcador donde sera el evento</p>
-                        {/* <Mapa onCambio={llenarEstadoCoordenadas} /> */}
+                        <Mapa onCambio={llenarEstadoCoordenadas} />
                     </div>
                 </div>
                 <ToastContainer

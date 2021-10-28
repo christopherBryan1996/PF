@@ -19,9 +19,15 @@ import { login, socketConfig } from '../actions/actions';
 import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
-import MercadoPago from '../components/MercadoPago';
+import MercadoPago from '../components/MercadoPay';
 import '../components/styles/Loading.css';
 import ModificarEvento from '../components/ModificarEvento';
+
+import MercadoPay from '../components/MercadoPay';
+
+import '../components/styles/Loading.css'
+import { Admin } from '../components/Admin';
+
 
 export const AppRouter = () => {
 
@@ -85,7 +91,7 @@ export const AppRouter = () => {
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
 
                     <PublicRoute exact path="/detail/:eventid" component={EventDetails} />
-                    <PublicRoute exact path="/mercadopago" component={MercadoPago} />
+                    <PublicRoute exact path="/mercadopago" component={MercadoPay} /> 
 
                     <PublicRoute
                         exact path="/"
@@ -131,6 +137,11 @@ export const AppRouter = () => {
                         isAuthenticated={isAuthenticated}
                         component={ModificarEvento} />
 
+                          <PrivateRoute
+                        exact path="/admin/"
+                        isAuthenticated={isAuthenticated}
+                        component={Admin}/>
+                        
                         
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>

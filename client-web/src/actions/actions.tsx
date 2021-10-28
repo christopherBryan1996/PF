@@ -26,8 +26,19 @@ export function llenarCoordenadas(data: string[]) {
   return async function (dispatch: any) {
     return dispatch({ type: actions.LLENAR_COORDENADAS, payload: data });
   };
-
+  
 }
+
+export function getUsers() {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/users`);
+    dispatch({
+      type: actions.GET_USERS,
+      payload: res.data,
+    });
+  };
+}
+
 export function getEvents() {
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}events`);
