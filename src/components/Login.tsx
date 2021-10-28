@@ -47,7 +47,7 @@ export default function Login() {
         draggable: true,
         progress: undefined,
     });
-    const usuarioRepetido = () => toast.error('El usuario o el Email son incorrectos!', {
+    const usuarioRepetido = (text: string) => toast.error(text, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -124,7 +124,6 @@ export default function Login() {
         };
 
         const post = { email, password }
-        console.log("constPost", post)
 
         async function fetchPost(data: object) {
             try {
@@ -134,7 +133,7 @@ export default function Login() {
                     dispatch(loginNormal(data));
                     toHome();
                 } else {
-                    usuarioRepetido();
+                    usuarioRepetido(data.msg);
                 }
 
             } catch (error) {
