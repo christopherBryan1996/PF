@@ -15,17 +15,25 @@ export interface IActions {
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
     DELETE_EVENT:string;
-    SOCKET_IO_CONFIG: string;
+    
     CLEAN_NOTIFICATIONS: string;
-    GET_USERS: string;
+   
     GET_EVENTOSASISTIR:string;
     
+    SOCKET_IO_CONFIG: string;   
+    SAVE_NOTIFICATIONS: string;    
+    RESET_NOTIFICATIONS: string;
+    GET_NOTIF_OFFLINE: string;
+    GET_USERS: string;   
+    FAVORITOS_INVITADO: string; 
 }
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
-    eventId: string
+    eventId: string;
     usuario: any;
+    eventName: string;
+    avatar:string;
     userId: string;
     tareasDelUsuario: string[];
 }
@@ -87,4 +95,19 @@ export interface Ievento {
     publico: boolean;
     invitados: number;
     imagen: string;
+}
+
+export interface INotificaciones {
+    uid: string,
+    type: string,
+    idEvento: string,
+    message: string,
+}
+
+export interface INotifRecibidas {
+    uid: string,
+    type: string,
+    idEvento: string,
+    message: string,
+    _id: string
 }
