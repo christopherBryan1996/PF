@@ -5,13 +5,16 @@ import {BsFillTrashFill} from "react-icons/bs";
 import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
 import { IeventosUsuario } from "../interfaces/interfaces";
-import { useDispatch} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import {deleteEvent} from "../controllers/eventos/eventoscontrollers"
 
 export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fecha}:IeventosUsuario) {
     
-    const dispatch=useDispatch();
-   
+   const dispatch=useDispatch();
+   const { authGoo, socketIO }: { authGoo: any; socketIO: any } = useSelector(
+    (state: any) => state
+  );
+    
     
     return(
         <div>
@@ -44,16 +47,10 @@ export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fec
             <span><FaUserFriends className="icons"/></span>
             </Link>
 
-            <button className="boton" onClick={()=>deleteEvent(uid,id,dispatch)}><BsFillTrashFill className="icons"  /></button>
+            <button className="boton" onClick={()=>deleteEvent(uid, id, authGoo.logNormal.name, nombreDelEvento, socketIO.socket, dispatch)}><BsFillTrashFill className="icons"  /></button>
 
              </div>                  
             </div>
-            
-            
-            
-            
         </div>
     )
-
-//
 }

@@ -5,6 +5,7 @@ import {reducerCoords} from './coordsReducer';
 import {authReducerG} from './authGoogle'
 import { socketIoConfig } from './socketIo';
 import { usersReducer } from './usersReducer';
+import {adminReducer} from './adminReducer';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
     eventos:eventosReducer,
     authGoo: authReducerG,
     socketIO: socketIoConfig,
-    users: usersReducer
+    users: usersReducer,
+    admin: adminReducer,
 
 })

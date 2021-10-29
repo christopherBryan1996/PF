@@ -133,7 +133,7 @@ export default function ModificarEvento() {
                 
                     setCreando(false);
                     eventoModificado()
-                
+                    
             } catch (error) {
                 console.error(error);
             }
