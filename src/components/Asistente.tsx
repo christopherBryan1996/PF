@@ -26,6 +26,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
       authGoo.logNormal.name,
       props.userId, 
       props.eventId, 
+      props.eventName,
       dispatch, 
       socketIO.socket);
     setNuevaTarea("");
@@ -52,6 +53,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
             <button 
               onClick={() =>
                 eliminarAsistente(props.userId,
+                  props.eventName,
                   authGoo.logNormal.name,
                    props.eventId, 
                    dispatch, 
@@ -59,9 +61,27 @@ export default function Asistente(props: Iasistentes): JSX.Element {
               }
               type="button"
               className="btn btn-outline-danger"
+               data-toggle="modal" 
+               data-target="#myModal"
             >
               Eliminar Asistente
-            </button>
+              </button>
+            <div className="modal" id="myModal">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">modal</span>
+                    </button>
+                  <div className="modal-body">
+                    <p>{`Eliminar a ${props.usuario} de la lista de asistentes al evento`}</p>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-primary">Cerrar</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>
+                  </div>
+                </div>
+              </div>
+            </div>            
           </div>
           {!tareasVisibles ? null : (
             <div className={"card-body"}>
@@ -71,6 +91,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
                   <button
                     onClick={() =>
                       eliminarTarea(tarea,
+                        props.eventName,
                         authGoo.logNormal.name, 
                         props.userId, 
                         props.eventId, 

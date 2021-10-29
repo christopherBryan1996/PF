@@ -2,7 +2,7 @@ import './styles/Card.css'
 import { Link } from "react-router-dom";
 import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavoriteEvent } from "../actions/actions"
+import { addFavoriteEvent, addFavoriteInvitado } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
 import { IoHeartOutline } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
@@ -42,7 +42,7 @@ export const Evento = (props: Iprops) => {
         eventoAgregado();
         }
         else{
-            toLogin();
+            dispatch(addFavoriteInvitado(_id));
         }
     };
 
