@@ -14,21 +14,15 @@ export interface IActions {
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
-    DELETE_EVENT:string;
-<<<<<<< HEAD
-    SOCKET_IO_CONFIG: string;
-    CLEAN_NOTIFICATIONS: string;
-    GET_USERS: string;
-    ADMIN: string;
-    
-=======
+    DELETE_EVENT:string;   
+    CLEAN_NOTIFICATIONS: string;    
+    ADMIN: string;    
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
     RESET_NOTIFICATIONS: string;
     GET_NOTIF_OFFLINE: string;
     GET_USERS: string;   
     FAVORITOS_INVITADO: string; 
->>>>>>> 113fdd808c9170ed850b967a76c6bf7f1cbf06ba
 }
 
 //interface para lista de asistentes por evento
