@@ -42,6 +42,11 @@ export interface IeventosUsuario {
     fecha:string;
 }
 
+export interface IeventosAsistir {
+    eventId:any;
+    tareas:any;
+}
+
 
 export interface Iusers{
 

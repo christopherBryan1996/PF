@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { Nav } from './Nav';
 import { getEventosAsistir } from "../actions/actions";
-
+import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
 
 
 
@@ -45,7 +45,7 @@ export default function EventosAsistir(): JSX.Element {
             <h1>Eventos a asistir</h1>
             {/* <div>{userTasks[0].eventId.nombreDelEvento}</div>  */}
             
-            <div>
+            {/* <div>
                 {eventos.map((i:any)=>(
                     <>
                     <div>
@@ -58,6 +58,18 @@ export default function EventosAsistir(): JSX.Element {
                     </div>
                     </>
                 ))}
+
+            </div> */}
+            <div>
+
+            {eventos.map((i:{
+                eventId:{};
+                tareas:[];
+            })=>(
+                <div>
+            <TarjetaEventosAsistir eventId={i.eventId} tareas={i.tareas}/>
+            </div>
+            ))}
 
             </div>
         </div>
