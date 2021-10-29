@@ -41,7 +41,7 @@ export default function EventDetails() {
     const dispatch = useDispatch()
 
     const evento = useSelector((state: any) => state.eventos.evento)
-    const { authGoo } = useSelector((state: any) => state);
+    const { authGoo, socketIO } = useSelector((state: any) => state);
 
     useEffect(() => {
        
@@ -86,6 +86,14 @@ export default function EventDetails() {
         authGoo.logNormal &&
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
+
+         const dataNotif = {
+           uid: evento.autor,
+           type: "newAsis",
+           idEvento: evento._id,
+            message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
+        }
+     socketIO.socket.emit("postNotification", dataNotif);
     }
 //Funcion para despachar la compra de una entrada POST------------------------------------------------
     const [cantidad, setCantidad] = useState(1);

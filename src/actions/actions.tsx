@@ -2,7 +2,7 @@ import axios from "axios";
 import actions from "../actions_type/actions_types";
 import URLrequests from "../components/constanteURL";
 import socketIOClient from "socket.io-client";
-
+import { INotificaciones } from "../interfaces/interfaces"
 
 
 /********PASOS PARA CREAR UNA ACTION NUEVA***********
@@ -93,7 +93,7 @@ export const login = (data: any) => ({
 
 
     
-export const loginNormal = (data: any) => {
+export const loginNormal = (data: any) => {  
   return {
     type: actions.LOGIN_NORMAL,
     payload: data,
@@ -101,9 +101,9 @@ export const loginNormal = (data: any) => {
 };
 
 
-export const logout = () => ({
-  type: actions.LOGOUT,
-});
+export const logout = () => (
+  {type: actions.LOGOUT,}  
+)
 
 export const getFavorites = (id: any) => {
   return async function (dispatch: any) {
@@ -158,19 +158,45 @@ export const socketConfig = (uid: string, usuario: string) => {
   const socket = socketIOClient(URLrequests)
   const data = {uid, usuario}
   socket.emit("newUser",data);
-
-  let  notificacionesOffL: string[] = [];  
-  socket.on("getNotifOfLine", ( OffLinenotif: string[])  => {
-    OffLinenotif.forEach(e =>notificacionesOffL.push(e))
-  })
   return function (dispatch: any) {
     dispatch({
       type: actions.SOCKET_IO_CONFIG,
-      payload: {socket, notificacionesOffL}
+      payload: socket
     });
   }
 }
 
-export const cleanNotifications = () => ({
-  type: actions.CLEAN_NOTIFICATIONS,
-});
+export const resetNotifications = () => ({
+  type: actions.RESET_NOTIFICATIONS,
+})
+
+
+export const getNotifOffLine = (uid: string) => {
+   return async function (dispatch: any) {
+    const res: any = await axios.get(`${URLrequests}notifications/${uid}`);
+    dispatch({
+      type: actions.GET_NOTIF_OFFLINE,
+      payload: res.data
+    });
+  }
+
+}
+
+export const addFavoriteInvitado = (id : string) => {
+  return function (dispatch: any) {
+    dispatch({
+      type: actions.FAVORITOS_INVITADO,
+      payload: id
+    });
+  }
+
+}
+
+export const saveNotifications = (notif: any) => {
+   return function (dispatch: any) {
+    dispatch({
+      type: actions.SAVE_NOTIFICATIONS,
+      payload: notif
+    });
+  }
+}

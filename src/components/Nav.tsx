@@ -11,11 +11,11 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
+  
   const { authGoo } = useSelector((state: any) => state);
   const [logins, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         const datos = {
@@ -33,14 +33,7 @@ export const Nav = () => {
     });
   }, [dispatch]);
 
-  const handleLogout = async () => {
-    const auth = getAuth();
-    await signOut(auth);
-    dispatch(logout());
-    landing()
-  };
-
-  const history = useHistory();
+    const history = useHistory();
   const botonIngresa = () => {
     history.push("/login");
   };
@@ -56,6 +49,13 @@ export const Nav = () => {
   };
   const landing = () => {
     history.push("/");
+  };
+
+  const handleLogout = async () => {
+    const auth = getAuth();
+    await signOut(auth);
+    dispatch(logout());
+    landing()
   };
 
   return (
