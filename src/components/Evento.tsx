@@ -73,7 +73,7 @@ export const Evento = (props: Iprops) => {
                             </FacebookShareButton>
                             <WhatsappShareButton
                                 title='Hola, te comparto este evento, te pueda interesar!'
-                                url="https://students.soyhenry.com/">
+                                url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
                         </div>

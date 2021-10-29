@@ -174,3 +174,10 @@ export const socketConfig = (uid: string, usuario: string) => {
 export const cleanNotifications = () => ({
   type: actions.CLEAN_NOTIFICATIONS,
 });
+
+export const admin = (state: any) => {
+  return {
+    type: actions.ADMIN,
+    payload: state,
+  };
+};

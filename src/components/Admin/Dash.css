@@ -1,0 +1,25 @@
+.container-dash{
+
+    background-color:rgb(218, 216, 216);
+    padding-top: 25px;    
+    height:95%;
+    border-radius: 8px;
+    margin-top: 30px;
+
+
+}
+
+.container-dash h2{
+
+    color:rgb(56, 52, 52);
+
+}
+
+.searchUs{
+
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom:15px;
+
+}
