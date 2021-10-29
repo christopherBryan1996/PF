@@ -8,8 +8,7 @@ import { Iasistentes } from "../interfaces/interfaces";
 import "./styles/AsistentesPage.css";
 
 export default function AsistentesPage( ): JSX.Element {
-  const { eventid, uid }: { eventid: string; uid: string } =
-    useParams();
+  const { eventid, uid }: { eventid: string; uid: string } = useParams();
 
   const { authGoo, eventos } = useSelector((state: any) => state);
 

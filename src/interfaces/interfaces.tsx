@@ -14,7 +14,9 @@ export interface IActions {
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
-    DELETE_EVENT:string;
+    DELETE_EVENT:string;   
+    CLEAN_NOTIFICATIONS: string;    
+    ADMIN: string;    
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
     RESET_NOTIFICATIONS: string;
