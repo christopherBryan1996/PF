@@ -18,6 +18,7 @@ export interface IActions {
     SOCKET_IO_CONFIG: string;
     CLEAN_NOTIFICATIONS: string;
     GET_USERS: string;
+    GET_EVENTOSASISTIR:string;
     
 }
 
@@ -63,6 +64,7 @@ export interface IEventoState {
     asistentesEvento: IasistentesAEvento[];
     eventosFavoritos:[];
     eventosUsuario:[];
+    eventosAsistir:[], 
 }
 
 //interface para la lista de eventos
