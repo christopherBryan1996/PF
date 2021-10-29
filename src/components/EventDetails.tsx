@@ -13,6 +13,7 @@ import Foot from "./Foot";
 import axios from 'axios';
 import URLrequests from "./constanteURL";
 import { useLocation } from "react-router";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -29,9 +30,29 @@ export default function EventDetails() {
         draggable: true,
         progress: undefined,
     });
+    const pagoConfirmado = () => toast.success('Tu pago se encuentra confirmado y ahora figuras como que asistiras al evento', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const pagoYaRealizado = () => toast.error('Ya compraste una entrada para este evento', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
     const url = window.location.pathname;
+
+   
 
     const [loading, setLoading] = useState<boolean>(true)
     const { eventid }: { eventid: string } =
@@ -50,60 +71,75 @@ export default function EventDetails() {
             setLoading(false)
         }, 500)
     }, []);
+
+    const history = useHistory();
+    const toEvent = () => {
+        history.push(`/detail/${eventid}`)
+    };
+
+
+ 
+            
+
 //Con esto me fijo si cuando volvio de hacer la compra en los query hay un aprobado-------------------------------
     let { search } = useLocation();
     const query = new URLSearchParams(search);
-    const paramFieldStatus = query.get('collection_status');
-    const paramFieldPayment_id= query.get("payment_id")
+    const paramFieldStatus:any  = query.get('collection_status');
+    const paramFieldPayment_id:any = query.get("payment_id");
     console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
+    
+    
+//Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------
 
-    if (paramFieldStatus === "pending" || paramFieldStatus === "approved" ){
-        
-        const infoEnviar = {
-            status: paramFieldStatus,
-            userID: authGoo.logNormal.uid,
-            enventID: eventid,
-            mount: evento.price,
-            payment_id: paramFieldPayment_id
-        }
-
-        console.log("infoEnviar", infoEnviar)
-        const despacharStatus = async (data:any) => {
+    const agregarPagoDB = async () =>{
+    
             try {
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, infoEnviar) //tenes q cambiar esta ruta
-                console.log("data",data);
-    
+                const {data}: {data:any} =  await axios.patch(`${URLrequests}api/payment/addpayment/${authGoo.logNormal.uid}/${eventid}`, 
+                 {
+                    status: paramFieldStatus.toString(),
+                    mount: evento.precio,
+                    payment_id: paramFieldPayment_id.toString() 
+                }) 
+                console.log("dataEnviadaRecibida",data);
+            
+
             } catch (error) {
-                console.error(error);
+            console.error(error);
             };
-        }
-        despacharStatus(infoEnviar)
-    }
-    
+        
+     pagoConfirmado();
+
+     setTimeout(()=>toEvent() ,2000);
+    };    
 
 //Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
     const agregarGenteAsistir = () => {
         authGoo.logNormal &&
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
-    }
+    };
 //Funcion para despachar la compra de una entrada POST------------------------------------------------
     const [cantidad, setCantidad] = useState(1);
 
-    const comprarEntrada = () => {
-        const post = {
+    const comprarEntrada = async () => {
+
+        
+            const check:any = await  axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
+            
+            const post = {
             title: evento.nombreDelEvento,
             price: evento.precio,
             quantity: cantidad,
             eventID: eventid
         }
+            console.log("postEnviar", post)
         async function fetchPost(data:any) {
             try {
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/getid`, post)
+                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
                 console.log("data",data);
     
                 if (data.LinkMP) {
-                    window.open(data.LinkMP);
+                    window.location.assign(data.LinkMP);
                     //window.open para nueva tab % window.location.assign en la misma tab
                    
     
@@ -114,9 +150,13 @@ export default function EventDetails() {
             } catch (error) {
                 console.error(error);
             };
-        }
-        fetchPost(post)
-        console.log("constPost", post) 
+        }    
+            if (!check.status){
+                fetchPost(post)
+
+            }else if (check.status){
+                pagoYaRealizado();
+            }
 
     }
 
@@ -170,10 +210,22 @@ export default function EventDetails() {
                     <div onClick={comprarEntrada}> 
                     <FiShoppingCart size="2em" color="white" />
                      <p>Comprar Entradas</p> 
-                     <input type="number" value={cantidad} onChange={(e)=> setCantidad(parseInt(e.target.value))}></input>
-                     </div> }   
+                     
+                     </div> } 
 
+                     
                 </button>
+
+                {paramFieldPayment_id && 
+                     <button className="btn btn-success">
+                     <div onClick={(()=> agregarPagoDB())}>
+                          <FiUserPlus size="2em" color="white" />
+                          <p>Confirma que compraste la entrada y asistiras al evento</p>
+
+                    </div>
+                    </button>} 
+
+                
 
                 <div className="card-contai2" >
                     <Mapa1evento />
