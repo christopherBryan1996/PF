@@ -24,6 +24,7 @@
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "mercadopago": "^1.5.8",
+    "nodemailer": "^6.7.0",
     "pretty-error": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
