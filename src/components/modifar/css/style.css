@@ -68,6 +68,10 @@
 }
 .form-v8-content .tab .tab-inner {
 	width: 100%;
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .form-v8-content .tab .tablinks {
 	background: transparent;
@@ -208,8 +212,16 @@
 .form-v8-content .form-detail .form-row-last input {
 	padding: 11px;
 }
+.imgUser{
+	width: 90px;
+	display: none;
+}
+
 /* Responsive */
 @media screen and (max-width: 991px) {
+	.form-v8{
+		padding: 120px;
+	}
 	.form-v8-content {
 		margin: 40px 20px;
 		flex-direction:  column;
@@ -221,21 +233,26 @@
 	.form-v8-content .form-left {
 		width: 100%;
 	}
-	.form-v8-content .form-left img {
-		width: 100%;
-		border-bottom-left-radius: 0px;
-	    border-top-right-radius: 8px;
-	}
+	
 	.form-v8-content .form-right {
 		width: auto;
 		border-top-right-radius: 0;
 		border-bottom-left-radius: 8px;
+		display: flex;
+		flex-direction: column;
+    	align-items: center;
 	}
 	.form-v8-content .tab {
 		margin-top: 45px;
 	}
 	.form-v8-content .form-detail .register {
 		margin-bottom: 80px;
+	}
+	.imagform{
+		display: none;
+	}
+	.imgUser{
+		display:block;
 	}
 }
 
