@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import './styles/Login.css';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginNormal, login } from "../actions/actions";
@@ -15,6 +15,7 @@ import axios from 'axios'
 export default function Login() {
 
     const dispatch = useDispatch()
+    const { authGoo } = useSelector((state: any) => state)
 
     //Estados-------------------------------------------------------------------------
     const [email, setEmail] = useState("");
@@ -104,6 +105,7 @@ export default function Login() {
         dispatch(loginNormal(datos))           
     }
     await dispatch(login(loginGoogle));
+    const {dataGoogle}:{dataGoogle:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)
         toHome() 
 
         
@@ -130,8 +132,9 @@ export default function Login() {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
                 console.log("mensaje", data)
                 if (data.ok) {
-                    dispatch(loginNormal(data));
-                    toHome();
+                    dispatch(loginNormal(data));             
+                    const {data2}:{data2:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)           
+                    setTimeout(()=>toHome(),1000);
                 } else {
                     usuarioRepetido(data.msg);
                 }

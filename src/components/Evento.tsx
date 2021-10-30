@@ -2,7 +2,7 @@ import './styles/Card.css'
 import { Link } from "react-router-dom";
 import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavoriteEvent } from "../actions/actions"
+import { addFavoriteEvent, addFavoriteInvitado } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
 import { IoHeartOutline } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
@@ -42,7 +42,7 @@ export const Evento = (props: Iprops) => {
         eventoAgregado();
         }
         else{
-            toLogin();
+            dispatch(addFavoriteInvitado(_id));
         }
     };
 
@@ -73,7 +73,7 @@ export const Evento = (props: Iprops) => {
                             </FacebookShareButton>
                             <WhatsappShareButton
                                 title='Hola, te comparto este evento, te pueda interesar!'
-                                url="https://students.soyhenry.com/">
+                                url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
                         </div>

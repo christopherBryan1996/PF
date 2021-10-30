@@ -1,12 +1,11 @@
 .notificaciones {
-   
-    width:  40px;
-    margin-right:  0;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 .buttonNotif{
     background-color: transparent;
     border:none;
-    position: relative;
 }
 
 .buttonNotif:focus{
@@ -27,10 +26,31 @@
     color:white;
 }
 
-.notificacion{
-    display: block;
-    box-sizing: content-box;
+.notificacion {
     position: absolute;
-    margin-top: 5px;     
+    display: block;
+    max-width: 400px;
+    top: 65px;
     overflow-y: auto;
+    max-height: 50vh;
+    font-weight: 600;
+}
+
+.linkNotif {
+    text-decoration: none; 
+}
+
+.notifText {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.deleteNot {
+    display: block;
+    background-color: transparent;
+    border: 1px solid rgb(5, 184, 145);
+    color: rgb(5, 184, 145);
+    font-weight: 400;
+    box-shadow: 2px 2px 4px rgb(6, 7, 7) ;
+    border-radius: 5px;
 }

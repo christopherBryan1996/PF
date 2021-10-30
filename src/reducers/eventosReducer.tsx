@@ -28,9 +28,10 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
                 
             }
         }
-        case actions.GET_ASISTENTES:{
+         case actions.GET_ASISTENTES:{
             return {
                 ...state,
+                evento: action.payload.nombreDelEvento,
                 asistentesEvento: action.payload.asistentes,
             }
         }
@@ -84,11 +85,6 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
             eventosUsuario: action.payload,
         }
     }
-
-        
-
-    
-    
         default:
             return state;
     }
