@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import { IeventosAsistir } from "../interfaces/interfaces";
-
+import {borrarAsistencia} from "../controllers/asistirEventos/asistircontroller"
+import {  useParams } from "react-router-dom";
+import {  useDispatch} from "react-redux";
 
 export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) {
-    
+    const { uid }: { uid: string } = useParams()
+    const dispatch=useDispatch();
     const [tareasVisibles, setTareasVisibles] = useState(false);
     console.log(eventId,"eventid")
     console.log(tareas,"eid")
@@ -12,26 +15,31 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
         setTareasVisibles(!tareasVisibles);
     };
 
-    const fechacoratada = eventId.fecha.slice(0,10)
-    // const fechahoy = new Date()
-    // console.log(fechahoy,"feh")
-    // console.log(fechacoratada,"feh")
-
-    // let dif = mome     
+    const fechacoratada = eventId.fecha
+    const fechacorta=fechacoratada.slice(0,10)
+    const fecha =new Date(fechacoratada).getTime()
+    const fechahoy = new Date().getTime()
     
+    const resta=fecha-fechahoy
+    
+    const numerfinal=Math.ceil(resta/8.64**7/24)
+    
+    
+   
 
-    // console.log(dif)
+
 
     return(
         <div>
             <div className="barra">
                 {eventId.nombreDelEvento}
                 <br/>
-                {fechacoratada}
+                {fechacorta}
+                <span>Faltan {numerfinal} dias para el evento</span>
 
 
             <button  onClick={desplegarTareas} type="button" className="btn btn-outline-success" >
-                tareas
+                Tareas
             </button>
 
             {!tareasVisibles ? null : ( 
@@ -41,6 +49,10 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
                     )):null}  
                 </div>
             )}
+
+            <button  onClick={()=>borrarAsistencia(uid, eventId, dispatch)} type="button" className="btn btn-outline-success" >
+                No voy a asistir
+            </button>
 
             </div>
         </div>
