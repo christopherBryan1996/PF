@@ -55,7 +55,7 @@ export default function EventDetails() {
     const query = new URLSearchParams(search);
     const paramFieldStatus = query.get('collection_status');
     const paramFieldPayment_id= query.get("payment_id")
-    console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
+    // console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
 
     if (paramFieldStatus === "pending" || paramFieldStatus === "approved" ){
         

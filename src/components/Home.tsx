@@ -4,7 +4,7 @@ import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
-import { getEvents, filtroPrecio } from "../actions/actions"
+import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import URLrequests from "./constanteURL";
@@ -14,6 +14,7 @@ export const Home = () => {
 
     const [search, setSearch] = useState('')
     const { eventos } = useSelector((state: any) => state.eventos)
+    const { authGoo } = useSelector((state: any) => state);
 
     const history = useHistory();
     const crearEvento = () => {
@@ -22,6 +23,7 @@ export const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
+        dispatch(getFavorites(authGoo.logNormal.uid))
     }, []);
 
     function change(e: any) {
