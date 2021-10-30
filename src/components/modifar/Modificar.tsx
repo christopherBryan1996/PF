@@ -9,7 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { loginNormal } from '../../actions/actions'
 import { useDispatch, useSelector } from "react-redux";
 import {Nav }from '../Nav'
-export const ModificarUser=()=>{
+import { fileUpload } from "../../helpers/fileUpload";
+export const ModificarUser=  ()=>{
     //traemos lo que este en id del params
     const {id}= useParams() as any
     const {authGoo}=useSelector((state:any)=>state);
@@ -20,7 +21,7 @@ export const ModificarUser=()=>{
         comfirm_password:'',
     })
     
-    
+    const [img, setimg] = useState(null||'')
     
     //mensajes
     const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
@@ -68,12 +69,19 @@ export const ModificarUser=()=>{
         draggable: true,
         progress: undefined,
     });
+    const sindatos = () => toast.error('Dedes de llenar una minimo', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    
     const actualizar= async ()=> {
-         const {data}:{data:any} = await axios.get(`http://localhost:3008/api/users/${id}`)
+         const {data}:{data:any} = await axios.get(`${URLrequests}api/users/${id}`)
          const email2= data.user.email
-         //await dispatch(loginNormal({email: email22, password: state.password}))
-         //return email22
-
          async function fetchPost() {
             try {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, {email:email2,password:state.password});
@@ -101,10 +109,20 @@ export const ModificarUser=()=>{
             }
         })
     }
+    //funcion para guardar la informacion de la imagen
+    const handleFileChange = (e: any) => {
+
+        const pic = e.target.files[0]
+        setimg(pic);
+
+    }
     //funcion para verificar y hacer cambios en la api
     async function postModificar(e:any) {
         e.preventDefault()
         //verificaciones
+        if(!img && !state.name && !state.password){
+            return sindatos()
+        }
          if(state.name.length>=1 && state.name.length <=2){
             return nombreCorto()
         }
@@ -118,16 +136,15 @@ export const ModificarUser=()=>{
         
         //funcion para cambios
         async function echo(){
-            await axios.put(`https://api-fest.herokuapp.com/api/users/edit/${id}`,{name:state.name,password:state.password})
-            //dispatch(loginNormal({email: email, password: state.password}))
+            const url= await fileUpload(img)
+            await axios.put(`${URLrequests}api/users/edit/${id}`,{name:state.name,password:state.password,avatar:url})
             exitoso()
             actualizar()
-            
         } 
        
         echo()
     }
-    
+    console.log(img)
     return <div>
         <div>
             <Nav/>
@@ -136,34 +153,46 @@ export const ModificarUser=()=>{
 	        <div className="page-content">
 		        <div className="form-v8-content">
 			        <div className="form-left">
-				        <img src={image} alt="form"/>
+				        <img className='imagform' src={image} alt="form"/>
 			        </div>
 			        <div className="form-right">
-				        <div className="tab">
-					        <div className="tab-inner">
-						        {<button className="tablinks" id="defaultOpen">Modificar</button> }
-					        </div>
-				        </div>
+                        <img className='imgUser' src={authGoo.logNormal.image} alt={authGoo.logNormal.name}/>
 				        <form className="form-detail" onSubmit={postModificar}>
 					        <div className="tabcontent" id="sign-up">
+                                <div className="form-row">
+                                    <input type="file" onChange={handleFileChange} className="custom-file-input" id="customFile" />
+                                    <label className="custom-file-label" htmlFor="customFile">Adjuntar imagen</label>
+					            </div>
+                                <div className="form-row">
+                                    <label ></label>
+                                    <label ></label>
+					            </div>
+                                <div className="form-row">
+                                    <label ></label>
+                                    <label ></label>
+					            </div>
+                                <div className="form-row">
+                                    <label ></label>
+                                    <label ></label>
+					            </div>
 						        <div className="form-row">
 							        <label className="form-row-inner">
 								        <input type="text" name="name" id="full_name" className="input-text"   value={state.name} onChange={inputChange} />
-								        <span className="label">Username</span>
+								        <span className="label">Nombre</span>
 		  						        <span className="border"></span>
 							        </label>
 						        </div>
 						        <div className="form-row">
 							        <label className="form-row-inner">
 								        <input type="password" name="password" id="password" className="input-text" value={state.password} onChange={inputChange} />
-								        <span className="label">Password</span>
+								        <span className="label">Nuevo Password</span>
 								        <span className="border"></span>
 							        </label>
 						        </div>
 						        <div className="form-row">
 							        <label className="form-row-inner">
 								        <input type="password" name="comfirm_password" id="comfirm_password" className="input-text" value={state.comfirm_password} onChange={inputChange} />
-								        <span className="label">Comfirm Password</span>
+								        <span className="label">Confirme Password</span>
 								        <span className="border"></span>
 							        </label>
 						        </div>
