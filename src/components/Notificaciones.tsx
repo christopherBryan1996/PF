@@ -13,7 +13,7 @@ export const Notificacion = () => {
   );
 
   const { OffLinenotif, notifLeidas } : {OffLinenotif: any[], notifLeidas: any} = useSelector(
-    (state: any ) => state.socketIO
+    (state: any ) => state.notificaciones 
   );
   const dispatch = useDispatch();
 
@@ -23,17 +23,19 @@ export const Notificacion = () => {
 
   useEffect(() => {
    dispatch(getNotifOffLine(authGoo.logNormal.uid))
-  }, []);
- 
- 
-  useEffect(() => {
-    OffLinenotif.length && setNotificaciones(OffLinenotif.reverse())
+   OffLinenotif.length && setNotificaciones(OffLinenotif.reverse())
     setCounter(OffLinenotif.length) 
   }, []);
-
-  useEffect(() => {
-     socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
-       const newNot = {
+ 
+ 
+  const notificac = () => {
+    console.log("notif funcion")
+    socketIO.socket.on("hola", (info: any) => {
+      console.log("socketHolaOn", info)
+    })
+    socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+      console.log("postNotif") 
+      const newNot = {
        uid, 
        type,
        idEvento,
@@ -44,18 +46,20 @@ export const Notificacion = () => {
      console.log("Listaaa", lista)
      setNotificaciones(lista); 
      setCounter(lista.length);
-     })         
-  }, [socketIO.socket])
+     }) 
+  }
+
+  notificac()
 
   const handleClickTrue  = () => {
     setClicked(true);  
-    setCounter(0);  
+    setCounter(0);   
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
   const handleClickFalse  = () => {
     setClicked(false);    
-    notificaciones.length && dispatch(saveNotifications(notificaciones));  
+    notificaciones.length && dispatch(saveNotifications(notificaciones));    
     setCounter(0);  
     setNotificaciones([]);
   };
