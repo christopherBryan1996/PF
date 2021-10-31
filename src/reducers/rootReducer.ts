@@ -6,6 +6,7 @@ import {authReducerG} from './authGoogle'
 import { socketIoConfig } from './socketIo';
 import { usersReducer } from './usersReducer';
 import {adminReducer} from './adminReducer';
+import {notificaciones} from './notificaciones';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
     socketIO: socketIoConfig,
     users: usersReducer,
     admin: adminReducer,
+    notificaciones: notificaciones
 
 })

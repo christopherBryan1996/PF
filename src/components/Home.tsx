@@ -23,6 +23,7 @@ export const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
+        authGoo.logNormal &&
         dispatch(getFavorites(authGoo.logNormal.uid))
     }, []);
 
