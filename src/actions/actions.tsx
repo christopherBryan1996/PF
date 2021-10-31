@@ -111,13 +111,16 @@ export const loginNormal = (data: any) => {
 };
 
 
-export const logout = () => (
-  {type: actions.LOGOUT,}  
-)
+export const logout = (socket: any) => {
+  socket.disconnect()
+  return {
+    type: actions.LOGOUT,
+  };
+}  
+
 
 export const getFavorites = (id: any) => {
   return async function (dispatch: any) {
-    console.log("llego al action");
     const res = await axios.get(
       `${URLrequests}api/users/favouritesevents/${id}`
     );
@@ -165,7 +168,7 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
 }
 
 export const socketConfig = (uid: string, usuario: string) => {
-  const socket = socketIOClient(URLrequests)
+  const socket = socketIOClient(URLrequests,{forceNew: true})
   const data = {uid, usuario}
   socket.emit("newUser",data);
   return function (dispatch: any) {

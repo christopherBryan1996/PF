@@ -77,21 +77,13 @@ export const Evento = (props: Iprops) => {
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
                         </div>
-                        
+                        {
                         <div className="favorites-container">
-                        {/* {authGoo.logNormal?( */}
                             <span>
                                 <button onClick={agregarAfavoritos}><IoHeartOutline color="white" fontSize="1.6em" /></button>
                             </span>
-                        {/* // )
-                        //     :
-                        // (
-                        //     <span>
-                        //         <button ref='/login'><IoHeartOutline color="white" fontSize="1.6em" /></button>
-                        //     </span>
-                        // )} */}
                         </div>
-               
+                        }
                 </div>
 
                 <ToastContainer
