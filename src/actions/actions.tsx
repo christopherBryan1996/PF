@@ -192,6 +192,16 @@ export const getNotifOffLine = (uid: string) => {
 
 }
 
+export const cleanNotifications = () => ({
+  type: actions.CLEAN_NOTIFICATIONS,
+});
+
+export const admin = (state: any) => {
+  return {
+    type: actions.ADMIN,
+    payload: state,
+  };
+};
 export const addFavoriteInvitado = (id : string) => {
   return function (dispatch: any) {
     dispatch({
