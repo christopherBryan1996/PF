@@ -12,7 +12,7 @@ export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
   
-  const { authGoo } = useSelector((state: any) => state);
+  const { authGoo, socketIO} = useSelector((state: any) => state);
   const [logins, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const Nav = () => {
   const handleLogout = async () => {
     const auth = getAuth();
     await signOut(auth);
-    dispatch(logout());
+    dispatch(logout(socketIO.socket));
     landing()
   };
 

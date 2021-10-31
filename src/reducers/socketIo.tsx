@@ -1,7 +1,7 @@
 import actions from "../actions_type/actions_types";
 
 const initialState = {
-  socket: null, 
+  socket: null
 };
 
 export const socketIoConfig = (state = initialState, action: any) => {

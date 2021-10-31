@@ -13,43 +13,44 @@ export const Notificacion = () => {
   );
 
   const { OffLinenotif, notifLeidas } : {OffLinenotif: any[], notifLeidas: any} = useSelector(
+<<<<<<< HEAD
     (state: any ) => state.notificaciones 
+=======
+    (state: any ) => state.notificaciones
+>>>>>>> f0ebcbeb7284150f3ab36a0c8393edb0955ced66
   );
   const dispatch = useDispatch();
 
   const [notificaciones, setNotificaciones] = useState<any[]>([])  
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
+  var lista:any[] = []
+  
+  useEffect(() => {
+     dispatch(getNotifOffLine(authGoo.logNormal.uid))
+  }, []);
 
   useEffect(() => {
-   dispatch(getNotifOffLine(authGoo.logNormal.uid))
    OffLinenotif.length && setNotificaciones(OffLinenotif.reverse())
-    setCounter(OffLinenotif.length) 
-  }, []);
- 
- 
-  const notificac = () => {
-    console.log("notif funcion")
-    socketIO.socket.on("hola", (info: any) => {
-      console.log("socketHolaOn", info)
-    })
-    socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
-      console.log("postNotif") 
-      const newNot = {
+   setCounter(OffLinenotif.length)
+ }, [OffLinenotif]);
+
+  useEffect(() => {
+      if(clicked) lista = []
+     socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+       const newNot = {
        uid, 
        type,
        idEvento,
        message
      }
-     let lista = notificaciones
+     lista = notificaciones
      lista.unshift(newNot)
      console.log("Listaaa", lista)
      setNotificaciones(lista); 
      setCounter(lista.length);
-     }) 
-  }
-
-  notificac()
+     })         
+  }, [socketIO])
 
   const handleClickTrue  = () => {
     setClicked(true);  
@@ -61,7 +62,8 @@ export const Notificacion = () => {
     setClicked(false);    
     notificaciones.length && dispatch(saveNotifications(notificaciones));    
     setCounter(0);  
-    setNotificaciones([]);
+    setNotificaciones([])
+    ;
   };
 
   const eliminarNotif = () => {
@@ -96,7 +98,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador">{counter}</div>}
+          {counter === 0 ? null : <div className="contador"></div>}
         </button>
       ) : (
           <button className="buttonNotif">

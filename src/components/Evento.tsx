@@ -2,14 +2,14 @@ import './styles/Card.css'
 import { Link } from "react-router-dom";
 import { FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavoriteEvent, addFavoriteInvitado } from "../actions/actions"
+import { addFavoriteEvent, addFavoriteInvitado, getEvents, getFavorites } from "../actions/actions"
 import { toast, ToastContainer } from 'react-toastify';
 import { IoHeartOutline } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 
-
-interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string, precio: number }
+interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: string, precio: number, favoritos:any}
 
 
 export const Evento = (props: Iprops) => {
@@ -17,14 +17,21 @@ export const Evento = (props: Iprops) => {
 
 
 
-    const { fecha, imagen, nombreDelEvento, _id, precio }: Iprops = props
+    const { fecha, imagen, nombreDelEvento, _id, precio, favoritos }: Iprops = props
     const { authGoo } = useSelector((state: any) => state);
     const dispatch = useDispatch();
-    
+
     const history :any = useHistory();
     const toLogin = () => {
         history.push("/login")
     };
+    const checkFavorito = ()=>{
+        if(favoritos.favouritesEvents){
+            var resultado = favoritos.favouritesEvents.some((e:any)=> e._id === _id)
+            if(resultado) return "favorites-container2"
+        }
+        return "favorites-container"
+    }
 
     const eventoAgregado = () => toast.success('Evento agregado con exito!', {
         position: "top-center",
@@ -73,25 +80,15 @@ export const Evento = (props: Iprops) => {
                             </FacebookShareButton>
                             <WhatsappShareButton
                                 title='Hola, te comparto este evento, te pueda interesar!'
-                                url="https://students.soyhenry.com/">
+                                url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
                         </div>
-                        
-                        <div className="favorites-container">
-                        {/* {authGoo.logNormal?( */}
+                        <div className={checkFavorito()}>
                             <span>
                                 <button onClick={agregarAfavoritos}><IoHeartOutline color="white" fontSize="1.6em" /></button>
                             </span>
-                        {/* // )
-                        //     :
-                        // (
-                        //     <span>
-                        //         <button ref='/login'><IoHeartOutline color="white" fontSize="1.6em" /></button>
-                        //     </span>
-                        // )} */}
                         </div>
-               
                 </div>
 
                 <ToastContainer

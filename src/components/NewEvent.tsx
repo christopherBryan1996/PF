@@ -7,7 +7,7 @@ import { Nav } from "./Nav";
 import axios from "axios";
 import {useSelector} from 'react-redux';
 import URLrequests from "./constanteURL";
-
+import { useHistory } from "react-router-dom";
 
 export default function NewEvent() {
 
@@ -52,6 +52,10 @@ export default function NewEvent() {
 
     const {authGoo}=useSelector((state:any)=>state)
     
+    const history :any = useHistory();
+    const toLogin = () => {
+        history.push("/login")
+    };
 
     //Funcion para enviar el post del form----------------------------------------------------------------
 
@@ -67,6 +71,7 @@ export default function NewEvent() {
 
         e.preventDefault();
         
+        if(!authGoo.logNormal) return toLogin();
 
         if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent) { return faltanCasillas() }
         setCreando(true);

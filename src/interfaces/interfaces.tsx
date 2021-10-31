@@ -14,7 +14,14 @@ export interface IActions {
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
-    DELETE_EVENT:string;
+    
+    CLEAN_NOTIFICATIONS: string;
+   
+    GET_EVENTOSASISTIR:string;
+ 
+    DELETE_EVENT:string;   
+      
+    ADMIN: string;    
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
     RESET_NOTIFICATIONS: string;
@@ -45,6 +52,11 @@ export interface IeventosUsuario {
     fecha:string;
 }
 
+export interface IeventosAsistir {
+    eventId:any;
+    tareas:any;
+}
+
 
 export interface Iusers{
 
@@ -67,6 +79,7 @@ export interface IEventoState {
     asistentesEvento: IasistentesAEvento[];
     eventosFavoritos:[];
     eventosUsuario:[];
+    eventosAsistir:[], 
 }
 
 //interface para la lista de eventos

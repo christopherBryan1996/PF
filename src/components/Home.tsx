@@ -4,7 +4,7 @@ import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
-import { getEvents, filtroPrecio } from "../actions/actions"
+import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import URLrequests from "./constanteURL";
@@ -13,7 +13,8 @@ import MapaHome from '../components/MapaHome';
 export const Home = () => {
 
     const [search, setSearch] = useState('')
-    const { eventos } = useSelector((state: any) => state.eventos)
+    const { eventos, eventosFavoritos } = useSelector((state: any) => state.eventos)
+    const { authGoo } = useSelector((state: any) => state);
 
     const history = useHistory();
     const crearEvento = () => {
@@ -24,6 +25,11 @@ export const Home = () => {
         dispatch(getEvents());
     }, []);
 
+    useEffect(() => {
+        authGoo.logNormal &&
+        dispatch(getFavorites(authGoo.logNormal.uid))
+    }, []);
+
     function change(e: any) {
         dispatch(filtroPrecio(e.target.value))
     }
@@ -32,7 +38,6 @@ export const Home = () => {
         setSearch(e.target.value)
         console.log(search)
     }
-
 
 
 
@@ -97,7 +102,7 @@ export const Home = () => {
                     }
                 }).map((i: any) => (
 
-                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} />
+                    <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={eventosFavoritos} />
 
                 ))
                 }

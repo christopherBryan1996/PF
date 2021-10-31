@@ -59,6 +59,16 @@ export function getEvent(eventId: any) {
   };
 }
 
+export function getEventosAsistir(uid: any) {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    dispatch({
+      type: actions.GET_EVENTOSASISTIR,
+      payload: res.data,
+    });
+  };
+}
+
 export const filtroPrecio = (state: any) => {
   return {
     type: actions.FILTRO_PRECIO,
@@ -101,13 +111,16 @@ export const loginNormal = (data: any) => {
 };
 
 
-export const logout = () => (
-  {type: actions.LOGOUT,}  
-)
+export const logout = (socket: any) => {
+  socket.disconnect()
+  return {
+    type: actions.LOGOUT,
+  };
+}  
+
 
 export const getFavorites = (id: any) => {
   return async function (dispatch: any) {
-    console.log("llego al action");
     const res = await axios.get(
       `${URLrequests}api/users/favouritesevents/${id}`
     );
@@ -131,6 +144,7 @@ export const getUsersEvents = (id:any) => {
 export const addFavoriteEvent = (uid:any, eventID: any) => {
   return async function (dispatch: any){
     const res = await axios.patch(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
+    dispatch(getFavorites(uid))
     dispatch({
       type: actions.ADD_FAVORITE_EVENT,
       payload: res.data
@@ -155,7 +169,7 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
 }
 
 export const socketConfig = (uid: string, usuario: string) => {
-  const socket = socketIOClient(URLrequests)
+  const socket = socketIOClient(URLrequests,{forceNew: true})
   const data = {uid, usuario}
   socket.emit("newUser",data);
   return function (dispatch: any) {
@@ -182,6 +196,16 @@ export const getNotifOffLine = (uid: string) => {
 
 }
 
+export const cleanNotifications = () => ({
+  type: actions.CLEAN_NOTIFICATIONS,
+});
+
+export const admin = (state: any) => {
+  return {
+    type: actions.ADMIN,
+    payload: state,
+  };
+};
 export const addFavoriteInvitado = (id : string) => {
   return function (dispatch: any) {
     dispatch({
