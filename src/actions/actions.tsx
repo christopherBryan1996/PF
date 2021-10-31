@@ -144,6 +144,7 @@ export const getUsersEvents = (id:any) => {
 export const addFavoriteEvent = (uid:any, eventID: any) => {
   return async function (dispatch: any){
     const res = await axios.patch(`${URLrequests}api/users/addfavourite/${uid}/${eventID}`);
+    dispatch(getFavorites(uid))
     dispatch({
       type: actions.ADD_FAVORITE_EVENT,
       payload: res.data
