@@ -13,7 +13,7 @@ import MapaHome from '../components/MapaHome';
 export const Home = () => {
 
     const [search, setSearch] = useState('')
-    const { eventos } = useSelector((state: any) => state.eventos)
+    const { eventos, eventosFavoritos } = useSelector((state: any) => state.eventos)
     const { authGoo } = useSelector((state: any) => state);
 
     const history = useHistory();
@@ -23,6 +23,9 @@ export const Home = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getEvents());
+    }, []);
+
+    useEffect(() => {
         authGoo.logNormal &&
         dispatch(getFavorites(authGoo.logNormal.uid))
     }, []);
@@ -35,7 +38,6 @@ export const Home = () => {
         setSearch(e.target.value)
         console.log(search)
     }
-
 
 
 
@@ -100,7 +102,7 @@ export const Home = () => {
                     }
                 }).map((i: any) => (
 
-                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} />
+                    <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={eventosFavoritos} />
 
                 ))
                 }

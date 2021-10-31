@@ -14,13 +14,11 @@ export interface IActions {
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
     USER_ASISTIRA_EVENTO: string;
-
-    DELETE_EVENT:string;
     
     CLEAN_NOTIFICATIONS: string;
    
     GET_EVENTOSASISTIR:string;
-
+ 
     DELETE_EVENT:string;   
       
     ADMIN: string;    
