@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { IeventosAsistir } from "../interfaces/interfaces";
 import {borrarAsistencia} from "../controllers/asistirEventos/asistircontroller"
 import {  useParams } from "react-router-dom";
-import {  useDispatch} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 
 export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) {
     const { uid }: { uid: string } = useParams()
@@ -10,6 +10,10 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
     const [tareasVisibles, setTareasVisibles] = useState(false);
     console.log(eventId,"eventid")
     console.log(tareas,"eid")
+
+    const { authGoo, socketIO }: { authGoo: any; socketIO: any } = useSelector(
+        (state: any) => state
+      );
     
     const desplegarTareas = (): void => {
         setTareasVisibles(!tareasVisibles);
@@ -50,7 +54,7 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
                 </div>
             )}
 
-            <button  onClick={()=>borrarAsistencia(uid, eventId, dispatch)} type="button" className="btn btn-outline-success" >
+            <button  onClick={()=>borrarAsistencia(uid, authGoo.logNormal.name, socketIO.socket, eventId, dispatch, eventId.nombreDelEvento)} type="button" className="btn btn-outline-success" >
                 No voy a asistir
             </button>
 

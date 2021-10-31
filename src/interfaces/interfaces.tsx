@@ -24,7 +24,6 @@ export interface IActions {
     DELETE_EVENT:string;   
       
     ADMIN: string;    
-
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
     RESET_NOTIFICATIONS: string;

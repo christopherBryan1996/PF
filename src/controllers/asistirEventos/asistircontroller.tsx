@@ -4,25 +4,24 @@ import axios from 'axios';
 
 
 //, author: string, nombreDelEvento: string, socket: any, dispatch:any
-export const borrarAsistencia = async(uid:string, eventId:any, dispatch:any) => {
+export const borrarAsistencia = async(uid:string, asistente:string, socket:any,  eventId:any, dispatch:any, nombreDelEvento:string ) => {
     console.log(eventId._id, "eventiffd")
     
     await axios.patch(`${URLrequests}api/users/deleteeventstoassist/${uid}/${eventId._id}`);
     dispatch(getEventosAsistir(uid))
     
-    // const { data }: {data : any} = await axios.get(`${URLrequests}events/assistans/${id}`);   
+    const { data }: {data : any} = await axios.get(`${URLrequests}events/${eventId}`);   
    
-    //     const asistentes: [] = data.asistentes
-    //     let post:any = {    
-    //         uid,
-    //         type: "delEvent",
-    //         idEvento: id,
-    //         message: `${author} ha eliminado el evento ${nombreDelEvento}. ¡Encuentra nuevos eventos!`,
-    //     }
+        const autor: string = data.autor
+        let post:any = {    
+            uid:autor,
+            type: "newAsis",
+            idEvento: eventId,
+            message: `${asistente} no asistira al evento ${nombreDelEvento}.`,
+        }
 
-    //     asistentes.forEach((asistente: any)=>{
-    //         post.uid = asistente.usuario[0]._id
-    //         socket.emit("postNotification", post)
-    //     })
+  
+        socket.emit("postNotification", post)
+ 
 
     }

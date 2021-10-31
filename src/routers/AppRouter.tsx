@@ -144,16 +144,12 @@ export const AppRouter = () => {
                     <PrivateRoute
                         exact path="/admin/"
                         isAuthenticated={isAuthenticated}
-                        component={Admin}/>
-                  
+                        component={AdminScreen} />
+
                         <PrivateRoute
                         exact path="/misEventos/:uid"
                         isAuthenticated={isAuthenticated}
                         component={EventosAsistir}/>
-                  
-                        
-
-                      //  component={AdminScreen} />
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
