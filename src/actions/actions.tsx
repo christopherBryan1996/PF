@@ -209,7 +209,29 @@ export const admin = (state: any) => {
 export const addFavoriteInvitado = (id : string) => {
   return function (dispatch: any) {
     dispatch({
-      type: actions.FAVORITOS_INVITADO,
+      type: actions.FAV_INVITADO,
+      payload: id
+    });
+  }
+
+}
+
+
+export const getFavoriteInvitado = (idEvents:any) => {
+  return async function (dispatch: any) {
+    const res = await axios.post(`${URLrequests}notLogin/getfavourites`, {idEvents})
+    
+    dispatch({
+      type: actions.GET_FAV_INVITADO,
+      payload: res.data
+    });
+  }
+}
+
+export const deleteFavoriteInvit = (id : string) => {  
+  return function (dispatch: any) {
+    dispatch({
+      type: actions.DEL_FAV_INVITADO,
       payload: id
     });
   }
@@ -224,3 +246,6 @@ export const saveNotifications = (notif: any) => {
     });
   }
 }
+
+
+

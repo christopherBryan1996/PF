@@ -27,6 +27,7 @@ import MercadoPay from '../components/MercadoPay';
 
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
+import { FavoritesInv }from '../components/FavoritesInvit';
 
 
 export const AppRouter = () => {
@@ -127,7 +128,9 @@ export const AppRouter = () => {
                         exact path="/home/:username/favorites"
                         // isAuthenticated={isAuthenticated}
                         component={Favorites} />
-                    {/* ruta para modificar usuario */}
+                    <PublicRoute
+                    exact path="/home/favorites"
+                    component={FavoritesInv} />
                     <PrivateRoute
                         exact path='/modificarUser/:id'
                         isAuthenticated={isAuthenticated}

@@ -13,11 +13,7 @@ export const Notificacion = () => {
   );
 
   const { OffLinenotif, notifLeidas } : {OffLinenotif: any[], notifLeidas: any} = useSelector(
-<<<<<<< HEAD
-    (state: any ) => state.notificaciones 
-=======
     (state: any ) => state.notificaciones
->>>>>>> f0ebcbeb7284150f3ab36a0c8393edb0955ced66
   );
   const dispatch = useDispatch();
 

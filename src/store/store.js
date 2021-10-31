@@ -11,7 +11,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['authGoo','notificaciones']
+    whitelist: ['authGoo','notificaciones','favInvitados']
   }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

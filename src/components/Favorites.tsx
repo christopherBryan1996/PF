@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getFavorites, deleteFavoriteEvent } from "../actions/actions";
+import { getFavorites, deleteFavoriteInvit } from "../actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/Favorites.css'
 import { Link, useParams } from "react-router-dom";
@@ -9,21 +9,13 @@ import { Nav } from "./Nav";
 import { toast, ToastContainer } from 'react-toastify';
 import axios from "axios";
 import URLrequests from "./constanteURL";
-
-
-
-
-
-// https://api-fest.herokuapp.com/api/users
-
-//                                   /favouritesevents/:id'
-
-//                                                         61708d7df0064afec86c1277
+import { combinarFavs } from "../controllers/favoritosInvit/favoritosInvit";
 
 
 export default function Favorites() {
 
     const { username }: { username: string } = useParams()
+    const { favoritosIds } = useSelector((state: any) => state.favInvitados)
 
     console.log("username", username)
 
@@ -32,9 +24,30 @@ export default function Favorites() {
     const { eventosFavoritos } = useSelector((state: any) => state.eventos)
     const { authGoo } = useSelector((state: any) => state)
 
+    //verifico si hay favoritos en modo invitado no agregados a la cuenta logueada
+    const checkFavoritos = ()=> {
+        if(authGoo.logNormal && eventosFavoritos.favouritesEvents 
+            && eventosFavoritos.favouritesEvents.length 
+            && favoritosIds && favoritosIds.length ){
+           const favs: any[] = favoritosIds
+            for(let favInvit of favs){
+                for(const fav of eventosFavoritos.favouritesEvents ){
+                    if(fav._id === favInvit) favInvit = false;
+                }
+            const newFavs: any = favs.filter((fav: any) => fav !== false);
+                return newFavs.length ? newFavs : []
+        }
+    }
+    return [];
+}
+
     useEffect(() => {
-        authGoo.logNormal &&
-            dispatch(getFavorites(authGoo.logNormal.uid));
+        const newFavs: any = checkFavoritos()        
+       if (authGoo.logNormal){
+        newFavs.length ? combinarFavs(authGoo.logNormal.uid, newFavs, dispatch) 
+        : combinarFavs(authGoo.logNormal.uid, favoritosIds, dispatch)
+       } 
+        dispatch(getFavorites(authGoo.logNormal.uid));           
     }, []);
 
     const history = useHistory();
@@ -63,6 +76,7 @@ export default function Favorites() {
     const deleteFavoriteEvent = async (id: any, eventid: any) => {
         await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
         dispatch(getFavorites(authGoo.logNormal.uid));
+        eventosFavoritos &&  dispatch(deleteFavoriteInvit(eventid));
         eventoQuitado();
     }
 

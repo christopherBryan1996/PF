@@ -27,7 +27,9 @@ export interface IActions {
     RESET_NOTIFICATIONS: string;
     GET_NOTIF_OFFLINE: string;
     GET_USERS: string;   
-    FAVORITOS_INVITADO: string; 
+    FAV_INVITADO: string; 
+    GET_FAV_INVITADO: string; 
+    DEL_FAV_INVITADO: string;
 }
 
 //interface para lista de asistentes por evento

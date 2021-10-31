@@ -6,8 +6,6 @@ import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import URLrequests from "./constanteURL";
 import MapaHome from '../components/MapaHome';
 
 export const Home = () => {
