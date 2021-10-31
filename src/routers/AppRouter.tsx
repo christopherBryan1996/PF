@@ -26,7 +26,7 @@ import EventosAsistir from "../components/EventosAsistir";
 import MercadoPay from '../components/MercadoPay';
 
 import '../components/styles/Loading.css'
-import { Admin } from '../components/Admin';
+import { AdminScreen } from '../components/Admin/AdminScreen'
 
 
 export const AppRouter = () => {
@@ -65,6 +65,9 @@ export const AppRouter = () => {
 
     //conexion a SocketIo------------------------------------------
     const { authGoo } = useSelector((state: any) => state);
+    useEffect((): any => {
+        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));
+    }, [])
     useEffect(():any => {
         authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
       }, [dispatch, authGoo])
@@ -72,6 +75,7 @@ export const AppRouter = () => {
     if (cheking) {
         return (
             <div className="loading">
+                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" />
                 <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" alt="loading"/>
             </div>
             // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
@@ -91,7 +95,7 @@ export const AppRouter = () => {
                     {/* <PublicRoute exact path="/favorites" component={Favorites} /> */}
 
                     <PublicRoute exact path="/detail/:eventid" component={EventDetails} />
-                    <PublicRoute exact path="/mercadopago" component={MercadoPay} /> 
+                    <PublicRoute exact path="/mercadopago" component={MercadoPay} />
 
                     <PublicRoute
                         exact path="/"
@@ -131,21 +135,25 @@ export const AppRouter = () => {
                     <PrivateRoute
                         exact path="/asistentes/:uid/:eventid"
                         isAuthenticated={isAuthenticated}
-                        component={AsistentesPage}/>
+                        component={AsistentesPage} />
                     <PrivateRoute
                         exact path="/modificarEventos/:eventid"
                         isAuthenticated={isAuthenticated}
                         component={ModificarEvento} />
 
-                          <PrivateRoute
+                    <PrivateRoute
                         exact path="/admin/"
                         isAuthenticated={isAuthenticated}
-                        component={Admin}/>
+                        component={AdminScreen} />
+
                         <PrivateRoute
                         exact path="/misEventos/:uid"
                         isAuthenticated={isAuthenticated}
                         component={EventosAsistir}/>
                         
+                        
+
+
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
             </div>

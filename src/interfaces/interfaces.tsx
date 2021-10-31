@@ -20,6 +20,8 @@ export interface IActions {
    
     GET_EVENTOSASISTIR:string;
     
+    
+    ADMIN: string;    
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
     RESET_NOTIFICATIONS: string;
