@@ -22,7 +22,7 @@ import PrivateRoute from './PrivateRoute';
 import MercadoPago from '../components/MercadoPay';
 import '../components/styles/Loading.css';
 import ModificarEvento from '../components/ModificarEvento';
-
+import EventosAsistir from "../components/EventosAsistir";
 import MercadoPay from '../components/MercadoPay';
 
 import '../components/styles/Loading.css'
@@ -146,6 +146,10 @@ export const AppRouter = () => {
                         isAuthenticated={isAuthenticated}
                         component={AdminScreen} />
 
+                        <PrivateRoute
+                        exact path="/misEventos/:uid"
+                        isAuthenticated={isAuthenticated}
+                        component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>

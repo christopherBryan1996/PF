@@ -25,12 +25,12 @@ export default function AsistentesPage( ): JSX.Element {
         {eventos.asistentesEvento && eventos.asistentesEvento.length ? (
           eventos.asistentesEvento.map((asist: Iasistentes) => (
             <div key={asist.usuario} className="card card-body mt-2">
-             <Asistente
+            <Asistente
                 eventName={eventos.evento}
                 eventId={eventid}
-                usuario={asist.usuario[0].usuario}
-                avatar={asist.usuario[0].avatar}
-                userId={asist.usuario[0]._id}
+                usuario={asist.usuario.length && asist.usuario[0].usuario}
+                avatar={asist.usuario.length && asist.usuario[0].avatar}
+                userId={asist.usuario.length && asist.usuario[0]._id}
                 tareasDelUsuario={asist.tareasDelUsuario}
               />
             </div>

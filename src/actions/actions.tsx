@@ -59,6 +59,16 @@ export function getEvent(eventId: any) {
   };
 }
 
+export function getEventosAsistir(uid: any) {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    dispatch({
+      type: actions.GET_EVENTOSASISTIR,
+      payload: res.data,
+    });
+  };
+}
+
 export const filtroPrecio = (state: any) => {
   return {
     type: actions.FILTRO_PRECIO,

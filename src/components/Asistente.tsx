@@ -43,7 +43,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
         <div className="col-md-6 offset-md-3">
           <div className="card-name">
             {props.usuario}
-                   <button
+                  <button
               onClick={desplegarTareas}
               type="button"
               className="btn btn-outline-success"

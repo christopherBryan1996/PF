@@ -9,7 +9,7 @@ const initialState:IEventoState  = {
     eventosFavoritos: [],
     eventosUsuario:[],  
     asistentesEvento: [],
-     
+    eventosAsistir:[], 
 }
 
 export  function eventosReducer  (state = initialState, action:any):{}  {
@@ -85,6 +85,17 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
             eventosUsuario: action.payload,
         }
     }
+    case actions.GET_EVENTOSASISTIR: {
+        return {
+            ...state,
+            eventosAsistir: action.payload,
+        }
+    }
+
+        
+
+    
+    
         default:
             return state;
     }
