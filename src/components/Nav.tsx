@@ -42,7 +42,9 @@ export const Nav = () => {
   };
 
   const favorites = () => {
-    history.push(`/home/${authGoo.logNormal.uid}/favorites`);
+    authGoo.logNormal ?
+    history.push(`/home/${authGoo.logNormal.uid}/favorites`)
+    : history.push(`/home/favorites`)
   };
   const botonRegistrate = () => {
     history.push("/register");
@@ -73,14 +75,16 @@ export const Nav = () => {
         </a>
 
 
-        {logins ? (
-          <div className="fff ">
+        
+          
             <div className="fav">
               <a onClick={favorites}>
                 {" "}
                 <ImHeart color="white" fontSize="1.6em" />
               </a>
             </div>
+          {logins ? (
+            <div className="fff ">
             <Notificacion />
 
 

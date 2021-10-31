@@ -5,8 +5,9 @@ import {reducerCoords} from './coordsReducer';
 import {authReducerG} from './authGoogle'
 import { socketIoConfig } from './socketIo';
 import { usersReducer } from './usersReducer';
-import {adminReducer} from './adminReducer';
-import {notificaciones} from './notificaciones';
+import {adminReducer } from './adminReducer';
+import { notificaciones } from './notificaciones';
+import { favInvitado } from './favInvitados';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -16,6 +17,6 @@ export const rootReducer = combineReducers({
     socketIO: socketIoConfig,
     users: usersReducer,
     admin: adminReducer,
-    notificaciones: notificaciones
-
+    notificaciones: notificaciones,
+    favInvitados: favInvitado
 })

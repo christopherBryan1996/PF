@@ -50,13 +50,13 @@ export const Notificacion = () => {
 
   const handleClickTrue  = () => {
     setClicked(true);  
-    setCounter(0);  
+    setCounter(0);   
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
   const handleClickFalse  = () => {
     setClicked(false);    
-    notificaciones.length && dispatch(saveNotifications(notificaciones));  
+    notificaciones.length && dispatch(saveNotifications(notificaciones));    
     setCounter(0);  
     setNotificaciones([])
     ;
