@@ -20,6 +20,7 @@ export const Notificacion = () => {
   const [notificaciones, setNotificaciones] = useState<any[]>([])  
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
+
   var lista:any[] = []
   
   useEffect(() => {
@@ -50,7 +51,8 @@ export const Notificacion = () => {
 
   const handleClickTrue  = () => {
     setClicked(true);  
-    setCounter(0);   
+    setCounter(0);  
+    lista =[]; 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
@@ -94,7 +96,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador"></div>}
+          {counter === 0 ? null : <div className="contador">{counter}</div>}          
         </button>
       ) : (
           <button className="buttonNotif">

@@ -151,7 +151,7 @@ export const AppRouter = () => {
 
                         <PrivateRoute
                         exact path="/misEventos/:uid"
-                        isAuthenticated={isAuthenticated}
+                        isAuthenticated={isAuthenticated}                        
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
