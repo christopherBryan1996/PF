@@ -67,6 +67,15 @@ export default function Login() {
         progress: undefined,
     });
 
+    const cuentaInhabilitada = () => toast.error('Esta cuenta se encuentra temporalmente inhabilitada', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
     //Funciones para Redireccionar pagina--------------------------------------------
     const history = useHistory();
@@ -83,15 +92,18 @@ export default function Login() {
   const  handleGoogleLogin = async () => {
     const auth = getAuth();
     const { user }: {user: any} = await signInWithPopup(auth, googleAuthProvider)
+
     const loginGoogle = {
         uid:user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL
     }
+
     const infoLog = {
         email: user.email, 
         password: user.uid.slice(0,12)
     }
+    
     const data : any = await startGoogleLogin(infoLog) 
     if( data && data.ok){
         dispatch(loginNormal(data)); 
@@ -104,6 +116,7 @@ export default function Login() {
         const datos: any = await nuevoUsuario(usuario)
         dispatch(loginNormal(datos))           
     }
+    if(!data.habilitado) return cuentaInhabilitada()
     await dispatch(login(loginGoogle));
     const {dataGoogle}:{dataGoogle:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)
         toHome() 
@@ -130,8 +143,8 @@ export default function Login() {
         async function fetchPost(data: object) {
             try {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
-                console.log("mensaje", data)
                 if (data.ok) {
+                    if(!data.habilitado) return cuentaInhabilitada()
                     dispatch(loginNormal(data));             
                     const {data2}:{data2:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)           
                     setTimeout(()=>toHome(),1000);

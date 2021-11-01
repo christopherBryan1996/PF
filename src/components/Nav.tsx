@@ -12,7 +12,7 @@ export const Nav = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
   
-  const { authGoo } = useSelector((state: any) => state);
+  const { authGoo, socketIO} = useSelector((state: any) => state);
   const [logins, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -42,7 +42,9 @@ export const Nav = () => {
   };
 
   const favorites = () => {
-    history.push(`/home/${authGoo.logNormal.uid}/favorites`);
+    authGoo.logNormal ?
+    history.push(`/home/${authGoo.logNormal.uid}/favorites`)
+    : history.push(`/home/favorites`)
   };
   const botonRegistrate = () => {
     history.push("/register");
@@ -52,10 +54,14 @@ export const Nav = () => {
   };
 
   const handleLogout = async () => {
+   
     const auth = getAuth();
-    await signOut(auth);
-    dispatch(logout());
     landing()
+    dispatch(logout(socketIO.socket));
+    await signOut(auth);
+    
+    window.location.replace('');
+    
   };
 
   return (
@@ -66,14 +72,16 @@ export const Nav = () => {
         </a>
 
 
-        {logins ? (
-          <div className="fff ">
+        
+          
             <div className="fav">
               <a onClick={favorites}>
                 {" "}
                 <ImHeart color="white" fontSize="1.6em" />
               </a>
             </div>
+          {logins ? (
+            <div className="fff ">
             <Notificacion />
 
 

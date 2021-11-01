@@ -112,7 +112,7 @@ export default function EventDetails() {
     const query = new URLSearchParams(search);
     const paramFieldStatus:any  = query.get('collection_status');
     const paramFieldPayment_id:any = query.get("payment_id");
-    console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
+    // console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
     
     
 //Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------

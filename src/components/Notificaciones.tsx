@@ -13,7 +13,7 @@ export const Notificacion = () => {
   );
 
   const { OffLinenotif, notifLeidas } : {OffLinenotif: any[], notifLeidas: any} = useSelector(
-    (state: any ) => state.socketIO
+    (state: any ) => state.notificaciones
   );
   const dispatch = useDispatch();
 
@@ -21,17 +21,19 @@ export const Notificacion = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
+  var lista:any[] = []
+  
   useEffect(() => {
-   dispatch(getNotifOffLine(authGoo.logNormal.uid))
-  }, []);
- 
- 
-  useEffect(() => {
-    OffLinenotif.length && setNotificaciones(OffLinenotif.reverse())
-    setCounter(OffLinenotif.length) 
+     dispatch(getNotifOffLine(authGoo.logNormal.uid))
   }, []);
 
   useEffect(() => {
+   OffLinenotif.length && setNotificaciones(OffLinenotif.reverse())
+   setCounter(OffLinenotif.length)
+ }, [OffLinenotif]);
+
+  useEffect(() => {
+   
      socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
        const newNot = {
        uid, 
@@ -39,25 +41,27 @@ export const Notificacion = () => {
        idEvento,
        message
      }
-     let lista = notificaciones
+     lista = notificaciones
      lista.unshift(newNot)
      console.log("Listaaa", lista)
      setNotificaciones(lista); 
      setCounter(lista.length);
      })         
-  }, [socketIO.socket])
+  }, [socketIO])
 
   const handleClickTrue  = () => {
     setClicked(true);  
     setCounter(0);  
+    lista =[]; 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
   const handleClickFalse  = () => {
     setClicked(false);    
-    notificaciones.length && dispatch(saveNotifications(notificaciones));  
+    notificaciones.length && dispatch(saveNotifications(notificaciones));    
     setCounter(0);  
-    setNotificaciones([]);
+    setNotificaciones([])
+    ;
   };
 
   const eliminarNotif = () => {
@@ -92,7 +96,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador">{counter}</div>}
+          {counter === 0 ? null : <div className="contador"></div>}          
         </button>
       ) : (
           <button className="buttonNotif">
