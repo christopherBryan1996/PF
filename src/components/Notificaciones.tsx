@@ -20,6 +20,7 @@ export const Notificacion = () => {
   const [notificaciones, setNotificaciones] = useState<any[]>([])  
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
+
   var lista:any[] = []
   
   useEffect(() => {
@@ -32,7 +33,7 @@ export const Notificacion = () => {
  }, [OffLinenotif]);
 
   useEffect(() => {
-      if(clicked) lista = []
+   
      socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
        const newNot = {
        uid, 
@@ -50,7 +51,8 @@ export const Notificacion = () => {
 
   const handleClickTrue  = () => {
     setClicked(true);  
-    setCounter(0);   
+    setCounter(0);  
+    lista =[]; 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
@@ -94,7 +96,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador"></div>}
+          {counter === 0 ? null : <div className="contador"></div>}          
         </button>
       ) : (
           <button className="buttonNotif">
