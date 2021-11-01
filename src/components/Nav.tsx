@@ -54,17 +54,12 @@ export const Nav = () => {
   };
 
   const handleLogout = async () => {
-    // const auth = getAuth();
-    // await signOut(auth);
-    // dispatch(logout(socketIO.socket));
-    // landing()
-    // al hacer click primero se cerrara 
+   
+    const auth = getAuth();
     landing()
     dispatch(logout(socketIO.socket));
-    const auth = getAuth();
     await signOut(auth);
-    // al finalizar te mandara a pagina principal 
-    history.push('/')
+    
   };
 
   return (
