@@ -15,6 +15,16 @@ interface Iprops { fecha: string, imagen: string, nombreDelEvento: string, _id: 
 export const Evento = (props: Iprops) => {
 
 
+    const toEventClipboard = (_id:any)=>{
+        var path = window.location.href.split("").reverse().slice(4).reverse().join("");
+        var UrlCompartir  = path + "detail/" + `${_id}`;
+        navigator.clipboard.writeText(UrlCompartir);
+        seCopio();
+    }
+    
+    
+
+    
 
 
     const { fecha, imagen, nombreDelEvento, _id, precio }: Iprops = props
@@ -27,6 +37,15 @@ export const Evento = (props: Iprops) => {
     };
 
     const eventoAgregado = () => toast.success('Evento agregado con exito!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const seCopio = () => toast.success('El URL del eveno se copio en tu teclado', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -76,6 +95,12 @@ export const Evento = (props: Iprops) => {
                                 url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
+                            <button 
+                        onClick={() => toEventClipboard(_id)}>
+                                                                                           
+                            ClipBoard
+                            </button>
+
                         </div>
                         
                         <div className="favorites-container">
