@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
+import { HomePrueba } from '../components/HomePrueba';
 import LandingPage from '../components/LandingPage';
 import Login from '../components/Login';
 import NewEvent from '../components/NewEvent';
@@ -105,6 +106,10 @@ export const AppRouter = () => {
                         exact path="/home"
                         component={Home}
                     />
+                    <PublicRoute
+                    exact path="/homePrueba"
+                    component={HomePrueba}
+                     />
                     <PublicRoute
                         exact path="/about"
                         component={About} />
