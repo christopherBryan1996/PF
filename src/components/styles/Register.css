@@ -1,0 +1,45 @@
+
+
+.card-register{
+
+    margin-top: 8%;
+    background-color: black;
+    border-radius: 8px;    
+    position:relative;
+    background: rgb(14, 10, 10); /* Fallback for older browsers without RGBA-support */
+    background: rgba(8, 5, 5, 0.5);
+    width: 40%;
+
+
+
+
+}
+
+.card { background-color: rgba(19, 17, 17, 0.4); }
+
+.formRegister{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.botonesRegister{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fondoDiv{
+    
+    background-image: url('../../images/fondoRegister.jpg');
+    opacity: 0.95;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: absolute; top: 0; left: 0;
+    display:flex;    
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}

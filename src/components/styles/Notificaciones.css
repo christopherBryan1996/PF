@@ -1,0 +1,56 @@
+.notificaciones {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.buttonNotif{
+    background-color: transparent;
+    border:none;
+}
+
+.buttonNotif:focus{
+    outline: none;
+}
+.contador {
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border-radius: 14px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 5px;
+    top:2px;
+    color:white;
+}
+
+.notificacion {
+    position: absolute;
+    display: block;
+    max-width: 400px;
+    top: 65px;
+    overflow-y: auto;
+    max-height: 50vh;
+    font-weight: 600;
+}
+
+.linkNotif {
+    text-decoration: none; 
+}
+
+.notifText {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.deleteNot {
+    display: block;
+    background-color: transparent;
+    border: 1px solid rgb(5, 184, 145);
+    color: rgb(5, 184, 145);
+    font-weight: 400;
+    box-shadow: 2px 2px 4px rgb(6, 7, 7) ;
+    border-radius: 5px;
+}

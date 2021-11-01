@@ -1,0 +1,48 @@
+.navCrearEvento{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-Nevent{
+    margin-top: 180px;
+}
+
+.container-h{
+
+    margin-top: 180px;
+    padding: 25px;
+    height:70vh
+
+
+}
+.divDeLaUl{
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+.Lista{
+    display: flex;
+    column-count: 2;
+    flex-wrap: wrap;
+  flex-direction: column;
+}
+.inputTextarea{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
