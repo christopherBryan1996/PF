@@ -59,6 +59,7 @@ export const Nav = () => {
     landing()
     dispatch(logout(socketIO.socket));
     await signOut(auth);
+    window.location.replace('');
     
   };
 
