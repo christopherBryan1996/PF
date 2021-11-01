@@ -10,13 +10,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addFavoriteEvent,
   addFavoriteInvitado,
-  getEvents,
-  getFavorites,
+  deleteFavoriteEvent,
+  deleteFavoriteInvit,
+  
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
 import { IoHeartOutline } from "react-icons/io5";
-import { useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 interface Iprops {
   fecha: string;
@@ -32,20 +31,16 @@ export const Evento = (props: Iprops) => {
     props;
   const { authGoo, favInvitados } = useSelector((state: any) => state);
   const dispatch = useDispatch();
+  let resultado:boolean
 
-  const history: any = useHistory();
-  const toLogin = () => {
-    history.push("/login");
-  };
   const checkFavorito = () => {
     if (authGoo.logNormal && favoritos.favouritesEvents) {
-      const resultado = favoritos.favouritesEvents.some(
+      resultado = favoritos.favouritesEvents.some(
         (e: any) => e._id === _id
       );
       if (resultado) return "favorites-container2";
     } else if (!authGoo.logNormal && favInvitados.favoritosIds) {
-      const resultado = favInvitados.favoritosIds.some((e: any) => e === _id);
-      console.log(resultado);
+      resultado = favInvitados.favoritosIds.some((e: any) => e === _id);
       if (resultado) return "favorites-container2";
     }
     return "favorites-container";
@@ -74,26 +69,26 @@ export const Evento = (props: Iprops) => {
     });
 
   const agregarAfavoritos = () => {
-    if (authGoo.logNormal) {
-      dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
-      eventoAgregado();
-    } else {
-      if (favInvitados.favoritosIds.length) {
-        const fav = favInvitados.favoritosIds.some(
-          (fav: string) => fav === _id
-        );
-        if (fav) {
-          eventoNoAgregado();
-        } else {
-          dispatch(addFavoriteInvitado(_id));
-          eventoAgregado();
+        if (authGoo.logNormal) {
+            if(resultado){
+                dispatch(deleteFavoriteEvent(authGoo.logNormal.uid, _id));
+            }
+            else{
+            dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
+            eventoAgregado()
+            }
         }
-      } else{
-        dispatch(addFavoriteInvitado(_id));
-        eventoAgregado();
-      }
+        else {
+            if(resultado){
+                dispatch(deleteFavoriteInvit(_id));
+            }
+            else{
+            dispatch(addFavoriteInvitado(_id));
+            eventoAgregado();
+            }
+        }
     }
-  };
+
 
   return (
     <div className="card container-card">

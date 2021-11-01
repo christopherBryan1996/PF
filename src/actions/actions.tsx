@@ -162,6 +162,7 @@ export const filtroFavoritos = (state: any) => {
 export const deleteFavoriteEvent = (id: any, eventid: any) => {
   return async function (dispatch: any) {
     await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
+    dispatch(getFavorites(id))
     dispatch({
       type: actions.DELETE_FAVORITE_EVENT,
     });
