@@ -92,15 +92,18 @@ export default function Login() {
   const  handleGoogleLogin = async () => {
     const auth = getAuth();
     const { user }: {user: any} = await signInWithPopup(auth, googleAuthProvider)
+
     const loginGoogle = {
         uid:user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL
     }
+
     const infoLog = {
         email: user.email, 
         password: user.uid.slice(0,12)
     }
+    
     const data : any = await startGoogleLogin(infoLog) 
     if( data && data.ok){
         dispatch(loginNormal(data)); 

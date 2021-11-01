@@ -77,6 +77,24 @@ export default function EventDetails() {
         history.push(`/detail/${eventid}`)
     };
 
+    //Funcion para enviar mail---------------------------------------------------------------------------------
+    const enviarMailDeCompra = async() =>{
+        try{
+
+            const {data}: {data:any} =  await axios.get(`${URLrequests}api/users/${evento.autor}`);
+            
+            await axios.post(`${URLrequests}api/email/send-email`, 
+                 {
+                    mailDeAutor: data.user.email,
+                    nombreDeComprador: authGoo.logNormal.name,
+                    nombreDelEvento: evento.nombreDelEvento  
+                }) 
+
+        }catch(err){
+            console.log(err)
+        };
+    }
+
 
  
             
@@ -106,8 +124,10 @@ export default function EventDetails() {
             } catch (error) {
             console.error(error);
             };
-        
+    
      pagoConfirmado();
+     enviarMailDeCompra();
+
 
      setTimeout(()=>toEvent() ,2000);
     };    
@@ -133,6 +153,7 @@ export default function EventDetails() {
 
         
             const check:any = await  axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
+            console.log("check", check)
             
             const post = {
             title: evento.nombreDelEvento,
@@ -159,10 +180,10 @@ export default function EventDetails() {
                 console.error(error);
             };
         }    
-            if (!check.status){
+            if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.status){
+            }else if (check.data.status === "approved" || check.data.status === "in_process"){
                 pagoYaRealizado();
             }
 
@@ -232,6 +253,7 @@ export default function EventDetails() {
 
                     </div>
                     </button>} 
+                    <button onClick={enviarMailDeCompra}>probar mail</button>
 
                 
 

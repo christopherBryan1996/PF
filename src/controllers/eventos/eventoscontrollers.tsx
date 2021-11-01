@@ -21,6 +21,7 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
         asistentes.forEach((asistente: any)=>{
             post.uid = asistente.usuario[0]._id
             socket.emit("postNotification", post)
+            //aca pongo la funcion de enviar mail de que se elimino evento
         })
 
     }
