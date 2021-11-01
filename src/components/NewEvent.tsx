@@ -8,6 +8,7 @@ import axios from "axios";
 import {useSelector} from 'react-redux';
 import URLrequests from "./constanteURL";
 import { useHistory } from "react-router-dom";
+import categorias from "../categorias/Categorias";
 
 export default function NewEvent() {
 
@@ -23,6 +24,7 @@ export default function NewEvent() {
     const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
     const [file, setFile] = useState(null || "")
     const [creando, setCreando] = useState(false);
+    const [categories, setCategorias]=useState<string[]>([]);
 
     const eventoCreado = () => toast.success('El evento fue creado con exito', {
         position: "top-center",
@@ -94,7 +96,8 @@ export default function NewEvent() {
             fecha,
             descripcion,
             imagen: url,
-            coordenadas: coordenadasPadre
+            coordenadas: coordenadasPadre,
+            categorias
         }
         console.log("post", post)
 
@@ -126,7 +129,7 @@ export default function NewEvent() {
         console.log("constPost", post) 
     };
 
-
+console.log(categorias,"categorias")
     //Return del componente----------------------------------------------------------------------------
 
     return (
@@ -213,6 +216,23 @@ export default function NewEvent() {
                                     value={descripcion}
                                     onChange={(e) => setDescripcion(e.target.value)}
                                 ></textarea>
+                            </div>
+                            <div className="form-group col-md-11">
+                                <label>Selecciona una o mas categorias</label>
+                                
+                                    
+                                    
+                                    
+                                
+                              
+                                {/* onChange={(e) => setCategorias([...categorias,e.target.value])} */}
+                                {categorias.map((i:any)=>
+                                <div className="form-check">
+                                        <input  className="form-check-input" type="checkbox" value={i}  id="flexCheckDefault" key="categorias" onChange={(e) => setCategorias([...categories,e.target.value])}/>                                   
+                                    {i}                                    
+                                    </div>
+                                )}
+
                             </div>
                             <div className="form-group col-md-11">
                                 {creando && <button disabled className="btn btn-success col-md-12  btn-lg">Creando evento</button>}
