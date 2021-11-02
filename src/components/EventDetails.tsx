@@ -197,6 +197,7 @@ const [confirmado, setConfirmado] = useState(false);
             console.log("postEnviar", post)
         async function fetchPost(data:any) {
             try {
+                console.log("aca manito acaa")
                 const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
                 console.log("data",data);
     
@@ -216,7 +217,9 @@ const [confirmado, setConfirmado] = useState(false);
             if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto"){
+
+            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado"){
+
                 pagoYaRealizado();
                 setConfirmado(true)
             }

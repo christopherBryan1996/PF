@@ -17,6 +17,9 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import { IoHeartOutline } from "react-icons/io5";
 
+import { useHistory } from "react-router-dom";
+
+
 interface Iprops {
   fecha: string;
   imagen: string;
@@ -46,16 +49,6 @@ export const Evento = (props: Iprops) => {
     return "favorites-container";
   };
 
-  const eventoAgregado = () =>
-    toast.success("Evento agregado con exito!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
 
 
 
@@ -65,15 +58,6 @@ export const Evento = (props: Iprops) => {
         navigator.clipboard.writeText(UrlCompartir);
         seCopio();
     }
-    
-    
-
-    
-
-
-    const { fecha, imagen, nombreDelEvento, _id, precio }: Iprops = props
-    const { authGoo } = useSelector((state: any) => state);
-    const dispatch = useDispatch();
     
     const history :any = useHistory();
     const toLogin = () => {
