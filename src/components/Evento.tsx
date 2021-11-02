@@ -82,7 +82,7 @@ export const Evento = (props: Iprops) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
+      progress: undefined, 
 
     });
     const seCopio = () => toast.success('El URL del eveno se copio en tu teclado', {
