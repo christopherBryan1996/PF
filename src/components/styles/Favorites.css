@@ -27,6 +27,11 @@
     cursor: pointer;
     color: red;
 }
+.foto{
+    display: flex;
+    width: 255px;
+    height: 200px;
+}
 
 
 .container-cards{

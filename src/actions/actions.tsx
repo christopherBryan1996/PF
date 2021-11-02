@@ -248,5 +248,26 @@ export const saveNotifications = (notif: any) => {
   }
 }
 
+export function getVentas() {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/payment/getpayments`);
+    dispatch({
+      type: actions.GET_VENTAS,
+      payload: res.data,
+    });
+  };
+}
+
+export function inhabilitarUs(id:string, accion:boolean ) {
+  return async function (dispatch: any) {
+    const res = await axios.patch(`${URLrequests}admin/set/${id}/${accion}`);
+    dispatch(getUsers())
+    dispatch({
+      type: actions.INHABILITAR_US,
+      payload: res.data,
+    });
+  };
+}
+
 
 
