@@ -171,7 +171,7 @@ const [confirmado, setConfirmado] = useState(false);
            idEvento: evento._id,
             message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
         }
-     socketIO.socket.emit("postNotification", dataNotif);
+     socketIO.socket?.emit("postNotification", dataNotif);
     }
         }
         

@@ -67,12 +67,11 @@ export const AppRouter = () => {
 
     //conexion a SocketIo------------------------------------------
     const { authGoo } = useSelector((state: any) => state);
-    useEffect((): any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));
-    }, [])
+  
     useEffect(():any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
-      }, [dispatch, authGoo])
+        authGoo.logNormal && 
+        dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
+      }, [authGoo])
 
     if (cheking) {
         return (

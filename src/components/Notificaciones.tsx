@@ -34,8 +34,7 @@ export const Notificacion = () => {
 
   useEffect(() => {
    
-    socketIO.socket && 
-    socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+     socketIO.socket?.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
     
       const newNot = {
        uid, 
@@ -53,7 +52,6 @@ export const Notificacion = () => {
   const handleClickTrue  = () => {
     setClicked(true);  
     setCounter(0);  
-    socketIO.socket && 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
@@ -68,8 +66,7 @@ export const Notificacion = () => {
   const eliminarNotif = () => {
     setNotificaciones([]);
     setCounter(0);
-    socketIO.socket && 
-    socketIO.socket.emit("cleanNotifications", authGoo.logNormal.uid);
+    socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);
     dispatch(resetNotifications());
   };
 
@@ -86,7 +83,7 @@ export const Notificacion = () => {
       default:
         break;
     }
-  };
+  }
 
   return (
     <>
@@ -98,7 +95,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador"></div>}          
+          {counter === 0 ? null : <div className="contador">{counter}</div>}          
         </button>
       ) : (
           <button className="buttonNotif">
