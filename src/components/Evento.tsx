@@ -16,7 +16,9 @@ import {
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
 import { IoHeartOutline } from "react-icons/io5";
+
 import { useHistory } from "react-router-dom";
+
 
 interface Iprops {
   fecha: string;
@@ -47,7 +49,7 @@ export const Evento = (props: Iprops) => {
     return "favorites-container";
   };
 
-  
+
 
 
     const toEventClipboard = (_id:any)=>{
@@ -70,6 +72,17 @@ export const Evento = (props: Iprops) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+
+  const eventoNoAgregado = () =>
+    toast.error("Este evento ya se encuentra entre tus favoritos!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+
     });
     const seCopio = () => toast.success('El URL del eveno se copio en tu teclado', {
         position: "top-center",
@@ -100,6 +113,7 @@ export const Evento = (props: Iprops) => {
             eventoAgregado();
             }
         }
+
     };
 
     return (

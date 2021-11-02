@@ -202,7 +202,7 @@ const [confirmado, setConfirmado] = useState(false);
                 console.log("data",data);
     
                 if (data.LinkMP) {
-                    window.location.assign(data.LinkMP);
+                    window.open(data.LinkMP);
                     //window.open para nueva tab % window.location.assign en la misma tab
                    
     
@@ -217,7 +217,9 @@ const [confirmado, setConfirmado] = useState(false);
             if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.data.status === "approved" || check.data.status === "incompleto" || check.data.status ===  "Aprobado"){
+
+            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado"){
+
                 pagoYaRealizado();
                 setConfirmado(true)
             }
