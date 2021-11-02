@@ -61,6 +61,8 @@ export const Nav = () => {
     await signOut(auth);
     window.location.replace('');
     
+    window.location.replace('');
+    
   };
 
   return (
