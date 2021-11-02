@@ -9,6 +9,7 @@ import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
 import React, { useEffect, useState } from "react";
 import MapaHome from '../components/MapaHome';
 import { EventoCategoria } from "./EventoCategorias";
+import categorias from "../categorias/Categorias";
 
 
 export const HomePrueba = () => {
@@ -87,8 +88,13 @@ export const HomePrueba = () => {
             </div>
 
             {/*Carousel*/}
-              
-            <EventoCategoria  search={search} eventos={eventos} categoria={"deporte"} favoritos={eventosFavoritos}/>
+            
+            <div className="carousel">
+            {categorias.map((i:string)=>
+            (
+            <EventoCategoria  search={search} eventos={eventos} categoria={i} favoritos={eventosFavoritos}/>)
+            )}
+            </div>
             
             <Foot />
 

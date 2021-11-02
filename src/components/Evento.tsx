@@ -72,6 +72,7 @@ export const Evento = (props: Iprops) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+    });
 
   const eventoNoAgregado = () =>
     toast.error("Este evento ya se encuentra entre tus favoritos!", {
@@ -81,10 +82,10 @@ export const Evento = (props: Iprops) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
+      progress: undefined, 
 
     });
-    const seCopio = () => toast.success('El URL del eveno se copio en tu teclado', {
+    const seCopio = () => toast.success('El URL del evento se copio en tu teclado', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -101,7 +102,7 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
-            eventoAgregado()
+            // eventoAgregado()
             }
         }
         else {
@@ -110,7 +111,7 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteInvitado(_id));
-            eventoAgregado();
+            // eventoAgregado();
             }
         }
 
@@ -154,18 +155,12 @@ export const Evento = (props: Iprops) => {
 
                         </div>
                         
-                        <div className="favorites-container">
-                        {/* {authGoo.logNormal?( */}
+                        <div className={checkFavorito()}>
+                        
                             <span>
                                 <button onClick={agregarAfavoritos}><IoHeartOutline color="white" fontSize="1.6em" /></button>
                             </span>
-                        {/* // )
-                        //     :
-                        // (
-                        //     <span>
-                        //         <button ref='/login'><IoHeartOutline color="white" fontSize="1.6em" /></button>
-                        //     </span>
-                        // )} */}
+                        
                         </div>
                
                 </div>
