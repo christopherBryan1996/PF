@@ -75,7 +75,7 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
-            eventoAgregado()
+            // eventoAgregado()
             }
         }
         else {
@@ -84,7 +84,7 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteInvitado(_id));
-            eventoAgregado();
+            // eventoAgregado();
             }
         }
     }

@@ -1,11 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
-import { Nav } from './Nav';
-import { useHistory } from "react-router-dom";
-import Foot from './Foot';
-import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
-import React, { useEffect, useState } from "react";
-import MapaHome from './MapaHome';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './styles/categoria.css'
@@ -51,10 +44,12 @@ superLargeDesktop: {
 export const EventoCategoria = (props: Iprops) => {
     
     const{eventos, categoria, search, favoritos} = props
+    const eventosFiltrados=eventos.filter((i:any)=> i.categorias && i.categorias.includes(categoria) );
+    console.log(categoria, eventosFiltrados, "cate")
 
-    return(
+    return !eventosFiltrados.length? null :(
         <div className="row_events">
-            <h2>{categoria}</h2>
+            <h3>{categoria}</h3>
             <Carousel  
                 swipeable={false}
                 draggable={false}                
@@ -65,18 +60,22 @@ export const EventoCategoria = (props: Iprops) => {
                 transitionDuration={500}
                 containerClass="carousel-container"                           
                 itemClass="carousel-item-padding-0-px">
-            {eventos.filter((val: any) => {
+            {eventosFiltrados.filter((val: any) => {
                     if (search === '') {
+                      
                         return val
                     } else if (val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())) {
                         return val
                     }
-                }).map((i: any) => (
+                }).map((i: any) => 
+                
+                (
 
-                    <div className="row_event">
-                    <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={favoritos} />    
-                    </div>
-                ))
+                  <div className="row_event">
+                  <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={favoritos} />    
+                  </div>
+              )
+                )
                 }
                 </Carousel>
              </div>

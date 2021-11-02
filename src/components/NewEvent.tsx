@@ -24,7 +24,10 @@ export default function NewEvent() {
     const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
     const [file, setFile] = useState(null || "")
     const [creando, setCreando] = useState(false);
-    const [categories, setCategorias]=useState<string[]>([]);
+    const [categories, setCategorias]=useState<any>([]);
+    
+
+    
 
     const eventoCreado = () => toast.success('El evento fue creado con exito', {
         position: "top-center",
@@ -75,7 +78,7 @@ export default function NewEvent() {
         
         if(!authGoo.logNormal) return toLogin();
 
-        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent) { return faltanCasillas() }
+        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
         setCreando(true);
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
@@ -97,7 +100,7 @@ export default function NewEvent() {
             descripcion,
             imagen: url,
             coordenadas: coordenadasPadre,
-            categorias
+            categorias:categories
         }
         console.log("post", post)
 
@@ -130,6 +133,18 @@ export default function NewEvent() {
     };
 
 console.log(categorias,"categorias")
+
+const Checked=(value:string)=>{
+
+    const categorias:boolean=categories.some((i:string)=>i===value)
+    if(!categorias){
+        setCategorias([...categories,value])
+    } else{
+        const filter:[]=categories.filter((i:string)=>i !== value)
+        setCategorias(filter)
+    }
+
+}
     //Return del componente----------------------------------------------------------------------------
 
     return (
@@ -218,17 +233,17 @@ console.log(categorias,"categorias")
                                 ></textarea>
                             </div>
                             <div className="form-group col-md-11">
-                                <label>Selecciona una o mas categorias</label>
+                                <label>Selecciona al menos una categoria</label>
                                 
                                     
                                     
                                     
                                 
-                              
+                            
                                 {/* onChange={(e) => setCategorias([...categorias,e.target.value])} */}
-                                {categorias.map((i:any)=>
+                                {categorias.map((i:string)=>
                                 <div className="form-check">
-                                        <input  className="form-check-input" type="checkbox" value={i}  id="flexCheckDefault" key="categorias" onChange={(e) => setCategorias([...categories,e.target.value])}/>                                   
+                                        <input  className="form-check-input"  type="checkbox" value={i}  id="flexCheckDefault" key="categorias" onChange={(e)=>Checked(e.target.value)}/>                                   
                                     {i}                                    
                                     </div>
                                 )}
