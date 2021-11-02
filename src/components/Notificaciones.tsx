@@ -34,8 +34,10 @@ export const Notificacion = () => {
 
   useEffect(() => {
    
-     socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
-       const newNot = {
+    socketIO.socket && 
+    socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+    
+      const newNot = {
        uid, 
        type,
        idEvento,
@@ -43,16 +45,15 @@ export const Notificacion = () => {
      }
      lista = notificaciones
      lista.unshift(newNot)
-     console.log("Listaaa", lista)
      setNotificaciones(lista); 
-     setCounter(lista.length);
+     setCounter(notificaciones.length);
      })         
   }, [socketIO])
 
   const handleClickTrue  = () => {
     setClicked(true);  
     setCounter(0);  
-    lista =[]; 
+    socketIO.socket && 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
@@ -67,6 +68,7 @@ export const Notificacion = () => {
   const eliminarNotif = () => {
     setNotificaciones([]);
     setCounter(0);
+    socketIO.socket && 
     socketIO.socket.emit("cleanNotifications", authGoo.logNormal.uid);
     dispatch(resetNotifications());
   };
@@ -74,13 +76,13 @@ export const Notificacion = () => {
   const nofifType = (type: string, idEv: string, uid:string) => {
     switch (type) {
       case "task":
-        return `/detail/${idEv}`;
+        return `/misEventos/${uid}`;
       case "delAsis":
         return `/detail/${idEv}`;
       case "delEvent":
-      return `/home`;
+        return `/home`;
       case "newAsis":
-      return `/asistentes/${uid}/${idEv}`;
+        return `/asistentes/${uid}/${idEv}`;
       default:
         break;
     }
