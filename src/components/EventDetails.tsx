@@ -218,7 +218,7 @@ const [confirmado, setConfirmado] = useState(false);
                 fetchPost(post)
 
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado"){
+            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado" || check.data.status === "Incompleto"){
 
                 pagoYaRealizado();
                 setConfirmado(true)
