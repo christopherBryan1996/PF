@@ -285,7 +285,7 @@ const [confirmado, setConfirmado] = useState(false);
                     {evento.precio !== 0 && 
                     <div onClick={comprarEntrada}> 
                     <FiShoppingCart size="2em" color="white" />
-                     <p>Comprar Entradas</p> 
+                     <p>Comprar Entradas</p>  
                      
                      </div> } 
 
