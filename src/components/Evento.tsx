@@ -72,6 +72,7 @@ export const Evento = (props: Iprops) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+    });
 
   const eventoNoAgregado = () =>
     toast.error("Este evento ya se encuentra entre tus favoritos!", {
