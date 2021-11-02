@@ -18,7 +18,8 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
             message: `${author} ha eliminado el evento ${nombreDelEvento}. ¡Encuentra nuevos eventos!`,
         }
 
-        asistentes.forEach(async (asistente: any)=>{
+        asistentes && asistentes.length && asistentes.forEach(async(asistente: any)=>{
+        
             post.uid = asistente.usuario[0]._id
             socket.emit("postNotification", post)
             const { data }: {data : any} = await axios.get(`${URLrequests}api/users/${asistente.usuario[0]._id}`);

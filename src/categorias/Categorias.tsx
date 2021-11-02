@@ -1,11 +1,11 @@
 const categorias = [
-    "deportes, salud, estilo de vida" ,
-"fiestas, conciertos, comida y bebida ",
-"educacion, negocios y tecnologia"  ,
-"online",
-"viajes, ocio y hobbies"  ,
-"hogar y familia",
-"otros" 
+    "Deportes, salud, estilo de vida" ,
+"Fiestas, conciertos, comida y bebida",
+"Educacion, negocios y tecnologia"  ,
+"Online",
+"Viajes, ocio y hobbies"  ,
+"Hogar y familia",
+"Otros" 
 ]
 
 export default categorias;
