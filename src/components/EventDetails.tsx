@@ -136,6 +136,13 @@ const [confirmado, setConfirmado] = useState(false);
      pagoConfirmado();
      enviarMailDeCompra();
      setConfirmado(true);
+     const dataNotif = {
+        uid: evento.autor,
+        type: "newAsis",
+        idEvento: evento._id,
+         message: `${authGoo.logNormal.name} Compro la entrada y asistirá a tu evento ${evento.nombreDelEvento}`,
+     }
+     socketIO.socket.emit("postNotification", dataNotif);
 
 
      setTimeout(()=>toEvent() ,2000);
