@@ -112,7 +112,7 @@ export default function EventDetails() {
     const query = new URLSearchParams(search);
     const paramFieldStatus:any  = query.get('collection_status');
     const paramFieldPayment_id:any = query.get("payment_id");
-    console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
+    // console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
     
     
 //Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------
@@ -197,6 +197,7 @@ const [confirmado, setConfirmado] = useState(false);
             console.log("postEnviar", post)
         async function fetchPost(data:any) {
             try {
+                console.log("aca manito acaa")
                 const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
                 console.log("data",data);
     
@@ -216,7 +217,7 @@ const [confirmado, setConfirmado] = useState(false);
             if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process"){
+            }else if (check.data.status === "approved" || check.data.status === "incompleto" || check.data.status ===  "Aprobado"){
                 pagoYaRealizado();
                 setConfirmado(true)
             }

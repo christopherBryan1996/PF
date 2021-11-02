@@ -1,3 +1,4 @@
+
 import { useSelector, useDispatch } from "react-redux";
 import { Evento } from './Evento'
 import './styles/Card.css'
@@ -7,8 +8,10 @@ import Foot from './Foot';
 import { getEvents, filtroPrecio, getFavorites } from "../actions/actions"
 import React, { useEffect, useState } from "react";
 import MapaHome from '../components/MapaHome';
+import { EventoCategoria } from "./EventoCategorias";
 
-export const Home = () => {
+
+export const HomePrueba = () => {
 
     const [search, setSearch] = useState('')
     const { eventos, eventosFavoritos } = useSelector((state: any) => state.eventos)
@@ -37,13 +40,7 @@ export const Home = () => {
         console.log(search)
     }
 
-
-
-
-
     return (
-
-
         <div>
             <Nav />
             <div className="container">
@@ -63,7 +60,7 @@ export const Home = () => {
                                     type="text"
                                     className="form-control search col-md-3"
                                     placeholder="Buscar evento..."
-                                    aria-label="Username"
+                                   aria-label="Username"
                                     aria-describedby="basic-addon1"
                                     onChange={handlrOnchange}
                                 />
@@ -89,23 +86,10 @@ export const Home = () => {
 
             </div>
 
-
-            <div className=" container-home">
-
-                {eventos.filter((val: any) => {
-                    if (search === '') {
-                        return val
-                    } else if (val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())) {
-                        return val
-                    }
-                }).map((i: any) => (
-
-                    <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={eventosFavoritos} />
-
-                ))
-                }
-            </div>
-
+            {/*Carousel*/}
+              
+            <EventoCategoria  search={search} eventos={eventos} categoria={"deporte"} favoritos={eventosFavoritos}/>
+            
             <Foot />
 
         </div>

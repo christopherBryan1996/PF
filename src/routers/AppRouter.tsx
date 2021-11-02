@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
+import { HomePrueba } from '../components/HomePrueba';
 import LandingPage from '../components/LandingPage';
 import Login from '../components/Login';
 import NewEvent from '../components/NewEvent';
@@ -22,11 +23,12 @@ import PrivateRoute from './PrivateRoute';
 import MercadoPago from '../components/MercadoPay';
 import '../components/styles/Loading.css';
 import ModificarEvento from '../components/ModificarEvento';
-
+import EventosAsistir from "../components/EventosAsistir";
 import MercadoPay from '../components/MercadoPay';
 
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
+import { FavoritesInv }from '../components/FavoritesInvit';
 
 
 export const AppRouter = () => {
@@ -105,6 +107,10 @@ export const AppRouter = () => {
                         component={Home}
                     />
                     <PublicRoute
+                    exact path="/homePrueba"
+                    component={HomePrueba}
+                     />
+                    <PublicRoute
                         exact path="/about"
                         component={About} />
                     <PublicRoute
@@ -127,7 +133,9 @@ export const AppRouter = () => {
                         exact path="/home/:username/favorites"
                         // isAuthenticated={isAuthenticated}
                         component={Favorites} />
-                    {/* ruta para modificar usuario */}
+                    <PublicRoute
+                    exact path="/home/favorites"
+                    component={FavoritesInv} />
                     <PrivateRoute
                         exact path='/modificarUser/:id'
                         isAuthenticated={isAuthenticated}
@@ -146,6 +154,10 @@ export const AppRouter = () => {
                         isAuthenticated={isAuthenticated}
                         component={AdminScreen} />
 
+                        <PrivateRoute
+                        exact path="/misEventos/:uid"
+                        isAuthenticated={isAuthenticated}                        
+                        component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
                 </Switch>
