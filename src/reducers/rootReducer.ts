@@ -8,6 +8,7 @@ import { usersReducer } from './usersReducer';
 import {adminReducer } from './adminReducer';
 import { notificaciones } from './notificaciones';
 import { favInvitado } from './favInvitados';
+import {ventasReducer} from './ventasReducer'
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
     users: usersReducer,
     admin: adminReducer,
     notificaciones: notificaciones,
-    favInvitados: favInvitado
+    favInvitados: favInvitado,
+    ventas: ventasReducer,
 })

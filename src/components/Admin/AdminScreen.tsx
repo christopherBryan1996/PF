@@ -1,10 +1,12 @@
 
-import { useState } from 'react'
+
+
 import { useSelector } from 'react-redux'
 import './AdminScreen.css'
 import { Dash } from './Dash'
 import { EventsAdmin } from './EventsAdmin'
 import { SideBar } from './SideBar'
+import { VentasAdmin } from './VentasAdmin'
 
 
 export const AdminScreen = () => {
@@ -15,11 +17,11 @@ export const AdminScreen = () => {
 
     return (
         <>
-
+  
             <div className="containerScreem">
-
+              
                 <SideBar />
-                {admin === 1 ? <Dash /> : <EventsAdmin />}
+                {admin === 1 ? <Dash /> : admin === 2 ?  <EventsAdmin /> : <VentasAdmin/>}
 
             </div>
         </>

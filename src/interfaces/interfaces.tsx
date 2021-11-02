@@ -13,14 +13,10 @@ export interface IActions {
     DELETE_FAVORITE_EVENT: string;
     LOGIN_NORMAL: string;
     ADD_FAVORITE_EVENT: string;
-    USER_ASISTIRA_EVENTO: string;
-    
-    CLEAN_NOTIFICATIONS: string;
-   
-    GET_EVENTOSASISTIR:string;
- 
-    DELETE_EVENT:string;   
-      
+    USER_ASISTIRA_EVENTO: string;    
+    CLEAN_NOTIFICATIONS: string;   
+    GET_EVENTOSASISTIR:string; 
+    DELETE_EVENT:string;      
     ADMIN: string;    
     SOCKET_IO_CONFIG: string;   
     SAVE_NOTIFICATIONS: string;    
@@ -30,6 +26,8 @@ export interface IActions {
     FAV_INVITADO: string; 
     GET_FAV_INVITADO: string; 
     DEL_FAV_INVITADO: string;
+    GET_VENTAS: string;
+    INHABILITAR_US: string;
 }
 
 //interface para lista de asistentes por evento
@@ -114,4 +112,9 @@ export interface INotifRecibidas {
     idEvento: string,
     message: string,
     _id: string
+}
+export interface Iventas{
+
+    ventas:[];
+
 }

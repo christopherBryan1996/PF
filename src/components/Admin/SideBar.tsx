@@ -19,6 +19,10 @@ export const SideBar = () => {
         dispatch(admin(2));
         console.log()
     }
+    function handleOnclicKVentas() {
+        dispatch(admin(3));
+        console.log()
+    }
 
 
     return (
@@ -49,7 +53,7 @@ export const SideBar = () => {
                     <button className='boton' onClick={handleOnclicKEvents}>Eventos</button>
                 </div>
                 <div className="btn-container">
-                    <button className='boton'>Pagos</button>
+                    <button className='boton'  onClick={handleOnclicKVentas}>Pagos</button>
                 </div>
 
 
