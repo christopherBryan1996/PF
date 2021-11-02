@@ -15,7 +15,7 @@ import {
   
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeartOutline, IoCopyOutline } from "react-icons/io5";
 
 import { useHistory } from "react-router-dom";
 
@@ -148,9 +148,11 @@ export const Evento = (props: Iprops) => {
                                 <WhatsappIcon className="share" round={true} size='2em' />
                             </WhatsappShareButton>
                             <button 
+                            className="botonCopy"
                         onClick={() => toEventClipboard(_id)}>
+                          <IoCopyOutline></IoCopyOutline>
                                                                                            
-                            ClipBoard
+                            
                             </button>
 
                         </div>
