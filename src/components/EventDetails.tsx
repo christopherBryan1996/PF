@@ -216,7 +216,7 @@ const [confirmado, setConfirmado] = useState(false);
             if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process"){
+            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto"){
                 pagoYaRealizado();
                 setConfirmado(true)
             }
