@@ -9,6 +9,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import URLrequests from "./constanteURL";
 import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
+import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 
 export default function ModificarEvento() {
      //Estados------------------------------------------------------------------------------------------
@@ -140,6 +141,7 @@ export default function ModificarEvento() {
         }
         fetchPost(put)
         console.log("constPost", put) 
+        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento )
     };
 
     
