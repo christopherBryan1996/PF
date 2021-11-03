@@ -15,6 +15,8 @@ import URLrequests from "./constanteURL";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 
+import FileDownload from 'js-file-download';
+
 
 
 
@@ -243,9 +245,16 @@ const [confirmado, setConfirmado] = useState(false);
 //Funcion para conseguir QR----------------------------------------------------------------------------------
      const obtenerQR = async () => {
         
-        const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/qr/${authGoo.logNormal.uid}/${eventid}`);
-        console.log(data)
-        window.open(data)
+        // const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`);
+        
+
+        axios({
+            url: `${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`,
+            method: 'GET',
+            responseType: 'blob', // Important
+          }).then((response:any) => {
+              FileDownload(response.data, 'Entrada.png');
+          });
     }
 
 

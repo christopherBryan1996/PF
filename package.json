@@ -24,6 +24,7 @@
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "firebase": "^9.1.3",
+    "js-file-download": "^0.4.12",
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "mercadopago": "^1.5.8",
