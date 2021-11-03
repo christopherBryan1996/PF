@@ -17,6 +17,7 @@ export default function EventosAsistir(): JSX.Element {
     }, []);
     
     const { eventosAsistir }: { eventosAsistir: any } = useSelector((state: any) => state.eventos)
+    console.log("EVENTOS A ASISTIR", eventosAsistir)
     // const { eventsToAssist }: { eventsToAssist: any } = useSelector((state: any) => state.eventos.eventosAsistir)
     let eventos = []
     if ( eventosAsistir.eventsToAssist){
@@ -39,7 +40,7 @@ export default function EventosAsistir(): JSX.Element {
     console.log(eventos,"eventstoassist")
     }
     // const {nombreDelEvento}:{nombreDelEvento:any}=eventosAsistir.eventsToAssist[0].eventId
-    return eventos.length ? (
+    return (
         <div>
             <div className="divDelNav"><Nav></Nav></div>
             <h1>Eventos a asistir</h1>
@@ -60,6 +61,7 @@ export default function EventosAsistir(): JSX.Element {
                 ))}
 
             </div> */}
+        { eventos.length ? 
             <div>
 
             {eventos.map((i:{
@@ -72,6 +74,7 @@ export default function EventosAsistir(): JSX.Element {
             ))}
 
             </div>
+            :<div>No tienes eventos a asistir</div>}
         </div>
-    ):<div>No tienes eventos a asistir</div>
+    )
 }

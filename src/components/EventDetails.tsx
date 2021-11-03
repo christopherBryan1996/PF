@@ -15,6 +15,8 @@ import URLrequests from "./constanteURL";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 
+import FileDownload from 'js-file-download';
+
 
 
 
@@ -136,6 +138,13 @@ const [confirmado, setConfirmado] = useState(false);
      pagoConfirmado();
      enviarMailDeCompra();
      setConfirmado(true);
+     const dataNotif = {
+        uid: evento.autor,
+        type: "newAsis",
+        idEvento: evento._id,
+         message: `${authGoo.logNormal.name} Compro la entrada y asistirá a tu evento ${evento.nombreDelEvento}`,
+     }
+     socketIO.socket.emit("postNotification", dataNotif);
 
 
      setTimeout(()=>toEvent() ,2000);
@@ -149,10 +158,10 @@ const [confirmado, setConfirmado] = useState(false);
         console.log("q asistesn", data)
 
          await data.asistentes.forEach((a:any)=>{
-             console.log(a.usuario[0].usuario)
+             console.log("USUARIO", a.usuario[0].usuario)
             if(a.usuario[0]._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
-                 console.log("lo paso a true el gil")
+                 
             }
         })
 
@@ -164,6 +173,7 @@ const [confirmado, setConfirmado] = useState(false);
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
         setConfirmado(true);
+        enviarMailDeCompra();
 
          const dataNotif = {
            uid: evento.autor,
@@ -202,7 +212,7 @@ const [confirmado, setConfirmado] = useState(false);
                 console.log("data",data);
     
                 if (data.LinkMP) {
-                    window.open(data.LinkMP);
+                    window.location.assign(data.LinkMP); 
                     //window.open para nueva tab % window.location.assign en la misma tab
                    
     
@@ -236,9 +246,16 @@ const [confirmado, setConfirmado] = useState(false);
 //Funcion para conseguir QR----------------------------------------------------------------------------------
      const obtenerQR = async () => {
         
-        const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/qr/${authGoo.logNormal.uid}/${eventid}`);
-        console.log(data)
-        window.open(data)
+        // const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`);
+        
+
+        axios({
+            url: `${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`,
+            method: 'GET',
+            responseType: 'blob', // Important
+          }).then((response:any) => {
+              FileDownload(response.data, `Entrada a ${evento.nombreDelEvento}.png`);
+          });
     }
 
 
@@ -328,10 +345,8 @@ const [confirmado, setConfirmado] = useState(false);
 
 
             {/* <div className="card card-details ">
-
                 <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
                 <div className="card-body">
-
                     <h5 className="card-text"> <span><FaCalendarAlt color="white" /></span> {evento.fecha.split("T")[0]}</h5>
                     <h3 className="card-title">{evento.nombreDelEvento}</h3>
                 </div>
@@ -353,10 +368,8 @@ const [confirmado, setConfirmado] = useState(false);
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
                 </div>
-
             </div>
             <div className="card-details ">
-
                 {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
             {/* <div >
                     <Mapa1evento />

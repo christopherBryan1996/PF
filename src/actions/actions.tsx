@@ -61,7 +61,7 @@ export function getEvent(eventId: any) {
 
 export function getEventosAsistir(uid: any) {
   return async function (dispatch: any) {
-    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    const res = await axios.get(`${URLrequests}api/users/usereventstoassist/${uid}`);
     dispatch({
       type: actions.GET_EVENTOSASISTIR,
       payload: res.data,
@@ -246,6 +246,27 @@ export const saveNotifications = (notif: any) => {
       payload: notif
     });
   }
+}
+
+export function getVentas() {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/payment/getpayments`);
+    dispatch({
+      type: actions.GET_VENTAS,
+      payload: res.data,
+    });
+  };
+}
+
+export function inhabilitarUs(id:string, accion:boolean ) {
+  return async function (dispatch: any) {
+    const res = await axios.patch(`${URLrequests}admin/set/${id}/${accion}`);
+    dispatch(getUsers())
+    dispatch({
+      type: actions.INHABILITAR_US,
+      payload: res.data,
+    });
+  };
 }
 
 

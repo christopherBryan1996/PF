@@ -9,7 +9,9 @@ import {useSelector,useDispatch} from 'react-redux';
 import URLrequests from "./constanteURL";
 import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
+import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 import categorias from "../categorias/Categorias";
+
 
 export default function ModificarEvento() {
      //Estados------------------------------------------------------------------------------------------
@@ -31,7 +33,7 @@ export default function ModificarEvento() {
     useEffect(() => {
         dispatch(getEvent(eventid));
     }, []);
-    const {authGoo}=useSelector((state:any)=>state)
+    const {authGoo, socketIO}=useSelector((state:any)=>state)
     const {evento}:{evento:any}=useSelector((state:any)=>state.eventos)
     console.log(evento,"hola")
 
@@ -131,9 +133,6 @@ export default function ModificarEvento() {
                 const {data}: {data:any} =  await axios.put(`${URLrequests}events/edit/${eventid}`, put)
                 console.log("data",data);
                 
-                
-
-                
                     setCreando(false);
                     eventoModificado()
                     
@@ -142,7 +141,8 @@ export default function ModificarEvento() {
             }
         }
         fetchPost(put)
-        console.log("constPost", put) 
+        console.log("Aca estoy", evento.nombreDelEvento) 
+        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento, socketIO.socket )
     };
 
     const Checked=(value:string)=>{
