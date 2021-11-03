@@ -61,7 +61,7 @@ export function getEvent(eventId: any) {
 
 export function getEventosAsistir(uid: any) {
   return async function (dispatch: any) {
-    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    const res = await axios.get(`${URLrequests}api/users/usereventstoassist/${uid}`);
     dispatch({
       type: actions.GET_EVENTOSASISTIR,
       payload: res.data,

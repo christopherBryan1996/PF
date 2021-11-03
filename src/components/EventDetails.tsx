@@ -158,10 +158,10 @@ const [confirmado, setConfirmado] = useState(false);
         console.log("q asistesn", data)
 
          await data.asistentes.forEach((a:any)=>{
-             console.log(a.usuario[0].usuario)
+             console.log("USUARIO", a.usuario[0].usuario)
             if(a.usuario[0]._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
-                 console.log("lo paso a true el gil")
+                 
             }
         })
 
@@ -173,6 +173,7 @@ const [confirmado, setConfirmado] = useState(false);
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
         setConfirmado(true);
+        enviarMailDeCompra();
 
          const dataNotif = {
            uid: evento.autor,
