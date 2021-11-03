@@ -103,11 +103,11 @@ export const AppRouter = () => {
                         component={LandingPage} />
                     <PublicRoute
                         exact path="/home"
-                        component={Home}
+                        component={HomePrueba}
                     />
                     <PublicRoute
                     exact path="/homePrueba"
-                    component={HomePrueba}
+                    component={Home}
                      />
                     <PublicRoute
                         exact path="/about"

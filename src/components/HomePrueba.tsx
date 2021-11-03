@@ -1,6 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";import { Evento } from "./Evento";
-import "./styles/Card.css";
-import { Nav } from "./Nav";
+
+import { useSelector, useDispatch } from "react-redux";
+import './styles/Card.css'
+import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
 import Foot from "./Foot";
 import { getEvents, filtroPrecio, getFavorites } from "../actions/actions";

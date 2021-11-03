@@ -9,6 +9,7 @@ import {useSelector,useDispatch} from 'react-redux';
 import URLrequests from "./constanteURL";
 import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
+import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 import categorias from "../categorias/Categorias";
 import { notificacionModifEvento } from "../controllers/notificaciones/notificaciones";
 
@@ -137,7 +138,8 @@ export default function ModificarEvento() {
             }
         }
         fetchPost(put)
-        console.log("constPost", put) 
+        console.log("Aca estoy", evento.nombreDelEvento) 
+        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento )
     };
 
     const Checked=(value:string)=>{
