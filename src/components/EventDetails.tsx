@@ -253,7 +253,7 @@ const [confirmado, setConfirmado] = useState(false);
             method: 'GET',
             responseType: 'blob', // Important
           }).then((response:any) => {
-              FileDownload(response.data, 'Entrada.png');
+              FileDownload(response.data, `Entrada a ${evento.nombreDelEvento}.png`);
           });
     }
 
