@@ -69,6 +69,17 @@ export function getEventosAsistir(uid: any) {
   };
 }
 
+export function getTareas(uid: any) {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    
+    dispatch({
+      type: actions.GET_TAREAS,
+      payload: res.data,
+    });
+  };
+}
+
 export const filtroPrecio = (state: any) => {
   return {
     type: actions.FILTRO_PRECIO,

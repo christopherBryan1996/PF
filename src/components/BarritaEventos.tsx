@@ -8,6 +8,7 @@ import { IeventosUsuario } from "../interfaces/interfaces";
 import { useSelector, useDispatch} from "react-redux";
 import {deleteEvent} from "../controllers/eventos/eventoscontrollers"
 
+
 export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fecha}:IeventosUsuario) {
     
    const dispatch=useDispatch();
@@ -15,7 +16,8 @@ export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fec
     (state: any) => state
   );
     
-    
+
+
     return(
         <div>
             <div className="barra">
