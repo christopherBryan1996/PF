@@ -16,6 +16,8 @@ import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 
 import FileDownload from 'js-file-download';
+import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
+import { IoCopyOutline } from "react-icons/io5";
 
 
 
@@ -158,10 +160,10 @@ const [confirmado, setConfirmado] = useState(false);
         console.log("q asistesn", data)
 
          await data.asistentes.forEach((a:any)=>{
-             console.log("USUARIO", a.usuario[0].usuario)
-            if(a.usuario[0]._id === authGoo.logNormal.uid){
+             console.log(a.usuario[0]?.usuario)
+            if(a.usuario[0]?._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
-                 
+                 console.log("lo paso a true el gil")
             }
         })
 
@@ -173,7 +175,6 @@ const [confirmado, setConfirmado] = useState(false);
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
         setConfirmado(true);
-        enviarMailDeCompra();
 
          const dataNotif = {
            uid: evento.autor,
@@ -181,7 +182,7 @@ const [confirmado, setConfirmado] = useState(false);
            idEvento: evento._id,
             message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
         }
-     socketIO.socket.emit("postNotification", dataNotif);
+     socketIO.socket?.emit("postNotification", dataNotif);
     }
         }
         
@@ -258,7 +259,15 @@ const [confirmado, setConfirmado] = useState(false);
           });
     }
 
+    const toEventClipboard = (_id: any) => {
 
+        var UrlCompartir = `http://localhost:3000/detail/${_id}`;
+        navigator.clipboard.writeText(UrlCompartir);
+        //seCopio();
+    }
+
+
+    //return del componente------------------------------------------------------------------------------
 
     //return del componente------------------------------------------------------------------------------
 
@@ -277,7 +286,86 @@ const [confirmado, setConfirmado] = useState(false);
 
             <Nav />
 
-            <div className="card-contai">
+            <div className="container container-card-detalles">
+
+
+                <div className="card mb-3 card-detalle" >
+                    <div className="row no-gutters">
+                        <div className="col-md-8">
+                            <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" width="400" />
+                        </div>
+                        <div className="col-md-4">
+                            <div className="card-body">
+                                <h4 className="card-title">{evento.nombreDelEvento}</h4>
+                                <p className="card-text"><small className="text-muted">{evento.fecha.split("").slice(0, 10).join("")}</small></p>
+                                <p className="card-text">{evento.descripcion}</p>
+                                <p className="card-text"><small className="text-muted">{evento.precio === 0 ? 'Gratis ' : `Valor:  $${evento.precio} `}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card-footer">
+                        <button className="btn btn-success">
+                            {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
+                                <p>Asistire al evento</p>  </div>}
+
+                            {evento.precio !== 0 &&
+                                <div onClick={comprarEntrada}>
+                                    <FiShoppingCart size="2em" color="white" />
+                                    <p>Comprar Entradas</p>
+
+                                </div>}
+
+
+                        </button>
+                        {paramFieldPayment_id &&
+                            <button className="btn btn-success">
+                                <div onClick={(() => agregarPagoDB())}>
+                                    <FiUserPlus size="2em" color="white" />
+                                    <p>Confirma que compraste la entrada y asistiras al evento</p>
+
+                                </div>
+                            </button>}
+
+                        {confirmado &&
+                            <button className="btn btn-success" onClick={obtenerQR}>
+                                <div >
+                                    <FiTag size="2em" color="white" />
+                                    <p>Obtiene tu QR de la entrada!</p>
+
+                                </div>
+                            </button>}
+
+
+
+                    </div>
+                    <div className="card-footer">
+                        <span className="spa">Compartir con tus amigos</span>
+                        <FacebookShareButton url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`} quote='Hola, quiero compartir este evento'>
+                            <FacebookIcon className="share" round={true} size='2em' />
+                        </FacebookShareButton>
+                        <WhatsappShareButton
+                            title='Hola, te comparto este evento, te pueda interesar!'
+                            url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`}>
+                            <WhatsappIcon className="share" round={true} size='2em' />
+                        </WhatsappShareButton>
+                        <button
+                            className="botonCopy"
+                            onClick={() => toEventClipboard(evento._id)}>
+                            <IoCopyOutline></IoCopyOutline>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div className="card-contai2" >
+                    <Mapa1evento />
+                </div>
+
+
+
+            </div>
+
+            {/* <div className="card-contai">
 
                 <div className="card " >
 
@@ -299,86 +387,44 @@ const [confirmado, setConfirmado] = useState(false);
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
 
-                    {evento.precio !== 0 && 
-                    <div onClick={comprarEntrada}> 
-                    <FiShoppingCart size="2em" color="white" />
-                     <p>Comprar Entradas</p>  
-                     
-                     </div> } 
+                    {evento.precio !== 0 &&
+                        <div onClick={comprarEntrada}>
+                            <FiShoppingCart size="2em" color="white" />
+                            <p>Comprar Entradas</p>
 
-                     
+                        </div>}
+
+
                 </button>
 
-                {paramFieldPayment_id && 
-                     <button className="btn btn-success">
-                     <div onClick={(()=> agregarPagoDB())}>
-                          <FiUserPlus size="2em" color="white" />
-                          <p>Confirma que compraste la entrada y asistiras al evento</p>
+                {paramFieldPayment_id &&
+                    <button className="btn btn-success">
+                        <div onClick={(() => agregarPagoDB())}>
+                            <FiUserPlus size="2em" color="white" />
+                            <p>Confirma que compraste la entrada y asistiras al evento</p>
 
-                    </div>
-                    </button>} 
-                    
-                    {confirmado && 
-                    <button className="btn btn-success" onClick={obtenerQR}>
-                      <div >
-                          <FiTag size="2em" color="white" />
-                          <p>Obtiene tu QR de la entrada!</p>
-
-                     </div>
+                        </div>
                     </button>}
-                    
 
-                
+                {confirmado &&
+                    <button className="btn btn-success" onClick={obtenerQR}>
+                        <div >
+                            <FiTag size="2em" color="white" />
+                            <p>Obtiene tu QR de la entrada!</p>
+
+                        </div>
+                    </button>}
+
+
+
 
                 <div className="card-contai2" >
                     <Mapa1evento />
                 </div>
 
                 <Foot />
-            </div>
-
-
-
-
-
-
-
-
-            {/* <div className="card card-details ">
-                <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
-                <div className="card-body">
-                    <h5 className="card-text"> <span><FaCalendarAlt color="white" /></span> {evento.fecha.split("T")[0]}</h5>
-                    <h3 className="card-title">{evento.nombreDelEvento}</h3>
-                </div>
-                <div className="card-footer">
-                    <p>Hora: <span>{evento.horaDeInicio}</span>  </p>
-                    <p>Ubicacion: <span>{evento.direccion}</span>  </p>
-                    <p>Asistentes: <span>{evento.asistentes.length}</span></p>
-                    <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
-                    <p>Publico: <span>{final}</span></p>
-                </div>
-                <div className="card-footer">
-                    <p>Descripción: <span>{evento.descripcion}</span>  </p>
-                </div>
-                <div className="card-footer">
-                    {!privadoOpublico && <div><FiShoppingCart size="2em" color="white" />
-                        <p>Adquirir Boletos</p></div>}
-                </div>
-                <div className="card-footer">
-                    {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
-                        <p>Asistire al evento</p>  </div>}
-                </div>
-            </div>
-            <div className="card-details ">
-                {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
-            {/* <div >
-                    <Mapa1evento />
-                </div> */}
-            {/* </div> */}
-
-
-            {/* } */}
-
+            </div> */}
+            <Foot />
         </div>
     ) : (
         <div className="loading">
