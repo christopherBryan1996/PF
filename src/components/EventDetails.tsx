@@ -366,11 +366,8 @@ const [confirmado, setConfirmado] = useState(false);
             </div>
 
             {/* <div className="card-contai">
-
                 <div className="card " >
-
                     <h3 className="card-title">{evento.nombreDelEvento}</h3>
-
                 </div>
                 <div className="card">
                     <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="300" width="00" />
@@ -381,47 +378,33 @@ const [confirmado, setConfirmado] = useState(false);
                     <p>Asistentes: <span>{evento.asistentes.length}</span></p>
                     <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
                     <p>Publico: <span>{final}</span></p>
-
                 </div>
                 <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
-
                     {evento.precio !== 0 &&
                         <div onClick={comprarEntrada}>
                             <FiShoppingCart size="2em" color="white" />
                             <p>Comprar Entradas</p>
-
                         </div>}
-
-
                 </button>
-
                 {paramFieldPayment_id &&
                     <button className="btn btn-success">
                         <div onClick={(() => agregarPagoDB())}>
                             <FiUserPlus size="2em" color="white" />
                             <p>Confirma que compraste la entrada y asistiras al evento</p>
-
                         </div>
                     </button>}
-
                 {confirmado &&
                     <button className="btn btn-success" onClick={obtenerQR}>
                         <div >
                             <FiTag size="2em" color="white" />
                             <p>Obtiene tu QR de la entrada!</p>
-
                         </div>
                     </button>}
-
-
-
-
                 <div className="card-contai2" >
                     <Mapa1evento />
                 </div>
-
                 <Foot />
             </div> */}
             <Foot />
