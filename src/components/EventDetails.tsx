@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles/EventDetails.css";
 import { FaCalendarAlt } from "react-icons/fa"
-import { FiShoppingCart, FiUserPlus } from "react-icons/fi";
+import { FiShoppingCart, FiUserPlus, FiTag } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
 import { useEffect, useState } from "react";
 import { getEvent, userAsistiraEvento } from "../actions/actions"
@@ -14,6 +14,8 @@ import axios from 'axios';
 import URLrequests from "./constanteURL";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
+
+import FileDownload from 'js-file-download';
 
 
 
@@ -47,6 +49,14 @@ export default function EventDetails() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+    });const yaAsistes = () => toast.error('Ya figuras como que asistiras, descarga tu Entrada QR', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
     });
 
     //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
@@ -57,7 +67,6 @@ export default function EventDetails() {
     const [loading, setLoading] = useState<boolean>(true)
     const { eventid }: { eventid: string } =
         useParams();
-    console.log('event:', eventid);
 
     const dispatch = useDispatch()
 
@@ -77,6 +86,7 @@ export default function EventDetails() {
         history.push(`/detail/${eventid}`)
     };
 
+   
     //Funcion para enviar mail---------------------------------------------------------------------------------
     const enviarMailDeCompra = async() =>{
         try{
@@ -108,7 +118,7 @@ export default function EventDetails() {
     
     
 //Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------
-
+const [confirmado, setConfirmado] = useState(false);
     const agregarPagoDB = async () =>{
     
             try {
@@ -127,16 +137,42 @@ export default function EventDetails() {
     
      pagoConfirmado();
      enviarMailDeCompra();
+     setConfirmado(true);
+     const dataNotif = {
+        uid: evento.autor,
+        type: "newAsis",
+        idEvento: evento._id,
+         message: `${authGoo.logNormal.name} Compro la entrada y asistirá a tu evento ${evento.nombreDelEvento}`,
+     }
+     socketIO.socket.emit("postNotification", dataNotif);
 
 
      setTimeout(()=>toEvent() ,2000);
     };    
 
 //Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
-    const agregarGenteAsistir = () => {
-        authGoo.logNormal &&
+
+    const agregarGenteAsistir = async () => {
+
+        const {data}: {data:any} =  await axios.get(`${URLrequests}events/assistans/${eventid}`)
+        console.log("q asistesn", data)
+
+         await data.asistentes.forEach((a:any)=>{
+             console.log(a.usuario[0].usuario)
+            if(a.usuario[0]._id === authGoo.logNormal.uid){
+                 setConfirmado(true) 
+                 console.log("lo paso a true el gil")
+            }
+        })
+
+         if (confirmado === true){
+            return yaAsistes();
+        }else if (confirmado === false){
+
+            authGoo.logNormal &&
             dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
         asistire();
+        setConfirmado(true);
 
          const dataNotif = {
            uid: evento.autor,
@@ -144,8 +180,14 @@ export default function EventDetails() {
            idEvento: evento._id,
             message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
         }
-     socketIO.socket.emit("postNotification", dataNotif);
+     socketIO.socket?.emit("postNotification", dataNotif);
     }
+        }
+        
+        
+
+
+        
 //Funcion para despachar la compra de una entrada POST------------------------------------------------
     const [cantidad, setCantidad] = useState(1);
 
@@ -164,11 +206,12 @@ export default function EventDetails() {
             console.log("postEnviar", post)
         async function fetchPost(data:any) {
             try {
+                console.log("aca manito acaa")
                 const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
                 console.log("data",data);
     
                 if (data.LinkMP) {
-                    window.location.assign(data.LinkMP);
+                    window.location.assign(data.LinkMP); 
                     //window.open para nueva tab % window.location.assign en la misma tab
                    
     
@@ -183,8 +226,11 @@ export default function EventDetails() {
             if (check.data.message === "Error al buscar pago"){
                 fetchPost(post)
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process"){
+
+            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado" || check.data.status === "Incompleto"){
+
                 pagoYaRealizado();
+                setConfirmado(true)
             }
 
     }
@@ -194,6 +240,23 @@ export default function EventDetails() {
     var privadoOpublico = evento.publico;
     var final = "Publico - Cualquiera puede asistir";
     if (privadoOpublico === false) { final = "Privado - Solo invitados" };
+
+
+//Funcion para conseguir QR----------------------------------------------------------------------------------
+     const obtenerQR = async () => {
+        
+        // const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`);
+        
+
+        axios({
+            url: `${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`,
+            method: 'GET',
+            responseType: 'blob', // Important
+          }).then((response:any) => {
+              FileDownload(response.data, `Entrada a ${evento.nombreDelEvento}.png`);
+          });
+    }
+
 
 
     //return del componente------------------------------------------------------------------------------
@@ -238,7 +301,7 @@ export default function EventDetails() {
                     {evento.precio !== 0 && 
                     <div onClick={comprarEntrada}> 
                     <FiShoppingCart size="2em" color="white" />
-                     <p>Comprar Entradas</p> 
+                     <p>Comprar Entradas</p>  
                      
                      </div> } 
 
@@ -253,7 +316,16 @@ export default function EventDetails() {
 
                     </div>
                     </button>} 
-                    <button onClick={enviarMailDeCompra}>probar mail</button>
+                    
+                    {confirmado && 
+                    <button className="btn btn-success" onClick={obtenerQR}>
+                      <div >
+                          <FiTag size="2em" color="white" />
+                          <p>Obtiene tu QR de la entrada!</p>
+
+                     </div>
+                    </button>}
+                    
 
                 
 

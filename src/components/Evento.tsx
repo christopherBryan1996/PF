@@ -15,7 +15,13 @@ import {
   
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
-import { IoHeartOutline } from "react-icons/io5";
+import { IoHeartOutline, IoCopyOutline } from "react-icons/io5";
+import { useHistory } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
+import {useState} from "react"
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 
 interface Iprops {
   fecha: string;
@@ -33,6 +39,19 @@ export const Evento = (props: Iprops) => {
   const dispatch = useDispatch();
   let resultado:boolean
 
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    
+      setOpen(true);
+   
+  };
+
+
   const checkFavorito = () => {
     if (authGoo.logNormal && favoritos.favouritesEvents) {
       resultado = favoritos.favouritesEvents.some(
@@ -46,15 +65,29 @@ export const Evento = (props: Iprops) => {
     return "favorites-container";
   };
 
-  const eventoAgregado = () =>
-    toast.success("Evento agregado con exito!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+
+
+
+    const toEventClipboard = (_id:any)=>{
+        var path = window.location.href.split("").reverse().slice(4).reverse().join("");
+        var UrlCompartir  = path + "detail/" + `${_id}`;
+        navigator.clipboard.writeText(UrlCompartir);
+        // seCopio();
+    }
+    
+    const history :any = useHistory();
+    const toLogin = () => {
+        history.push("/login")
+    };
+
+    const eventoAgregado = () => toast.success('Evento agregado con exito!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
     });
 
   const eventoNoAgregado = () =>
@@ -65,7 +98,17 @@ export const Evento = (props: Iprops) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
+      progress: undefined, 
+
+    });
+    const seCopio = () => toast.success('El URL del evento se copio en tu teclado', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
     });
 
   const agregarAfavoritos = () => {
@@ -75,7 +118,7 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteEvent(authGoo.logNormal.uid, _id));
-            eventoAgregado()
+            // eventoAgregado()
             }
         }
         else {
@@ -84,103 +127,125 @@ export const Evento = (props: Iprops) => {
             }
             else{
             dispatch(addFavoriteInvitado(_id));
-            eventoAgregado();
+            // eventoAgregado();
             }
         }
-    }
+
+    };
+
+    return (
+            <div className='card container-card'>
+            <Link to={`/detail/${_id}`}>
+                <img className="card-img-top" src={imagen} alt="Card image cap" height="160" />
+                </Link>
+                <div className='card-body'>
+                   
+                        <p className="card-text fecha">{fecha.slice(0, 10)}</p>
+                        <Link to={`/detail/${_id}`}>
+                        <h5 className="card-title">{nombreDelEvento}</h5>
+                        </Link>
+
+                        {
+                            (precio === 0
+                                ?
+                                <p className="card-text">Gratis</p>
+                                :
+                                <p className="card-text">Valor:  ${precio}</p>
+                            )
+                        }
+                        <div className="card-footer">
+                            <span className="spa">Compartir</span>
+                            <FacebookShareButton url={`https://students.soyhenry.com/`} quote='Hola, quiero compartir este evento'>
+                                <FacebookIcon className="share" round={true} size='2em' />
+                            </FacebookShareButton>
+                            <WhatsappShareButton
+                                title='Hola, te comparto este evento, te pueda interesar!'
+                                url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
+                                <WhatsappIcon className="share" round={true} size='2em' />
+                            </WhatsappShareButton>  
 
 
-  return (
-    <div className="card container-card">
-      <Link to={`/detail/${_id}`}>
-        <img
-          className="card-img-top"
-          src={imagen}
-          alt="Card image cap"
-          height="160"
-        />
-      </Link>
-      <div className="card-body">
-        <p className="card-text fecha">{fecha.slice(0, 10)}</p>
-        <Link to={`/detail/${_id}`}>
-          <h5 className="card-title">{nombreDelEvento}</h5>
-        </Link>
+                            <ClickAwayListener onClickAway={handleTooltipClose}>
+            <div>
+                            <Tooltip PopperProps={{
+                  disablePortal: true,
+                }} onClose={handleTooltipClose}
+                open={open}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener title="Link copiado" placement="top">
+                            <Button   onClick={() => {handleTooltipOpen(); toEventClipboard(_id)}}>
+                            <IoCopyOutline></IoCopyOutline>
+                              </Button>
+                            </Tooltip>
+                            </div>
+          </ClickAwayListener>                          
+                           
 
-        {precio === 0 ? (
-          <p className="card-text">Gratis</p>
-        ) : (
-          <p className="card-text">Valor: ${precio}</p>
-        )}
-        <div className="card-footer">
-          <span className="spa">Compartir</span>
-          <FacebookShareButton
-            url={`https://students.soyhenry.com/`}
-            quote="Hola, quiero compartir este evento"
-          >
-            <FacebookIcon className="share" round={true} size="2em" />
-          </FacebookShareButton>
-          <WhatsappShareButton
-            title="Hola, te comparto este evento, te pueda interesar!"
-            url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}
-          >
-            <WhatsappIcon className="share" round={true} size="2em" />
-          </WhatsappShareButton>
-        </div>
-        <div className={checkFavorito()}>
-          <span>
-            <button onClick={agregarAfavoritos}>
-              <IoHeartOutline color="white" fontSize="1.6em" />
-            </button>
-          </span>
-        </div>
-      </div>
+                          
+                  
+                            
+                            
 
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </div>
-  );
-};
+                        </div>
+                        
+                        <div className={checkFavorito()}>
+                        
+                            <span>
+                                <button onClick={agregarAfavoritos}><IoHeartOutline color="white" fontSize="1.6em" /></button>
+                            </span>
+                        
+                        </div>
+               
+                </div>
 
-// <div className="container-card">
-//     <div >
-//         <Link to={`/detail/${_id}`} className="link" >
-//             <img className="card-img-top" src={imagen} alt="Card image cap" height="180" />
-//             <div className="card-body">
-//                 <p className="card-text">{fecha.slice(0, 10)}</p>
-//                 <h5 className="card-title">{nombreDelEvento}</h5>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover />
+            </div>
+    )
+}
 
-//                 {
-//                     (precio === 0
-//                         ?
-//                         <p className="card-text">Gratis</p>
-//                         :
-//                         <p className="card-text">Valor:  ${precio}</p>
-//                     )
-//                 }
-//             </div>
+            // <div className="container-card">
+            //     <div >
+            //         <Link to={`/detail/${_id}`} className="link" >
+            //             <img className="card-img-top" src={imagen} alt="Card image cap" height="180" />
+            //             <div className="card-body">
+            //                 <p className="card-text">{fecha.slice(0, 10)}</p>
+            //                 <h5 className="card-title">{nombreDelEvento}</h5>
 
-//         <div className="card-footer">
-//             <button className="btn btn-outline-success my-2 my-sm-0" onClick={agregarAfavoritos}> Añadir a Favoritos</button>
-//             <span className="spa">Compartir</span>
-//             <FacebookShareButton url={`https://students.soyhenry.com/`} quote='Hola, quiero compartir este evento'>
-//                 <FacebookIcon className="share" round={true} size='2em' />
-//             </FacebookShareButton>
-//             <WhatsappShareButton
-//                 title='Hola, te comparto este evento, te pueda interesar!'
-//                 url="https://students.soyhenry.com/">
-//                 <WhatsappIcon className="share" round={true} size='2em' />
-//             </WhatsappShareButton>
-//         </div>
+            //                 {
+            //                     (precio === 0
+            //                         ?
+            //                         <p className="card-text">Gratis</p>
+            //                         :
+            //                         <p className="card-text">Valor:  ${precio}</p>
+            //                     )
+            //                 }
+            //             </div>
+                   
+            //         <div className="card-footer">
+            //             <button className="btn btn-outline-success my-2 my-sm-0" onClick={agregarAfavoritos}> Añadir a Favoritos</button>
+            //             <span className="spa">Compartir</span>
+            //             <FacebookShareButton url={`https://students.soyhenry.com/`} quote='Hola, quiero compartir este evento'>
+            //                 <FacebookIcon className="share" round={true} size='2em' />
+            //             </FacebookShareButton>
+            //             <WhatsappShareButton
+            //                 title='Hola, te comparto este evento, te pueda interesar!'
+            //                 url="https://students.soyhenry.com/">
+            //                 <WhatsappIcon className="share" round={true} size='2em' />
+            //             </WhatsappShareButton>
+            //         </div>
 
-//     </div>
+            //     </div>
+              
+            // </div>
 
-// </div>
+

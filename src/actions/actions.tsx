@@ -168,9 +168,9 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
     });
   }
 }
-
+//https://api-fest.herokuapp.com
 export const socketConfig = (uid: string, usuario: string) => {
-  const socket = socketIOClient("https://api-fest.herokuapp.com/",{forceNew: true})
+  const socket = socketIOClient("http://localhost:3008/",{forceNew: true})
   const data = {uid, usuario}
   socket.emit("newUser",data);
   return function (dispatch: any) {
@@ -246,6 +246,27 @@ export const saveNotifications = (notif: any) => {
       payload: notif
     });
   }
+}
+
+export function getVentas() {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/payment/getpayments`);
+    dispatch({
+      type: actions.GET_VENTAS,
+      payload: res.data,
+    });
+  };
+}
+
+export function inhabilitarUs(id:string, accion:boolean ) {
+  return async function (dispatch: any) {
+    const res = await axios.patch(`${URLrequests}admin/set/${id}/${accion}`);
+    dispatch(getUsers())
+    dispatch({
+      type: actions.INHABILITAR_US,
+      payload: res.data,
+    });
+  };
 }
 
 

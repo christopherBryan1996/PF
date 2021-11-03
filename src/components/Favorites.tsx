@@ -22,6 +22,7 @@ export default function Favorites() {
     const dispatch = useDispatch()
 
     const { eventosFavoritos } = useSelector((state: any) => state.eventos)
+    console.log("eventosFavoritos", eventosFavoritos.favouritesEvents)
     const { authGoo } = useSelector((state: any) => state)
 
     //verifico si hay favoritos en modo invitado no agregados a la cuenta logueada
@@ -100,13 +101,17 @@ export default function Favorites() {
             <div className="container container-cards">
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
 
-                    <div className="card col-md-8">
+                    <div className='card container-card'>
                         <Link to={`/detail/${e._id}`} className="container container-favorites">
                             <div className="card-body">
-                                <h4>{e.nombreDelEvento}</h4>
+                            <span><h4>{e.nombreDelEvento} </h4><h5 className="card-text fecha">el {e.fecha.split("").slice(0, 10).join("")}</h5></span> 
 
                             </div>
                         </Link>
+                        <div>
+                            <img src={e.imagen} className="card-img-top"/>
+                        </div>
+                        <br/>
                         <div className="icon">
                             <ImBin className="icon-delete" fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
                         </div>

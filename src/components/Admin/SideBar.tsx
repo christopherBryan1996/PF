@@ -19,6 +19,10 @@ export const SideBar = () => {
         dispatch(admin(2));
         console.log()
     }
+    function handleOnclicKVentas() {
+        dispatch(admin(3));
+        console.log()
+    }
 
 
     return (
@@ -29,30 +33,32 @@ export const SideBar = () => {
                    <Link to={'/home'}><h4>ClanFest</h4></Link> 
                 </div>
 
-                <div className="linea"></div>
+                <div className="lineas"></div>
 
                 <div className="avatar">
-                    <div className='foto'>
+                    <div className='fotos'>
                         <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="60" height="60" />
 
                     </div>
-                    <div className='foto'>
+                    <div className='fotos'>
                         <p>{authGoo.logNormal && authGoo.logNormal.name}</p>
                         <p>Admin</p>
                     </div>
                 </div>
-                <div className="linea"></div>
-                <div className="btn-container">
+                <div className="lineas"></div>
+                <div className="container-sideBar-btn">        
+                            <div className="btn-container">
                     <button className='boton' onClick={handleOnclicK}>Usuarios</button>
                 </div>
                 <div className="btn-container">
                     <button className='boton' onClick={handleOnclicKEvents}>Eventos</button>
                 </div>
                 <div className="btn-container">
-                    <button className='boton'>Pagos</button>
+                    <button className='boton'  onClick={handleOnclicKVentas}>Pagos</button>
+                </div>
                 </div>
 
-
+                <div className="lineas"></div>
 
             </div>
 

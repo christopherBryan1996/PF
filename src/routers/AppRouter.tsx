@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import About from '../components/About';
 import EventDetails from '../components/EventDetails';
 import { Home } from '../components/Home';
+import { HomePrueba } from '../components/HomePrueba';
 import LandingPage from '../components/LandingPage';
 import Login from '../components/Login';
 import NewEvent from '../components/NewEvent';
@@ -28,7 +29,7 @@ import MercadoPay from '../components/MercadoPay';
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
 import { FavoritesInv }from '../components/FavoritesInvit';
-
+import NotFound from '../components/NotFound';
 
 export const AppRouter = () => {
 
@@ -66,12 +67,11 @@ export const AppRouter = () => {
 
     //conexion a SocketIo------------------------------------------
     const { authGoo } = useSelector((state: any) => state);
-    useEffect((): any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));
-    }, [])
+  
     useEffect(():any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
-      }, [dispatch, authGoo])
+        authGoo.logNormal && 
+        dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
+      }, [authGoo])
 
     if (cheking) {
         return (
@@ -103,8 +103,12 @@ export const AppRouter = () => {
                         component={LandingPage} />
                     <PublicRoute
                         exact path="/home"
-                        component={Home}
+                        component={HomePrueba}
                     />
+                    <PublicRoute
+                    exact path="/homePrueba"
+                    component={Home}
+                     />
                     <PublicRoute
                         exact path="/about"
                         component={About} />
@@ -155,6 +159,9 @@ export const AppRouter = () => {
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
+
+                    <PublicRoute component={NotFound}/>
+                    <PrivateRoute component={NotFound}/>
                 </Switch>
             </div>
         </Router>

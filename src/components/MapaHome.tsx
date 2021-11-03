@@ -66,7 +66,7 @@ function MapaHome(props: any) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {eventos.map((e: any, index: any) => (e.coordenadas ?
+        {eventos && eventos.length && eventos.map((e: any, index: any) => (e.coordenadas ?
           <Marker position={[e.coordenadas.lat, e.coordenadas.lng]}
             key={index}
             eventHandlers={{
