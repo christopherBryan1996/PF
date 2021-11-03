@@ -49,7 +49,7 @@ export const EventoCategoria = (props: Iprops) => {
 
     return !eventosFiltrados.length? null :(
         <div className="row_events">
-            <h3>{categoria}</h3>
+            <h4>{categoria}</h4>
             <Carousel  
                 swipeable={false}
                 draggable={false}                

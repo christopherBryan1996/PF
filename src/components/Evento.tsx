@@ -16,8 +16,11 @@ import {
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
 import { IoHeartOutline, IoCopyOutline } from "react-icons/io5";
-
 import { useHistory } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
+import {useState} from "react"
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 
 interface Iprops {
@@ -36,6 +39,19 @@ export const Evento = (props: Iprops) => {
   const dispatch = useDispatch();
   let resultado: boolean
 
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    
+      setOpen(true);
+   
+  };
+
+
   const checkFavorito = () => {
     if (authGoo.logNormal && favoritos.favouritesEvents) {
       resultado = favoritos.favouritesEvents.some(
@@ -52,27 +68,27 @@ export const Evento = (props: Iprops) => {
 
 
 
-  const toEventClipboard = (_id: any) => {
-    var path = window.location.href.split("").reverse().slice(4).reverse().join("");
-    var UrlCompartir = path + "detail/" + `${_id}`;
-    navigator.clipboard.writeText(UrlCompartir);
-    seCopio();
-  }
+    const toEventClipboard = (_id:any)=>{
+        var path = window.location.href.split("").reverse().slice(4).reverse().join("");
+        var UrlCompartir  = path + "detail/" + `${_id}`;
+        navigator.clipboard.writeText(UrlCompartir);
+        // seCopio();
+    }
+    
+    const history :any = useHistory();
+    const toLogin = () => {
+        history.push("/login")
+    };
 
-  const history: any = useHistory();
-  const toLogin = () => {
-    history.push("/login")
-  };
-
-  const eventoAgregado = () => toast.success('Evento agregado con exito!', {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+    const eventoAgregado = () => toast.success('Evento agregado con exito!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
   const eventoNoAgregado = () =>
     toast.error("Este evento ya se encuentra entre tus favoritos!", {

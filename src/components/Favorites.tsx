@@ -104,7 +104,7 @@ export default function Favorites() {
                     <div className='card container-card'>
                         <Link to={`/detail/${e._id}`} className="container container-favorites">
                             <div className="card-body">
-                                <span><h4>{e.nombreDelEvento} </h4><h5 className="card-text fecha">el {e.fecha.split("").slice(0, 10).join("")}</h5></span>
+                            <span><h4>{e.nombreDelEvento} </h4><h5 className="card-text fecha">el {e.fecha.split("").slice(0, 10).join("")}</h5></span> 
 
                             </div>
                         </Link>
