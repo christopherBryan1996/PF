@@ -28,24 +28,24 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
             await axios.post(`${URLrequests}api/email/send-email-delete-asis/${data.user.email}/${nombreDelEvento}`);
         })
 
-    }
+    };
 
-    export const EditEvent = async (id:any, author:any, uid:any, nombreDelEvento:any ) => {
+    export const EditEvent = async (id:any, author:any, uid:any, nombreDelEvento:any, socket: any ) => {
 
         const { data }: {data : any} = await axios.get(`${URLrequests}events/assistans/${id}`);
         const asistentes: [] = data.asistentes
-        // let post:any = {    
-        //     uid,
-        //     type: "delEvent",
-        //     idEvento: id,
-        //     message: `${author} ha editado el evento ${nombreDelEvento}. ¡Hecha un vistazo a los cambios!`,
-        // }
+        let post:any = {    
+            uid,
+            type: "delEvent",
+            idEvento: id,
+            message: `${author} ha editado el evento ${nombreDelEvento}. ¡Hecha un vistazo a los cambios!`,
+        }
         const nomb = nombreDelEvento;
         
 
         asistentes.length && asistentes.forEach(async (asistente:any)=>{
-            // post.uid = asistente.usuario[0]._id;
-            // socket.emit("postNotification", post);
+            post.uid = asistente.usuario[0]._id;
+            socket.emit("postNotification", post);
             const { data }: {data : any} = await axios.get(`${URLrequests}api/users/${asistente.usuario[0]._id}`);
             console.log("DataDeEditar" , data)
             
