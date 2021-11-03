@@ -70,9 +70,9 @@ export const Check = (props: Iprops) => {
                 value={id}
                 onChange={(e: any) => handleChange(e)}
             />}</td>
-            <td> <Button onClick={handleOnClick} variant="contained">
-                Guardar Cambios
-            </Button></td>
+            <td> <button className="btn btn-secondary" type="button"onClick={handleOnClick} >
+               Guardar
+            </button></td>
         </tr>
         <ToastContainer
                     position="top-right"

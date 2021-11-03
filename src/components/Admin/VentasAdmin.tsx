@@ -95,8 +95,8 @@ export const VentasAdmin = () => {
                     }
 
                 </table>
-                <button onClick={prevPage} className='btn btn-success'>Antrior</button>
-                <button onClick={nextPage} className='btn btn-success'> Siguitnete</button>
+                <button onClick={prevPage} className='btn btn-success'>Anterior</button>
+                <button onClick={nextPage} className='btn btn-success'> Siguiente</button>
             </div>
         </>
 
