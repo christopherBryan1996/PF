@@ -29,7 +29,7 @@ import MercadoPay from '../components/MercadoPay';
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
 import { FavoritesInv }from '../components/FavoritesInvit';
-
+import NotFound from '../components/NotFound';
 
 export const AppRouter = () => {
 
@@ -160,6 +160,9 @@ export const AppRouter = () => {
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
+
+                    <PublicRoute component={NotFound}/>
+                    <PrivateRoute component={NotFound}/>
                 </Switch>
             </div>
         </Router>
