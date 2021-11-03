@@ -71,11 +71,6 @@ export default function Favorites() {
         progress: undefined,
     });
 
-    // const quitarFavs = (userID:any, eventID:any) => {
-    //     dispatch(deleteFavoriteEvent(userID,eventID));
-    //     dispatch(getFavorites(userID));
-
-    // }
 
     const deleteFavoriteEvent = async (id: any, eventid: any) => {
         await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
@@ -91,13 +86,13 @@ export default function Favorites() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+    });
 
     const toEventClipboard = (_id: any) => {
-       
-        var UrlCompartir = `http://localhost:3000/detail/${_id}` ;
+
+        var UrlCompartir = `http://localhost:3000/detail/${_id}`;
         navigator.clipboard.writeText(UrlCompartir);
-         seCopio();
+        seCopio();
     }
 
 
