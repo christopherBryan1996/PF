@@ -26,29 +26,29 @@ export default function Favorites() {
     const { authGoo } = useSelector((state: any) => state)
 
     //verifico si hay favoritos en modo invitado no agregados a la cuenta logueada
-    const checkFavoritos = ()=> {
-        if(authGoo.logNormal && eventosFavoritos.favouritesEvents 
-            && eventosFavoritos.favouritesEvents.length 
-            && favoritosIds && favoritosIds.length ){
-           const favs: any[] = favoritosIds
-            for(let favInvit of favs){
-                for(const fav of eventosFavoritos.favouritesEvents ){
-                    if(fav._id === favInvit) favInvit = false;
+    const checkFavoritos = () => {
+        if (authGoo.logNormal && eventosFavoritos.favouritesEvents
+            && eventosFavoritos.favouritesEvents.length
+            && favoritosIds && favoritosIds.length) {
+            const favs: any[] = favoritosIds
+            for (let favInvit of favs) {
+                for (const fav of eventosFavoritos.favouritesEvents) {
+                    if (fav._id === favInvit) favInvit = false;
                 }
-            const newFavs: any = favs.filter((fav: any) => fav !== false);
+                const newFavs: any = favs.filter((fav: any) => fav !== false);
                 return newFavs.length ? newFavs : []
+            }
         }
+        return [];
     }
-    return [];
-}
 
     useEffect(() => {
-        const newFavs: any = checkFavoritos()        
-       if (authGoo.logNormal){
-        newFavs.length ? combinarFavs(authGoo.logNormal.uid, newFavs, dispatch) 
-        : combinarFavs(authGoo.logNormal.uid, favoritosIds, dispatch)
-       } 
-        dispatch(getFavorites(authGoo.logNormal.uid));           
+        const newFavs: any = checkFavoritos()
+        if (authGoo.logNormal) {
+            newFavs.length ? combinarFavs(authGoo.logNormal.uid, newFavs, dispatch)
+                : combinarFavs(authGoo.logNormal.uid, favoritosIds, dispatch)
+        }
+        dispatch(getFavorites(authGoo.logNormal.uid));
     }, []);
 
     const history = useHistory();
@@ -77,7 +77,7 @@ export default function Favorites() {
     const deleteFavoriteEvent = async (id: any, eventid: any) => {
         await axios.patch(`${URLrequests}api/users/removefavourite/${id}/${eventid}`);
         dispatch(getFavorites(authGoo.logNormal.uid));
-        eventosFavoritos &&  dispatch(deleteFavoriteInvit(eventid));
+        eventosFavoritos && dispatch(deleteFavoriteInvit(eventid));
         eventoQuitado();
     }
 
@@ -104,14 +104,14 @@ export default function Favorites() {
                     <div className='card container-card'>
                         <Link to={`/detail/${e._id}`} className="container container-favorites">
                             <div className="card-body">
-                               <span><h4>{e.nombreDelEvento} </h4><h5 className="card-text fecha">el {e.fecha.split("").slice(0, 10).join("")}</h5></span> 
+                                <span><h4>{e.nombreDelEvento} </h4><h5 className="card-text fecha">el {e.fecha.split("").slice(0, 10).join("")}</h5></span>
 
                             </div>
                         </Link>
                         <div>
-                            <img src={e.imagen} className="card-img-top"/>
+                            <img src={e.imagen} className="card-img-top" />
                         </div>
-                        <br/>
+                        <br />
                         <div className="icon">
                             <ImBin className="icon-delete" fontSize="1.6em" onClick={() => deleteFavoriteEvent(authGoo.logNormal.uid, e._id)} />
                         </div>

@@ -151,8 +151,6 @@ export const Evento = (props: Iprops) => {
             className="botonCopy"
             onClick={() => toEventClipboard(_id)}>
             <IoCopyOutline></IoCopyOutline>
-
-
           </button>
 
         </div>
