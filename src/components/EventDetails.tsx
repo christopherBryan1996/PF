@@ -159,7 +159,7 @@ const [confirmado, setConfirmado] = useState(false);
 
          await data.asistentes.forEach((a:any)=>{
              console.log("USUARIO", a.usuario[0].usuario)
-            if(a.usuario[0]._id === authGoo.logNormal.uid){
+            if(a.usuario[0]?._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
                  
             }
