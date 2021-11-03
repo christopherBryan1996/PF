@@ -158,8 +158,8 @@ const [confirmado, setConfirmado] = useState(false);
         console.log("q asistesn", data)
 
          await data.asistentes.forEach((a:any)=>{
-             console.log(a.usuario[0].usuario)
-            if(a.usuario[0]._id === authGoo.logNormal.uid){
+             console.log(a.usuario[0]?.usuario)
+            if(a.usuario[0]?._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
                  console.log("lo paso a true el gil")
             }
