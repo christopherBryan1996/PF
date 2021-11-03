@@ -51,7 +51,7 @@ export default function EventDetails() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    });const yaAsistes = () => toast.error('Ya figuras como que asistiras, descarga tu Entrada QR', {
+    }); const yaAsistes = () => toast.error('Ya figuras como que asistiras, descarga tu Entrada QR', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -64,7 +64,7 @@ export default function EventDetails() {
     //CONSTANTS USE EFFECT Y VARIABLES------------------------------------------------------------------------------
     const url = window.location.pathname;
 
-   
+
 
     const [loading, setLoading] = useState<boolean>(true)
     const { eventid }: { eventid: string } =
@@ -76,7 +76,7 @@ export default function EventDetails() {
     const { authGoo, socketIO } = useSelector((state: any) => state);
 
     useEffect(() => {
-       
+
         dispatch(getEvent(eventid));
         setTimeout(() => {
             setLoading(false)
@@ -88,175 +88,175 @@ export default function EventDetails() {
         history.push(`/detail/${eventid}`)
     };
 
-   
-    //Funcion para enviar mail---------------------------------------------------------------------------------
-    const enviarMailDeCompra = async() =>{
-        try{
 
-            const {data}: {data:any} =  await axios.get(`${URLrequests}api/users/${evento.autor}`);
-            
-            await axios.post(`${URLrequests}api/email/send-email`, 
-                 {
+    //Funcion para enviar mail---------------------------------------------------------------------------------
+    const enviarMailDeCompra = async () => {
+        try {
+
+            const { data }: { data: any } = await axios.get(`${URLrequests}api/users/${evento.autor}`);
+
+            await axios.post(`${URLrequests}api/email/send-email`,
+                {
                     mailDeAutor: data.user.email,
                     nombreDeComprador: authGoo.logNormal.name,
-                    nombreDelEvento: evento.nombreDelEvento  
-                }) 
+                    nombreDelEvento: evento.nombreDelEvento
+                })
 
-        }catch(err){
+        } catch (err) {
             console.log(err)
         };
     }
 
 
- 
-            
 
-//Con esto me fijo si cuando volvio de hacer la compra en los query hay un aprobado-------------------------------
+
+
+    //Con esto me fijo si cuando volvio de hacer la compra en los query hay un aprobado-------------------------------
     let { search } = useLocation();
     const query = new URLSearchParams(search);
-    const paramFieldStatus:any  = query.get('collection_status');
-    const paramFieldPayment_id:any = query.get("payment_id");
+    const paramFieldStatus: any = query.get('collection_status');
+    const paramFieldPayment_id: any = query.get("payment_id");
     // console.log("paramField", paramFieldStatus, "usuariologeado", authGoo.logNormal.uid, "payment_id", paramFieldPayment_id)
-    
-    
-//Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------
-const [confirmado, setConfirmado] = useState(false);
-    const agregarPagoDB = async () =>{
-    
-            try {
-                const {data}: {data:any} =  await axios.patch(`${URLrequests}api/payment/addpayment/${authGoo.logNormal.uid}/${eventid}`, 
-                 {
+
+
+    //Funcion para agregar el pago a la DB-----------------------------------------------------------------------------------
+    const [confirmado, setConfirmado] = useState(false);
+    const agregarPagoDB = async () => {
+
+        try {
+            const { data }: { data: any } = await axios.patch(`${URLrequests}api/payment/addpayment/${authGoo.logNormal.uid}/${eventid}`,
+                {
                     status: paramFieldStatus.toString(),
                     mount: evento.precio,
-                    payment_id: paramFieldPayment_id.toString() 
-                }) 
-                console.log("dataEnviadaRecibida",data);
-            
+                    payment_id: paramFieldPayment_id.toString()
+                })
+            console.log("dataEnviadaRecibida", data);
 
-            } catch (error) {
+
+        } catch (error) {
             console.error(error);
-            };
-    
-     pagoConfirmado();
-     enviarMailDeCompra();
-     setConfirmado(true);
-     const dataNotif = {
-        uid: evento.autor,
-        type: "newAsis",
-        idEvento: evento._id,
-         message: `${authGoo.logNormal.name} Compro la entrada y asistirá a tu evento ${evento.nombreDelEvento}`,
-     }
-     socketIO.socket.emit("postNotification", dataNotif);
+        };
+
+        pagoConfirmado();
+        enviarMailDeCompra();
+        setConfirmado(true);
+        const dataNotif = {
+            uid: evento.autor,
+            type: "newAsis",
+            idEvento: evento._id,
+            message: `${authGoo.logNormal.name} Compro la entrada y asistirá a tu evento ${evento.nombreDelEvento}`,
+        }
+        socketIO.socket.emit("postNotification", dataNotif);
 
 
-     setTimeout(()=>toEvent() ,2000);
-    };    
+        setTimeout(() => toEvent(), 2000);
+    };
 
-//Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
+    //Funciones de los botones de Asistire y de Comprar entrada-------------------------------------------------------
 
     const agregarGenteAsistir = async () => {
 
-        const {data}: {data:any} =  await axios.get(`${URLrequests}events/assistans/${eventid}`)
+        const { data }: { data: any } = await axios.get(`${URLrequests}events/assistans/${eventid}`)
         console.log("q asistesn", data)
 
-         await data.asistentes.forEach((a:any)=>{
-             console.log(a.usuario[0].usuario)
-            if(a.usuario[0]._id === authGoo.logNormal.uid){
-                 setConfirmado(true) 
-                 console.log("lo paso a true el gil")
+        await data.asistentes.forEach((a: any) => {
+            console.log(a.usuario[0].usuario)
+            if (a.usuario[0]._id === authGoo.logNormal.uid) {
+                setConfirmado(true)
+                console.log("lo paso a true el gil")
             }
         })
 
-         if (confirmado === true){
+        if (confirmado === true) {
             return yaAsistes();
-        }else if (confirmado === false){
+        } else if (confirmado === false) {
 
             authGoo.logNormal &&
-            dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
-        asistire();
-        setConfirmado(true);
+                dispatch(userAsistiraEvento(authGoo.logNormal.uid, evento._id))
+            asistire();
+            setConfirmado(true);
 
-         const dataNotif = {
-           uid: evento.autor,
-           type: "newAsis",
-           idEvento: evento._id,
-            message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
+            const dataNotif = {
+                uid: evento.autor,
+                type: "newAsis",
+                idEvento: evento._id,
+                message: `${authGoo.logNormal.name} asistirá a tu evento ${evento.nombreDelEvento}`,
+            }
+            socketIO.socket?.emit("postNotification", dataNotif);
         }
-     socketIO.socket?.emit("postNotification", dataNotif);
     }
-        }
-        
-        
 
 
-        
-//Funcion para despachar la compra de una entrada POST------------------------------------------------
+
+
+
+    //Funcion para despachar la compra de una entrada POST------------------------------------------------
     const [cantidad, setCantidad] = useState(1);
 
     const comprarEntrada = async () => {
 
-        
-            const check:any = await  axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
-            console.log("check", check)
-            
-            const post = {
+
+        const check: any = await axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
+        console.log("check", check)
+
+        const post = {
             title: evento.nombreDelEvento,
             price: evento.precio,
             quantity: cantidad,
             eventID: eventid
         }
-            console.log("postEnviar", post)
-        async function fetchPost(data:any) {
+        console.log("postEnviar", post)
+        async function fetchPost(data: any) {
             try {
                 console.log("aca manito acaa")
-                const {data}: {data:any} =  await axios.post(`${URLrequests}api/payment/new`, post)
-                console.log("data",data);
-    
+                const { data }: { data: any } = await axios.post(`${URLrequests}api/payment/new`, post)
+                console.log("data", data);
+
                 if (data.LinkMP) {
-                    window.location.assign(data.LinkMP); 
+                    window.location.assign(data.LinkMP);
                     //window.open para nueva tab % window.location.assign en la misma tab
-                   
-    
-                } else if  (data.err){
+
+
+                } else if (data.err) {
                     alert("error al crear el link");
-    
+
                 }
             } catch (error) {
                 console.error(error);
             };
-        }    
-            if (check.data.message === "Error al buscar pago"){
-                fetchPost(post)
+        }
+        if (check.data.message === "Error al buscar pago") {
+            fetchPost(post)
 
 
-            }else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status ===  "Aprobado" || check.data.status === "Incompleto"){
+        } else if (check.data.status === "approved" || check.data.status === "in_process" || check.data.status === "incompleto" || check.data.status === "Aprobado" || check.data.status === "Incompleto") {
 
-                pagoYaRealizado();
-                setConfirmado(true)
-            }
+            pagoYaRealizado();
+            setConfirmado(true)
+        }
 
     }
 
 
-//Variables de como llegan los estados PrivadoOpublico---------------------------------------------------------------
+    //Variables de como llegan los estados PrivadoOpublico---------------------------------------------------------------
     var privadoOpublico = evento.publico;
     var final = "Publico - Cualquiera puede asistir";
     if (privadoOpublico === false) { final = "Privado - Solo invitados" };
 
 
-//Funcion para conseguir QR----------------------------------------------------------------------------------
-     const obtenerQR = async () => {
-        
+    //Funcion para conseguir QR----------------------------------------------------------------------------------
+    const obtenerQR = async () => {
+
         // const {data}: {data:any} =  await axios.get(`${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`);
-        
+
 
         axios({
             url: `${URLrequests}api/payment/sendqr/${authGoo.logNormal.name}-${eventid}.png`,
             method: 'GET',
             responseType: 'blob', // Important
-          }).then((response:any) => {
-              FileDownload(response.data, `Entrada a ${evento.nombreDelEvento}.png`);
-          });
+        }).then((response: any) => {
+            FileDownload(response.data, `Entrada a ${evento.nombreDelEvento}.png`);
+        });
     }
 
     const toEventClipboard = (_id: any) => {
