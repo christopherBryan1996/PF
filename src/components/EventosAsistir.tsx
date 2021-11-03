@@ -17,6 +17,7 @@ export default function EventosAsistir(): JSX.Element {
     }, []);
     
     const { eventosAsistir }: { eventosAsistir: any } = useSelector((state: any) => state.eventos)
+    console.log("EVENTOS A ASISTIR", eventosAsistir)
     // const { eventsToAssist }: { eventsToAssist: any } = useSelector((state: any) => state.eventos.eventosAsistir)
     let eventos = []
     if ( eventosAsistir.eventsToAssist){
