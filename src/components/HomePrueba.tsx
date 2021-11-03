@@ -1,6 +1,5 @@
 
 import { useSelector, useDispatch } from "react-redux";
-import { Evento } from './Evento'
 import './styles/Card.css'
 import { Nav } from './Nav';
 import { useHistory } from "react-router-dom";
@@ -38,8 +37,9 @@ export const HomePrueba = () => {
 
     const handlrOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
-        console.log(search)
+        
     }
+    
 
     return (
         <div>
