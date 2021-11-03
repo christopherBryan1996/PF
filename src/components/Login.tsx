@@ -104,7 +104,8 @@ export default function Login() {
         password: user.uid.slice(0,12)
     }
     
-    const data : any = await startGoogleLogin(infoLog) 
+    const data : any = await startGoogleLogin(infoLog)
+    
     if( data && data.ok){
         dispatch(loginNormal(data)); 
     } else {
@@ -121,8 +122,7 @@ export default function Login() {
     const {dataGoogle}:{dataGoogle:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)
         toHome() 
 
-        
-  }
+}
 
 
     const handleSubmit = (e: any) => {
@@ -144,6 +144,7 @@ export default function Login() {
             try {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
                 if (data.ok) {
+                    console.log('DATAA', data)
                     if(!data.habilitado) return cuentaInhabilitada()
                     dispatch(loginNormal(data));             
                     const {data2}:{data2:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)           
