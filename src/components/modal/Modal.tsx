@@ -1,7 +1,7 @@
 import { Overlay, ContenedorModal, EncabezadoModal, Boton, BotonEliminar } from "./styled"
 
 
-export const Modal = ({ children, estado, cambiarEstado, id }: any) => {
+export const Modal = ({ children, estado, cambiarEstado }: any) => {
 
     return (
         <>

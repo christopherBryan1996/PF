@@ -345,10 +345,8 @@ const [confirmado, setConfirmado] = useState(false);
 
 
             {/* <div className="card card-details ">
-
                 <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="400" />
                 <div className="card-body">
-
                     <h5 className="card-text"> <span><FaCalendarAlt color="white" /></span> {evento.fecha.split("T")[0]}</h5>
                     <h3 className="card-title">{evento.nombreDelEvento}</h3>
                 </div>
@@ -370,10 +368,8 @@ const [confirmado, setConfirmado] = useState(false);
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
                 </div>
-
             </div>
             <div className="card-details ">
-
                 {/* <img className="card-img-top" src={mapa} alt="Card image cap" height="600" /> */}
             {/* <div >
                     <Mapa1evento />

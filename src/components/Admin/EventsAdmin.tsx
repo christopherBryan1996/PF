@@ -59,7 +59,7 @@ export const EventsAdmin = () => {
     const handleOnclick = (id: string) => {
         setid(id)
         setestadoModal(true)
-       console.log('id a eliminar:', id)
+        console.log('id a eliminar:', id)
 
     }
 
@@ -84,8 +84,8 @@ export const EventsAdmin = () => {
                         estado={estadoModal}
                         cambiarEstado={setestadoModal}>
                         <h4>Seguro quiere eliminar el evento?</h4>
-                        <BotonEliminar onClick={() => {deleteEventAdm(id); setestadoModal(false) }} >Eliminar</BotonEliminar>
-                        console.log(evento._id)
+                        <BotonEliminar onClick={() => { deleteEventAdm(id); setestadoModal(false) }} >Eliminar</BotonEliminar>
+
                     </Modal>
                 </div>
                 <table className="table table-dark table-striped">
@@ -111,15 +111,15 @@ export const EventsAdmin = () => {
                                     <td>{evento.fecha.slice(0, 10)}</td>
                                     <td>{evento.publico ? 'si' : 'no'}</td>
                                     <td>{evento.precio}</td>
-                                    <td> <ImBin className="icon-delete" fontSize="1.3em" onClick={() => {handleOnclick(evento._id) }} />  </td>
+                                    <td> <ImBin className="icon-delete" fontSize="1.3em" onClick={() => { handleOnclick(evento._id) }} />  </td>
                                 </tr>
                             </tbody>
                         ))
                     }
 
                 </table>
-                <button onClick={prevPage} className='btn btn-success'>Antrior</button>
-                <button onClick={nextPage} className='btn btn-success'> Siguitnete</button>
+                <button onClick={prevPage} className='btn btn-success'>Anterior</button>
+                <button onClick={nextPage} className='btn btn-success'> Siguiente</button>
             </div>
 
         </>
