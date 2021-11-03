@@ -16,8 +16,11 @@ import {
 } from "../actions/actions";
 import { toast, ToastContainer } from "react-toastify";
 import { IoHeartOutline, IoCopyOutline } from "react-icons/io5";
-
 import { useHistory } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
+import {useState} from "react"
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 
 interface Iprops {
@@ -35,6 +38,19 @@ export const Evento = (props: Iprops) => {
   const { authGoo, favInvitados } = useSelector((state: any) => state);
   const dispatch = useDispatch();
   let resultado:boolean
+
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    
+      setOpen(true);
+   
+  };
+
 
   const checkFavorito = () => {
     if (authGoo.logNormal && favoritos.favouritesEvents) {
@@ -56,7 +72,7 @@ export const Evento = (props: Iprops) => {
         var path = window.location.href.split("").reverse().slice(4).reverse().join("");
         var UrlCompartir  = path + "detail/" + `${_id}`;
         navigator.clipboard.writeText(UrlCompartir);
-        seCopio();
+        // seCopio();
     }
     
     const history :any = useHistory();
@@ -146,14 +162,30 @@ export const Evento = (props: Iprops) => {
                                 title='Hola, te comparto este evento, te pueda interesar!'
                                 url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`}>
                                 <WhatsappIcon className="share" round={true} size='2em' />
-                            </WhatsappShareButton>
-                            <button 
-                            className="botonCopy"
-                        onClick={() => toEventClipboard(_id)}>
-                          <IoCopyOutline></IoCopyOutline>
-                                                                                           
+                            </WhatsappShareButton>  
+
+
+                            <ClickAwayListener onClickAway={handleTooltipClose}>
+            <div>
+                            <Tooltip PopperProps={{
+                  disablePortal: true,
+                }} onClose={handleTooltipClose}
+                open={open}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener title="Link copiado" placement="top">
+                            <Button   onClick={() => {handleTooltipOpen(); toEventClipboard(_id)}}>
+                            <IoCopyOutline></IoCopyOutline>
+                              </Button>
+                            </Tooltip>
+                            </div>
+          </ClickAwayListener>                          
+                           
+
+                          
+                  
                             
-                            </button>
+                            
 
                         </div>
                         
