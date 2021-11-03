@@ -5,13 +5,14 @@ import axios from 'axios';
 export const deleteEvent = async(uid:string, id: string, author: string, nombreDelEvento: string, socket: any, dispatch:any) => {
 
     
-    await axios.delete(`${URLrequests}events/delete/${id}`);
+    
     dispatch(getUsersEvents(uid))
     
     console.log("id", id)
     const { data }: {data : any} = await axios.get(`${URLrequests}events/assistans/${id}`);   
    
         const asistentes: [] = data.asistentes
+        await axios.post(`${URLrequests}events/delete/${id}`, asistentes);
         console.log("asistentes", asistentes)
         let post:any = {    
             uid,

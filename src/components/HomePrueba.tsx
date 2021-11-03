@@ -89,12 +89,16 @@ export const HomePrueba = () => {
 
             {/*Carousel*/}
             
+            {eventos.length?
             <div className="carousel">
             {categorias.map((i:string)=>
             (
             <EventoCategoria  search={search} eventos={eventos} categoria={i} favoritos={eventosFavoritos}/>)
             )}
             </div>
+            :
+            null
+            }
             
             <Foot />
 
