@@ -211,7 +211,7 @@ const [confirmado, setConfirmado] = useState(false);
                 console.log("data",data);
     
                 if (data.LinkMP) {
-                    window.location.assign(data.LinkMP);
+                    window.location.assign(data.LinkMP); 
                     //window.open para nueva tab % window.location.assign en la misma tab
                    
     
