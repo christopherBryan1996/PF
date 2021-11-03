@@ -1,17 +1,15 @@
 .container-dash{
 
-    background-color:rgb(218, 216, 216);
-    padding-top: 25px;    
+    background-color:rgb(218, 216, 216); 
+    padding-bottom: 15px;  
     height:95%;
     border-radius: 8px;
-    margin-top: 30px;
-
-
+   
 }
 
 .container-dash h2{
 
-    color:rgb(56, 52, 52);
+    color:rgb(75, 72, 72);
 
 }
 
@@ -23,3 +21,8 @@ align-items: center;
 margin-bottom:15px;
 
 }
+
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    background-color: #34c52a;
+}
+

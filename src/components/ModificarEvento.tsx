@@ -10,6 +10,7 @@ import URLrequests from "./constanteURL";
 import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
 import {EditEvent} from '../controllers/eventos/eventoscontrollers';
+import categorias from "../categorias/Categorias";
 
 export default function ModificarEvento() {
      //Estados------------------------------------------------------------------------------------------
@@ -23,6 +24,7 @@ export default function ModificarEvento() {
     const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
     const [file, setFile] = useState(null || "")
     const [creando, setCreando] = useState(false);
+    const [categories, setCategorias]=useState<any>([]);
     
     
     const { eventid }: { eventid: string } = useParams()
@@ -45,7 +47,7 @@ export default function ModificarEvento() {
             setPublicoOPriv(evento.publico);
             setCoordenadasPadre(evento.coordenadas);
             setFile(evento.imagen);
-            
+            setCategorias(evento.categorias)
         }
     },[evento])
 
@@ -98,7 +100,7 @@ export default function ModificarEvento() {
         e.preventDefault();
         
         console.log(publicoOPriv,fecha,descripcion,fecha,nameEvent,ubicacion, "hola")
-        if (!publicoOPriv  || !fecha || !descripcion  || !precio || !nameEvent || !ubicacion) { return faltanCasillas() }
+        if (!publicoOPriv  || !fecha || !descripcion  || !nameEvent || !ubicacion || !categories.length) { return faltanCasillas() }
         setCreando(true);
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
@@ -119,7 +121,8 @@ export default function ModificarEvento() {
             fecha,
             descripcion,
             imagen: url,
-            coordenadas: coordenadasPadre
+            coordenadas: coordenadasPadre,
+            categorias:categories
         }
         console.log("put", put)
 
@@ -140,11 +143,22 @@ export default function ModificarEvento() {
             }
         }
         fetchPost(put)
-        console.log("constPost", put) 
+        console.log("Aca estoy", evento.nombreDelEvento) 
         EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento )
     };
 
+    const Checked=(value:string)=>{
+
+        const categorias:boolean=categories.some((i:string)=>i===value)
+        if(!categorias){
+            setCategorias([...categories,value])
+        } else{
+            const filter:[]=categories.filter((i:string)=>i !== value)
+            setCategorias(filter)
+        }
     
+    }
+
     //Return del componente----------------------------------------------------------------------------
 
     return  (
@@ -238,6 +252,33 @@ export default function ModificarEvento() {
                                     onChange={(e) => setDescripcion(e.target.value)}
                                 ></textarea>
                             </div>
+
+                            {/* <div className="form-group col-md-11">
+                                <label>Descripcion del evento</label>
+                                <textarea
+                                    className="form-control"
+                                    placeholder="Descripcion del evento, detalles, cuidades, etc"
+                                    value={descripcion}
+                                    onChange={(e) => setDescripcion(e.target.value)}
+                                ></textarea>
+                            </div> */}
+                            <div className="form-group col-md-11">
+                                <label>Selecciona al menos una categoria</label>                              
+                                                                
+                                                                                                
+                                {/* onChange={(e) => setCategorias([...categorias,e.target.value])} */}
+                                {categorias.map((i:string)=>
+                                <div className="form-check">
+                                    { categories && categories.includes(i)?
+                                        <input checked className="form-check-input"  type="checkbox" value={i}  id="flexCheckDefault" key="categorias" onChange={(e)=>Checked(e.target.value)}/>      
+                                    :   <input className="form-check-input"  type="checkbox" value={i}  id="flexCheckDefault" key="categorias" onChange={(e)=>Checked(e.target.value)}/>                          
+                                    }       {i}                           
+                                    </div>
+                                )}
+
+                            </div>
+
+
                             <div className="form-group col-md-11">
                                 {creando && <button disabled className="btn btn-success col-md-12  btn-lg">Creando evento</button>}
                                 {!creando && <button className="btn btn-success col-md-12  btn-lg">Modificar evento</button>} 

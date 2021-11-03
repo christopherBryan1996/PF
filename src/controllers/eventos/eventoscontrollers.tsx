@@ -1,5 +1,5 @@
 import URLrequests from "../../components/constanteURL";
-import { getUsersEvents } from "../../actions/actions";
+import { getUsers, getUsersEvents } from "../../actions/actions";
 import axios from 'axios';
 
 export const deleteEvent = async(uid:string, id: string, author: string, nombreDelEvento: string, socket: any, dispatch:any) => {
@@ -20,7 +20,8 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
             message: `${author} ha eliminado el evento ${nombreDelEvento}. ¡Encuentra nuevos eventos!`,
         }
 
-        asistentes.length && asistentes.forEach(async (asistente: any)=>{
+        asistentes && asistentes.length && asistentes.forEach(async(asistente: any)=>{
+        
             post.uid = asistente.usuario[0]._id
             socket.emit("postNotification", post)
             const { data }: {data : any} = await axios.get(`${URLrequests}api/users/${asistente.usuario[0]._id}`);
@@ -39,14 +40,26 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
         //     idEvento: id,
         //     message: `${author} ha editado el evento ${nombreDelEvento}. ¡Hecha un vistazo a los cambios!`,
         // }
+        const nomb = nombreDelEvento;
+        
 
         asistentes.length && asistentes.forEach(async (asistente:any)=>{
             // post.uid = asistente.usuario[0]._id;
             // socket.emit("postNotification", post);
             const { data }: {data : any} = await axios.get(`${URLrequests}api/users/${asistente.usuario[0]._id}`);
-            await axios.post(`${URLrequests}api/email/send-email-edit-asis/${data.user.email}/${nombreDelEvento}`);
+            console.log("DataDeEditar" , data)
+            
+            await axios.post(`${URLrequests}api/email/send-email-edit-asis/${data.user.email}/${nombreDelEvento.toString()}`);
 
         })
-
-
     }
+
+
+    export const deleteEventAdm = async (id: string) => {
+
+        await axios.delete(`${URLrequests}events/delete/${id}`); 
+       
+    
+    }
+    
+    
