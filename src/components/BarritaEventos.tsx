@@ -5,18 +5,18 @@ import { BsFillTrashFill } from "react-icons/bs";
 import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
 import { IeventosUsuario } from "../interfaces/interfaces";
-import { useSelector, useDispatch} from "react-redux";
-import {deleteEvent} from "../controllers/eventos/eventoscontrollers"
+import { useSelector, useDispatch } from "react-redux";
+import { deleteEvent } from "../controllers/eventos/eventoscontrollers"
 
 
-export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fecha}:IeventosUsuario) {
-    
-   const dispatch=useDispatch();
-   const { authGoo, socketIO }: { authGoo: any; socketIO: any } = useSelector(
-    (state: any) => state
-  );
-    
-   
+export default function BarritaEventos({ id, nombreDelEvento, uid, precio, imagen, fecha }: IeventosUsuario) {
+
+    const dispatch = useDispatch();
+    const { authGoo, socketIO }: { authGoo: any; socketIO: any } = useSelector(
+        (state: any) => state
+    );
+
+
 
 
     return (
@@ -47,7 +47,7 @@ export default function BarritaEventos({id,nombreDelEvento,uid,precio,imagen,fec
                     <Link to={`/modificarEventos/${id}`}>
                         <span><FiEdit2 className="icons" /></span>
                     </Link>
-                 <BsFillTrashFill  onClick={()=>deleteEvent(uid, id, authGoo.logNormal.name, nombreDelEvento, socketIO.socket, dispatch)} className="icons"  />
+                    <BsFillTrashFill onClick={() => deleteEvent(uid, id, authGoo.logNormal.name, nombreDelEvento, socketIO.socket, dispatch)} className="icons" />
                 </div>
             </div>
 

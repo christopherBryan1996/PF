@@ -145,7 +145,7 @@ export default function Login() {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
                 if (data.ok) {
                     console.log('DATAA', data)
-                    if(!data.habilitado) return cuentaInhabilitada()
+                     if(!data.habilitado) return cuentaInhabilitada()
                     dispatch(loginNormal(data));             
                     const {data2}:{data2:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)           
                     setTimeout(()=>toHome(),1000);
