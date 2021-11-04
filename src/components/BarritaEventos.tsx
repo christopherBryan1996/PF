@@ -6,21 +6,43 @@ import "./styles/BarritaEventos.css"
 import { Link } from "react-router-dom";
 import { IeventosUsuario } from "../interfaces/interfaces";
 import { useSelector, useDispatch } from "react-redux";
+import { Modal } from "./modal/Modal";
+import { BotonEliminar,Boton } from "./modal/styled";
 import { deleteEvent } from "../controllers/eventos/eventoscontrollers"
+import { useState } from "react";
+
 
 
 export default function BarritaEventos({ id, nombreDelEvento, uid, precio, imagen, fecha }: IeventosUsuario) {
 
+    const [estadoModal, setestadoModal] = useState(false);
+    
     const dispatch = useDispatch();
     const { authGoo, socketIO }: { authGoo: any; socketIO: any } = useSelector(
         (state: any) => state
     );
 
+    const handleOnclick = () => {
+        setestadoModal(true)
+    }
 
 
 
     return (
         <div className="container">
+            <Modal
+            id={id}
+            estado={estadoModal}
+            cambiarEstado={setestadoModal}>
+                {precio?
+                <><h4>Para eliminar este evento tendrá que contactar con el administrador</h4>
+                <BotonEliminar ><a className="contactar" href="mailto:clanfest@gmail.com">Contactar</a></BotonEliminar></>
+                :
+                <><h4>Seguro quiere eliminar el evento?</h4>
+                <BotonEliminar onClick={() => { deleteEvent(uid, id, authGoo.logNormal.name, nombreDelEvento, socketIO.socket, dispatch); setestadoModal(false) }} >Eliminar</BotonEliminar></>
+                }
+            </Modal>
+
             <div className="card mb-3 container-card-favorites">
                 <div className="row no-gutters">
 
@@ -47,7 +69,7 @@ export default function BarritaEventos({ id, nombreDelEvento, uid, precio, image
                     <Link to={`/modificarEventos/${id}`}>
                         <span><FiEdit2 className="icons" /></span>
                     </Link>
-                    <BsFillTrashFill onClick={() => deleteEvent(uid, id, authGoo.logNormal.name, nombreDelEvento, socketIO.socket, dispatch)} className="icons" />
+                    <BsFillTrashFill onClick={() => handleOnclick()} className="icons" />
                 </div>
             </div>
 

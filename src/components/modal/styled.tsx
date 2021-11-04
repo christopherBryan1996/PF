@@ -6,6 +6,7 @@ padding: 30px;
     left: 0;
     display: flex;
     position: absolute;
+    z-index:5000;
     background-color: rgba(0,0,0,.6);
     height: 100vh;
     top: 125;
