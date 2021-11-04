@@ -194,11 +194,11 @@ export default function Login() {
                             </input>
                         </div>
                         <div className="form-group col-md-12">
-                            <button className="btn btn-primary   btn-lg">Iniciar sesion </button>
+                            <button className="btn btn-primary   btn-lg">Iniciar sesión </button>
                         </div>
                     </form>
                     <div className="form-group col-md-12">
-                        <button onClick={handleGoogleLogin} className="btn btn-outline-success btn-lg"><FcGoogle /> Iniciar sesion con Google</button>
+                        <button onClick={handleGoogleLogin} className="btn btn-outline-success btn-lg"><FcGoogle /> Iniciar sesión con Google</button>
                     </div>
                     <div className="form-group col-md-8">
                         <button className=" btn btn btn-link" onClick={toRegister}>No tienes cuenta? Registrate</button>

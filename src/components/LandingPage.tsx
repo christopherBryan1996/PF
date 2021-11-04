@@ -52,7 +52,7 @@ export default function LandingPage() {
                 </div>
                 <div className="contTextoBoton">
                     <h2 className="titulotarjeta2 text-center" >Agrega eventos a tu lista de Favoritos</h2>
-                    <p className="parrafo1 text-center">Arma tu bandeja de favoritos, asi no tienes tiempo que perder pensando cual es tu mejor opcion</p>
+                    <p className="parrafo1 text-center">Arma tu bandeja de favoritos, asi no tienes tiempo que perder pensando cual es tu mejor opción</p>
 
                 </div>
             </div>
@@ -60,7 +60,7 @@ export default function LandingPage() {
             <div className="div-tarjeta1">
                 <div className="contTextoBoton text-center">
                     <h2 className="titulotarjeta2 text-center">Organiza eventos y compartelos en tus redes</h2>
-                    <p className="parrafo1 text-center">No te preocupes por las invitaciones, con nosotros todo es mas facil y rapido</p>
+                    <p className="parrafo1 text-center">No te preocupes por las invitaciones, con nosotros todo es mas fácil y rápido</p>
 
                 </div>
                 <div className="imagen" >

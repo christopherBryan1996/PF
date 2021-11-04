@@ -73,7 +73,7 @@ export const HomePrueba = () => {
 
                         <div className="container container-map">
                             <div className="conta">
-                                <h5>Para revisar los eventos cercanos a tu ubicacion, da click en el mapa y listo</h5>
+                                <h5>Click en el mapa para ver eventos en tu ubicación</h5>
                             </div>
                             <div className="conta">
                                 <MapaHome />
