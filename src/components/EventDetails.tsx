@@ -256,10 +256,6 @@ const [confirmado, setConfirmado] = useState(false);
     }
 
 
-//Variables de como llegan los estados PrivadoOpublico---------------------------------------------------------------
-    var privadoOpublico = evento.publico;
-    var final = "Publico - Cualquiera puede asistir";
-    if (privadoOpublico === false) { final = "Privado - Solo invitados" };
 
 
 //Funcion para conseguir QR----------------------------------------------------------------------------------
@@ -322,7 +318,7 @@ const [confirmado, setConfirmado] = useState(false);
                     </div>
                     <div className="card-footer">
                         <button className="btn btn-success">
-                            {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
+                            {evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                                 <p>Asistire al evento</p>  </div>}
 
                             {evento.precio !== 0 &&
