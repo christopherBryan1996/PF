@@ -3,6 +3,7 @@ import { IeventosAsistir } from "../interfaces/interfaces";
 import {borrarAsistencia} from "../controllers/asistirEventos/asistircontroller"
 import {  useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
+import "./styles/EventosAsistir.css"
 
 export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) {
     const { uid }: { uid: string } = useParams()
@@ -46,13 +47,15 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
                 Tareas
             </button>
 
+            <div className="tareasvisibles">
             {!tareasVisibles ? null : ( 
-                <div>
-                {tareas.length? tareas.map((i:any)=>(
-                        <p>-{i}</p>
+                <ul>
+                {(tareas && tareas.length)? tareas.map((i:any)=>(
+                        <li>{i}</li>
                     )):null}  
-                </div>
+                </ul>
             )}
+            </div>
 
             <button  onClick={()=>borrarAsistencia(uid, authGoo.logNormal.name, socketIO.socket, eventId, dispatch, eventId.nombreDelEvento)} type="button" className="btn btn-outline-success" >
                 No voy a asistir

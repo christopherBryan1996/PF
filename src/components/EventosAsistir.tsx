@@ -1,66 +1,82 @@
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
-import { Nav } from './Nav';
+import React, { useEffect, useState } from "react";
+import { Nav } from "./Nav";
 import { getEventosAsistir, getTareas } from "../actions/actions";
 import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
 
-
 export default function EventosAsistir(): JSX.Element {
-    const { uid }: { uid: string } = useParams()
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        
-        dispatch(getEventosAsistir(uid));
-        dispatch(getTareas(uid));
+  const { uid }: { uid: string } = useParams();
+  
+  
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(getEventosAsistir(uid));
+      dispatch(getTareas(uid));
     }, []);
-
-    const { eventosAsistir }: { eventosAsistir: any } = useSelector((state: any) => state.eventos)
-    const { tareas }: { tareas: any } = useSelector((state: any) => state.eventos)
-    console.log("EVENTOS A ASISTIR", eventosAsistir)
-    console.log("tareas", tareas)
-
     
-        
-    let eventos = []
-        if ( eventosAsistir.eventsToAssist){
-            const eventsToAssist= eventosAsistir.eventsToAssist;
-            if(tareas.userTasks){
-            const userTasks=tareas.userTasks;//data.userTasks?data.userTasks:null
-            
-        
-            if(userTasks)
-            {for(var i=0;i<eventsToAssist.length;i++){
+    const { eventosAsistir }: { eventosAsistir: any } = useSelector(
+        (state: any) => state.eventos
+        );
+    const { tareas }: { tareas: any } = useSelector(
+        (state: any) => state.eventos
+        );
+        console.log("EVENTOS A ASISTIR", eventosAsistir);
+        console.log("tareas", tareas);
+    const [eventos, setEventos] = useState<any[]>([]);
+    const [eventsToAssist,seteventsToAssist]=useState<any[]>([]);
+    const [tasks,setTasks]=useState<any[]>([])
 
-                if(eventsToAssist[i].eventId){
-                for(var j=0;j<userTasks.length;j++){
-
-                    
-                    if((userTasks[j].eventId && eventsToAssist[i].eventId._id===userTasks[j].eventId._id)){
-                        eventos.push({...eventsToAssist[i], tareas:userTasks[j].tareasDelUsuario})
-                    }else if((userTasks[j].eventId && eventsToAssist[i].eventId._id!==userTasks[j].eventId._id)){
-                        eventos.push({...eventsToAssist[i], tareas:[]})
-                    }
-                
-                }
-            }}}else{eventos=eventsToAssist}
-        
-            console.log(eventos,"eventstoassist")
-        }
+  useEffect(()=>{
+      if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length ) {
+        seteventsToAssist(eventosAsistir.eventsToAssist);
+        setTasks(tareas.userTasks)
+        configEventos()
     }
-        
-    
+    else {
+        setEventos(eventosAsistir.eventsToAssist);
 
-    // const { eventsToAssist }: { eventsToAssist: any } = useSelector((state: any) => state.eventos.eventosAsistir)
-    // const {nombreDelEvento}:{nombreDelEvento:any}=eventosAsistir.eventsToAssist[0].eventId
-    return (
-        <div>
-            <div className="divDelNav"><Nav></Nav></div>
-            <h1>Eventos a asistir</h1>
-            {/* <div>{userTasks[0].eventId.nombreDelEvento}</div>  */}
-            
-            {/* <div>
+        
+    }
+  },[eventosAsistir,tareas])
+
+      function configEventos(){
+          console.log(tasks,"tasks")
+        for (var i = 0; i < eventsToAssist.length; i++) {
+            if (eventsToAssist[i].eventId) {
+            for (var j = 0; j < tasks.length; j++) {
+                if (
+                  tasks[j].eventId &&
+                eventsToAssist[i].eventId._id === tasks[j].eventId._id
+                ) {
+                setEventos([
+                    ...eventos,
+                    {
+                    ...eventsToAssist[i],
+                    tareas: tasks[j].tareasDelUsuario,
+                    },
+                ]);
+                } else  {
+                setEventos([...eventos, { ...eventsToAssist[i], tareas: [] }]);
+                }
+            }
+            }
+        }
+   
+        
+    }
+
+  console.log(eventos,"EVENTOS22222222")  
+  
+  return (
+    <div>
+      <div className="divDelNav">
+        <Nav></Nav>
+      </div>
+      <h1>Eventos a asistir</h1>
+      {/* <div>{userTasks[0].eventId.nombreDelEvento}</div>  */}
+
+      {/* <div>
                 {eventos.map((i:any)=>(
                     <>
                     <div>
@@ -75,20 +91,17 @@ export default function EventosAsistir(): JSX.Element {
                 ))}
 
             </div> */}
-        { eventos.length ? 
+      {eventos && eventos.length ? (
+        <div>
+          {eventos.map((i: { eventId: {}; tareas: [] }) => (
             <div>
-
-            {eventos.map((i:{
-                eventId:{};
-                tareas:[];
-            })=>(
-                <div>
-            <TarjetaEventosAsistir eventId={i.eventId} tareas={i.tareas}/>
+              <TarjetaEventosAsistir eventId={i.eventId} tareas={i.tareas} />
             </div>
-            ))}
-
-            </div>
-            :<div>No tienes eventos a asistir</div>}
+          ))}
         </div>
-    )
+      ) : (
+        <div>No tienes eventos a asistir</div>
+      )}
+    </div>
+  );
 }

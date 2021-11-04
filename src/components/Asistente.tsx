@@ -42,6 +42,7 @@ export default function Asistente(props: Iasistentes): JSX.Element {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card-name">
+            <img src={props.avatar} alt="avatar" width="50px"/>
             {props.usuario}
                   <button
               onClick={desplegarTareas}
