@@ -11,6 +11,7 @@ import { getEvent } from "../actions/actions";
 import {  useParams } from "react-router-dom";
 import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 import categorias from "../categorias/Categorias";
+import { notificacionModifEvento } from "../controllers/notificaciones/notificaciones";
 
 
 export default function ModificarEvento() {
@@ -51,9 +52,6 @@ export default function ModificarEvento() {
             setCategorias(evento.categorias)
         }
     },[evento])
-
-
-    
 
     const eventoModificado = () => toast.success('El evento fue modificado con exito', {
         position: "top-center",
@@ -96,6 +94,7 @@ export default function ModificarEvento() {
     }
     console.log(file)
 
+    
     const handleSubmit = async (e: any) => {
 
         e.preventDefault();
@@ -135,6 +134,7 @@ export default function ModificarEvento() {
                 
                     setCreando(false);
                     eventoModificado()
+                    notificacionModifEvento(socketIO.socket, eventid, authGoo.logNormal.name, nameEvent  )
                     
             } catch (error) {
                 console.error(error);

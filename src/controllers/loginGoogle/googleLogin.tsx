@@ -5,7 +5,8 @@ import axios from "axios";
 export const startGoogleLogin = async(infoLog: any) => {
     
     try {        
-        const {data}: {data:any} = await axios.post(`${URLrequests}api/auth`, infoLog);
+        const {data}: {data:any} = await axios.post(`${URLrequests}api/auth`, infoLog);        
+        console.log("dataPost", data)
         return data;       
      } catch (error) {
          console.error(error)

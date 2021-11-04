@@ -24,7 +24,8 @@ export const Notificacion = () => {
   var lista: any[] = []
 
   useEffect(() => {
-    dispatch(getNotifOffLine(authGoo.logNormal.uid))
+    authGoo.logNormal &&
+     dispatch(getNotifOffLine(authGoo.logNormal.uid))
   }, []);
 
   useEffect(() => {
@@ -33,27 +34,26 @@ export const Notificacion = () => {
   }, [OffLinenotif]);
 
   useEffect(() => {
-
-    socketIO.socket.on("getNotifications", (uid: string, type: string, idEvento: string, message: string) => {
+   
+     socketIO.socket?.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+    
       const newNot = {
-        uid,
-        type,
-        idEvento,
-        message
-      }
-      lista = notificaciones
-      lista.unshift(newNot)
-      
-      setNotificaciones(lista);
-      setCounter(lista.length);
-    })
+       uid, 
+       type,
+       idEvento,
+       message
+     }
+     lista = notificaciones
+     lista.unshift(newNot)
+     setNotificaciones(lista); 
+     setCounter(notificaciones.length);
+     })         
   }, [socketIO])
 
-  const handleClickTrue = () => {
-    setClicked(true);
-    setCounter(0);
-    lista = [];
-    socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);
+  const handleClickTrue  = () => {
+    setClicked(true);  
+    setCounter(0);  
+    socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
 
   const handleClickFalse = () => {
@@ -67,14 +67,14 @@ export const Notificacion = () => {
   const eliminarNotif = () => {
     setNotificaciones([]);
     setCounter(0);
-    socketIO.socket.emit("cleanNotifications", authGoo.logNormal.uid);
+    socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);
     dispatch(resetNotifications());
   };
 
   const nofifType = (type: string, idEv: string, uid: string) => {
     switch (type) {
       case "task":
-        return `/detail/${idEv}`;
+        return `/misEventos/${uid}`;
       case "delAsis":
         return `/detail/${idEv}`;
       case "delEvent":
@@ -84,21 +84,21 @@ export const Notificacion = () => {
       default:
         break;
     }
-  };
+  }
 
   return (
     <>
-      <div className="notificaciones">
-        {!clicked ? (
-          <button className="buttonNotif">
-            <BsFillBellFill
-              color="white"
-              fontSize="1.6em"
-              onClick={() => handleClickTrue()}
-            />
-            {counter === 0 ? null : <div className="contador"></div>}
-          </button>
-        ) : (
+    <div className="notificaciones">
+      {!clicked ? (
+        <button className="buttonNotif">
+          <BsFillBellFill
+            color="white"
+            fontSize="1.6em"
+            onClick={() => handleClickTrue()}
+          />
+          {counter === 0 ? null : <div className="contador">{counter}</div>}          
+        </button>
+      ) : (
           <button className="buttonNotif">
             <BsBell
               color="white"
