@@ -24,6 +24,7 @@ export const Notificacion = () => {
   var lista:any[] = []
   
   useEffect(() => {
+    authGoo.logNormal &&
      dispatch(getNotifOffLine(authGoo.logNormal.uid))
   }, []);
 

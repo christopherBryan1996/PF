@@ -7,6 +7,7 @@ import imagen3 from '../images/fiestalogin4.jpg';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';
 import { Nav } from "./Nav";
+import { ToastContainer } from 'react-toastify';
 
 export default function LandingPage() {
 
@@ -67,9 +68,17 @@ export default function LandingPage() {
                     <img src={imagen3} alt="imagen de vos cuando bajes la app" className="imagenes" />
                 </div>
             </div>
-
-
-
+             <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Foot />
 
         </div>

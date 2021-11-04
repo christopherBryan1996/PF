@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { loginNormal, login } from "../actions/actions";
 import {startGoogleLogin, nuevoUsuario} from "../controllers/loginGoogle/googleLogin";
 import URLrequests from "./constanteURL";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithPopup, signOut } from "firebase/auth";
 import { googleAuthProvider } from "../firebase/firebase-config";
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios'
@@ -87,6 +87,10 @@ export default function Login() {
         history.push("/home")
     };
 
+     const toLanding = () => {
+        history.push("/")
+    };
+
 
     //Funcion para enviar los posts del form-----------------------------------------
   const  handleGoogleLogin = async () => {
@@ -96,32 +100,36 @@ export default function Login() {
     const loginGoogle = {
         uid:user.uid,
         displayName: user.displayName,
-        photoURL: user.photoURL
+        photoURL: user.photoURL      
     }
 
     const infoLog = {
         email: user.email, 
-        password: user.uid.slice(0,12)
+        password: user.uid.slice(0,12)        
     }
     
     const data : any = await startGoogleLogin(infoLog) 
     if( data && data.ok){
+      if(data.habilitado){
         dispatch(loginNormal(data)); 
+        const {dataGoogle}:{dataGoogle:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)
+        toHome() 
+        } else {
+            await signOut(auth);
+          cuentaInhabilitada();
+        }
     } else {
         const usuario = {
                 usuario: user.displayName,
                 email: user.email,
-                password: user.uid.slice(0,12)
+                password: user.uid.slice(0,12),
+                avatar: user.photoURL
         }
         const datos: any = await nuevoUsuario(usuario)
-        dispatch(loginNormal(datos))           
+        dispatch(loginNormal(datos))  
+        toHome()          
     }
-    if(!data.habilitado) return cuentaInhabilitada()
-    await dispatch(login(loginGoogle));
-    const {dataGoogle}:{dataGoogle:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)
-        toHome() 
-
-        
+    dispatch(login(loginGoogle));    
   }
 
 
@@ -141,13 +149,18 @@ export default function Login() {
         const post = { email, password }
 
         async function fetchPost(data: object) {
+            const auth = getAuth();
             try {
                 const { data }: { data: any } = await axios.post(`${URLrequests}api/auth`, post);
                 if (data.ok) {
-                    if(!data.habilitado) return cuentaInhabilitada()
+                    if(data.habilitado){
                     dispatch(loginNormal(data));             
                     const {data2}:{data2:any} = await axios.get(`${URLrequests}api/payment/getstatus/${data.uid}`)           
                     setTimeout(()=>toHome(),1000);
+                }  else {
+                    await signOut(auth);
+                  cuentaInhabilitada();
+                }
                 } else {
                     usuarioRepetido(data.msg);
                 }

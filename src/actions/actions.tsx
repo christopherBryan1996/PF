@@ -112,7 +112,7 @@ export const loginNormal = (data: any) => {
 
 
 export const logout = (socket: any) => {
-  socket.disconnect()
+  socket?.disconnect()
   return {
     type: actions.LOGOUT,
   };
