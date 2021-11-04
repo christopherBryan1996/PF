@@ -99,7 +99,7 @@ export const getAsistentes = (id: string) => {
 
 export const userAsistiraEvento = (uid:any, eventID: any) => {
   return async function (dispatch:any){
-    const res = await axios.patch(`${URLrequests}api/users/addeventstoassist/${uid}/${eventID}`);
+    const res = await axios.patch(`${URLrequests}api/users/addtofreeevent/${uid}/${eventID}`);
     dispatch({
       type: actions.USER_ASISTIRA_EVENTO,
       payload: res.data
