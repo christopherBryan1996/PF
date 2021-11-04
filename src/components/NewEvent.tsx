@@ -198,7 +198,7 @@ const Checked=(value:string)=>{
                                 </div>
                                 
                             </div>
-                            <div className="row">
+                            <div className="row"> 
                                 
                                 <div className="form-group col-md-9 col-sm-12">
                                     <label>Fecha</label>
