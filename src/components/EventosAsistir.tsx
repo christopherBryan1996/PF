@@ -31,40 +31,52 @@ export default function EventosAsistir(): JSX.Element {
       if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length ) {
         seteventsToAssist(eventosAsistir.eventsToAssist);
         setTasks(tareas.userTasks)
-        configEventos()
-    }
-    else {
-        setEventos(eventosAsistir.eventsToAssist);
-
         
     }
+    else {
+        setEventos(eventosAsistir.eventsToAssist);        
+    }
+
+  
   },[eventosAsistir,tareas])
+
+  useEffect(()=>{
+    
+    configEventos()
+  },[tasks])
 
       function configEventos(){
           console.log(tasks,"tasks")
+          let listaeventos=[]
+            
         for (var i = 0; i < eventsToAssist.length; i++) {
-            if (eventsToAssist[i].eventId) {
+          let flag=false;
             for (var j = 0; j < tasks.length; j++) {
                 if (
                   tasks[j].eventId &&
                 eventsToAssist[i].eventId._id === tasks[j].eventId._id
                 ) {
-                setEventos([
-                    ...eventos,
-                    {
+                  listaeventos.push({
                     ...eventsToAssist[i],
                     tareas: tasks[j].tareasDelUsuario,
-                    },
-                ]);
-                } else  {
-                setEventos([...eventos, { ...eventsToAssist[i], tareas: [] }]);
+                    })
+                
+                flag=true;
+                
                 }
+            }if(!flag){
+                listaeventos.push({ ...eventsToAssist[i], tareas: [] })
+                
+                
             }
-            }
+            
         }
+        setEventos(listaeventos)
    
-        
+    
     }
+
+    
 
   console.log(eventos,"EVENTOS22222222")  
   
