@@ -17,7 +17,7 @@ export default function NewEvent() {
     //Estados------------------------------------------------------------------------------------------
     const [nameEvent, setNameEvent] = useState("");
     const [ubicacion, setUbicacion] = useState("");
-    const [publicoOPriv, setPublicoOPriv] = useState("publico");
+
     const [numeroPersonas, setNumeroPersonas] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
@@ -77,14 +77,12 @@ export default function NewEvent() {
     const handleSubmit = async (e: any) => {
 
         e.preventDefault();
-        
+        console.log("fecha", fecha)
         if(!authGoo.logNormal) return toLogin();
 
-        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
+        if ( !fecha || !descripcion  || !nameEvent || !categories.length) { return faltanCasillas() }
         setCreando(true);
-        let publicVar = true;
-        if (publicoOPriv === "true") publicVar = true;
-        if (publicoOPriv === "false") publicVar = false;
+        
 
         const url = await fileUpload(file)
         
@@ -93,21 +91,20 @@ export default function NewEvent() {
         const post:any = {
             nombreDelEvento: nameEvent,
             direccion: ubicacion,
-            horaDeInicio: "20:30",
+            horaDeInicio: fecha.slice(11),
             autor: authGoo.logNormal.uid,
-            publico: publicVar,
             invitados: numeroPersonas,
             precio,
-            fecha,
+            fecha: fecha.slice(0, 10).split("").join(""),
             descripcion,
             imagen: url,
             coordenadas: coordenadasPadre,
             categorias:categories
         }
         console.log("post", post)
+        
 
-
-        async function fetchPost(data: object) {
+        async function fetchPost(data: object) { 
             try {
                 const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
                 console.log("data",data);
@@ -125,6 +122,7 @@ export default function NewEvent() {
 
                 } else {
                     faltanCasillas();
+                    setCreando(false);
                 }
             } catch (error) {
                 console.error(error);
@@ -134,7 +132,7 @@ export default function NewEvent() {
         console.log("constPost", post) 
     };
 
-console.log(categorias,"categorias")
+
 
 const Checked=(value:string)=>{
 
@@ -181,7 +179,7 @@ const Checked=(value:string)=>{
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-6 col-sm-12 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Cantidad de asistentes</label>
                                     <input
                                         type="number"
@@ -191,20 +189,7 @@ const Checked=(value:string)=>{
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-1 ">
-                                    <label>Tipo</label>
-                                    <select
-                                        className="form-select form-select-lg "
-                                        value={publicoOPriv}
-                                        onChange={(e) => setPublicoOPriv(e.target.value)}
-                                    >
-                                        <option value="true" >Público</option>
-                                        <option value="false" >Privado</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-5 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Valor del ingreso</label>
                                     <input
                                         type="number"
@@ -214,7 +199,11 @@ const Checked=(value:string)=>{
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-2 col-sm-12">
+                                
+                            </div>
+                            <div className="row"> 
+                                
+                                <div className="form-group col-md-9 col-sm-12">
                                     <label>Fecha</label>
                                     <input
                                         type="datetime-local"

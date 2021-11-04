@@ -1,25 +1,8 @@
-.barra{
-   
-     width: 600px; 
-    font-size: 1.3rem;
-    display: flex;
-    background-color: rgba(92, 92, 91, 0.856);
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin:auto;
-    border:solid;
-    border-radius: 8px;
-    height: max-content;
-    border-width: 1px;
-    border-color: rgba(92, 92, 91, 0.856) ;
-    
-}
+
 
 .icons{
-    color: rgb(0, 247, 255);
-    size: 2rem;
-}
-.boton{
-    background-color:rgba(92, 92, 91, 0.856);
+    color: rgb(227, 234, 235);
+    font-size: 1.5rem;
+    cursor: pointer;
+
 }

@@ -24,7 +24,7 @@ export const agregarTarea = async (
     idEvento,
     message: `${name} te ha asignado una nueva tarea: ${tarea} en su evento ${eventName}`,
   };  
-  socket.emit("postNotification", data);
+  socket?.emit("postNotification", data);
 };
 
 export const eliminarTarea = async (
@@ -48,7 +48,7 @@ export const eliminarTarea = async (
     idEvento,
     message: `${name} te ha eliminado una tarea asignada: ${tarea} de su evento ${eventName}`,
   };
-  socket.emit("postNotification", data);
+  socket?.emit("postNotification", data);
 };
 
 //Agregar alerta para confirmar eliminacion de asistente
@@ -71,5 +71,5 @@ export const eliminarAsistente = async (
     idEvento,
     message: `${name} te ha quitado de la lista de asistentes al evento ${eventName}`,
   };
-  socket.emit("postNotification", data);
+  socket?.emit("postNotification", data);
 };
