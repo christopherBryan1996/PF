@@ -258,7 +258,7 @@ export const saveNotifications = (notif: any) => {
     });
   }
 }
-
+//http://localhost:3008/api/payment/getpayments
 export function getVentas() {
   return async function (dispatch: any) {
     const res = await axios.get(`${URLrequests}api/payment/getpayments`);
