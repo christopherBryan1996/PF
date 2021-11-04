@@ -25,6 +25,7 @@ export default function NewEvent() {
     const [file, setFile] = useState(null || "")
     const [creando, setCreando] = useState(false);
     const [categories, setCategorias]=useState<any>([]);
+    const [hora, setHora] = useState("");
     
 
     
@@ -75,10 +76,10 @@ export default function NewEvent() {
     const handleSubmit = async (e: any) => {
 
         e.preventDefault();
-        
+        console.log("fecha", fecha)
         if(!authGoo.logNormal) return toLogin();
 
-        if ( !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
+        if ( !fecha || !descripcion  || !nameEvent || !categories.length) { return faltanCasillas() }
         setCreando(true);
         
 
@@ -89,18 +90,18 @@ export default function NewEvent() {
         const post:any = {
             nombreDelEvento: nameEvent,
             direccion: ubicacion,
-            horaDeInicio: "20:30",
+            horaDeInicio: fecha.slice(11),
             autor: authGoo.logNormal.uid,
             invitados: numeroPersonas,
             precio,
-            fecha,
+            fecha: fecha.slice(0, 10).split("").join(""),
             descripcion,
             imagen: url,
             coordenadas: coordenadasPadre,
             categorias:categories
         }
         console.log("post", post)
-
+        
 
         async function fetchPost(data: object) { 
             try {
@@ -177,7 +178,7 @@ const Checked=(value:string)=>{
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-6 col-sm-12 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Cantidad de asistentes</label>
                                     <input
                                         type="number"
@@ -186,10 +187,7 @@ const Checked=(value:string)=>{
                                     >
                                     </input>
                                 </div>
-                                
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-5 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Valor del ingreso</label>
                                     <input
                                         type="number"
@@ -198,10 +196,14 @@ const Checked=(value:string)=>{
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-2 col-sm-12">
+                                
+                            </div>
+                            <div className="row">
+                                
+                                <div className="form-group col-md-9 col-sm-12">
                                     <label>Fecha</label>
                                     <input
-                                        type="date"
+                                        type="datetime-local"
                                         value={fecha}
                                         onChange={(e) => setFecha(e.target.value)}>
                                     </input>

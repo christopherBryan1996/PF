@@ -313,9 +313,10 @@ const [confirmado, setConfirmado] = useState(false);
                         <div className="col-md-4">
                             <div className="card-body">
                                 <h4 className="card-title">{evento.nombreDelEvento}</h4>
-                                <p className="card-text"><small className="text-muted">{evento.fecha.split("").slice(0, 10).join("")}</small></p>
-                                <p className="card-text">{evento.descripcion}</p>
                                 <p className="card-text"><small className="text-muted">{evento.precio === 0 ? 'Gratis ' : `Valor:  $${evento.precio} `}</small></p>
+                                <p className="card-text"><small className="text-muted">{evento.fecha.split("").slice(0, 10).join("")}{"  "}{evento.horaDeInicio}</small></p>
+                                <p className="card-text">{evento.descripcion}</p>
+                                
                             </div>
                         </div>
                     </div>
