@@ -179,7 +179,7 @@ const [confirmado, setConfirmado] = useState(false);
         console.log("q asistesn", data)
 
          await data.asistentes.forEach((a:any)=>{
-             
+             console.log(a.usuario[0]?.usuario)
             if(a.usuario[0]?._id === authGoo.logNormal.uid){
                  setConfirmado(true) 
                  console.log("lo paso a true el gil")
@@ -285,8 +285,7 @@ const [confirmado, setConfirmado] = useState(false);
         //seCopio();
     }
 
-
-    //return del componente------------------------------------------------------------------------------
+  
 
     //return del componente------------------------------------------------------------------------------
 
@@ -386,10 +385,66 @@ const [confirmado, setConfirmado] = useState(false);
 
             {/* <div className="card-contai">
 
+                            {evento.precio !== 0 &&
+                                <div onClick={comprarEntrada}>
+                                    <FiShoppingCart size="2em" color="white" />
+                                    <p>Comprar Entradas</p>
+
+                                </div>}
+
+
+                        </button>
+                        {paramFieldPayment_id &&
+                            <button className="btn btn-success">
+                                <div onClick={(() => agregarPagoDB())}>
+                                    <FiUserPlus size="2em" color="white" />
+                                    <p>Confirma que compraste la entrada y asistiras al evento</p>
+
+                                </div>
+                            </button>}
+
+                        {confirmado &&
+                            <button className="btn btn-success" onClick={obtenerQR}>
+                                <div >
+                                    <FiTag size="2em" color="white" />
+                                    <p>Obtiene tu QR de la entrada!</p>
+
+                                </div>
+                            </button>}
+
+
+
+                    </div>
+                    <div className="card-footer">
+                        <span className="spa">Compartir con tus amigos</span>
+                        <FacebookShareButton url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`} quote='Hola, quiero compartir este evento'>
+                            <FacebookIcon className="share" round={true} size='2em' />
+                        </FacebookShareButton>
+                        <WhatsappShareButton
+                            title='Hola, te comparto este evento, te pueda interesar!'
+                            url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`}>
+                            <WhatsappIcon className="share" round={true} size='2em' />
+                        </WhatsappShareButton>
+                        <button
+                            className="botonCopy"
+                            onClick={() => toEventClipboard(evento._id)}>
+                            <IoCopyOutline></IoCopyOutline>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div className="card-contai2" >
+                    <Mapa1evento />
+                </div>
+
+
+
+            </div>
+
+            {/* <div className="card-contai">
                 <div className="card " >
-
                     <h3 className="card-title">{evento.nombreDelEvento}</h3>
-
                 </div>
                 <div className="card">
                     <img className="card-img-top" src={evento.imagen} alt="Card image cap" height="300" width="00" />
@@ -400,47 +455,33 @@ const [confirmado, setConfirmado] = useState(false);
                     <p>Asistentes: <span>{evento.asistentes.length}</span></p>
                     <p>Precio: <span>{evento.precio}$ (moneda local)</span></p>
                     <p>Publico: <span>{final}</span></p>
-
                 </div>
                 <button className="btn btn-success">
                     {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                         <p>Asistire al evento</p>  </div>}
-
                     {evento.precio !== 0 &&
                         <div onClick={comprarEntrada}>
                             <FiShoppingCart size="2em" color="white" />
                             <p>Comprar Entradas</p>
-
                         </div>}
-
-
                 </button>
-
                 {paramFieldPayment_id &&
                     <button className="btn btn-success">
                         <div onClick={(() => agregarPagoDB())}>
                             <FiUserPlus size="2em" color="white" />
                             <p>Confirma que compraste la entrada y asistiras al evento</p>
-
                         </div>
                     </button>}
-
                 {confirmado &&
                     <button className="btn btn-success" onClick={obtenerQR}>
                         <div >
                             <FiTag size="2em" color="white" />
                             <p>Obtiene tu QR de la entrada!</p>
-
                         </div>
                     </button>}
-
-
-
-
                 <div className="card-contai2" >
                     <Mapa1evento />
                 </div>
-
                 <Foot />
             </div> */}
             <Foot />
