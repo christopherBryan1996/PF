@@ -92,7 +92,7 @@ export const Home = () => {
 
             <div className=" container-home">
 
-                {eventos.filter((val: any) => {
+                {eventos && eventos.length && eventos.filter((val: any) => {
                     if (search === '') {
                         return val
                     } else if (val.nombreDelEvento.toLowerCase().includes(search.toLocaleLowerCase())) {

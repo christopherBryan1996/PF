@@ -24,6 +24,7 @@ export const Notificacion = () => {
   var lista:any[] = []
   
   useEffect(() => {
+    authGoo.logNormal &&
      dispatch(getNotifOffLine(authGoo.logNormal.uid))
   }, []);
 
@@ -34,8 +35,9 @@ export const Notificacion = () => {
 
   useEffect(() => {
    
-     socketIO.socket.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
-       const newNot = {
+     socketIO.socket?.on("getNotifications", ( uid: string, type:string, idEvento:string, message:string) =>{
+    
+      const newNot = {
        uid, 
        type,
        idEvento,
@@ -43,16 +45,14 @@ export const Notificacion = () => {
      }
      lista = notificaciones
      lista.unshift(newNot)
-     console.log("Listaaa", lista)
      setNotificaciones(lista); 
-     setCounter(lista.length);
+     setCounter(notificaciones.length);
      })         
   }, [socketIO])
 
   const handleClickTrue  = () => {
     setClicked(true);  
     setCounter(0);  
-    lista =[]; 
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
   };
   
@@ -67,24 +67,24 @@ export const Notificacion = () => {
   const eliminarNotif = () => {
     setNotificaciones([]);
     setCounter(0);
-    socketIO.socket.emit("cleanNotifications", authGoo.logNormal.uid);
+    socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);
     dispatch(resetNotifications());
   };
 
   const nofifType = (type: string, idEv: string, uid:string) => {
     switch (type) {
       case "task":
-        return `/detail/${idEv}`;
+        return `/misEventos/${uid}`;
       case "delAsis":
         return `/detail/${idEv}`;
       case "delEvent":
-      return `/home`;
+        return `/home`;
       case "newAsis":
-      return `/asistentes/${uid}/${idEv}`;
+        return `/asistentes/${uid}/${idEv}`;
       default:
         break;
     }
-  };
+  }
 
   return (
     <>
@@ -96,7 +96,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador"></div>}          
+          {counter === 0 ? null : <div className="contador">{counter}</div>}          
         </button>
       ) : (
           <button className="buttonNotif">
