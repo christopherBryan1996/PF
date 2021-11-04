@@ -20,8 +20,7 @@ export const Notificacion = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
-  var lista:any[] = []
-  
+    
   useEffect(() => {
     authGoo.logNormal &&
      dispatch(getNotifOffLine(authGoo.logNormal.uid))
@@ -42,7 +41,8 @@ export const Notificacion = () => {
        idEvento,
        message
      }
-     lista = notificaciones
+     
+     let lista = notificaciones
      if(lista[0] !== newNot) lista.unshift(newNot)
      setNotificaciones(lista); 
      setCounter(notificaciones.length);
