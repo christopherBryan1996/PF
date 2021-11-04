@@ -20,8 +20,6 @@ export const Notificacion = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   const [counter, setCounter] = useState<number>(0);
 
-  var lista: any[] = []
-
   useEffect(() => {
     authGoo.logNormal &&
      dispatch(getNotifOffLine(authGoo.logNormal.uid))
@@ -44,24 +42,23 @@ export const Notificacion = () => {
      }
      
      let lista = notificaciones
-     if(lista[0] !== newNot) lista.unshift(newNot)
+     if(notificaciones[0] !== newNot) lista.unshift(newNot)
      setNotificaciones(lista); 
      setCounter(notificaciones.length);
      })         
   }, [socketIO])
 
   const handleClickTrue  = () => {
-    setClicked(true);  
+    notificaciones.length && dispatch(saveNotifications(notificaciones))
     setCounter(0);  
+    const emptyArr: [] = []
+    setNotificaciones(emptyArr);
     socketIO.socket?.emit("cleanNotifications", authGoo.logNormal.uid);     
+    setClicked(true);  
   };
 
   const handleClickFalse = () => {
     setClicked(false);
-    notificaciones.length && dispatch(saveNotifications(notificaciones));
-    setCounter(0);
-    setNotificaciones([])
-      ;
   };
 
   const eliminarNotif = () => {
@@ -96,7 +93,7 @@ export const Notificacion = () => {
             fontSize="1.6em"
             onClick={() => handleClickTrue()}
           />
-          {counter === 0 ? null : <div className="contador">{counter}</div>}          
+          {counter === 0 ? null : <div className="contador"></div>}          
         </button>
       ) : (
           <button className="buttonNotif">

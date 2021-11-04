@@ -27,7 +27,7 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
     
         console.log(post)
 
-            post.uid = asistente.usuario[0]._id
+            post.uid = asistente.usuario[0]?._id
             socket?.emit("postNotification", post)
 
             const { data }: {data : any} = await axios.get(`${URLrequests}api/users/${asistente.usuario[0]._id}`);
