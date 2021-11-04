@@ -285,7 +285,6 @@ const [confirmado, setConfirmado] = useState(false);
         //seCopio();
     }
 
-  
 
     //return del componente------------------------------------------------------------------------------
 
@@ -381,6 +380,7 @@ const [confirmado, setConfirmado] = useState(false);
 
 
 
+
             </div>
 
             {/* <div className="card-contai">
@@ -440,7 +440,9 @@ const [confirmado, setConfirmado] = useState(false);
 
 
 
+
             </div>
+
 
             {/* <div className="card-contai">
                 <div className="card " >
