@@ -77,8 +77,9 @@ export const VentasAdmin = () => {
                     <thead>
                         <tr>
                             <th scope="col">Nombre Comprador</th>
-                            <th scope="col">Estado de pago</th>
                             <th scope="col">Evento</th>
+                            <th scope="col">Estado de pago</th>
+                           
 
                         </tr>
                     </thead>
