@@ -3,7 +3,6 @@ import "./styles/Notificaciones.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotifOffLine, saveNotifications, resetNotifications } from "../actions/actions";
-import { INotifRecibidas, INotificaciones } from "../interfaces/interfaces";
 
 
 export const Notificacion = () => {
@@ -44,7 +43,7 @@ export const Notificacion = () => {
        message
      }
      lista = notificaciones
-     lista.unshift(newNot)
+     if(lista[0] !== newNot) lista.unshift(newNot)
      setNotificaciones(lista); 
      setCounter(notificaciones.length);
      })         
