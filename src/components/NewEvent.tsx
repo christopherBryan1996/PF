@@ -10,6 +10,7 @@ import URLrequests from "./constanteURL";
 import { useHistory } from "react-router-dom";
 import categorias from "../categorias/Categorias";
 import dateFormat, { masks } from "dateformat";
+import Foot from "./Foot";
 
 export default function NewEvent() {
 
@@ -150,6 +151,7 @@ const Checked=(value:string)=>{
     return (
         <div>
             <Nav />
+
             <div className="container container-Nevent">
                 <div className="row">
                     <div className="col-lg-6 col-sm-12  ">
@@ -201,11 +203,12 @@ const Checked=(value:string)=>{
                                 </div>
                                 
                             </div>
-                            <div className="row"> 
+                            <div className="form-group col-md-6 col-sm-1"> 
                                 
-                                <div className="form-group col-md-9 col-sm-12">
+                                <div className="form-group col-md-1 col-sm-1">
                                     <label>Fecha</label>
-                                    <input
+                                    <input 
+                                       
                                         type="datetime-local"
                                         min={hoy}
                                         value={fecha}
@@ -213,7 +216,9 @@ const Checked=(value:string)=>{
                                     </input>
                                 </div>
                             </div>
+                            <div className="mb-3">Adjuntar imagen</div>
                             <div className="custom-file col-md-11">
+                                 <label>Fecha</label>
                                 <input type="file" onChange={handleFileChange} className="custom-file-input" id="customFile" />
                                 <label className="custom-file-label" htmlFor="customFile">{file.name || "Adjuntar imagen"}</label>
                             </div>
@@ -250,6 +255,7 @@ const Checked=(value:string)=>{
                         <Mapa onCambio={llenarEstadoCoordenadas} />
                     </div>
                 </div>
+              
                 <ToastContainer
                     position="top-right"
                     autoClose={1000}
@@ -262,7 +268,7 @@ const Checked=(value:string)=>{
                     pauseOnHover />
             </div>
 
-
+            <Foot/>
 
             {/* <div className="container container-Nevent">
                 <form onSubmit={handleSubmit} className="form">

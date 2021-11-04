@@ -195,39 +195,5 @@ export const Evento = (props: Iprops) => {
   )
 }
 
-            // <div className="container-card">
-            //     <div >
-            //         <Link to={`/detail/${_id}`} className="link" >
-            //             <img className="card-img-top" src={imagen} alt="Card image cap" height="180" />
-            //             <div className="card-body">
-            //                 <p className="card-text">{fecha.slice(0, 10)}</p>
-            //                 <h5 className="card-title">{nombreDelEvento}</h5>
-
-            //                 {
-            //                     (precio === 0
-            //                         ?
-            //                         <p className="card-text">Gratis</p>
-            //                         :
-            //                         <p className="card-text">Valor:  ${precio}</p>
-            //                     )
-            //                 }
-            //             </div>
-
-            //         <div className="card-footer">
-            //             <button className="btn btn-outline-success my-2 my-sm-0" onClick={agregarAfavoritos}> Añadir a Favoritos</button>
-            //             <span className="spa">Compartir</span>
-            //             <FacebookShareButton url={`https://students.soyhenry.com/`} quote='Hola, quiero compartir este evento'>
-            //                 <FacebookIcon className="share" round={true} size='2em' />
-            //             </FacebookShareButton>
-            //             <WhatsappShareButton
-            //                 title='Hola, te comparto este evento, te pueda interesar!'
-            //                 url="https://students.soyhenry.com/">
-            //                 <WhatsappIcon className="share" round={true} size='2em' />
-            //             </WhatsappShareButton>
-            //         </div>
-
-            //     </div>
-
-            // </div>
 
 
