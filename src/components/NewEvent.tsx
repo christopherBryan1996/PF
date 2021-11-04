@@ -16,7 +16,7 @@ export default function NewEvent() {
     //Estados------------------------------------------------------------------------------------------
     const [nameEvent, setNameEvent] = useState("");
     const [ubicacion, setUbicacion] = useState("");
-    const [publicoOPriv, setPublicoOPriv] = useState("publico");
+
     const [numeroPersonas, setNumeroPersonas] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
@@ -78,11 +78,9 @@ export default function NewEvent() {
         
         if(!authGoo.logNormal) return toLogin();
 
-        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
+        if ( !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
         setCreando(true);
-        let publicVar = true;
-        if (publicoOPriv === "true") publicVar = true;
-        if (publicoOPriv === "false") publicVar = false;
+        
 
         const url = await fileUpload(file)
         
@@ -93,7 +91,6 @@ export default function NewEvent() {
             direccion: ubicacion,
             horaDeInicio: "20:30",
             autor: authGoo.logNormal.uid,
-            publico: publicVar,
             invitados: numeroPersonas,
             precio,
             fecha,
@@ -105,7 +102,7 @@ export default function NewEvent() {
         console.log("post", post)
 
 
-        async function fetchPost(data: object) {
+        async function fetchPost(data: object) { 
             try {
                 const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
                 console.log("data",data);
@@ -189,17 +186,7 @@ const Checked=(value:string)=>{
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-1 ">
-                                    <label>Tipo</label>
-                                    <select
-                                        className="form-select form-select-lg "
-                                        value={publicoOPriv}
-                                        onChange={(e) => setPublicoOPriv(e.target.value)}
-                                    >
-                                        <option value="true" >Publico</option>
-                                        <option value="false" >Privado</option>
-                                    </select>
-                                </div>
+                                
                             </div>
                             <div className="row">
                                 <div className="form-group col-md-5 ">
