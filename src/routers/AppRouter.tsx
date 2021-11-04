@@ -107,8 +107,7 @@ export const AppRouter = () => {
     if (cheking) {
         return (
             <div className="loading">
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" />
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" alt="loading"/>
+                <img src="https://media.giphy.com/media/XYoVdV12UXizl7bNvL/giphy.gif" alt="loading"/>
             </div>
             // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
         )
