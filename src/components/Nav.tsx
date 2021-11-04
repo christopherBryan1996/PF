@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../actions/actions";
 import { Notificacion } from "./Notificaciones";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Nav = () => {
   const dispatch = useDispatch();
@@ -59,10 +60,37 @@ export const Nav = () => {
     landing()
     dispatch(logout(socketIO.socket));
     await signOut(auth);
-
     window.location.replace('');
 
   };
+
+  //usuario inhabilitado---------------------------
+  const cuentaInhabilitada = () =>
+    toast.error("Esta cuenta se encuentra temporalmente inhabilitada", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const logOutAuth = async()=>{
+      const auth = getAuth();
+      await signOut(auth);
+  }
+
+  useEffect(() => {        
+      if(authGoo.logNormal && !authGoo.logNormal.habilitado){
+        landing()
+        dispatch(logout(socketIO?.socket));
+        logOutAuth()
+        cuentaInhabilitada();
+      } 
+           
+    }, [authGoo])
+
 
   return (
     <nav className="navbar navbar-dark bg-dark fixed-top">

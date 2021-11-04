@@ -14,7 +14,6 @@ import axios from 'axios';
 import URLrequests from "./constanteURL";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
-
 import FileDownload from 'js-file-download';
 import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import { IoCopyOutline } from "react-icons/io5";
@@ -285,7 +284,6 @@ const [confirmado, setConfirmado] = useState(false);
         //seCopio();
     }
 
-  
 
     //return del componente------------------------------------------------------------------------------
 
@@ -381,6 +379,7 @@ const [confirmado, setConfirmado] = useState(false);
 
 
 
+
             </div>
 
             {/* <div className="card-contai">
@@ -440,7 +439,9 @@ const [confirmado, setConfirmado] = useState(false);
 
 
 
+
             </div>
+
 
             {/* <div className="card-contai">
                 <div className="card " >
