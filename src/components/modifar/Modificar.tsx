@@ -4,7 +4,7 @@ import URLrequests from "../constanteURL";
 import './css/style.css'
 import './css/sourcesanspro-font.css'
 import image from './images/form-v8.jpg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { loginNormal } from '../../actions/actions'
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,9 @@ export const ModificarUser=  ()=>{
     
     const [img, setimg] = useState(null||'')
     
+    useEffect(()=>{
+        authGoo.logNormal && setimg(authGoo.logNormal.image)
+    },[authGoo])
     //mensajes
     const contraseña2incorrecta = () => toast.error('Las contraseñas no coinciden', {
         position: "top-center",
@@ -153,7 +156,7 @@ export const ModificarUser=  ()=>{
 	        <div className="page-content">
 		        <div className="form-v8-content">
 			        <div className="form-left">
-				        <img className='imagform' src={image} alt="form"/>
+				        <img className='imagform' src={authGoo.logNormal.image} alt="form"/>
 			        </div>
 			        <div className="form-right">
                         <img className='imgUser' src={authGoo.logNormal.image} alt={authGoo.logNormal.name}/>
@@ -185,14 +188,14 @@ export const ModificarUser=  ()=>{
 						        <div className="form-row">
 							        <label className="form-row-inner">
 								        <input type="password" name="password" id="password" className="input-text" value={state.password} onChange={inputChange} />
-								        <span className="label">Nuevo Password</span>
+								        <span className="label">Nueva Password</span>
 								        <span className="border"></span>
 							        </label>
 						        </div>
 						        <div className="form-row">
 							        <label className="form-row-inner">
 								        <input type="password" name="comfirm_password" id="comfirm_password" className="input-text" value={state.comfirm_password} onChange={inputChange} />
-								        <span className="label">Confirme Password</span>
+								        <span className="label">Confirmar Password</span>
 								        <span className="border"></span>
 							        </label>
 						        </div>

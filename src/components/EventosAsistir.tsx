@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav } from "./Nav";
 import { getEventosAsistir, getTareas } from "../actions/actions";
 import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
@@ -30,13 +30,10 @@ export default function EventosAsistir(): JSX.Element {
   useEffect(()=>{
       if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length ) {
         seteventsToAssist(eventosAsistir.eventsToAssist);
-        setTasks(tareas.userTasks)
-        configEventos()
+        setTasks(tareas.userTasks)        
     }
     else {
-        setEventos(eventosAsistir.eventsToAssist);
-
-        
+        setEventos(eventosAsistir.eventsToAssist);        
     }
   },[eventosAsistir,tareas])
 
@@ -61,10 +58,10 @@ export default function EventosAsistir(): JSX.Element {
                 }
             }
             }
-        }
-   
+        } 
         
     }
+    configEventos()
 
   console.log(eventos,"EVENTOS22222222")  
   

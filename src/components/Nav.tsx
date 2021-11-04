@@ -116,7 +116,7 @@ export const Nav = () => {
 
               <li className=" dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src={authGoo.logNormal && authGoo.logNormal.image} alt="Avatar" width="40" height="40" />
+                  <img src={authGoo.logNormal.image} alt="Avatar" width="40" height="40" />
                   <span>{authGoo.logNormal && authGoo.logNormal.name}</span>
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

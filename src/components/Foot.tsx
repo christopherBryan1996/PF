@@ -19,7 +19,7 @@ export default function Foot() {
                     <ul className="listafinal">
                         <li> <Link to="/home"> <p>Home</p> </Link> </li>
                         <li> <Link to="/About"> <p>About Us</p> </Link> </li>
-                        <li><p>Twitter</p></li>
+                        <li><a href="https://twitter.com/?lang=es"><p>Twitter</p> </a></li>
                         <li> <a href="https://www.facebook.com/brian.ramos.71271/videos/826579387874133/"> <p>Facebook</p> </a> </li>
                         <li> <a href="https://www.soyhenry.com/"> <p>Henry</p> </a> </li>
                         <li> <a href="https://www.instagram.com/reel/CTNbinrnCrI/?utm_medium=copy_link"> <p>Linkedin</p> </a> </li>
