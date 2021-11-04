@@ -1,7 +1,7 @@
 const categorias = [
     "Deportes, salud, estilo de vida" ,
 "Fiestas, conciertos, comida y bebida",
-"Educacion, negocios y tecnologia"  ,
+"Educación, negocios y tecnología"  ,
 "Online",
 "Viajes, ocio y hobbies"  ,
 "Hogar y familia",
