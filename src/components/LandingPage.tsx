@@ -15,7 +15,7 @@ export default function LandingPage() {
     const history = useHistory();
 
     const toHomeInvitado = () => {
-        history.push("/home")
+        history.push("/home") 
     };
 
 
