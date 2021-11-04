@@ -90,7 +90,7 @@ export default function Favorites() {
 
     const toEventClipboard = (_id: any) => {
 
-        var UrlCompartir = `http://localhost:3000/detail/${_id}`;
+        var UrlCompartir = `https://flamboyant-golick-d7cb40.netlify.app/detail/${_id}`;
         navigator.clipboard.writeText(UrlCompartir);
         seCopio();
     }

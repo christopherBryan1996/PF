@@ -109,7 +109,7 @@ export const Notificacion = () => {
       </div>
       <div className="notificacion">
         {!clicked ? null : (
-          <div className={"card-body card "}>
+          <div className="card-body card-container-noti">
             {(!notificaciones.length && !notifLeidas.length) ? (
               <p>No tienes notificaciones</p>
             ) : (
