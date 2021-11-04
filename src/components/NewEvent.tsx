@@ -27,7 +27,7 @@ export default function NewEvent() {
     const [creando, setCreando] = useState(false);
     const [categories, setCategorias]=useState<any>([]);
     const now = new Date();
-    const hoy = dateFormat(now, "isoDateTime").slice(0,19)
+    const hoy = dateFormat(now, "isoDateTime").slice(0,16)
     console.log('HOYY',hoy)
     
 
@@ -228,12 +228,6 @@ const Checked=(value:string)=>{
                             </div>
                             <div className="form-group col-md-11">
                                 <label>Selecciona al menos una categoría</label>
-                                
-                                    
-                                    
-                                    
-                                
-                            
                                 {/* onChange={(e) => setCategorias([...categorias,e.target.value])} */}
                                 {categorias.map((i:string)=>
                                 <div className="form-check">
