@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import "./styles/EventDetails.css";
 import { FaCalendarAlt } from "react-icons/fa"
-import { FiShoppingCart, FiUserPlus, FiTag } from "react-icons/fi";
+import { FiShoppingCart, FiUserPlus, FiTag, FiThumbsUp } from "react-icons/fi";
 import imag from '../images/bolos.jpg';
 import { useEffect, useState } from "react";
 import { getEvent, userAsistiraEvento } from "../actions/actions"
@@ -257,10 +257,6 @@ export default function EventDetails() {
     }
 
 
-    //Variables de como llegan los estados PrivadoOpublico---------------------------------------------------------------
-    var privadoOpublico = evento.publico;
-    var final = "Publico - Cualquiera puede asistir";
-    if (privadoOpublico === false) { final = "Privado - Solo invitados" };
 
 
     //Funcion para conseguir QR----------------------------------------------------------------------------------
@@ -323,8 +319,11 @@ export default function EventDetails() {
                     </div>
                     <div className="card-footer">
                         <button className="btn btn-success">
-                            {privadoOpublico && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
+                            {confirmado === false && evento.precio === 0 && <div onClick={agregarGenteAsistir}> <FiUserPlus size="2em" color="white" />
                                 <p>Asistire al evento</p>  </div>}
+
+                            {confirmado === true && evento.precio === 0 && <div onClick={()=> yaAsistes()}> <FiThumbsUp size="2em" color="white" />
+                                <p>Ya Asistes a este evento</p>  </div>}    
 
                             {evento.precio !== 0 &&
                                 <div onClick={comprarEntrada}>

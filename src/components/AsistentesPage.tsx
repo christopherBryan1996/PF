@@ -21,7 +21,7 @@ export default function AsistentesPage( ): JSX.Element {
   const { authGoo, eventos } = useSelector((state: any) => state);
 
   const dispatch: any = useDispatch();
-   const [ estadoModal, setestadoModal] = useState(true)
+   const [ estadoModal, setestadoModal] = useState(false)
    const [ userId, setuserId] = useState('')
    const [ eventName, seteventName] = useState('')
    const [ name, setname] = useState('')
@@ -36,16 +36,16 @@ export default function AsistentesPage( ): JSX.Element {
     seteventName(eventName)
     setname(name)
     seteventId(eventId)
-    setsocket(socket)
-    
+    setsocket(socket)    
 }
+
   //verifico que el usuario logueado coincida con el autor del evento
   return authGoo.logNormal && uid === authGoo.logNormal.uid ? (
     <div className="containerAsistentes">
     <Modal
                 estado={estadoModal}
                 cambiarEstado={setestadoModal}>
-                <h4>Seguro quiere eliminar el evento?</h4>
+                <h4>¿Seguro que quieres eliminar a {name} de la lista de asistentes?</h4>
                 <BotonEliminar onClick={() => {  
                   eliminarAsistente(userId,
                   eventName,

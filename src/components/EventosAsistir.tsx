@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav } from "./Nav";
 import { getEventosAsistir, getTareas } from "../actions/actions";
 import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
@@ -30,38 +30,53 @@ export default function EventosAsistir(): JSX.Element {
   useEffect(()=>{
       if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length ) {
         seteventsToAssist(eventosAsistir.eventsToAssist);
-        setTasks(tareas.userTasks)        
+        setTasks(tareas.userTasks)
+        
     }
     else {
         setEventos(eventosAsistir.eventsToAssist);        
     }
+
+  
   },[eventosAsistir,tareas])
+
+  useEffect(()=>{
+    
+    configEventos()
+  },[tasks])
 
       function configEventos(){
           console.log(tasks,"tasks")
+          let listaeventos=[]
+            
         for (var i = 0; i < eventsToAssist.length; i++) {
-            if (eventsToAssist[i].eventId) {
+          let flag=false;
             for (var j = 0; j < tasks.length; j++) {
                 if (
                   tasks[j].eventId &&
                 eventsToAssist[i].eventId._id === tasks[j].eventId._id
                 ) {
-                setEventos([
-                    ...eventos,
-                    {
+                  listaeventos.push({
                     ...eventsToAssist[i],
                     tareas: tasks[j].tareasDelUsuario,
-                    },
-                ]);
-                } else  {
-                setEventos([...eventos, { ...eventsToAssist[i], tareas: [] }]);
+                    })
+                
+                flag=true;
+                
                 }
+            }if(!flag){
+                listaeventos.push({ ...eventsToAssist[i], tareas: [] })
+                
+                
             }
-            }
-        } 
-        
+            
+        }
+        setEventos(listaeventos)
+   
+    
     }
-    configEventos()
+
+    
 
   console.log(eventos,"EVENTOS22222222")  
   
@@ -71,23 +86,7 @@ export default function EventosAsistir(): JSX.Element {
         <Nav></Nav>
       </div>
       <h1>Eventos a asistir</h1>
-      {/* <div>{userTasks[0].eventId.nombreDelEvento}</div>  */}
-
-      {/* <div>
-                {eventos.map((i:any)=>(
-                    <>
-                    <div>
-                    {i.eventId.nombreDelEvento} 
-                    </div>
-                    <div>
-                    {i.tareas.length? i.tareas.map((i:any)=>(
-                        <p>{i}</p>
-                    )):null}   
-                    </div>
-                    </>
-                ))}
-
-            </div> */}
+     
       {eventos && eventos.length ? (
         <div>
           {eventos.map((i: { eventId: {}; tareas: [] }) => (
