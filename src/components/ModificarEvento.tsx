@@ -13,6 +13,7 @@ import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 import categorias from "../categorias/Categorias";
 import { notificacionModifEvento } from "../controllers/notificaciones/notificaciones";
 
+
 export default function ModificarEvento() {
      //Estados------------------------------------------------------------------------------------------
     const [nameEvent, setNameEvent] = useState<string>("");
@@ -129,6 +130,8 @@ export default function ModificarEvento() {
         async function fetchPost(data: object) {
             try {
                 const {data}: {data:any} =  await axios.put(`${URLrequests}events/edit/${eventid}`, put)
+                console.log("data",data);
+                
                     setCreando(false);
                     eventoModificado()
                     notificacionModifEvento(socketIO.socket, eventid, authGoo.logNormal.name, nameEvent  )
@@ -139,7 +142,7 @@ export default function ModificarEvento() {
         }
         fetchPost(put)
         console.log("Aca estoy", evento.nombreDelEvento) 
-        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento )
+        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento, socketIO.socket )
     };
 
     const Checked=(value:string)=>{

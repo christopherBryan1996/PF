@@ -10,6 +10,7 @@ const initialState:IEventoState  = {
     eventosUsuario:[],  
     asistentesEvento: [],
     eventosAsistir:[], 
+    tareas:[],
 }
 
 export  function eventosReducer  (state = initialState, action:any):{}  {
@@ -91,7 +92,12 @@ export  function eventosReducer  (state = initialState, action:any):{}  {
             eventosAsistir: action.payload,
         }
     }
-
+    case actions.GET_TAREAS: {
+        return {
+            ...state,
+            tareas: action.payload,
+        }
+    }
         
 
     

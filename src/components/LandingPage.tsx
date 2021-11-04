@@ -2,7 +2,7 @@ import React from "react";
 import "./styles/LandingPage.css";
 import imagen1 from '../images/fiestalogin.jpg';
 import imagen2 from '../images/fiestalogin2.jpg';
-import logo from '../images/Logo.png';
+
 import imagen3 from '../images/fiestalogin4.jpg';
 import { useHistory } from "react-router-dom";
 import Foot from './Foot';

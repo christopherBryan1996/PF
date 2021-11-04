@@ -2,9 +2,8 @@ import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { Nav } from './Nav';
-import { getEventosAsistir } from "../actions/actions";
+import { getEventosAsistir, getTareas } from "../actions/actions";
 import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
-
 
 
 export default function EventosAsistir(): JSX.Element {
@@ -14,30 +13,46 @@ export default function EventosAsistir(): JSX.Element {
     useEffect(() => {
         
         dispatch(getEventosAsistir(uid));
+        dispatch(getTareas(uid));
     }, []);
-    
+
     const { eventosAsistir }: { eventosAsistir: any } = useSelector((state: any) => state.eventos)
-    // const { eventsToAssist }: { eventsToAssist: any } = useSelector((state: any) => state.eventos.eventosAsistir)
+    const { tareas }: { tareas: any } = useSelector((state: any) => state.eventos)
+    console.log("EVENTOS A ASISTIR", eventosAsistir)
+    console.log("tareas", tareas)
+
+    
+        
     let eventos = []
-    if ( eventosAsistir.eventsToAssist){
-    const userTasks=eventosAsistir.userTasks;
-    const eventsToAssist= eventosAsistir.eventsToAssist;
+        if ( eventosAsistir.eventsToAssist){
+            const eventsToAssist= eventosAsistir.eventsToAssist;
+            if(tareas.userTasks){
+            const userTasks=tareas.userTasks;//data.userTasks?data.userTasks:null
+            
+        
+            if(userTasks)
+            {for(var i=0;i<eventsToAssist.length;i++){
+
+                if(eventsToAssist[i].eventId){
+                for(var j=0;j<userTasks.length;j++){
+
+                    
+                    if((userTasks[j].eventId && eventsToAssist[i].eventId._id===userTasks[j].eventId._id)){
+                        eventos.push({...eventsToAssist[i], tareas:userTasks[j].tareasDelUsuario})
+                    }else if((userTasks[j].eventId && eventsToAssist[i].eventId._id!==userTasks[j].eventId._id)){
+                        eventos.push({...eventsToAssist[i], tareas:[]})
+                    }
+                
+                }
+            }}}else{eventos=eventsToAssist}
+        
+            console.log(eventos,"eventstoassist")
+        }
+    }
+        
     
 
-    // function simplificada(){
-        if(userTasks)
-        {for(var i=0;i<eventsToAssist.length;i++){
-            for(var j=0;j<userTasks.length;j++){
-                if((eventsToAssist[i].eventId._id===userTasks[j].eventId._id)){
-                    eventos.push({...eventsToAssist[i], tareas:userTasks[j].tareasDelUsuario})
-                }else{
-                    eventos.push({...eventsToAssist[i], tareas:[]})
-                }
-            }
-        }}else{eventos=eventsToAssist}
-    
-    console.log(eventos,"eventstoassist")
-    }
+    // const { eventsToAssist }: { eventsToAssist: any } = useSelector((state: any) => state.eventos.eventosAsistir)
     // const {nombreDelEvento}:{nombreDelEvento:any}=eventosAsistir.eventsToAssist[0].eventId
     return (
         <div>

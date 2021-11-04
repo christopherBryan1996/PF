@@ -123,6 +123,7 @@ export default function NewEvent() {
 
                 } else {
                     faltanCasillas();
+                    setCreando(false);
                 }
             } catch (error) {
                 console.error(error);
@@ -132,7 +133,7 @@ export default function NewEvent() {
         console.log("constPost", post) 
     };
 
-console.log(categorias,"categorias")
+
 
 const Checked=(value:string)=>{
 

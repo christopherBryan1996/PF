@@ -108,7 +108,8 @@ export default function Login() {
         password: user.uid.slice(0,12)        
     }
     
-    const data : any = await startGoogleLogin(infoLog) 
+    const data : any = await startGoogleLogin(infoLog)
+    
     if( data && data.ok){
       if(data.habilitado){
         dispatch(loginNormal(data)); 
