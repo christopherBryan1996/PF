@@ -5,12 +5,18 @@
 }
 
 .container-Nevent{
-    margin-top: 180px;
+    margin-top: 150px;
+    background-color: rgba(3, 3, 3, 0.315);
+    padding:15px;
+    border-radius:5px;
+    box-shadow: 1px 1px 33px -4px rgba(0,0,0,0.75);
+-webkit-box-shadow: 1px 1px 33px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 33px -4px rgba(0,0,0,0.75);
 }
 
 .container-h{
 
-    margin-top: 180px;
+    margin-top: 160px;
     padding: 25px;
     height:70vh
 

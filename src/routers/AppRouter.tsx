@@ -14,9 +14,9 @@ import MapaHome from '../components/MapaHome';
 import Perfil from '../components/Perfil';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, socketConfig } from '../actions/actions';
+import { login, socketConfig, logout } from '../actions/actions';
 import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
@@ -30,6 +30,8 @@ import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
 import { FavoritesInv }from '../components/FavoritesInvit';
 import NotFound from '../components/NotFound';
+import { useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export const AppRouter = () => {
 
@@ -37,6 +39,8 @@ export const AppRouter = () => {
     const auth = getAuth()
     const [cheking, setChecking] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [isAdmin, setIsAdmin] = useState(false)
+
 
     const userLogged: any = useSelector((state: any) => state.authGoo.state)
     const isAuthenticated = !userLogged ? false : true;
@@ -60,29 +64,56 @@ export const AppRouter = () => {
             setChecking(false)
 
             console.log('Usuario:', user);
-
         })
 
     }, [dispatch, setChecking, auth])
 
     //conexion a SocketIo------------------------------------------
-    const { authGoo } = useSelector((state: any) => state);
-    useEffect((): any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));
-    }, [])
+    const { authGoo, socketIO } = useSelector((state: any) => state);
+
+    const history = useHistory();
+    const landing = () => {
+            history.push("/");
+    };
+    
+    const cuentaInhabilitada = () =>
+    toast.error("Esta cuenta se encuentra temporalmente inhabilitada", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
     useEffect(():any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
-      }, [dispatch, authGoo])
+        authGoo.logNormal && 
+        dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
+      }, [authGoo])
+
+    useEffect(() => {
+        if(authGoo.logNormal){
+            //usuario Admin
+            if(authGoo.logNormal.admin){
+                setIsAdmin(true)
+            } else { 
+                    setIsAdmin(false)
+                }
+        } 
+           
+    }, [authGoo])
 
     if (cheking) {
         return (
             <div className="loading">
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" />
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" alt="loading"/>
+                <img src="https://media.giphy.com/media/XYoVdV12UXizl7bNvL/giphy.gif" alt="loading"/>
             </div>
             // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
         )
     }
+    
+    
 
     return (
         <Router>
@@ -152,11 +183,12 @@ export const AppRouter = () => {
                     <PrivateRoute
                         exact path="/admin/"
                         isAuthenticated={isAuthenticated}
+                        isAdmin={isAdmin} 
                         component={AdminScreen} />
 
                         <PrivateRoute
                         exact path="/misEventos/:uid"
-                        isAuthenticated={isAuthenticated}                        
+                        isAuthenticated={isAuthenticated} 
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />

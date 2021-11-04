@@ -9,6 +9,8 @@ import {useSelector} from 'react-redux';
 import URLrequests from "./constanteURL";
 import { useHistory } from "react-router-dom";
 import categorias from "../categorias/Categorias";
+import dateFormat, { masks } from "dateformat";
+import Foot from "./Foot";
 
 export default function NewEvent() {
 
@@ -16,17 +18,18 @@ export default function NewEvent() {
     //Estados------------------------------------------------------------------------------------------
     const [nameEvent, setNameEvent] = useState("");
     const [ubicacion, setUbicacion] = useState("");
-    const [publicoOPriv, setPublicoOPriv] = useState("publico");
+
     const [numeroPersonas, setNumeroPersonas] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [fecha, setFecha] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [coordenadasPadre, setCoordenadasPadre] = useState({ lat: 1, lng: 1 });
-    const [file, setFile] = useState(null || "")
+    const [file, setFile] = useState<any>({})
     const [creando, setCreando] = useState(false);
     const [categories, setCategorias]=useState<any>([]);
-    
-
+    const now = new Date();
+    const hoy = dateFormat(now, "isoDateTime").slice(0,16)
+    console.log('HOYY',hoy)
     
 
     const eventoCreado = () => toast.success('El evento fue creado con exito', {
@@ -75,14 +78,12 @@ export default function NewEvent() {
     const handleSubmit = async (e: any) => {
 
         e.preventDefault();
-        
+        console.log("fecha", fecha)
         if(!authGoo.logNormal) return toLogin();
 
-        if (!publicoOPriv  || !fecha || !descripcion  || !fecha || !nameEvent || !categories.length) { return faltanCasillas() }
+        if ( !fecha || !descripcion  || !nameEvent || !categories.length) { return faltanCasillas() }
         setCreando(true);
-        let publicVar = true;
-        if (publicoOPriv === "true") publicVar = true;
-        if (publicoOPriv === "false") publicVar = false;
+        
 
         const url = await fileUpload(file)
         
@@ -91,21 +92,20 @@ export default function NewEvent() {
         const post:any = {
             nombreDelEvento: nameEvent,
             direccion: ubicacion,
-            horaDeInicio: "20:30",
+            horaDeInicio: fecha.slice(11),
             autor: authGoo.logNormal.uid,
-            publico: publicVar,
             invitados: numeroPersonas,
             precio,
-            fecha,
+            fecha: fecha.slice(0, 10).split("").join(""),
             descripcion,
             imagen: url,
             coordenadas: coordenadasPadre,
             categorias:categories
         }
         console.log("post", post)
+        
 
-
-        async function fetchPost(data: object) {
+        async function fetchPost(data: object) { 
             try {
                 const {data}: {data:any} =  await axios.post(`${URLrequests}events/create`, post)
                 console.log("data",data);
@@ -151,6 +151,7 @@ const Checked=(value:string)=>{
     return (
         <div>
             <Nav />
+
             <div className="container container-Nevent">
                 <div className="row">
                     <div className="col-lg-6 col-sm-12  ">
@@ -168,10 +169,10 @@ const Checked=(value:string)=>{
                                     </input>
                                 </div>
                                 <div className="form-group col-md-5 col-sm-12 ">
-                                    <label>Ubicacion</label>
+                                    <label>Ubicación</label>
                                     <input
                                         className="form-control"
-                                        placeholder="Direccion del evento"
+                                        placeholder="Dirección del evento"
                                         type="text"
                                         value={ubicacion}
                                         onChange={(e) => setUbicacion(e.target.value)}
@@ -180,67 +181,58 @@ const Checked=(value:string)=>{
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-6 col-sm-12 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Cantidad de asistentes</label>
                                     <input
                                         type="number"
+                                        min={0}
                                         value={numeroPersonas}
                                         onChange={(e) => setNumeroPersonas(parseInt(e.target.value))}
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-1 ">
-                                    <label>Tipo</label>
-                                    <select
-                                        className="form-select form-select-lg "
-                                        value={publicoOPriv}
-                                        onChange={(e) => setPublicoOPriv(e.target.value)}
-                                    >
-                                        <option value="true" >Publico</option>
-                                        <option value="false" >Privado</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-5 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Valor del ingreso</label>
                                     <input
                                         type="number"
+                                        min={0}
                                         value={precio}
                                         onChange={(e) => setPrecio(parseInt(e.target.value))}
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-2 col-sm-12">
+                                
+                            </div>
+                            <div className="form-group col-md-6 col-sm-1"> 
+                                
+                                <div className="form-group col-md-1 col-sm-1">
                                     <label>Fecha</label>
-                                    <input
-                                        type="date"
+                                    <input 
+                                       
+                                        type="datetime-local"
+                                        min={hoy}
                                         value={fecha}
                                         onChange={(e) => setFecha(e.target.value)}>
                                     </input>
                                 </div>
                             </div>
+                            <div className="mb-3">Adjuntar imagen</div>
                             <div className="custom-file col-md-11">
+                                 <label>Fecha</label>
                                 <input type="file" onChange={handleFileChange} className="custom-file-input" id="customFile" />
-                                <label className="custom-file-label" htmlFor="customFile">Adjuntar imagen</label>
+                                <label className="custom-file-label" htmlFor="customFile">{file.name || "Adjuntar imagen"}</label>
                             </div>
                             <div className="form-group col-md-11">
-                                <label>Descripcion del evento</label>
+                                <label>Descripción del evento</label>
                                 <textarea
                                     className="form-control"
-                                    placeholder="Descripcion del evento, detalles, cuidades, etc"
+                                    placeholder="Descripción del evento, detalles, cuidades, etc"
                                     value={descripcion}
                                     onChange={(e) => setDescripcion(e.target.value)}
                                 ></textarea>
                             </div>
                             <div className="form-group col-md-11">
-                                <label>Selecciona al menos una categoria</label>
-                                
-                                    
-                                    
-                                    
-                                
-                            
+                                <label>Selecciona al menos una categoría</label>
                                 {/* onChange={(e) => setCategorias([...categorias,e.target.value])} */}
                                 {categorias.map((i:string)=>
                                 <div className="form-check">
@@ -259,10 +251,11 @@ const Checked=(value:string)=>{
                     </div>
 
                     <div className="col-6">
-                        <p>Haga click 1 vez para ver su localizacion actual, haga un segundo click para poner un marcador donde sera el evento</p>
+                        <p>Haga click 1 vez para ver su localización actual, haga un segundo click para poner un marcador donde será el evento</p>
                         <Mapa onCambio={llenarEstadoCoordenadas} />
                     </div>
                 </div>
+              
                 <ToastContainer
                     position="top-right"
                     autoClose={1000}
@@ -275,7 +268,7 @@ const Checked=(value:string)=>{
                     pauseOnHover />
             </div>
 
-
+            <Foot/>
 
             {/* <div className="container container-Nevent">
                 <form onSubmit={handleSubmit} className="form">

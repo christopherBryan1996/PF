@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVentas } from '../../actions/actions'
+import EventosAsistir from '../EventosAsistir';
+import { UsuarioVentas } from './UsuarioVentas';
+
+
+
 
 
 export const VentasAdmin = () => {
@@ -27,7 +32,7 @@ export const VentasAdmin = () => {
         const filtered = ventas.filter((val: any) => {
             if (search === '') {
                 return val
-            } else if ( val.usuario.toLowerCase().includes(search.toLocaleLowerCase())) {
+            } else if (val.usuario.toLowerCase().includes(search.toLocaleLowerCase())) {
                 return val
             }
         })
@@ -72,24 +77,22 @@ export const VentasAdmin = () => {
                     <thead>
                         <tr>
                             <th scope="col">Nombre Comprador</th>
-                            <th scope="col">Email Comprador</th>
                             <th scope="col">Evento</th>
-                            <th scope="col">Email autor evento</th>
-
                             <th scope="col">Estado de pago</th>
-                            <th scope="col">Precio</th>
+                           
+
                         </tr>
                     </thead>
                     {
                         filerEvents().map((venta: any) => (
 
                             <tbody key={venta._id} >
-                                <tr>
-                                    <td>{venta.usuario}</td>
-                                    <td>{venta.email}</td>
-                                
-                                
-                                </tr>
+                                <UsuarioVentas 
+                                    usuario={venta.usuario}
+                                    eventosaAsistir ={venta.eventosaAsistir}
+
+
+                                />
                             </tbody>
                         ))
                     }
