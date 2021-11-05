@@ -33,6 +33,7 @@ export interface IActions {
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
+    handleOnclick: any;
     eventId: string;
     usuario: any;
     eventName: string;

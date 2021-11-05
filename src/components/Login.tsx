@@ -57,6 +57,7 @@ export default function Login() {
         draggable: true,
         progress: undefined,
     });
+    
     const faltanCasillas = () => toast.error('Faltan completar casillas!', {
         position: "top-center",
         autoClose: 5000,

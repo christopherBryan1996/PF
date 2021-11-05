@@ -16,8 +16,9 @@ type FormElement = React.FormEvent<HTMLFormElement>;
 export default function Asistente(props: Iasistentes): JSX.Element {
   const [nuevaTarea, setNuevaTarea] = useState<string>("");
   const [tareasVisibles, setTareasVisibles] = useState(false);
+  
   const dispatch: any = useDispatch();
-
+  
   const { authGoo, socketIO } = useSelector((state: any) => state);
 
   const handleSubmit = (e: FormElement): void => {
@@ -35,10 +36,9 @@ export default function Asistente(props: Iasistentes): JSX.Element {
   const desplegarTareas = (): void => {
     setTareasVisibles(!tareasVisibles);
   };
-  console.log(props.usuario)
 
   return (
-    <div className="container ">
+    <div className="container ">   
       <div className="row">       
         <div className="col-md-12 offset-md-3">
           <div className="card-name">
@@ -50,16 +50,14 @@ export default function Asistente(props: Iasistentes): JSX.Element {
               className="btn btn-outline-success"
             >
              Asignar tareas
-            </button>
+            </button>              
             <button
-              onClick={() =>
-                eliminarAsistente(props.userId,
+              onClick={() => props.handleOnclick(
+                  props.userId,
                   props.eventName,
                   authGoo.logNormal.name,
                   props.eventId,
-                  dispatch,
-                  socketIO.socket)
-              }
+                  socketIO.socket)}
               type="button"
               className="btn btn-outline-danger"
               data-toggle="modal"

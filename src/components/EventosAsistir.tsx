@@ -85,24 +85,8 @@ export default function EventosAsistir(): JSX.Element {
       <div className="divDelNav">
         <Nav></Nav>
       </div>
-      <h1>Eventos a asistir</h1>
-      {/* <div>{userTasks[0].eventId.nombreDelEvento}</div>  */}
-
-      {/* <div>
-                {eventos.map((i:any)=>(
-                    <>
-                    <div>
-                    {i.eventId.nombreDelEvento} 
-                    </div>
-                    <div>
-                    {i.tareas.length? i.tareas.map((i:any)=>(
-                        <p>{i}</p>
-                    )):null}   
-                    </div>
-                    </>
-                ))}
-
-            </div> */}
+      <h1>Eventos a asistir</h1>      
+     
       {eventos && eventos.length ? (
         <div>
           {eventos.map((i: { eventId: {}; tareas: [] }) => (
@@ -116,4 +100,5 @@ export default function EventosAsistir(): JSX.Element {
       )}
     </div>
   );
+  
 }
