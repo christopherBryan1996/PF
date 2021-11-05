@@ -12,16 +12,18 @@ import { VentasAdmin } from './VentasAdmin'
 export const AdminScreen = () => {
 
     const { admin } = useSelector((state: any) => state.admin)
+    const { eventos } = useSelector((state: any) => state.eventos)
 
+    
 
-
+      
     return (
         <>
-  
+       
             <div className="containerScreem">
               
                 <SideBar />
-                {admin === 1 ? <Dash /> : admin === 2 ?  <EventsAdmin /> : <VentasAdmin/>}
+                {admin === 1 ? <Dash /> : admin === 2 ?  <EventsAdmin/> : <VentasAdmin/>}
 
             </div>
         </>

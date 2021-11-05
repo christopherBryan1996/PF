@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { ImBin } from 'react-icons/im'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEvents } from '../../actions/actions'
-import { deleteEventAdm } from '../../controllers/eventos/eventoscontrollers';
+import { deleteEvent, deleteEventAdm } from '../../controllers/eventos/eventoscontrollers';
 import { Modal } from '../modal/Modal'
 import { BotonEliminar } from '../modal/styled';
 
 export const EventsAdmin = () => {
     const [estadoModal, setestadoModal] = useState(false)
     const [id, setid] = useState('')
+    const [uid, setuid] = useState('')   
+    const [nombreDelEvento, setnombreDelEvento] = useState('') 
+    
+    const {socketIO }: { socketIO: any } = useSelector(
+        (state: any) => state
+    );
     const [search, setSearch] = useState('')
     const [currentPage, setcurrentPage] = useState(0)
     const dispatch = useDispatch()
@@ -56,12 +62,17 @@ export const EventsAdmin = () => {
 
     }
 
-    const handleOnclick = (id: string) => {
-        setid(id)
+    const handleOnclick = (id: string, uid:string,  nombreDelEvento: string) => {
+        setid(id)        
+        setuid(uid)  
+        setnombreDelEvento(nombreDelEvento)
         setestadoModal(true)
-        console.log('id a eliminar:', id)
+      console.log('parametros:', id, uid, nombreDelEvento)
 
     }
+
+    //uid-dueñoevento
+    //id del evento
 
     return (
 
@@ -81,12 +92,15 @@ export const EventsAdmin = () => {
                     />
                     <Modal
                         id={id}
+                        uid={uid}                        
+                        nombreDelEvento={nombreDelEvento}
                         estado={estadoModal}
                         cambiarEstado={setestadoModal}>
                         <h4>Seguro quiere eliminar el evento?</h4>
-                        <BotonEliminar onClick={() => { deleteEventAdm(id); setestadoModal(false) }} >Eliminar</BotonEliminar>
-
+                        <BotonEliminar onClick={() => { deleteEvent(uid, id, 'ClanFest', nombreDelEvento, socketIO.socket, dispatch); setestadoModal(false); console.log(id, uid, 'ClanFest', nombreDelEvento, socketIO.socket, dispatch) }} >Eliminar</BotonEliminar>
+                           
                     </Modal>
+                   
                 </div>
                 <table className="table table-dark table-striped">
 
@@ -94,7 +108,7 @@ export const EventsAdmin = () => {
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
-                            <th scope="col">Publico</th>
+                          
                             <th scope="col">Precio</th>
                             <th scope="col">Accion</th>
                         </tr>
@@ -109,9 +123,9 @@ export const EventsAdmin = () => {
 
                                     <td>{evento.nombreDelEvento}</td>
                                     <td>{evento.fecha.slice(0, 10)}</td>
-                                    <td>{evento.publico ? 'si' : 'no'}</td>
+                                   
                                     <td>{evento.precio}</td>
-                                    <td> <ImBin className="icon-delete" fontSize="1.3em" onClick={() => { handleOnclick(evento._id) }} />  </td>
+                                    <td> <ImBin className="icon-delete" fontSize="1.3em" onClick={() => { handleOnclick(evento._id, evento.autor._id , evento.nombreDelEvento  ) }} />  </td>
                                 </tr>
                             </tbody>
                         ))
