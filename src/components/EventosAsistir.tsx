@@ -85,7 +85,7 @@ export default function EventosAsistir(): JSX.Element {
       <div className="divDelNav">
         <Nav></Nav>
       </div>
-      <h1>Eventos a asistir</h1>
+      <h1>Eventos a asistir</h1>      
      
       {eventos && eventos.length ? (
         <div>
@@ -100,4 +100,8 @@ export default function EventosAsistir(): JSX.Element {
       )}
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 180cee22dc76b9a2799622865a493206449835d6

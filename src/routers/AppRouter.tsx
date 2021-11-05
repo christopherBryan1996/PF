@@ -33,6 +33,8 @@ import NotFound from '../components/NotFound';
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+
+
 export const AppRouter = () => {
 
     const dispatch = useDispatch()
@@ -164,9 +166,7 @@ export const AppRouter = () => {
                         exact path="/home/:username/favorites"
                         // isAuthenticated={isAuthenticated}
                         component={Favorites} />
-                    <PublicRoute
-                    exact path="/home/favorites"
-                    component={FavoritesInv} />
+                    {/* ruta para modificar usuario */}
                     <PrivateRoute
                         exact path='/modificarUser/:id'
                         isAuthenticated={isAuthenticated}
