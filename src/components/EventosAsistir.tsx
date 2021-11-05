@@ -79,15 +79,16 @@ export default function EventosAsistir(): JSX.Element {
 
   return (
     <div>
-      <div className="divDelNav">
+      <div className="divDelNav"> 
         <Nav></Nav>
       </div>
+
       <h1>Eventos a asistir</h1>
 
       {eventos && eventos.length ? (
         <div>
           {eventos.map((i: { eventId: {}; tareas: [] }) => (
-            <div>
+            <div className="container p-4">
               <TarjetaEventosAsistir eventId={i.eventId} tareas={i.tareas} />
             </div>
           ))}
