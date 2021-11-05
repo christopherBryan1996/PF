@@ -59,7 +59,7 @@ export default function Perfil(): JSX.Element {
                 : 
                 <div style={{textAlign:"center", marginTop:"30px"}}>
                 <h6>
-                  No tienes eventos a asistir
+                  No tienes eventos creados
                 </h6>
               </div>
             }
