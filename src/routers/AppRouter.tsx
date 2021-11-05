@@ -14,9 +14,9 @@ import MapaHome from '../components/MapaHome';
 import Perfil from '../components/Perfil';
 import AsistentesPage from '../components/AsistentesPage';
 import { onAuthStateChanged } from '@firebase/auth';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, socketConfig, logout } from '../actions/actions';
+import { login, socketConfig } from '../actions/actions';
 import Favorites from '../components/Favorites';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
@@ -33,8 +33,6 @@ import NotFound from '../components/NotFound';
 import { useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-
-
 export const AppRouter = () => {
 
     const dispatch = useDispatch()
@@ -43,10 +41,9 @@ export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true)
     const [isAdmin, setIsAdmin] = useState(false)
 
-
     const userLogged: any = useSelector((state: any) => state.authGoo.state)
     const isAuthenticated = !userLogged ? false : true;
-
+    
     useEffect(() => {
 
         onAuthStateChanged(auth, (user) => {
@@ -66,6 +63,7 @@ export const AppRouter = () => {
             setChecking(false)
 
             console.log('Usuario:', user);
+
         })
 
     }, [dispatch, setChecking, auth])
@@ -109,12 +107,12 @@ export const AppRouter = () => {
     if (cheking) {
         return (
             <div className="loading">
-                <img src="https://media.giphy.com/media/XYoVdV12UXizl7bNvL/giphy.gif" alt="loading"/>
+                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" />
+                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" alt="loading"/>
             </div>
             // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
         )
     }
-    
     
 
     return (
@@ -150,7 +148,6 @@ export const AppRouter = () => {
                         exact path="/Login"
                         // isAuthenticated={isAuthenticated}
                         component={Login} />
-
                     <PublicRoute
                         exact path="/Register"
                         component={Register} />
@@ -166,7 +163,9 @@ export const AppRouter = () => {
                         exact path="/home/:username/favorites"
                         // isAuthenticated={isAuthenticated}
                         component={Favorites} />
-                    {/* ruta para modificar usuario */}
+                    <PublicRoute
+                    exact path="/home/favorites"
+                    component={FavoritesInv} />
                     <PrivateRoute
                         exact path='/modificarUser/:id'
                         isAuthenticated={isAuthenticated}
@@ -188,7 +187,7 @@ export const AppRouter = () => {
 
                         <PrivateRoute
                         exact path="/misEventos/:uid"
-                        isAuthenticated={isAuthenticated} 
+                        isAuthenticated={isAuthenticated}                        
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
