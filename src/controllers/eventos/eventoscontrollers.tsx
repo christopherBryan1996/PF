@@ -1,5 +1,5 @@
 import URLrequests from "../../components/constanteURL";
-import { getUsers, getUsersEvents } from "../../actions/actions";
+import { getEvents, getUsers, getUsersEvents } from "../../actions/actions";
 import axios from 'axios';
 
 export const deleteEvent = async(uid:string, id: string, author: string, nombreDelEvento: string, socket: any, dispatch:any) => {
@@ -11,6 +11,7 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
         await axios.post(`${URLrequests}events/delete/${id}`, {asistentes});
 
         dispatch(getUsersEvents(uid))
+        dispatch(getEvents())
 
         let post:any = {    
             uid,
