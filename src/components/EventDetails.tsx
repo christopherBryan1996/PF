@@ -323,7 +323,7 @@ export default function EventDetails() {
                                 <p>Asistire al evento</p>  </div>}
 
                             {confirmado === true && evento.precio === 0 && <div onClick={()=> yaAsistes()}> <FiThumbsUp size="2em" color="white" />
-                                <p>Ya Asistes a este evento</p>  </div>}    
+                                <p>Ya asistes a este evento</p>  </div>}    
 
                             {evento.precio !== 0 &&
                                 <div onClick={comprarEntrada}>
@@ -345,13 +345,13 @@ export default function EventDetails() {
                             <button className="btn btn-success" onClick={obtenerQR}>
                                 <div >
                                     <FiTag size="2em" color="white" />
-                                    <p>Obtiene tu QR de la entrada!</p>
+                                    <p>Descarga el QR de la entrada!</p>
 
                                 </div>
                             </button>}
                     </div>
                     <div className="card-footer">
-                        <span className="spa">Compartir con tus amigos</span>
+                        <span className="spa">Comparte con tus amigos</span>
                         <FacebookShareButton url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`} quote='Hola, quiero compartir este evento'>
                             <FacebookIcon className="share" round={true} size='2em' />
                         </FacebookShareButton>

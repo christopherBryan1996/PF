@@ -31,13 +31,13 @@ export default function Perfil(): JSX.Element {
 
             <div className="container container-perfil">
             <Link to={`/misEventos/${authGoo.logNormal.uid}`}>
-                      <button className="btn btn-success">Eventos que voy a asistir</button>
+                    <button className="btn btn-success">Eventos a los que voy a asistir</button>
             </Link>
 
 
 
             <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
-                     <button className="btn btn-success">Editar mi perfil</button>
+                    <button className="btn btn-success">Editar mi perfil</button>
             </Link>
             </div>
 
