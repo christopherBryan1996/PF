@@ -62,7 +62,7 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
                             )):null}  
                         </ul>
                     )}
-                    </div>
+                    </div> 
 
                     <button  onClick={()=>borrarAsistencia(uid, authGoo.logNormal.name, socketIO.socket, eventId, dispatch, eventId.nombreDelEvento)} type="button" className="btn btn-outline-success" >
                         No voy a asistir
