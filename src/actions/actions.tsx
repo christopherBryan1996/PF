@@ -181,7 +181,7 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
 }
 //https://api-fest.herokuapp.com
 export const socketConfig = (uid: string, usuario: string) => {
-  const socket = socketIOClient("http://localhost:3008/",{forceNew: true})
+  const socket = socketIOClient("https://api-fest.herokuapp.com/socket.io/?EIO=4&transport=websocket",{forceNew: true})
   const data = {uid, usuario}
   socket.emit("newUser",data);
   return function (dispatch: any) {
