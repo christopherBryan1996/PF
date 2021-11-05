@@ -148,7 +148,6 @@ export const AppRouter = () => {
                         exact path="/Login"
                         // isAuthenticated={isAuthenticated}
                         component={Login} />
-
                     <PublicRoute
                         exact path="/Register"
                         component={Register} />

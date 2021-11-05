@@ -6,7 +6,7 @@ function PrivateRoute(props:any) {
 
 
   if (!props.isAuthenticated) return <Redirect to={"/Login"} />
-  if (!props.isAdmin) return <Redirect to={"/404"} />
+ 
   
 
   return <Route {...props} />
