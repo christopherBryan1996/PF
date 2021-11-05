@@ -100,8 +100,5 @@ export default function EventosAsistir(): JSX.Element {
       )}
     </div>
   );
-<<<<<<< HEAD
+  
 }
-=======
-}
->>>>>>> 180cee22dc76b9a2799622865a493206449835d6
