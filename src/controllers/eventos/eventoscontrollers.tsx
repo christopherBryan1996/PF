@@ -3,19 +3,15 @@ import { getUsers, getUsersEvents } from "../../actions/actions";
 import axios from 'axios';
 
 export const deleteEvent = async(uid:string, id: string, author: string, nombreDelEvento: string, socket: any, dispatch:any) => {
-
-
-    dispatch(getUsersEvents(uid))
-    
-    console.log("id", id)
     
     const { data }: {data : any} = await axios.get(`${URLrequests}events/assistans/${id}`);  
 
     const asistentes: [] = data.asistentes
 
-       
         await axios.post(`${URLrequests}events/delete/${id}`, {asistentes});
-        console.log("asistentes", asistentes)
+
+        dispatch(getUsersEvents(uid))
+
         let post:any = {    
             uid,
             type: "delEvent",
@@ -24,8 +20,6 @@ export const deleteEvent = async(uid:string, id: string, author: string, nombreD
         }
 
         asistentes && asistentes.length && asistentes.forEach(async(asistente: any)=>{
-    
-        console.log(post)
 
             post.uid = asistente.usuario[0]._id
             socket?.emit("postNotification", post)
