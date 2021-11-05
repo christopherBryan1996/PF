@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/LandingPage.css";
-// import 'animate.css';
+import 'animate.css';
 import imagen1 from '../images/fiestalogin.jpg';
 import imagen2 from '../images/fiestalogin2.jpg';
 
