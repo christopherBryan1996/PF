@@ -25,7 +25,7 @@ export const Home = () => {
 
     useEffect(() => {
         authGoo.logNormal &&
-        dispatch(getFavorites(authGoo.logNormal.uid))
+            dispatch(getFavorites(authGoo.logNormal.uid))
     }, []);
 
     function change(e: any) {
@@ -46,7 +46,10 @@ export const Home = () => {
 
         <div>
             <Nav />
-            <div className="container">
+
+          
+
+            {/* <div className="container">
                 <div className="container ">
                     <div className="container-map-btn">
                         <div className="container-search">
@@ -87,7 +90,7 @@ export const Home = () => {
                 </div>
 
 
-            </div>
+            </div> */}
 
 
             <div className=" container-home">
@@ -100,7 +103,7 @@ export const Home = () => {
                     }
                 }).map((i: any) => (
 
-                    <Evento  _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={eventosFavoritos} />
+                    <Evento _id={i._id} imagen={i.imagen} fecha={i.fecha} nombreDelEvento={i.nombreDelEvento} precio={i.precio} favoritos={eventosFavoritos} />
 
                 ))
                 }

@@ -28,10 +28,12 @@ export interface IActions {
     DEL_FAV_INVITADO: string;
     GET_VENTAS: string;
     INHABILITAR_US: string;
+    GET_TAREAS:string;
 }
 
 //interface para lista de asistentes por evento
 export interface Iasistentes {
+    handleOnclick: any;
     eventId: string;
     usuario: any;
     eventName: string;
@@ -80,6 +82,7 @@ export interface IEventoState {
     eventosFavoritos:[];
     eventosUsuario:[];
     eventosAsistir:[], 
+    tareas:[]
 }
 
 //interface para la lista de eventos

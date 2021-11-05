@@ -6,7 +6,8 @@ padding: 30px;
     left: 0;
     display: flex;
     position: absolute;
-    background-color: rgba(0,0,0,8%);
+    z-index:5000;
+    background-color: rgba(0,0,0,.6);
     height: 100vh;
     top: 125;
     left: 900;
@@ -23,7 +24,7 @@ padding: 30px;
 
 
 export const ContenedorModal = styled.div`
-width: 600px;
+    width: 600px;
     height: 180px;
     border-radius: 5px;
     min-height: 100px;
@@ -43,14 +44,11 @@ export const EncabezadoModal = styled.div`
         justify-content: space-between;
         margin-bottom:10px;
         padding-bottom:20px;
-        border-bottom:1px solid #E8E8E8;   
-
-
+        border-bottom:1px solid #00bc8c;   
         h3{
             font-weight: 500;
             font-size:16px;
-            color: black;
-         
+            color: black;         
         }
       
         `
@@ -77,8 +75,9 @@ export const Boton = styled.button`
         `
 
 export const BotonEliminar = styled.button`
-        position: absolute;      
-        background: black;       
+          
+        background: #00bc8c;   
+        padding: 10px;    
         border:none;
         cursor:pointer;
         transition: .3s ease all;
@@ -86,8 +85,8 @@ export const BotonEliminar = styled.button`
         color: white;
         margin-top:22px;
         &:hover{
-            background: #f2f2f2;
-            color:black; 
+            background: black;
+            color:white; 
             border:none;
         }      
     

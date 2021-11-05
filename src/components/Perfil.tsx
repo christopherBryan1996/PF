@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { getUsersEvents } from "../actions/actions";
 import { Nav } from './Nav';
 import './styles/Perfil.css';
+import Foot from "./Foot";
 
 
 
@@ -27,12 +28,20 @@ export default function Perfil(): JSX.Element {
         <div>
             <div className="divDelNav"><Nav></Nav></div>
             <div className="perfil">Mis eventos</div>
+
+            <div className="container container-perfil">
             <Link to={`/misEventos/${authGoo.logNormal.uid}`}>
-            <button className="modPerfil">Eventos que voy a asistir</button>
+                      <button className="btn btn-success">Eventos que voy a asistir</button>
             </Link>
+
+
+
             <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
-            <button className="modPerfil">Editar mi perfil</button>
+                     <button className="btn btn-success">Editar mi perfil</button>
             </Link>
+            </div>
+
+
             {eventosUsuario.createdEvents && eventosUsuario.createdEvents.length ?
                 <div>
                     {eventosUsuario.createdEvents.map((i: {
@@ -47,8 +56,14 @@ export default function Perfil(): JSX.Element {
                             <br /></div>
                     ))}
                 </div>
-                : <div>No tienes eventos creados</div>
+                : 
+                <div style={{textAlign:"center", marginTop:"30px"}}>
+                <h6>
+                  No tienes eventos a asistir
+                </h6>
+              </div>
             }
+            <Foot/>
         </div>
     )
 }

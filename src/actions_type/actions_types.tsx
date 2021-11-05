@@ -29,6 +29,7 @@ const actions : IActions = {
     DEL_FAV_INVITADO: 'DEL_FAV_INVITADO',
     GET_VENTAS: 'GET_VENTAS',
     INHABILITAR_US: 'INHABILITAR_US',
+    GET_TAREAS:"GET_TAREAS"
 }
 
 export default actions; 
