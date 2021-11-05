@@ -11,7 +11,7 @@ import Foot from "./Foot";
 
 export default function Perfil(): JSX.Element {
     const { authGoo } = useSelector((state: any) => state) //estado global del usuarios.
-    
+
     const { username }: { username: string } = useParams()
 
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ export default function Perfil(): JSX.Element {
     const { eventosUsuario }: { eventosUsuario: any } = useSelector((state: any) => state.eventos)
     useEffect(() => {
         authGoo.logNormal &&
-        dispatch(getUsersEvents(authGoo.logNormal.uid));
+            dispatch(getUsersEvents(authGoo.logNormal.uid));
     }, []);
 
 
@@ -30,15 +30,15 @@ export default function Perfil(): JSX.Element {
             <div className="perfil">Mis eventos</div>
 
             <div className="container container-perfil">
-            <Link to={`/misEventos/${authGoo.logNormal.uid}`}>
-                      <button className="btn btn-success">Eventos que voy a asistir</button>
-            </Link>
+                <Link to={`/misEventos/${authGoo.logNormal.uid}`}>
+                    <button className="btn btn-success">Eventos a los que voy a asistir</button>
+                </Link>
 
 
 
-            <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
-                     <button className="btn btn-success">Editar mi perfil</button>
-            </Link>
+                <Link to={`/modificarUser/${authGoo.logNormal.uid}`}>
+                    <button className="btn btn-success">Editar mi perfil</button>
+                </Link>
             </div>
 
 
@@ -47,18 +47,23 @@ export default function Perfil(): JSX.Element {
                     {eventosUsuario.createdEvents.map((i: {
                         _id: string;
                         nombreDelEvento: string;
-                        precio:number;
-                        imagen:string;
-                        fecha:string;
+                        precio: number;
+                        imagen: string;
+                        fecha: string;
                     }) => (
                         <div>
                             <BarritaEventos id={i._id} nombreDelEvento={i.nombreDelEvento} uid={authGoo.logNormal.uid} precio={i.precio} imagen={i.imagen} fecha={i.fecha} />
                             <br /></div>
                     ))}
                 </div>
-                : <div>No tienes eventos creados</div>
+                :
+                <div style={{ textAlign: "center", marginTop: "30px" }}>
+                    <h6>
+                        No tienes eventos a asistir
+                    </h6>
+                </div>
             }
-            <Foot/>
+            <Foot />
         </div>
     )
 }

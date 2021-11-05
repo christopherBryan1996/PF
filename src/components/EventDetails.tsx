@@ -81,9 +81,9 @@ export default function EventDetails() {
 
         await data.asistentes.forEach((a: any) => {
 
-            if (a.usuario[0]?._id === authGoo.logNormal.uid) {
+            if (a.usuario[0]?._id === authGoo.logNormal?.uid) {
                 setConfirmado(true)
-                console.log("lo paso a true el gil")
+                
             }
         })
     }
@@ -106,7 +106,9 @@ export default function EventDetails() {
     const toEvent = () => {
         history.push(`/detail/${eventid}`)
     };
-
+    const toRegister = () => {
+        history.push(`/register`)
+    };
 
     //Funcion para enviar mail---------------------------------------------------------------------------------
     const enviarMailDeCompra = async () => {
@@ -175,6 +177,8 @@ export default function EventDetails() {
 
     const agregarGenteAsistir = async () => {
 
+        if(!authGoo.logNormal){return toRegister()}
+
         const { data }: { data: any } = await axios.get(`${URLrequests}events/assistans/${eventid}`)
         console.log("q asistesn", data)
 
@@ -214,6 +218,7 @@ export default function EventDetails() {
 
     const comprarEntrada = async () => {
 
+        if(!authGoo.logNormal){return toRegister()}
 
         const check: any = await axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
         console.log("check", check)
@@ -323,7 +328,7 @@ export default function EventDetails() {
                                 <p>Asistire al evento</p>  </div>}
 
                             {confirmado === true && evento.precio === 0 && <div onClick={()=> yaAsistes()}> <FiThumbsUp size="2em" color="white" />
-                                <p>Ya Asistes a este evento</p>  </div>}    
+                                <p>Ya asistes a este evento</p>  </div>}    
 
                             {evento.precio !== 0 &&
                                 <div onClick={comprarEntrada}>
@@ -345,13 +350,13 @@ export default function EventDetails() {
                             <button className="btn btn-success" onClick={obtenerQR}>
                                 <div >
                                     <FiTag size="2em" color="white" />
-                                    <p>Obtiene tu QR de la entrada!</p>
+                                    <p>Descarga el QR de la entrada!</p>
 
                                 </div>
                             </button>}
                     </div>
                     <div className="card-footer">
-                        <span className="spa">Compartir con tus amigos</span>
+                        <span className="spa">Comparte con tus amigos</span>
                         <FacebookShareButton url={`https://flamboyant-golick-d7cb40.netlify.app/detail/${evento._id}`} quote='Hola, quiero compartir este evento'>
                             <FacebookIcon className="share" round={true} size='2em' />
                         </FacebookShareButton>

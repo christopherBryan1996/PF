@@ -1,6 +1,62 @@
 
 .tareasvisibles{
     width: 400px;
-    background-color:blue ;
+    background-color:rgba(24, 23, 23, 0.315) ;
     box-sizing: content-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+
+
+.titulos{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+.tareasboton{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.tareas{
+    display: flex;
+}
+.Cont{
+    display: flex;
+}
+.borrarboton{
+    display: flex;
+}
+.barra{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.titulos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.titulossub{
+    display: flex;
+}
+.containerasistir{
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.26);
+}
+.titulossubsub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.BotonYtareas{
+    display: flex;
+    align-items: center;
+    flex-direction: row; 
+    
+} 

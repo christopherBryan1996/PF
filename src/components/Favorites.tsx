@@ -102,9 +102,11 @@ export default function Favorites() {
             <Nav />
 
             <div className="container container-favorites">
-                <div>
-                    <h2>Favoritos</h2>
-                </div>
+            <div style={{textAlign:"center", marginTop:"30px"}}>
+                <h2>
+                  Favoritos
+                </h2>
+              </div>
 
                 {eventosFavoritos.favouritesEvents ? eventosFavoritos.favouritesEvents.map((e: any) => (
 
