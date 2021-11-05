@@ -7,86 +7,83 @@ import TarjetaEventosAsistir from "./TarjetaEventosAsistir";
 
 export default function EventosAsistir(): JSX.Element {
   const { uid }: { uid: string } = useParams();
-  
-  
+
+
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getEventosAsistir(uid));
-      dispatch(getTareas(uid));
-    }, []);
-    
-    const { eventosAsistir }: { eventosAsistir: any } = useSelector(
-        (state: any) => state.eventos
-        );
-    const { tareas }: { tareas: any } = useSelector(
-        (state: any) => state.eventos
-        );
-        console.log("EVENTOS A ASISTIR", eventosAsistir);
-        console.log("tareas", tareas);
-    const [eventos, setEventos] = useState<any[]>([]);
-    const [eventsToAssist,seteventsToAssist]=useState<any[]>([]);
-    const [tasks,setTasks]=useState<any[]>([])
+    dispatch(getEventosAsistir(uid));
+    dispatch(getTareas(uid));
+  }, []);
 
-  useEffect(()=>{
-      if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length ) {
-        seteventsToAssist(eventosAsistir.eventsToAssist);
-        setTasks(tareas.userTasks)
-        
+  const { eventosAsistir }: { eventosAsistir: any } = useSelector(
+    (state: any) => state.eventos
+  );
+  const { tareas }: { tareas: any } = useSelector(
+    (state: any) => state.eventos
+  );
+  console.log("EVENTOS A ASISTIR", eventosAsistir);
+  console.log("tareas", tareas);
+  const [eventos, setEventos] = useState<any[]>([]);
+  const [eventsToAssist, seteventsToAssist] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<any[]>([])
+
+  useEffect(() => {
+    if (tareas.userTasks?.length && eventosAsistir.eventsToAssist?.length) {
+      seteventsToAssist(eventosAsistir.eventsToAssist);
+      setTasks(tareas.userTasks)
+
     }
     else {
-        setEventos(eventosAsistir.eventsToAssist);        
+      setEventos(eventosAsistir.eventsToAssist);
     }
 
-  
-  },[eventosAsistir,tareas])
 
-  useEffect(()=>{
-    
+  }, [eventosAsistir, tareas])
+
+  useEffect(() => {
+
     configEventos()
-  },[tasks])
+  }, [tasks])
 
-      function configEventos(){
-          console.log(tasks,"tasks")
-          let listaeventos=[]
-            
-        for (var i = 0; i < eventsToAssist.length; i++) {
-          let flag=false;
-            for (var j = 0; j < tasks.length; j++) {
-                if (
-                  tasks[j].eventId &&
-                eventsToAssist[i].eventId._id === tasks[j].eventId._id
-                ) {
-                  listaeventos.push({
-                    ...eventsToAssist[i],
-                    tareas: tasks[j].tareasDelUsuario,
-                    })
-                
-                flag=true;
-                
-                }
-            }if(!flag){
-                listaeventos.push({ ...eventsToAssist[i], tareas: [] })
-                
-                
-            }
-            
+  function configEventos() {
+    console.log(tasks, "tasks")
+    let listaeventos = []
+
+    for (var i = 0; i < eventsToAssist.length; i++) {
+      let flag = false;
+      for (var j = 0; j < tasks.length; j++) {
+        if (
+          tasks[j].eventId &&
+          eventsToAssist[i].eventId._id === tasks[j].eventId._id
+        ) {
+          listaeventos.push({
+            ...eventsToAssist[i],
+            tareas: tasks[j].tareasDelUsuario,
+          })
+
+          flag = true;
+
         }
-        setEventos(listaeventos)
-   
-    
+      } if (!flag) {
+        listaeventos.push({ ...eventsToAssist[i], tareas: [] })
+
+
+      }
+
     }
+    setEventos(listaeventos)
 
-    
 
-  console.log(eventos,"EVENTOS22222222")  
-  
+  }
+
+
   return (
     <div>
       <div className="divDelNav">
         <Nav></Nav>
       </div>
-      <h1>Eventos a asistir</h1>      
-     
+      <h1>Eventos a asistir</h1>
+
       {eventos && eventos.length ? (
         <div>
           {eventos.map((i: { eventId: {}; tareas: [] }) => (
@@ -96,9 +93,13 @@ export default function EventosAsistir(): JSX.Element {
           ))}
         </div>
       ) : (
-        <div>No tienes eventos a asistir</div>
+        <div style={{textAlign:"center", marginTop:"40px"}}>
+          <h6>
+            No tienes eventos a asistir
+          </h6>
+        </div>
       )}
     </div>
   );
-  
+
 }
