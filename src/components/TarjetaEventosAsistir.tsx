@@ -77,5 +77,5 @@ export default function TarjetaEventosAsistir({eventId,tareas}:IeventosAsistir) 
         </div>
     )
 
-//
+
 }
