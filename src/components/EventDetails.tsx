@@ -81,9 +81,9 @@ export default function EventDetails() {
 
         await data.asistentes.forEach((a: any) => {
 
-            if (a.usuario[0]?._id === authGoo.logNormal.uid) {
+            if (a.usuario[0]?._id === authGoo.logNormal?.uid) {
                 setConfirmado(true)
-                console.log("lo paso a true el gil")
+                
             }
         })
     }
@@ -106,7 +106,9 @@ export default function EventDetails() {
     const toEvent = () => {
         history.push(`/detail/${eventid}`)
     };
-
+    const toRegister = () => {
+        history.push(`/register`)
+    };
 
     //Funcion para enviar mail---------------------------------------------------------------------------------
     const enviarMailDeCompra = async () => {
@@ -175,6 +177,8 @@ export default function EventDetails() {
 
     const agregarGenteAsistir = async () => {
 
+        if(!authGoo.logNormal){return toRegister()}
+
         const { data }: { data: any } = await axios.get(`${URLrequests}events/assistans/${eventid}`)
         console.log("q asistesn", data)
 
@@ -214,6 +218,7 @@ export default function EventDetails() {
 
     const comprarEntrada = async () => {
 
+        if(!authGoo.logNormal){return toRegister()}
 
         const check: any = await axios.get(`${URLrequests}api/payment/getpayment/${authGoo.logNormal.uid}/${eventid}`)
         console.log("check", check)
