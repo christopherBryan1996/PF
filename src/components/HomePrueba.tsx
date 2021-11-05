@@ -77,7 +77,7 @@ export const HomePrueba = () => {
             </div>
             <div className="col-md-6">
               <div className="card-body card-body-map">
-                <h5 className="card-title">Buscas eventos cerca a tu ubucación?</h5>
+                <h5 className="card-title">Buscas eventos cerca a tu ubicación?</h5>
                 <p className="card-text">Con un Click en el mapa los puedes encontrar</p>
                 <p className="card-text"><small className="text-muted">Debes aceptar acceder a tu ubucación</small></p>
               </div>
