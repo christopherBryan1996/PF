@@ -54,7 +54,7 @@ Revisa la categorías para encontrar eventos de tu interés
 </div>
 
 <br />
-Añade eventos a favoritos para comprar la entrada o confirmar asistencia mas tarde.
+Añade y elimina eventos de tu lista de favoritos.
 <br />
 <div align="center">
  <img src="./CapturasPF/favoritos.jpg" width="800px"/> 
