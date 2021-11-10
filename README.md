@@ -4,21 +4,23 @@
 
 
 
-## Construida con
+### Construida con
  - [ ] TypeScript
  - [ ] React
  - [ ] Redux
  - [ ] CSS3
  - [ ] Bootstrap
 
-Backend del proyecto https://github.com/NaniBM/ClanFest-API
-(Descargar repositorio y seguir instrucciones)
 
-## Deploy en
+### Información
+Este repositorio corresponde al frontend del proyecto CLANFEST. <br />
+Repo del Backend del Proyecto: https://github.com/NaniBM/ClanFest-API
+
+### Deploy en
 
   Netlify:  https://flamboyant-golick-d7cb40.netlify.app/.com/
 
-## Instalacion
+### Instalacion
 - Clonar repositorio: ``git clone https://github.com/christopherBryan1996/PF.git``
 - Abrir proyecto en una terminal 
 - Ejecutar ``npm install``
@@ -26,4 +28,8 @@ Backend del proyecto https://github.com/NaniBM/ClanFest-API
   - ``http://localhost:3008/`` si ya se instalo el repositorio de Backend para usarlo local
   - ``https://api-fest.herokuapp.com/`` para usar la API desde deploy
 
+<hr />
+<h3> ¿Qué vas a encontrar en la web de ClanFest? </h3>
+
+<h4>Visitá la pagina como invitado, encontrá eventos cercanos  a tu ubicación y agregá a favoritos</h4>
 
