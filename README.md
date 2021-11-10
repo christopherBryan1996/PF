@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+# CLAN FEST WEB APP FRONTEND
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ACERCA DE CLANFEST
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Construida con
+ - [ ] TypeScript
+ - [ ] React
+ - [ ] Redux
+ - [ ] CSS3
+ - [ ] Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Backend del proyecto https://github.com/NaniBM/ClanFest-API
+(Descargar repositorio y seguir instrucciones)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Deploy en
 
-### `npm test`
+  Netlify:  https://flamboyant-golick-d7cb40.netlify.app/.com/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalacion
+- Clonar repositorio: ``git clone https://github.com/christopherBryan1996/PF.git``
+- Abrir proyecto en una terminal 
+- Ejecutar ``npm install``
+- En la carpeta ``src/components/constanteURL`` : seleccionar el valor de la constante URLrequest a: <br />
+  - ``http://localhost:3008/`` si ya se instalo el repositorio de Backend para usarlo local
+  - ``https://api-fest.herokuapp.com/`` para usar la API desde deploy
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
