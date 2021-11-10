@@ -1,10 +1,10 @@
-# CLAN FEST WEB APP FRONTEND
+<a href="https://flamboyant-golick-d7cb40.netlify.app" target="blank"> <h2>CLAN FEST WEB APP</h2></a>
 
-## ACERCA DE CLANFEST
+### Acerca de ClanFest
 
 
 
-### Construida con
+### App construida con
  - [ ] TypeScript
  - [ ] React
  - [ ] Redux
@@ -18,7 +18,7 @@ Repo del Backend del Proyecto: https://github.com/NaniBM/ClanFest-API
 
 ### Deploy en
 
-  Netlify:  https://flamboyant-golick-d7cb40.netlify.app/.com/
+  Netlify:  https://flamboyant-golick-d7cb40.netlify.app
 
 ### Instalacion
 - Clonar repositorio: ``git clone https://github.com/christopherBryan1996/PF.git``
@@ -31,7 +31,7 @@ Repo del Backend del Proyecto: https://github.com/NaniBM/ClanFest-API
 <hr />
 <h3> ¿Qué vas a encontrar en la web de ClanFest? </h3>
 
-Visitá la pagina, encontrá eventos cercanos a tu ubicación y agregá a favoritos.
+Visita la pagina, encuentra eventos cercanos a tu ubicación y agrega a favoritos.
 
 <div align="center">
  <img src="./CapturasPF/Home_NoLogin.jpg" width="800px"/> 
@@ -40,25 +40,45 @@ Visitá la pagina, encontrá eventos cercanos a tu ubicación y agregá a favori
 </div>
 
 <br />
-Registrate para acceder a todas las posibilidades que te brinda de CLANFEST
+Regístrate para acceder a todas las posibilidades que te brinda de CLANFEST
+<br />
 <div align="center">
  <img src="./CapturasPF/Login.jpg" width="800px"/> 
 </div>
 
 <br />
-Revisá la categorías para encontrar tus eventos de interés  
+Revisa la categorías para encontrar eventos de tu interés
+<br />
 <div align="center">
  <img src="./CapturasPF/categories.jpg" width="800px"/> 
 </div>
 
-Añadí los eventos a favoritos para comprar la entrada o confirmar asistencia mas tarde.
+<br />
+Añade eventos a favoritos para comprar la entrada o confirmar asistencia mas tarde.
+<br />
 <div align="center">
  <img src="./CapturasPF/favoritos.jpg" width="800px"/> 
 </div>
 
-Una vez que te decidís a asistir, compra la entrada con MercadoPago o confirma tu asistencia.
+<br />
+Compra la entrada a eventos con MercadoPago o confirma tu asistencia.
 Recibirás un codigo QR como comprobante de entrada.
+<br />
 <div align="center"> 
- <img src="./CapturasPF/favoritos.jpg" width="800px"/> 
+ <img src="./CapturasPF/Buy.jpg" width="800px"/> 
 </div>
 
+<br />
+Crea eventos y administra los asistentes, podrás eliminarlos y dejarles tareas o recordatorios para el día del evento.
+<br />
+<div align="center"> 
+ <img src="./CapturasPF/newEvent.jpg" width="800px"/> 
+ <img src="./CapturasPF/asistentes.jpg" width="600px"/> 
+</div>
+
+<br />
+Si eres administrador de CLANFEST contarás con un panel, desde donde revisar y administrar usuarios, eventos creados y transacciones realizadas para controlar y regular la actividad de la aplicación.
+<br />
+<div align="center"> 
+ <img src="./CapturasPF/Admin.jpg" width="800px"/> 
+</div>
