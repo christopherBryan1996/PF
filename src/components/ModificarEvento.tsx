@@ -13,6 +13,7 @@ import {EditEvent} from '../controllers/eventos/eventoscontrollers';
 import categorias from "../categorias/Categorias";
 import { notificacionModifEvento } from "../controllers/notificaciones/notificaciones";
 
+
 export default function ModificarEvento() {
      //Estados------------------------------------------------------------------------------------------
     const [nameEvent, setNameEvent] = useState<string>("");
@@ -99,7 +100,7 @@ export default function ModificarEvento() {
         e.preventDefault();
         
         console.log(publicoOPriv,fecha,descripcion,fecha,nameEvent,ubicacion, "hola")
-        if (!publicoOPriv  || !fecha || !descripcion  || !nameEvent || !ubicacion || !categories.length) { return faltanCasillas() }
+        if (  !fecha || !descripcion  || !nameEvent || !ubicacion || !categories.length) { return faltanCasillas() }
         setCreando(true);
         let publicVar = true;
         if (publicoOPriv === "true") publicVar = true;
@@ -112,12 +113,12 @@ export default function ModificarEvento() {
         const put:any = {
             nombreDelEvento: nameEvent,
             direccion: ubicacion,
-            // horaDeInicio: "20:30",
+            horaDeInicio: fecha.slice(11),
             autor: authGoo.logNormal.uid,
             publico: publicVar,
             invitados: numeroPersonas,
             precio,
-            fecha,
+            fecha: fecha.slice(0, 10).split("").join(""),
             descripcion,
             imagen: url,
             coordenadas: coordenadasPadre,
@@ -129,6 +130,8 @@ export default function ModificarEvento() {
         async function fetchPost(data: object) {
             try {
                 const {data}: {data:any} =  await axios.put(`${URLrequests}events/edit/${eventid}`, put)
+                console.log("data",data);
+                
                     setCreando(false);
                     eventoModificado()
                     notificacionModifEvento(socketIO.socket, eventid, authGoo.logNormal.name, nameEvent  )
@@ -139,7 +142,7 @@ export default function ModificarEvento() {
         }
         fetchPost(put)
         console.log("Aca estoy", evento.nombreDelEvento) 
-        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento )
+        EditEvent(eventid, evento.autor, authGoo.logNormal.uid, evento.nombreDelEvento, socketIO.socket )
     };
 
     const Checked=(value:string)=>{
@@ -192,7 +195,7 @@ export default function ModificarEvento() {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group col-md-6 col-sm-12 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Cantidad de invitados</label>
                                     <input
                                         
@@ -203,20 +206,7 @@ export default function ModificarEvento() {
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-1 ">
-                                    <label>Tipo</label>
-                                    <select
-                                        className="form-select form-select-lg "
-                                        value={publicoOPriv}
-                                        onChange={(e) => setPublicoOPriv(e.target.value)}
-                                    >
-                                        <option value="true" >Publico</option>
-                                        <option value="false" >Privado</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="form-group col-md-5 ">
+                                <div className="form-group col-md-4 col-sm-12 ">
                                     <label>Valor del ingreso</label>
                                     <input
                                         type="number"
@@ -225,10 +215,14 @@ export default function ModificarEvento() {
                                     >
                                     </input>
                                 </div>
-                                <div className="form-group col-md-2 col-sm-12">
+                                
+                            </div>
+                            <div className="row">
+                                
+                                <div className="form-group col-md-9 col-sm-12">
                                     <label>Fecha</label>
                                     <input
-                                        type="date"
+                                        type="datetime-local"
                                         value={fecha}
                                         onChange={(e) => setFecha(e.target.value)}>
                                     </input>

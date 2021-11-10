@@ -7,11 +7,12 @@ import { store, persistedStore} from './store/store';
 
 
 
+
 function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistedStore}>
-        <AppRouter />
+        <AppRouter />  
       </PersistGate> 
     </Provider>
   );

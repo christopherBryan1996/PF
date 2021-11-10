@@ -42,7 +42,50 @@ export const HomePrueba = () => {
   return (
     <div>
       <Nav />
+
       <div className="container">
+
+
+        <div className="card mb-5 container-map-btn" >
+          <div className="card-header row card-header-home ">
+          <select className=" select-home col-md-3 col-sm-1 mb-3" onChange={change}>
+                  <option selected>Filtrar por precio</option>
+                  <option value="1">Gratis</option>
+                  <option value="2">Pago</option>
+                  <option value="3">de Menor a mayor precio </option>
+                  <option value="4">de Mayor a menor precio</option>
+                </select>
+                <input
+                  type="text"
+                  className="form-control search mb-3 col-md-3 col-sm-1"
+                  placeholder="Buscar evento..."
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  onChange={handlrOnchange}
+                />
+                 <button
+                  onClick={crearEvento}
+                  className="btn btn-light col-md-3 col-sm-1 mb-3 "
+                >
+                  Crea tu evento
+                </button>
+          </div>
+          <div className="row no-gutters">
+            <div className="col-md-6">
+            <MapaHome />
+            
+            </div>
+            <div className="col-md-6">
+              <div className="card-body card-body-map">
+                <h5 className="card-title">Buscas eventos cerca a tu ubicación?</h5>
+                <p className="card-text">Con un Click en el mapa los puedes encontrar</p>
+                <p className="card-text"><small className="text-muted">Debes aceptar acceder a tu ubicación</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="container">
         <div className="container ">
           <div className="container-map-btn">
             <div className="container-search">
@@ -84,7 +127,7 @@ export const HomePrueba = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/*Carousel*/}
 
