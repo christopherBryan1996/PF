@@ -31,15 +31,14 @@
     border-radius: 15px;
 }
 
-.parrafo1{
-    margin-top: 60px;
-    margin-bottom:25px;
-    margin-left: 20px;
-    margin-right: 20px;
-    font-size:20px;
-}
+
 .titulotarjeta2{
     margin-left: 20px;
+}
+
+.cards-container-landing{
+    margin-top: 80px;
+    padding:15px;
 }
 
   
@@ -51,5 +50,54 @@
       flex-direction: column;
 }
 
+.animacion{
+    animation-duration: 3s;
+  animation-name: slidein;
+  margin-left: 235px;
+}
 
 
+
+h2{
+
+    font-size: 3rem;
+
+}
+
+p{
+    font-size:1.2rem
+}
+
+@media (min-width: 344px) {
+    h2 {
+      font-size: 1.3rem;
+    } 
+    p {
+        font-size: .8rem;
+      } 
+     
+   
+  }
+
+ 
+
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    } /*1rem = 16px*/
+  }
+
+  @media (min-width: 992px) {
+    h2 {
+      font-size: 2.5rem;
+    } /*1rem = 16px*/
+  }
+
+  @media (min-width: 1200px) {
+    h2 {
+      font-size: 3rem;
+    } /*1rem = 16px*/
+   p {
+        font-size:1rem;
+    }
+  }

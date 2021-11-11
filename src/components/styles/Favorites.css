@@ -27,6 +27,11 @@
     cursor: pointer;
     color: red;
 }
+.foto{
+    display: flex;
+    width: 255px;
+    height: 200px;
+}
 
 
 .container-cards{
@@ -44,4 +49,37 @@
 
 .icon{
     margin-right:80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container-favorites{
+
+    margin-top: 145px;
+
+
+}
+
+.container-card-favorites:hover{
+
+    box-shadow: 1px 0px 18px -1px rgba(0,0,0,0.75);
+-webkit-box-shadow: 1px 0px 18px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 0px 18px -1px rgba(0,0,0,0.75);
+
+
+
+
 }

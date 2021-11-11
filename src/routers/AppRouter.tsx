@@ -30,7 +30,9 @@ import Loading from '../images/loading.gif'
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
 import { FavoritesInv }from '../components/FavoritesInvit';
-
+import NotFound from '../components/NotFound';
+import { useHistory } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export const AppRouter = () => {
 
@@ -38,10 +40,11 @@ export const AppRouter = () => {
     const auth = getAuth()
     const [cheking, setChecking] = useState(true)
     const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const userLogged: any = useSelector((state: any) => state.authGoo.state)
     const isAuthenticated = !userLogged ? false : true;
-
+    
     useEffect(() => {
 
         onAuthStateChanged(auth, (user) => {
@@ -67,14 +70,40 @@ export const AppRouter = () => {
     }, [dispatch, setChecking, auth])
 
     //conexion a SocketIo------------------------------------------
-    const { authGoo } = useSelector((state: any) => state);
-    useEffect((): any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));
-    }, [])
-    useEffect(():any => {
-        authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
-      }, [dispatch, authGoo])
+    const { authGoo, socketIO } = useSelector((state: any) => state);
+
+    const history = useHistory();
+    const landing = () => {
+            history.push("/");
+    };
     
+    const cuentaInhabilitada = () =>
+    toast.error("Esta cuenta se encuentra temporalmente inhabilitada", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    useEffect(():any => {
+        authGoo.logNormal && 
+        dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
+      }, [authGoo])
+
+    useEffect(() => {
+        if(authGoo.logNormal){
+            //usuario Admin
+            if(authGoo.logNormal.admin){
+                setIsAdmin(true)
+            } else { 
+                    setIsAdmin(false)
+                }
+        } 
+           
+    }, [authGoo])
 
     if (cheking) {
         return (
@@ -83,6 +112,7 @@ export const AppRouter = () => {
             </div>        
         )
     }
+    
 
     return (
         <Router>
@@ -104,11 +134,11 @@ export const AppRouter = () => {
                         component={LandingPage} />
                     <PublicRoute
                         exact path="/home"
-                        component={Home}
+                        component={HomePrueba}
                     />
                     <PublicRoute
                     exact path="/homePrueba"
-                    component={HomePrueba}
+                    component={Home}
                      />
                     <PublicRoute
                         exact path="/about"
@@ -117,7 +147,6 @@ export const AppRouter = () => {
                         exact path="/Login"
                         // isAuthenticated={isAuthenticated}
                         component={Login} />
-
                     <PublicRoute
                         exact path="/Register"
                         component={Register} />
@@ -152,6 +181,7 @@ export const AppRouter = () => {
                     <PrivateRoute
                         exact path="/admin/"
                         isAuthenticated={isAuthenticated}
+                        isAdmin={isAdmin} 
                         component={AdminScreen} />
 
                         <PrivateRoute
@@ -160,6 +190,9 @@ export const AppRouter = () => {
                         component={EventosAsistir}/>
 
                     <PrivateRoute exact path="/home/usuario/:username" isAuthenticated={isAuthenticated} component={Perfil} />
+
+                    <PublicRoute component={NotFound}/>
+                    <PrivateRoute component={NotFound}/>
                 </Switch>
             </div>
         </Router>

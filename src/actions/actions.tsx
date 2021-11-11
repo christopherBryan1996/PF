@@ -61,9 +61,20 @@ export function getEvent(eventId: any) {
 
 export function getEventosAsistir(uid: any) {
   return async function (dispatch: any) {
-    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    const res = await axios.get(`${URLrequests}api/users/usereventstoassist/${uid}`);
     dispatch({
       type: actions.GET_EVENTOSASISTIR,
+      payload: res.data,
+    });
+  };
+}
+
+export function getTareas(uid: any) {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/users/gettasks/${uid}`);
+    
+    dispatch({
+      type: actions.GET_TAREAS,
       payload: res.data,
     });
   };
@@ -88,7 +99,7 @@ export const getAsistentes = (id: string) => {
 
 export const userAsistiraEvento = (uid:any, eventID: any) => {
   return async function (dispatch:any){
-    const res = await axios.patch(`${URLrequests}api/users/addeventstoassist/${uid}/${eventID}`);
+    const res = await axios.patch(`${URLrequests}api/users/addtofreeevent/${uid}/${eventID}`);
     dispatch({
       type: actions.USER_ASISTIRA_EVENTO,
       payload: res.data
@@ -112,7 +123,7 @@ export const loginNormal = (data: any) => {
 
 
 export const logout = (socket: any) => {
-  socket.disconnect()
+  socket?.disconnect()
   return {
     type: actions.LOGOUT,
   };
@@ -168,9 +179,9 @@ export const deleteFavoriteEvent = (id: any, eventid: any) => {
     });
   }
 }
-
+//https://api-fest.herokuapp.com
 export const socketConfig = (uid: string, usuario: string) => {
-  const socket = socketIOClient("https://api-fest.herokuapp.com/",{forceNew: true})
+  const socket = socketIOClient("https://api-fest.herokuapp.com",{forceNew: true})
   const data = {uid, usuario}
   socket.emit("newUser",data);
   return function (dispatch: any) {
@@ -246,6 +257,27 @@ export const saveNotifications = (notif: any) => {
       payload: notif
     });
   }
+}
+//http://localhost:3008/api/payment/getpayments
+export function getVentas() {
+  return async function (dispatch: any) {
+    const res = await axios.get(`${URLrequests}api/payment/getpayments`);
+    dispatch({
+      type: actions.GET_VENTAS,
+      payload: res.data,
+    });
+  };
+}
+
+export function inhabilitarUs(id:string, accion:boolean ) {
+  return async function (dispatch: any) {
+    const res = await axios.patch(`${URLrequests}admin/set/${id}/${accion}`);
+    dispatch(getUsers())
+    dispatch({
+      type: actions.INHABILITAR_US,
+      payload: res.data,
+    });
+  };
 }
 
 

@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+<a href="https://flamboyant-golick-d7cb40.netlify.app" target="blank"> <h2>CLAN FEST WEB APP</h2></a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Acerca de ClanFest
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+### App construida con
+ - [ ] TypeScript
+ - [ ] React
+ - [ ] Redux
+ - [ ] CSS3
+ - [ ] Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Información
+Este repositorio corresponde al frontend del proyecto CLANFEST. <br />
+Repo del Backend del Proyecto: https://github.com/NaniBM/ClanFest-API
 
-### `npm test`
+### Deploy en
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  Netlify:  https://flamboyant-golick-d7cb40.netlify.app
 
-### `npm run build`
+### Instalacion
+- Clonar repositorio: ``git clone https://github.com/christopherBryan1996/PF.git``
+- Abrir proyecto en una terminal 
+- Ejecutar ``npm install``
+- En la carpeta ``src/components/constanteURL`` : seleccionar el valor de la constante URLrequest a: <br />
+  - ``http://localhost:3008/`` si ya se instalo el repositorio de Backend para usarlo local
+  - ``https://api-fest.herokuapp.com/`` para usar la API desde deploy
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<hr />
+<h3> ¿Qué vas a encontrar en la web de ClanFest? </h3>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Visita la pagina, encuentra eventos cercanos a tu ubicación y agrega a favoritos.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div align="center">
+ <img src="./CapturasPF/Home_NoLogin.jpg" width="800px"/> 
+ <img  src="./CapturasPF/Fav_NoLogin.jpg" width="800px"/>
+ 
+</div>
 
-### `npm run eject`
+<br />
+Regístrate para acceder a todas las posibilidades que te brinda de CLANFEST
+<br />
+<div align="center">
+ <img src="./CapturasPF/Login.jpg" width="800px"/> 
+</div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br />
+Revisa la categorías para encontrar eventos de tu interés
+<br />
+<div align="center">
+ <img src="./CapturasPF/categories.jpg" width="800px"/> 
+</div>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br />
+Añade y elimina eventos de tu lista de favoritos.
+<br />
+<div align="center">
+ <img src="./CapturasPF/favoritos.jpg" width="800px"/> 
+</div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br />
+Compra la entrada a eventos con MercadoPago o confirma tu asistencia.
+Recibirás un codigo QR como comprobante de entrada.
+<br />
+<div align="center"> 
+ <img src="./CapturasPF/Buy.jpg" width="800px"/> 
+</div>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br />
+Crea eventos y administra los asistentes, podrás eliminarlos y dejarles tareas o recordatorios para el día del evento.
+<br />
+<div align="center"> 
+ <img src="./CapturasPF/newEvent.jpg" width="800px"/> 
+ <img src="./CapturasPF/asistentes.jpg" width="600px"/> 
+</div>
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br />
+Si eres administrador de CLANFEST contarás con un panel, desde donde revisar y administrar usuarios, eventos creados y transacciones realizadas para controlar y regular la actividad de la aplicación.
+<br />
+<div align="center"> 
+ <img src="./CapturasPF/Admin.jpg" width="800px"/> 
+</div>
