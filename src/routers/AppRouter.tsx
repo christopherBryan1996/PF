@@ -25,6 +25,7 @@ import '../components/styles/Loading.css';
 import ModificarEvento from '../components/ModificarEvento';
 import EventosAsistir from "../components/EventosAsistir";
 import MercadoPay from '../components/MercadoPay';
+import Loading from '../images/loading.gif'
 
 import '../components/styles/Loading.css'
 import { AdminScreen } from '../components/Admin/AdminScreen'
@@ -73,14 +74,13 @@ export const AppRouter = () => {
     useEffect(():any => {
         authGoo.logNormal && dispatch(socketConfig(authGoo.logNormal.uid, authGoo.logNormal.name));   
       }, [dispatch, authGoo])
+    
 
     if (cheking) {
         return (
             <div className="loading">
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" />
-                <img src="https://media.giphy.com/media/6276Pinlkx8kSDJLxK/giphy.gif" alt="loading"/>
-            </div>
-            // <img src="http://res.cloudinary.com/dejlsgnm9/image/upload/v1634753139/vvlzoxmw4rba7yo05etm.gif" alt="" />
+                <img src={Loading} className="loadingGif" alt="loading"/>
+            </div>        
         )
     }
 
